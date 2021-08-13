@@ -1,0 +1,14 @@
+.lobby_statistics {
+	padding: 2rem;
+}
+
+.statistics_wrapper {
+	.log_wrapper {
+		padding: 2rem;
+
+		.log_scroll {
+			max-height: 50rem;
+			overflow-y: scroll;
+		}
+	}
+}

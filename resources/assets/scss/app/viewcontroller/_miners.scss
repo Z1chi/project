@@ -1,0 +1,103 @@
+.lobby_miners {
+
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	//justify-items: flex-start;
+	padding: $spacing_medium $spacing_medium 0 $spacing_medium;
+
+	@media #{$breakpointXS} {
+		padding: 1rem 1rem 0 1rem;
+		justify-content: space-between;
+	}
+
+	.miner_wrapper {
+		width: 27%;
+		margin: $spacing_small calc(19%/3/2);
+		background: $color_light_grey;
+		border-radius: $border_radius_default;
+		position: relative;
+
+		@media #{$breakpointXS} {
+			width: 31%;
+			margin: 0 0 1rem 0;
+		}
+
+		.miner_content {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			padding-bottom: 4rem;
+
+			&.plus {
+				padding-bottom: 0;
+				cursor: pointer;
+
+				svg {
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			//padding: 2rem;
+		}
+
+		.miner_text {
+			position: absolute;
+			bottom: 5%;
+			width: 100%;
+			text-align: center;
+
+			.ghs {
+				color: $color_black;
+				font-size: 1.4rem;
+
+				@media #{$breakpointXS} {
+					font-size: 1.2rem;
+				}
+			}
+
+			.stop {
+				color: $color_dark_grey;
+				font-size: 1.2rem;
+
+				@media #{$breakpointXS} {
+					font-size: 1.1rem;
+				}
+			}
+		}
+
+		&:after{
+			content: '';
+			display: block;
+			padding-bottom: 100%;
+		}
+	}
+
+	&.suspended {
+		.miner_content {
+			filter: grayscale(100%);
+			opacity: 0.4;
+		}
+	}
+}
+
+.buy_button_wrapper {
+	padding: $spacing_small 0 $spacing_medium 0;
+
+	@media #{$breakpointXS} {
+		padding: 1rem 0 $spacing_small 0;
+	}
+
+	.button_start_earn {
+		clear: both;
+
+		@media #{$breakpointXS} {
+			width: 20rem;
+		}
+	}
+}

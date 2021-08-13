@@ -1,0 +1,8 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+.layout_avoid_scam {
+	i {
+		color: $color_brand_green_dark
+	}
+}

@@ -1,0 +1,78 @@
+.miner_animate_levitation {
+
+	animation-name: miner_animate_levitation;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	//animation-timing-function: linear;
+
+	&_small {
+		animation-name: miner_animate_levitation_small;
+	}
+
+	@keyframes miner_animate_levitation {
+		0% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(4%);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes miner_animate_levitation_small {
+		0% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(2%);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	&.stop {
+		animation: none;
+	}
+}
+
+.miner_animate_spin_linear {
+	animation-name: miner_animate_spin_linear;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	transform-origin: center;
+	transform-box: fill-box;
+
+	&.miner_animate_spin_speed1 { animation-duration: 3.8s; }
+	&.miner_animate_spin_speed2 { animation-duration: 3.6s; }
+	&.miner_animate_spin_speed3 { animation-duration: 3.4s; }
+	&.miner_animate_spin_speed4 { animation-duration: 3.2s; }
+	&.miner_animate_spin_speed5 { animation-duration: 2.8s; }
+	&.miner_animate_spin_speed6 { animation-duration: 2.6s; }
+	&.miner_animate_spin_speed7 { animation-duration: 2.4s; }
+	&.miner_animate_spin_speed8 { animation-duration: 2.2s; }
+	&.miner_animate_spin_speed9 { animation-duration: 1.8s; }
+	&.miner_animate_spin_speed10 { animation-duration: 1.6s; }
+	&.miner_animate_spin_speed11 { animation-duration: 1.4s; }
+	&.miner_animate_spin_speed12 { animation-duration: 1.2s; }
+	&.miner_animate_spin_speed13 { animation-duration: 0.8s; }
+	&.miner_animate_spin_speed14 { animation-duration: 0.6s; }
+	&.miner_animate_spin_speed15 { animation-duration: 0.4s; }
+	&.miner_animate_spin_speed16 { animation-duration: 0.2s; }
+
+	@keyframes miner_animate_spin_linear {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	&.stop {
+		animation: none;
+	}
+}

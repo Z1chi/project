@@ -1,0 +1,101 @@
+/*
+.notification_container {
+
+	position: fixed;
+	left: 2rem;
+	bottom: 2rem;
+	z-index: 10;
+	pointer-events: none;
+
+	* {
+		pointer-events: none;
+	}
+
+	@media #{$breakpointXS} {
+		display: none;
+	}
+
+	.notification_wrapper {
+		padding: 2rem;
+		background: $color_brand_lightblue_bg;
+		box-shadow: $shadow_default;
+		border-radius: 1rem;
+		animation-name: animate_noti;
+		animation-duration: 6s;
+		transform: translateY(150%);
+
+		@media #{$breakpointXS} {
+			width: 100%;
+			display: flex;
+			flex-flow: row wrap;
+			padding: 1rem;
+			justify-content: center;
+			transform: translateY(-150%);
+		}
+
+		.notification_header {
+			font-size: 1.6rem;
+			margin-bottom: 1rem;
+			text-transform: lowercase;
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: left;
+
+			@media #{$breakpointXS} {
+				font-size: 1.4rem;
+				width: 100%;
+				justify-content: center;
+			}
+
+			.flag {
+				display: inline-block;
+				height: 2.4rem;
+				width: 3rem;
+				background-repeat: no-repeat;
+				background-position: bottom;
+				background-size: contain;
+
+				@media #{$breakpointXS} {
+					height: 1.6rem;
+					width: 2.4rem;
+				}
+			}
+
+			.name {
+				margin-left: 1rem;
+
+				@media #{$breakpointXS} {
+					margin-left: 0;
+				}
+			}
+		}
+
+		.notification_body {
+			color: $color_brand_green_dark;
+			font-weight: 400;
+		}
+	}
+
+	@keyframes animate_noti {
+		0%   {transform: translateY(150%)}
+		10%  {transform: translateY(0)}
+		90%  {transform: translateY(0)}
+		100% {transform: translateY(150%)}
+	}
+
+
+	@media #{$breakpointXS} {
+		left: 1rem;
+		top: 1rem;
+		right: 1rem;
+		//border: 1px solid red;
+		height: 1px;
+
+		@keyframes animate_noti {
+			0%   {transform: translateY(-150%)}
+			10%  {transform: translateY(0)}
+			90%  {transform: translateY(0)}
+			100% {transform: translateY(-150%)}
+		}
+	}
+}*/

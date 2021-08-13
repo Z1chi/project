@@ -1,0 +1,61 @@
+$path_img: '/assets/img';
+$path_icons: '/assets/img/icons';
+$path_fonts: '/assets/fonts';
+
+$inner_size_default: 1200px;
+
+$header_height_mobile: 6rem;
+
+$spacing_small: 2rem;
+$spacing_medium: 4rem;
+$spacing_big: 8rem;
+$spacing_superbig: 10rem;
+
+$border_height_default: 1px;
+
+$lobby_sidemenu_width: 24rem;
+$header_height: 8rem;
+
+// home breakpoints
+
+$breakpointXXS: 'only screen and (max-width: 370px)'; // mobile layout (width: 320px - 320px)
+$breakpointXS: 'only screen and (max-width: 767px)'; // mobile layout (width: 370px - 767px)
+$breakpointS: 'only screen and (max-width: 991px)';  // tablet layout
+$breakpointM: 'only screen and (max-width: 1210px)'; // small desktop
+$breakpointL: 'only screen and (min-width: 1400px) and (min-height: 800px)'; // large desktop
+
+// colors
+
+$color_brand_grey: #2D2926;
+$color_brand_blue_dark: #0165C2;
+$color_brand_blue_light: #027CEF;
+
+$color_brand_darkblue_light: #064196;
+$color_brand_darkblue_dark: #01013F;
+
+$color_brand_lightblue_bg: #F5FAFF;
+$color_brand_blue_bg: #E3F1FF;
+
+$color_dark_grey: #808080;
+$color_light_grey: #F6F6F6;
+
+$color_white: #FFFFFF;
+$color_black: #111111;
+$color_text_default: #111111;
+
+$color_brand_green_light: #7FE117;
+$color_brand_green_dark: #48BF0A;
+
+$color_brand_orange_light: #FF9700;
+$color_brand_orange_dark: #FF5E00;
+
+$form_input_height: 4rem;
+$form_input_height_mobile: 4rem;
+
+$border_radius_default: 1rem;
+$color_link_color: $color_brand_blue_dark;
+
+$color_fail: red;
+
+$box_shadow_color: rgba(#01013F, 0.07);
+$shadow_default: 0 0 3rem $box_shadow_color;

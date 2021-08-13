@@ -1,0 +1,660 @@
+@import '../config/variables';
+
+* {
+    box-sizing: border-box;
+
+    &::selection {
+        background: rgba($color_brand_blue_dark, 0.3);
+        //color: $color_white;
+    }
+}
+
+html {
+    font-size: 10px;
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 1.8rem;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+
+    @media #{$breakpointXS} {
+        font-size: 1.5rem;
+    }
+}
+
+.body_wrapper {
+    height: 1px;
+    min-height: 100%;
+    width: 100%;
+}
+
+.layout_lobby {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.layout_page {
+    display: flex;
+    flex-direction: column;
+    height: 1px;
+    min-height: 100%;
+}
+
+// прилипашка футер
+.home_content_wrapper {
+    width: 100%;
+    //height: 100%;
+    flex: 1;
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+input:focus,
+textarea:focus,
+button:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+button {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $color_link_color;
+    //transition: 0.3s;
+
+    &:hover {
+        color: $color_brand_blue_dark;
+    }
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"], button, .button_default {
+    width: 100%;
+    font-size: 1.8rem;
+    height: $form_input_height;
+    line-height: $form_input_height;
+    border-radius: 1rem;
+    //border: 1px solid $color_dark_grey;
+    border: 0;
+    margin-bottom: 1rem;
+
+    @media #{$breakpointS} {
+        height: $form_input_height_mobile;
+        line-height: $form_input_height_mobile;
+        font-size: 1.4rem;
+    }
+}
+
+input[type="text"], input[type="password"], input[type="tel"],input[type="email"] {
+    background: $color_brand_blue_bg;
+    padding: 0 1.25rem;
+    font-weight: 300;
+
+    &::placeholder {
+        color: $color_dark_grey;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 2px rgba($color_brand_blue_light, 1);
+    }
+
+    &:disabled {
+        color: $color_dark_grey;
+    }
+}
+
+.select_wrapper {
+    margin-bottom: 2rem;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    //width: 100%;
+    height: $form_input_height;
+    line-height: $form_input_height;
+    //border: 0;
+    //border: 1px solid $color_dark_grey;
+    //background: $color_brand_blue_bg;
+    border-radius: 1rem;
+    font-size: 1.8rem;
+    outline: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.select2-container--default .select2-selection--multiple {
+    min-height: $form_input_height;
+    border-radius: 1rem;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 0;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    font-size: 1.4rem;
+}
+
+.select2-dropdown {
+    //border: 1px solid $color_dark_grey;
+    //border: 0;
+    overflow: hidden;
+}
+
+.select2-results__option {
+    &:hover {
+        background: $color_brand_blue_bg;
+    }
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 0;
+    border-radius: 1rem;
+    background: $color_brand_blue_bg;
+    padding: 0.5rem 1rem;
+}
+
+.input_error {
+    input {
+        box-shadow: 0 0 0 2px rgba($color_fail, 1);
+    }
+}
+
+.iti {
+    width: 100%;
+}
+
+.tel_wrapper {
+    margin-bottom: 1rem;
+}
+
+.is_hidden {
+    display: none;
+}
+
+button, .button_default {
+    color: $color_white;
+    background-color: $color_brand_blue_light;
+    margin-top: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 300;
+    border-radius: 1rem;
+
+    // border kostyl
+    border: 0;
+    //line-height: calc(#{$form_input_height} + 0.5rem);
+
+    @media #{$breakpointS} {
+        //line-height: calc(#{$form_input_height_mobile} + 0.5rem);
+    }
+
+    &:active {
+        transform: scale(1.02);
+    }
+
+    &:hover {
+        background: $color_brand_blue_dark;
+    }
+
+    &.inverse {
+        color: $color_brand_blue_light;
+        background-color: $color_white;
+        border: 3px solid $color_brand_blue_bg;
+        //line-height: $form_input_height;
+
+        @media #{$breakpointS} {
+            //line-height: $form_input_height_mobile;
+        }
+
+        &:hover {
+            color: $color_white;
+            background: $color_brand_blue_dark;
+            border-color: $color_brand_blue_dark;
+        }
+    }
+
+    &:disabled {
+        cursor: default;
+        background: $color_dark_grey;
+        opacity: 0.5;
+        transform: none;
+    }
+
+    &.preloader {
+
+        i {
+            display: none;
+        }
+
+        &:disabled {
+
+            span {
+                display: none;
+            }
+
+            i {
+                display: inline-block;
+            }
+        }
+
+    }
+}
+
+input[type="checkbox"] {
+    height: 2rem;
+    width: 2rem;
+}
+
+/* Global page rules */
+
+.container {
+    width: $inner_size_default;
+    min-width: $inner_size_default;
+    margin: 0 auto;
+    //padding: 0 2rem;
+
+    @media #{$breakpointM} {
+        min-width: 800px;
+        width: 100%;
+        //overflow: hidden;
+        padding: 0 2rem;
+    }
+
+    @media #{$breakpointS} {
+        min-width: 720px;
+        padding: 0 1rem;
+    }
+
+    @media #{$breakpointXS} {
+        min-width: 320px;
+    }
+}
+
+.container_lobby {
+    width: 90rem;
+    margin: 0 auto;
+    //background: red;
+
+    @media #{$breakpointL} {
+        width: 110rem;
+    }
+
+    @media #{$breakpointM} {
+        width: 70rem;
+    }
+
+    @media #{$breakpointS} {
+        width: 100%;
+    }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    cursor: default;
+}
+
+//h1, h2 {
+//    font-size: 3.7rem;
+//    line-height: 6rem;
+//
+//    @media #{$breakpointS} {
+//        font-size: 2.5rem;
+//        line-height: 4rem;
+//    }
+//}
+
+//h1 {
+//
+//    $line_width: 10rem;
+//
+//    margin: $spacing_small 0 $spacing_medium 0;
+//    position: relative;
+//    cursor: default;
+//
+//    //@media #{$breakpointS} {
+//    //    font-size: 3.2rem;
+//    //    margin: $spacing_medium 0;
+//    //}
+//
+//    &::before {
+//        content: '';
+//        position: absolute;
+//        height: $border_height_default;
+//        background: $color_brand_blue_dark;
+//        bottom: -1rem;
+//        left: 0;
+//        width: $line_width;
+//    }
+//}
+
+p {
+    font-size: 1.8rem;
+    //line-height: 3rem;
+    //text-align: justify;
+
+    //@media #{$breakpointS} {
+    //    font-size: 2rem;
+    //    //line-height: 2.5rem;
+    //}
+	//
+    @media #{$breakpointXS} {
+        font-size: 1.4rem;
+        line-height: initial;
+    }
+}
+
+.ul_default {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &.nomargin {
+        margin: 0;
+    }
+
+    li {
+        padding-left: 0;
+        font-size: 2rem;
+        line-height: 3rem;
+        font-weight: 300;
+    }
+
+    li:before {
+        font-family: "Font Awesome 5 Pro";
+        content: "\f054";
+        padding-right: 1rem;
+        color: $color_brand_blue_dark;
+        font-weight: 400;
+        font-size: 2rem;
+    }
+}
+
+.heading_default {
+
+    $line_width: 12rem;
+
+    color: #111;
+    //line-height: $spacing_medium;
+    //height: $spacing_medium;
+    margin: $spacing_big 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 4.5rem;
+    font-weight: 300;
+    position: relative;
+    cursor: default;
+    // font-family: 'GothamPro';
+
+    @media #{$breakpointS} {
+        font-size: 3.5rem;
+        margin: $spacing_medium 0;
+    }
+
+    @media #{$breakpointXS} {
+        font-size: 2.4rem;
+        //margin: $spacing_small 0;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        height: $border_height_default;
+        background: #111;
+        bottom: -0.5rem;
+        left: calc(50% - #{$line_width/2});
+        width: $line_width;
+    }
+
+    &.heading_popup {
+        font-size: 2.5rem;
+        line-height: 3rem;
+        margin: 0 0 $spacing_medium 0;
+    }
+
+    &.heading_lobby {
+        line-height: initial;
+        margin: $spacing_medium;
+
+        &::before {
+            display: none;
+        }
+    }
+
+    &.heading_page {
+        line-height: initial;
+        margin: $spacing_medium 0;
+    }
+}
+
+.heading_inblock {
+    color: $color_brand_darkblue_dark;
+    margin: $spacing_medium 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2.6rem;
+    font-weight: 400;
+    position: relative;
+    cursor: default;
+
+    @media #{$breakpointS} {
+        font-size: 2.4rem;
+    }
+
+    @media #{$breakpointXS} {
+        font-size: 2.2rem;
+    }
+}
+
+.heading_small {
+    color: $color_dark_grey;
+    line-height: $spacing_medium;
+    margin: $spacing_big 0 $spacing_small;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    cursor: default;
+    // font-family: 'GothamPro';
+
+    @media #{$breakpointS} {
+        font-size: 2.2rem;
+        margin: $spacing_medium 0;
+    }
+
+    @media #{$breakpointXS} {
+        font-size: 2rem;
+    }
+}
+
+.go_back {
+
+    margin-top: $spacing_medium;
+    line-height: 2.5rem;
+    color: $color_dark_grey;
+
+    &:before {
+        font-family: "Font Awesome 5 Pro";
+        content: "\f053";
+        padding-right: 1rem;
+        color: $color_brand_blue_dark;
+        font-weight: 400;
+        font-size: 2rem;
+    }
+}
+
+.default_label {
+    font-size: 2rem;
+    color: $color_black;
+    font-weight: 400;
+    padding: 0;
+    margin-bottom: 0.75rem;
+    cursor: default;
+    //text-transform: uppercase;
+
+    em {
+        color: $color_fail;
+    }
+
+    @media #{$breakpointXS} {
+        font-size: 1.6rem;
+    }
+}
+
+.input_error_msg {
+    color: $color_fail;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+}
+
+.form_fullpage {
+    width: 40rem;
+    padding: 2rem;
+    margin: 0 auto;
+
+    @media #{$breakpointXS} {
+        width: 100%;
+    }
+}
+
+iframe.fireup {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    height: 1px;
+    width: 1px;
+}
+
+.input_upload {
+    width: 100%;
+    min-height: 18rem;
+    cursor: pointer;
+    border: 4px dashed $color_brand_blue_bg;
+    overflow: hidden;
+    @include centeredContent();
+    user-select: none;
+    margin-bottom: 2rem;
+    padding: 2rem 0;
+
+    .input_upload_placeholder
+    {
+        pointer-events: none;
+        * {
+            pointer-events: none;
+        }
+    }
+
+    &_placeholder {
+        text-align: center;
+        font-weight: 300;
+        color: $color_black;
+    }
+
+    &_complete {
+        .input_upload_placeholder {
+            display: none;
+        }
+    }
+
+    i {
+        font-size: 4rem;
+        color: $color_brand_blue_light;
+        margin-bottom: 1rem;
+    }
+
+    &:active {
+        box-shadow: 0 1px 10px 0 rgba($color_black, 0.1);
+    }
+
+    @media #{$breakpointXS} {
+        width: 100%;
+    }
+}
+
+.form_field {
+    &.input_error {
+        .input {
+            border-bottom-color: $color_fail;
+        }
+
+        .input_upload,
+        .select2-container--default .select2-selection--single
+        {
+            border-color: $color_fail;
+        }
+
+        .input_error_msg {
+            //display: block;
+            width: 100%;
+            color: $color_fail;
+            font-size: 1.2rem;
+            user-select: none;
+            margin-top: 0.5rem;
+
+            @media #{$breakpointXS} {
+                display: initial;
+                padding-left: 1rem;
+            }
+        }
+    }
+}
+
+.table_default {
+    width: 100%;
+    position: relative;
+
+    @media #{$breakpointXS} {
+       padding: 0;
+    }
+
+    th {
+        position: sticky;
+        top: 0; /* Don't forget this, required for the stickiness */
+        text-align: left;
+        padding: 0 0.5rem;
+    }
+
+    td {
+        padding: 0.5rem;
+
+        @media #{$breakpointXS} {
+           font-size: 1.2rem;
+        }
+    }
+
+    tr:nth-child(even) {
+        background-color: $color_light_grey;
+    }
+
+    thead {
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+	        font-size: 1.5rem;
+            background: $color_brand_lightblue_bg;
+            line-height: 4rem;
+        }
+    }
+}

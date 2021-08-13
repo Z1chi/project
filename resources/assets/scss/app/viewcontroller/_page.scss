@@ -1,0 +1,30 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+.page_wrapper {
+	background: $color_brand_lightblue_bg;
+	width: 100%;
+	flex: 1;
+	padding: 0 2rem $spacing_big 2rem;
+
+	@media #{$breakpointXS} {
+		padding: 0 1rem;
+	}
+
+	.page_content {
+
+		margin-top: $spacing_medium;
+
+		.page_content_wrapper {
+			padding: 2rem 3rem 2rem 3rem;
+		}
+	}
+
+	.page_back_button {
+		padding: $spacing_small 0;
+
+		a {
+			margin: 0 auto;
+		}
+	}
+}

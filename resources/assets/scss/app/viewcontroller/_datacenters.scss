@@ -1,0 +1,115 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+.layout_datacenters {
+	.map {
+		text-align: center;
+		border-bottom: 1px solid $color_light_grey;
+		margin-bottom: $spacing_small;
+
+		img {
+			width: auto;
+			height: auto;
+
+			@media #{$breakpointS} {
+				width: 100%;
+			}
+		}
+	}
+
+	.description {
+		margin-top: $spacing_small;
+	}
+
+	.dc_time {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-around;
+		margin-bottom: $spacing_medium;
+
+		.time_cell {
+			font-weight: 500;
+			text-align: center;
+
+			@media #{$breakpointXS} {
+				font-size: 1.4rem;
+			}
+
+			.time {
+				margin-top: 0.5rem;
+				font-size: 1.6rem;
+				font-weight: 300;
+
+				@media #{$breakpointXS} {
+					font-size: 1.2rem;
+				}
+			}
+
+			i {
+				color: $color_brand_blue_dark
+			}
+		}
+	}
+
+	.ge_icons {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-around;
+		margin: $spacing_medium 0;
+
+		@media #{$breakpointXS} {
+			margin-bottom: $spacing_small;
+		}
+
+		.icon_wrapper {
+
+			//@media #{$breakpointXS} {
+			//	width: 100%;
+			//}
+
+			.icon {
+
+				$ge_icon_size: 8rem;
+
+				width: $ge_icon_size;
+				height: $ge_icon_size;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				opacity: 0.9;
+				margin: 0 auto;
+
+				@media #{$breakpointXS} {
+					width: 6rem;
+					height: 6rem;
+				}
+
+				&.icon_1 {
+					background-image: url('/assets/img/green_energy_1.svg');
+				}
+
+				&.icon_2 {
+					background-image: url('/assets/img/green_energy_2.svg');
+				}
+
+				&.icon_3 {
+					background-image: url('/assets/img/green_energy_3.svg');
+				}
+
+
+			}
+
+			.title {
+				text-align: center;
+				margin-top: $spacing_small;
+				font-weight: 500;
+
+				@media #{$breakpointXS} {
+					font-size: 1.2rem;
+				}
+			}
+		}
+
+
+	}
+}

@@ -1,0 +1,582 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+$overlay_color: rgba(darken($color_dark_grey, 25%), 0.8);
+
+body.js_no_scroll {
+    overflow: hidden; // FIXME
+}
+
+.body_overlay {
+
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: $overlay_color;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    //padding-top: $header_height + 1rem;
+
+    &_hidden {
+        display: none;
+    }
+
+    .popup_wrapper {
+        padding: 2rem 0;
+
+        @media #{$breakpointXS} {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            background: $color_white;
+        }
+    }
+
+    &.popup_transparent {
+        .popup_wrapper {
+
+
+            @media #{$breakpointXS} {
+                background: $overlay_color;
+            }
+        }
+
+        .popup {
+            background: none;
+
+            .popup_close_button {
+                box-shadow: inset 0 0 0 2px $color_white;
+
+                &::before, &::after {
+                    background-color: $color_white;
+                }
+            }
+        }
+    }
+}
+
+.js_popup_blocks, .popup_block {
+    display: none;
+}
+
+.popup {
+    $_padding: 2rem 2rem 1rem 2rem;
+
+    min-width: 40rem;
+    //width: 60rem;
+    background: $color_white;
+    border-radius: 1rem;
+    padding: $_padding;
+
+    @media #{$breakpointXS} {
+        min-width: initial;
+        width: 100%;
+        border-radius: 0;
+        padding-bottom: $spacing_big;
+    }
+
+    &_head {
+        height: 3rem;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    &_body {
+        min-height: 2rem;
+        font-size: 1.8rem;
+        color: $color_black;
+
+        .popup_block {
+            display: block;
+        }
+    }
+
+    &_close_button {
+        $_color: $color_brand_blue_dark;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3rem;
+        height: 3rem;
+        @include centeredContent();
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 2px $_color;
+        transform: rotate(45deg);
+
+        &::before, &::after {
+            position: absolute;
+            content: '';
+            background-color: $_color;
+            width: 1.8rem;
+            height: 2px;
+            transition: width 0.2s;
+        }
+
+        &::before {
+            transform: rotate(90deg);
+        }
+
+        &:active {
+            &::before, &::after {
+                transition: width 0.2s;
+                width: 1.4rem;
+            }
+        }
+    }
+
+    &_bonus {
+        background-repeat: no-repeat;
+        background-position: top;
+        background-size: contain;
+
+        img {
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+
+        @media #{$breakpointXS} {
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+
+    &_text {
+        @mixin _icon ($text_color, $icon_color, $utf_char, $weight) {
+            position: relative;
+            padding: 0 $spacing_small;
+            margin-bottom: 4rem;
+            color: $text_color;
+            max-width: 50rem;
+
+            &::before {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                //@include font_awesome_char($utf_char, $weight, $icon_color, 6rem);
+            }
+        }
+
+        text-align: center;
+        margin-bottom: 2.5rem;
+
+        &_default {
+            @include _icon($color_text_default, $color_brand_grey, '\f5b8', 400);
+        }
+
+        &_success {
+            @include _icon($color_text_default, $color_brand_blue_dark, '\f00c', 900);
+        }
+
+        &_error {
+            @include _icon($color_text_default, $color_black, '\f00d', 900);
+        }
+    }
+
+    &_buttons {
+        @include centeredContent();
+        //margin-bottom: 2rem;
+    }
+
+    &_button {
+        display: inline-block;
+        cursor: pointer;
+        width: 100%;
+        text-transform: uppercase;
+
+        height: 4rem;
+        line-height: 4rem;
+        border-radius: 1rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+
+        color: $color_white;
+        background: linear-gradient($color_brand_blue_light, $color_brand_blue_dark);
+
+        @mixin _on_active () {
+			transform: scale(1.02);
+        }
+
+        &:hover {
+            background: linear-gradient($color_brand_blue_dark, $color_brand_blue_light)
+        }
+
+        &.popup_inverse {
+            color: $color_brand_blue_light;
+            background: $color_white;
+            border: 3px solid $color_brand_blue_bg;
+            line-height: $form_input_height;
+
+            &:hover {
+                color: $color_white;
+                background: $color_brand_blue_dark;
+                border-color: $color_brand_blue_dark;
+            }
+        }
+
+        &:active {
+            @include _on_active();
+        }
+    }
+
+    .popup_button + .popup_button {
+        margin-left: 1rem;
+    }
+}
+
+.popup_signup {
+
+    min-width: 45rem;
+
+    @media #{$breakpointS} {
+        min-width: auto;
+    }
+
+    .signin_menu {
+
+        .popup_buttons {
+
+            flex-flow: row wrap;
+
+            .popup_button {
+                display: block;
+                width: 100%;
+                margin-left: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .signup_form {
+        display: none;
+
+        .hcaptcha {
+            margin-bottom: 3rem;
+        }
+
+        .popup_buttons {
+            .inverse {
+                margin-top: $spacing_small;
+            }
+        }
+    }
+
+    .margin_top {
+        margin-top: 1rem;
+    }
+
+    .checkboxes {
+        margin-bottom: 1rem;
+    }
+
+    .signup_tip {
+        margin-top: $spacing_small;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .tip_link {
+        //color: $color_dark_grey;
+        margin-left: 1rem;
+        font-size: 1.4rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .signup_labels {
+        display: flex;
+        flex-flow: row nowrap;
+        margin: $spacing_small 0;
+        justify-content: center;
+
+        .signup_label {
+            width: 33%;
+            text-align: center;
+
+            .icon {
+                color: $color_brand_green_dark;
+                font-size: 5rem;
+                margin-bottom: 1rem;
+
+                @media #{$breakpointS} {
+                    font-size: 4rem;
+                }
+            }
+
+            .title {
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 1.4rem;
+                font-weight: 400;
+
+                @media #{$breakpointS} {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}
+
+.popup_new_miner {
+
+    min-width: 70rem;
+
+
+    @media #{$breakpointXS} {
+        padding-bottom: 8rem; //
+    }
+
+    @media #{$breakpointXS} {
+        min-width: initial;
+    }
+
+    .heading_popup {
+        margin-bottom: 0;
+    }
+
+    .dynamic_miner {
+        width: 32rem;
+        height: 32rem;
+        //background: $color_light_grey;
+        margin: 0 auto;
+        position: relative;
+
+        @media #{$breakpointXS} {
+            width: 24rem;
+            height: 24rem;
+        }
+
+        &.bounce {
+
+            animation-name: bounce;
+            animation-duration: 0.3s;
+
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+                40% {transform: translateY(-30px);}
+                60% {transform: translateY(-15px);}
+            }
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .select_tip {
+        font-size: 2.2rem;
+        color: $color_dark_grey;
+        font-weight: 400;
+        margin-bottom: 4rem;
+
+        @media #{$breakpointXS} {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .hint {
+            font-size: 1.6rem;
+            line-height: 3rem;
+            font-weight: 300;
+
+            @media #{$breakpointXS} {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    .calculator_block {
+        width: 85%;
+        margin: 0 auto $spacing_small auto;
+
+        @media #{$breakpointXS} {
+            width: 100%;
+
+            .range {
+                padding: 0 3rem;
+            }
+        }
+    }
+
+    .inputs_wrapper {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        @media #{$breakpointXS} {
+            flex-flow: row wrap;
+        }
+
+        .bonus {
+            display: flex;
+            padding-top: 1rem;
+            justify-content: left;
+
+            .text {
+                padding-left: 0.5rem;
+
+                @media #{$breakpointXS} {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .input_wrapper {
+            width: 32%;
+
+            &.muted input {
+                background-color: $color_light_grey;
+            }
+
+            &.bonus_tick {
+                .styled-checkbox {
+                    position: absolute; // take it out of document flow
+                    opacity: 0; // hide it
+
+                    & + label {
+                        position: relative;
+                        cursor: pointer;
+                        padding: 0;
+                    }
+
+                    // Box.
+                    & + label:before {
+                        content: '';
+                        margin-right: 0.5rem;
+                        display: inline-block;
+                        vertical-align: text-top;
+                        width: 20px;
+                        height: 20px;
+                        background: white;
+                        box-shadow: 0 0 0 4px $color_brand_blue_bg;
+                        margin-left: 0.4rem;
+                        border-radius: 0.5rem;
+                    }
+
+                    // Box hover
+                    &:hover + label:before {
+                        //background: $color_brand_orange_light;
+                    }
+
+                    // Box focus
+                    //&:focus + label:before {
+                    //    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+                    //}
+
+                    // Box checked
+                    &:checked + label:before {
+                        //background: $color_brand_orange_light;
+                    }
+
+                    // Disabled state label.
+                    &:disabled + label {
+                        color: #b8b8b8;
+                        cursor: auto;
+                    }
+
+                    // Disabled box.
+                    &:disabled + label:before {
+                        box-shadow: none;
+                        background: #ddd;
+                    }
+
+                    // Checkmark. Could be replaced with an image
+                    &:checked + label:after {
+                        content: '';
+                        position: absolute;
+                        left: 6px;
+                        top: 9px;
+                        background: $color_brand_orange_light;
+                        width: 4px;
+                        height: 4px;
+                        box-shadow:
+                                3px 0 0 $color_brand_orange_light,
+                                6px 0 0 $color_brand_orange_light,
+                                6px -3px 0 $color_brand_orange_light,
+                                6px -6px 0 $color_brand_orange_light,
+                                6px -9px 0 $color_brand_orange_light,
+                                6px -12px 0 $color_brand_orange_light;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+
+            @media #{$breakpointXS} {
+                width: 48%;
+
+                //&.sum { order: 1 }
+                //&.ghs { order: 2 }
+                //&.bonus_tick { order: 3 }
+
+                .default_label {
+                    font-size: 1.4rem;
+                }
+
+                &:first-child {
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+
+    .earnings {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        .period {
+            width: 32%;
+            text-align: center;
+            border: 2px solid lighten($color_brand_green_dark, 50%);
+            border-radius: $border_radius_default;
+            padding: 1rem 0;
+
+            .header {
+                color: $color_black;
+                text-transform: uppercase;
+                font-size: 1.4rem;
+                //line-height: 5rem;
+                margin-bottom: 1rem;
+
+                @media #{$breakpointXS} {
+                    font-size: 1.2rem;
+                    padding: 0 1rem;
+                }
+            }
+
+            .count {
+                color: $color_brand_green_dark;
+                font-weight: 600;
+                font-size: 3rem;
+
+                @media #{$breakpointXS} {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+    }
+
+    .button_start_earn {
+        margin-bottom: $spacing_small;
+
+        @media #{$breakpointXS} {
+            width: 22rem;
+        }
+    }
+
+}

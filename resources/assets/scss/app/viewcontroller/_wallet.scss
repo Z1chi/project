@@ -1,0 +1,26 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+.lobby_wallet {
+
+	&.suspended {
+		button {
+			display: none;
+		}
+	}
+
+	//width: 40rem;
+	//margin: 0 auto;
+	//padding: 4rem 0;
+
+
+	//@media #{$breakpointXS} {
+	//	width: 100%;
+	//	padding-right: 1rem;
+	//	padding-left: 1rem;
+	//}
+	//
+	//.button_start_earn {
+	//	margin-top: 1rem;
+	//}
+}

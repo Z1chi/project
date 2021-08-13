@@ -1,0 +1,98 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+.ghs_slider {
+	display: flex;
+	flex-flow: row wrap;
+
+	.range {
+		width: 100%;
+		height: 6rem;
+
+		//@media #{$breakpointXS} {
+		//	height: 6rem;
+		//}
+	}
+
+	// vendor style rewrites
+
+	.irs-line {
+		//background: lighten($color_brand_red, 50%);
+		background: $color_light_grey;
+		border: 1px solid $color_dark_grey;
+		border: none;
+		cursor: pointer;
+	}
+
+	.irs-bar {
+		background: $color_brand_blue_light;
+		border: 0;
+		cursor: pointer;
+	}
+
+	.irs-handle, .irs--big .irs-handle:hover, .irs--big .irs-handle.state_hover {
+		border: 4px solid $color_brand_blue_light;
+		background: $color_brand_blue_light;
+		box-shadow: none;
+	}
+
+	.irs-single {
+		background: $color_brand_blue_light;
+		border-radius: 1rem;
+		font-size: 1.6rem;
+		padding: 1rem;
+		top: -2.5rem;
+
+		@media #{$breakpointXS} {
+			font-size: 1.2rem;
+			padding: 0.5rem 1rem;
+			top: -1rem;
+		}
+
+		&::before {
+			position: absolute;
+			display: block;
+			content: "";
+			left: 50%;
+			width: 0;
+			height: 0;
+			overflow: hidden;
+
+
+			bottom: -1.4rem;
+			border: 0.8rem solid transparent;
+			margin-left: -0.8rem;
+			border-top-color: $color_brand_blue_light;
+		}
+	}
+
+	.irs-min, .irs-max {
+		color: $color_white;
+		font-size: 1.6rem;
+		padding: 0.8rem;
+		background-color: $color_brand_blue_light;
+		top: -1rem;
+		display: none;
+	}
+
+	.irs-grid-pol {
+		width: 2px;
+		height: 10px;
+		background-color: $color_brand_blue_light;
+	}
+
+	.irs-grid-text {
+		font-size: 1.5rem;
+		line-height: 2rem;
+		bottom: -1.5rem;
+		color: $color_dark_grey;
+
+		@media #{$breakpointXS} {
+			font-size: 1rem;
+		}
+	}
+
+	.irs-grid-pol.small {
+		display: none;
+	}
+}

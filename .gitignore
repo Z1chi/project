@@ -1,0 +1,15 @@
+.idea
+node_modules
+/vendor
+logs/
+package-lock.json
+env.ini
+public/upload
+.env
+resources/geoip
+app/localization/export.php
+public/*test*.php
+public/assets/img/bonus/
+
+pgadmin4/
+/public/ckfinder

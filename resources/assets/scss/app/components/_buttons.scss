@@ -1,0 +1,96 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+.button_calculate {
+	width: 30rem;
+	height: 6rem;
+	position: absolute;
+	left: calc(50% - 15rem);
+	bottom: -3rem;
+	background: linear-gradient($color_brand_green_light, $color_brand_green_dark);
+	text-align: center;
+	line-height: 6rem;
+	border-radius: 3rem;
+	font-weight: 600;
+	text-transform: uppercase;
+
+	@media #{$breakpointXS} {
+		width: 24rem;
+		height: 4rem;
+		line-height: 4rem;
+		bottom: -2rem;
+		left: calc(50% - 12rem);
+		font-weight: 400;
+	}
+
+	&:hover {
+		background: linear-gradient($color_brand_green_dark, $color_brand_green_light)
+	}
+}
+
+.button_more {
+	display: block;
+	width: 24rem;
+	height: 4rem;
+	color: $color_white;
+	background: #CECECE;
+	text-align: center;
+	line-height: 4rem;
+	border-radius: 1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin: $spacing_small auto 0 auto;
+
+	&:hover {
+		color: $color_white;
+		background: darken(#CECECE, 5%);
+	}
+}
+
+.button_start_earn {
+	display: block;
+	width: 30rem;
+	height: 6rem;
+	color: $color_white;
+	background: linear-gradient($color_brand_orange_light, $color_brand_orange_dark);
+	text-align: center;
+	line-height: 6rem;
+	border-radius: 1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin: 0 auto;
+
+	@media #{$breakpointXS} {
+		width: auto;
+		padding: 0 1rem;
+	}
+
+	&.small {
+		height: 4rem;
+		line-height: 4rem;
+		border-radius: 1rem;
+		font-size: 1.6rem;
+		font-weight: 400;
+	}
+
+	&:hover {
+		color: $color_white;
+		background: linear-gradient($color_brand_orange_dark, $color_brand_orange_light)
+	}
+
+	&.blue {
+		background: linear-gradient($color_brand_blue_light, $color_brand_blue_dark);
+
+		&:hover {
+			background: linear-gradient($color_brand_blue_dark, $color_brand_blue_light)
+		}
+	}
+
+	&.green {
+		background: linear-gradient($color_brand_green_light, $color_brand_green_dark);
+
+		&:hover {
+			background: linear-gradient($color_brand_green_dark, $color_brand_green_light)
+		}
+	}
+}

@@ -1,0 +1,41 @@
+.lobby_referrals {
+
+}
+
+.refer_wrapper {
+	padding: 0 0 $spacing_medium 0;
+
+	.hint {
+		background: $color_brand_blue_bg;
+	}
+
+	.block_refer_url {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+		background: $color_brand_lightblue_bg;
+		padding: 2rem;
+
+		@media #{$breakpointXS} {
+			flex-wrap: wrap;
+		}
+
+		.refer_title {
+			font-weight: 400;
+		}
+
+		.refer_url {
+			width: 33%;
+
+			@media #{$breakpointXS} {
+				width: 100%;
+				margin-top: 2rem;
+			}
+
+			input {
+				margin: 0;
+			}
+		}
+	}
+}
