@@ -1,5 +1,6 @@
 <?php
 
+define('DB_CONNECTION', getenv('APP_DB_CONNECTION'));
 define('DB_HOST', getenv('APP_DB_HOST'));
 define('DB_USER', getenv('APP_DB_USER'));
 define('DB_PASS', getenv('APP_DB_PASS'));

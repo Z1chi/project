@@ -12,7 +12,7 @@ final class DatabaseService
     {
         $capsule = new Capsule();
         $capsule->addConnection([
-            'driver'    => 'pgsql',
+            'driver'    => DB_CONNECTION,
             'host'      => DB_HOST,
             'database'  => DB_NAME,
             'username'  => DB_USER,
