@@ -20,7 +20,7 @@ class DB {
 		if (is_null(self::$db))
 		{
 			$config = [
-				'pgsql:host=' . DB_HOST . ';dbname=' . DB_NAME,
+				DB_CONNECTION . ':host=' . DB_HOST . ';dbname=' . DB_NAME,
 				DB_USER,
 				DB_PASS
 			];

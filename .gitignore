@@ -6,6 +6,7 @@ package-lock.json
 env.ini
 public/upload
 .env
+.htaccess
 resources/geoip
 app/localization/export.php
 public/*test*.php
