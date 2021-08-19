@@ -18,6 +18,7 @@ final class CreateAffiliateWithdrawTable extends Migration
             $table->integer('created')->nullable(false);
             $table->smallInteger('deleted')->nullable(false);
 
+            $table->index('affiliate_id');
         });
     }
 

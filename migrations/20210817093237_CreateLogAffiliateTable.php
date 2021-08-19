@@ -17,6 +17,8 @@ final class CreateLogAffiliateTable extends Migration
             $table->json('data');
             $table->string('ip', 64)->nullable(false);
             $table->integer('created')->nullable(false);
+
+            $table->index('affiliate_id');
         });
     }
 

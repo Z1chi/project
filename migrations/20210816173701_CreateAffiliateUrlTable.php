@@ -20,6 +20,8 @@ final class CreateAffiliateUrlTable extends Migration
             $table->text('iframe_conversion');
             $table->text('iframe_lead');
 
+            $table->index('affiliate_id');
+            $table->index('offer_id');
         });
     }
 

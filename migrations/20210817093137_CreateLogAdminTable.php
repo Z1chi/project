@@ -18,6 +18,7 @@ final class CreateLogAdminTable extends Migration
             $table->string('ip', 64)->nullable(false);
             $table->integer('created')->nullable(false);
 
+            $table->index('admin_id');
         });
     }
 

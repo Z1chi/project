@@ -27,6 +27,11 @@ final class CreateAffiliateActionLogTable extends Migration
             $table->text('http_referrer');
             $table->string('user_uid',64);
 
+            $table->index('affiliate_id');
+            $table->index('url_id');
+            $table->index('offer_id');
+            $table->index('user_id');
+            $table->index('user_uid');
         });
     }
 

@@ -17,7 +17,6 @@ final class CreateProjectTable extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
             $table->dateTime('accessed_at');
-
         });
     }
 
