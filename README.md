@@ -1,3 +1,4 @@
+## DEPLOY
     
      Инструкция для поднятие проекта
      
@@ -13,6 +14,10 @@
                           
 7. Для авторизации использовтаь **login: admin password: administrator**
 
+Clean and Seed database with fresh data.
+```bash
+php artisan app:seed
+```
     
       Instructions for raising the project
 

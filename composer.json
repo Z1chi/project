@@ -27,7 +27,10 @@
         "davedevelopment/phpmig": "^1.7",
         "illuminate/database": "^8.43",
         "vinkla/hashids": "^9.1",
-        "illuminate/validation": "^8.44"
+        "illuminate/validation": "^8.44",
+        "illuminate/console": "^8.55",
+        "illuminate/events": "^8.55",
+        "illuminate/cache": "^8.55"
     },
     "require-dev": {
         "larapack/dd": "^1.1"
@@ -35,7 +38,10 @@
     "autoload": {
         "psr-4": {
             "Ufo\\": "ufo/"
-        }
+        },
+        "files": [
+            "helpers.php"
+        ]
     },
     "scripts": {
         "post-install-cmd": [

@@ -23,8 +23,8 @@ final class CreateAdminTable extends Migration
             $table->integer('active')->nullable()->default(1);
             $table->unsignedInteger('callcenter_id')->nullable();
 
+            $table->index('active');
             $table->index('callcenter_id');
-
         });
     }
 

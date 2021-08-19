@@ -16,6 +16,7 @@ final class CreateVariablesTable extends Migration
             $table->text('value')->nullable(false);
             $table->integer('updated')->nullable(false)->default(0);
 
+            $table->unique('key');
         });
     }
 

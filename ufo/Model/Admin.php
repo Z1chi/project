@@ -36,6 +36,8 @@ final class Admin extends Eloquent implements AdminInterface
      */
     const UPDATED_AT = 'updated';
 
+    public $timestamps = false;
+
     public function getId(): int
     {
         return $this->id;

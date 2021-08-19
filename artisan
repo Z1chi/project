@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+use Ufo\Component\Scheduler\Kernel;
+use Dotenv\Dotenv;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Filesystem\Filesystem;
+use Ufo\Component\Scheduler\Application;
+
+require __DIR__.'/vendor/autoload.php';
+
+// Read environment variables
+$dotEnv = Dotenv::create(base_path());
+$dotEnv->load();
+define('ROOT', __DIR__);
+define('CONFIG', ROOT . '/config');
+define('SYSTEM', ROOT . '/system');
+define('RESOURCES', ROOT . '/resources');
+
+require config_path('system.php');
+
+$app = new Application;
+
+$app['config'] = [
+    'cache.default' => 'file',
+    'cache.stores.file' => [
+        'driver' => 'file',
+        'path' => __DIR__ . '/cache'
+    ]
+];
+
+$app['files'] = new Filesystem;
+
+$kernel = new Kernel($app, new Dispatcher($app));
+
+$kernel->handle(
+    new Symfony\Component\Console\Input\ArgvInput,
+    new Symfony\Component\Console\Output\ConsoleOutput
+);
