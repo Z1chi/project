@@ -32,6 +32,17 @@
 								</select>
 							</div>
 						</div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group">
+                                <label for="smartlinkInput">Project</label>
+                                <select class="form-control input-sm js_filter" data-param="project" id="projectSelect">
+                                    <option value="">All</option>
+
+                                </select>
+                            </div>
+                        </div>
+
 					</div>
 				</div>
 
