@@ -32,6 +32,16 @@
 								</select>
 							</div>
 						</div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group">
+                                <label for="dateFilter">Filter by date</label>
+                                <input type="date" class="form-control input-sm js_filter"
+//                                    value="Здесь в формате XXXX.MM.DD должно устанавливаться значение с урла как в примерах выше через if"
+                                 data-param="dataFilter" id="dataFilterInput"/>
+                            </div>
+                        </div>
+
 					</div>
 				</div>
 
