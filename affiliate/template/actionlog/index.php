@@ -32,6 +32,18 @@
 								</select>
 							</div>
 						</div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group">
+                                <label for="smartlinkInput">Offer</label>
+                                <select class="form-control input-sm js_filter" data-param="offer" id="offerSelect">
+                                    <option value="">All</option>
+                                    <option value="1">1</option>
+
+                                </select>
+                            </div>
+                        </div>
+
 					</div>
 				</div>
 
@@ -46,6 +58,7 @@
 							<tr>
 								<th class="text-center">User ID</th>
 								<th class="text-center">Smart link</th>
+								<th class="text-center">Offer</th>
 								<th class="text-center">Action</th>
 								<th class="text-center hidden-xs">Deposit</th>
 								<th class="text-center">Datetime</th>
@@ -60,6 +73,7 @@
 								<tr>
 									<td class="text-center"><?=$row->getUserUid()?></td>
 									<td class="text-center"><?=$row->url_title?></td>
+									<td class="text-center">123123</td>
 									<td class="text-center"><?=$row->getActionString()?></td>
 									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>
 									<td class="text-center"><?=$row->getCreatedFormatted()?></td>
