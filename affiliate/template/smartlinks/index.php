@@ -17,6 +17,7 @@
                             <thead>
                             <tr>
                                 <th class="text-center hidden-xs">Created</th>
+                                <th class="text-center">Project</th>
                                 <th class="text-center">Title</th>
                                 <th class="text-center">Url</th>
                                 <th class="text-center hidden-xs">Lead Iframe</th>
@@ -29,6 +30,7 @@
                             foreach ($LIST as $row): ?>
                                 <tr>
                                     <td class="text-center hidden-xs"><?= $row->getCreatedFormatted() ?></td>
+                                    <td class="text-center hidden-xs">1</td>
                                     <td class="text-bold">
 
                                         <?= htmlspecialchars($row->getTitle(), ENT_QUOTES) ?>

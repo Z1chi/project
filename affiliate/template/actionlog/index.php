@@ -56,6 +56,7 @@
 							<thead>
 							<tr>
 								<th class="text-center">User ID</th>
+								<th class="text-center">Project</th>
 								<th class="text-center">Smart link</th>
 								<th class="text-center">Action</th>
 								<th class="text-center hidden-xs">Deposit</th>
@@ -70,6 +71,7 @@
 							<? /* @var $row \affiliate\model\Logaction */ foreach ($LIST as $row): ?>
 								<tr>
 									<td class="text-center"><?=$row->getUserUid()?></td>
+									<td class="text-center">1</td>
 									<td class="text-center"><?=$row->url_title?></td>
 									<td class="text-center"><?=$row->getActionString()?></td>
 									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>
