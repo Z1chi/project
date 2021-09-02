@@ -38,7 +38,13 @@
                                 <label for="smartlinkInput">Project</label>
                                 <select class="form-control input-sm js_filter" data-param="project" id="projectSelect">
                                     <option value="">All</option>
-
+                                    <? /* @var $project \affiliate\model\Project */
+                                    foreach ($PROJECTS as $key => $project): ?>
+                                        <option value="<?= $project->getId() ?>"
+                                            <?if ($FILTER_PROJECT_ID == $project->getId()):?> selected="selected"<?endif;?>>
+                                            <?= $project->getTitle() ?>
+                                        </option>
+                                    <? endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -71,7 +77,7 @@
 							<? /* @var $row \affiliate\model\Logaction */ foreach ($LIST as $row): ?>
 								<tr>
 									<td class="text-center"><?=$row->getUserUid()?></td>
-									<td class="text-center">1</td>
+									<td class="text-center"><?=$row->project_title?></td>
 									<td class="text-center"><?=$row->url_title?></td>
 									<td class="text-center"><?=$row->getActionString()?></td>
 									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>

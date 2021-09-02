@@ -30,7 +30,7 @@
                             foreach ($LIST as $row): ?>
                                 <tr>
                                     <td class="text-center hidden-xs"><?= $row->getCreatedFormatted() ?></td>
-                                    <td class="text-center hidden-xs">1</td>
+                                    <td class="text-center hidden-xs"><?= $row->project_title ?></td>
                                     <td class="text-bold">
 
                                         <?= htmlspecialchars($row->getTitle(), ENT_QUOTES) ?>
@@ -111,7 +111,11 @@
                         <div class="form-group">
                             <label>Project</label>
                             <select name="project" class="form-control">
-                                <option value=>1</option>
+                                <? /* @var $row \affiliate\model\Project */
+                                foreach ($PROJECTS as $row): ?>
+                                    <option value="<?= $row->getId() ?>"
+                                        <? if ($row->getId() == 1): ?> selected="selected"<? endif; ?>><?= $row->getTitle() ?></option>
+                                <? endforeach; ?>
                                 <!--по дефолту стоит 1-->
                             </select>
                             <p class="help-block">Project</p>

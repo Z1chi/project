@@ -111,10 +111,21 @@ class Smartlink extends Model
 
 	public static function getSmartlinksList ($affiliate_id, $pagination = null)
 	{
-		$q = 'SELECT * FROM "' . TBL_AFFILIATE_URL . '" WHERE affiliate_id =  ' . $affiliate_id . ' AND deleted=0';
-
-		$q .= 'ORDER BY id DESC';
-
+		$q = 'SELECT '.
+            ' au.id, '.
+            ' au.title,'.
+            ' au.affiliate_id,'.
+            ' au.offer_id, '.
+            ' au.created, '.
+            ' au.deleted, '.
+            ' au.iframe_conversion, '.
+            ' au.iframe_lead, '.
+            ' pr.title project_title '.
+            ' FROM ' . TBL_AFFILIATE_URL . ' au'.
+            ' LEFT JOIN ' . TBL_AFFILIATE . ' af ON au.affiliate_id = af.id ' .
+            ' LEFT JOIN project pr ON af.project_id = pr.id ' .
+		    ' WHERE affiliate_id =  ' . $affiliate_id . ' AND deleted=0 '.
+		    ' ORDER BY id DESC ';
 		if ($pagination != null)
 		{
 			$q .= ' LIMIT ' . $pagination->getItemsOnPage() . ' ' .
@@ -129,7 +140,7 @@ class Smartlink extends Model
 		foreach ($list as $k => $row)
 		{
 			$smartlink = Smartlink::withRow($row);
-
+            $smartlink->project_title = $row['project_title'];
 			$smartlinks[] = $smartlink;
 		}
 

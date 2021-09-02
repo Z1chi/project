@@ -5,6 +5,7 @@ namespace affiliate\view;
 
 use admin\component\Pagination;
 use affiliate\component\Logger;
+use affiliate\model\Project;
 use App;
 use app\collection\Miners;
 use app\component\HashidHelper;
@@ -50,6 +51,7 @@ class SmartlinksView extends AffiliateController
 
 		$this->pushTemplateData([
 			'LIST' => $subscribers,
+			'PROJECTS' => Project::getProjects(),
 			'PAGES' => $pages,
 			'QUERY' => $this->query
 		]);
