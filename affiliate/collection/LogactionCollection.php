@@ -33,9 +33,11 @@ class LogactionCollection
 			'al.payout, ' .
             'al.created, ' .
             'al.user_uid, ' .
-			'au.title url_title ' .
+			'au.title url_title, ' .
+			'ao.title offer_title ' .
 			'FROM "' . TBL_AFFILIATE_ACTION_LOG . '" al ' .
 			'LEFT JOIN ' . TBL_AFFILIATE_URL . ' au ON al.url_id = au.id ' .
+			'LEFT JOIN affiliate_offer ao ON ao.id = al.offer_id ' .
 			' WHERE al.affiliate_id =  ' . $affiliate_id;
 
 		if ($filters != null && !empty($filters)) {
@@ -49,6 +51,9 @@ class LogactionCollection
 						case 'smartlink':
 							$q .= ' AND au.id = ' . $filter;
 							break;
+                        case 'offer':
+                            $q .= ' AND al.offer_id = ' . $filter;
+                            break;
 					}
 				}
 			}
@@ -72,6 +77,7 @@ class LogactionCollection
 		{
 			$action = Logaction::withRow($row);
 			$action->url_title = $row['url_title'];
+			$action->offer_title = $row['offer_title'];
 			$action->info_url = Url::create('/leads/?id=' . $row['user_uid']);
 
 			$actions[] = $action;

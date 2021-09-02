@@ -38,8 +38,9 @@
                                 <label for="smartlinkInput">Offer</label>
                                 <select class="form-control input-sm js_filter" data-param="offer" id="offerSelect">
                                     <option value="">All</option>
-                                    <option value="1">1</option>
-
+                                    <? foreach ($OFFERS as $key => $obj): ?>
+                                        <option value="<?=$obj->getId()?>"<?if ($FILTER_OFFER_ID == $obj->getId()):?> selected="selected"<?endif;?>><?=$obj->getTitle()?></option>
+                                    <? endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -73,7 +74,7 @@
 								<tr>
 									<td class="text-center"><?=$row->getUserUid()?></td>
 									<td class="text-center"><?=$row->url_title?></td>
-									<td class="text-center">123123</td>
+									<td class="text-center"><?=$row->offer_title?></td>
 									<td class="text-center"><?=$row->getActionString()?></td>
 									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>
 									<td class="text-center"><?=$row->getCreatedFormatted()?></td>
