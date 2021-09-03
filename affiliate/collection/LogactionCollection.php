@@ -35,10 +35,9 @@ class LogactionCollection
             'al.user_uid, ' .
 			'au.title url_title, ' .
 			'pr.title project_title ' .
-			'FROM "' . TBL_AFFILIATE_ACTION_LOG . '" al ' .
+			' FROM "' . TBL_AFFILIATE_ACTION_LOG . '" al ' .
 			'LEFT JOIN ' . TBL_AFFILIATE_URL . ' au ON al.url_id = au.id ' .
-			'LEFT JOIN ' . TBL_AFFILIATE . ' af ON al.affiliate_id = af.id ' .
-			'LEFT JOIN project pr ON af.project_id = pr.id ' .
+			'LEFT JOIN '.TBL_PROJECT.' pr ON au.project_id = pr.id ' .
 			' WHERE al.affiliate_id =  ' . $affiliate_id;
 
 		if ($filters != null && !empty($filters)) {
@@ -53,7 +52,7 @@ class LogactionCollection
 							$q .= ' AND au.id = ' . $filter;
 							break;
                         case 'project':
-							$q .= ' AND af.project_id = ' . $filter;
+							$q .= ' AND au.project_id = ' . $filter;
 							break;
 					}
 				}

@@ -12,7 +12,7 @@ class Smartlink extends Model
 	private $id;
 	private $affiliate_id;
 	private $title;
-	private $offer_id;
+	private $project_id;
 	private $created;
 	private $iframe_conversion;
 	private $iframe_lead;
@@ -29,7 +29,7 @@ class Smartlink extends Model
 		$this->id = $row['id'];
 		$this->affiliate_id = $row['affiliate_id'];
 		$this->title = $row['title'];
-		$this->offer_id = $row['offer_id'];
+		$this->project_id = $row['project_id'];
 		$this->created = $row['created'];
 		$this->iframe_conversion = $row['iframe_conversion'];
 		$this->iframe_lead = $row['iframe_lead'];
@@ -80,9 +80,9 @@ class Smartlink extends Model
 	/**
 	 * @return int
 	 */
-	public function getOfferId()
+	public function getProjectId()
 	{
-		return $this->offer_id;
+		return $this->project_id;
 	}
 
 	/**
@@ -115,15 +115,14 @@ class Smartlink extends Model
             ' au.id, '.
             ' au.title,'.
             ' au.affiliate_id,'.
-            ' au.offer_id, '.
+            ' au.project_id, '.
             ' au.created, '.
             ' au.deleted, '.
             ' au.iframe_conversion, '.
             ' au.iframe_lead, '.
             ' pr.title project_title '.
             ' FROM ' . TBL_AFFILIATE_URL . ' au'.
-            ' LEFT JOIN ' . TBL_AFFILIATE . ' af ON au.affiliate_id = af.id ' .
-            ' LEFT JOIN project pr ON af.project_id = pr.id ' .
+            ' LEFT JOIN '.TBL_PROJECT.' pr ON au.project_id = pr.id ' .
 		    ' WHERE affiliate_id =  ' . $affiliate_id . ' AND deleted=0 '.
 		    ' ORDER BY id DESC ';
 		if ($pagination != null)
