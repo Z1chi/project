@@ -109,7 +109,7 @@
                                 tracking code will be loaded in hidden iframe when the user successfully signed up.</p>
                         </div>
                         <div class="form-group">
-                            <label>Project</label>
+                            <label>Smartlink offer:</label>
                             <select name="project" class="form-control">
                                 <? /* @var $row \affiliate\model\Project */
                                 foreach ($PROJECTS as $row): ?>
@@ -118,7 +118,7 @@
                                 <? endforeach; ?>
                                 <!--по дефолту стоит 1-->
                             </select>
-                            <p class="help-block">Project</p>
+<!--                            <p class="help-block">Project</p>-->
                         </div>
                     </div>
                     <!-- /.box-body -->
