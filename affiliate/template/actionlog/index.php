@@ -71,15 +71,15 @@
 							<? endforeach; ?>
 							</tbody>
                             <tfoot>
-                                <tr>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center hidden-xs"><?= $row->getDeposit() ?> <?= $row->getCurrency() ?></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center hidden-xs"></td>
+                                <tr style="background: #ebedf3">
+                                    <td class="text-center">-</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center hidden-xs"><?= $TABLE_FOOTER->getDeposit() ?> <?= $TABLE_FOOTER->getCurrency() ?></td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center hidden-xs">-</td>
                                     <? if (App::getSession('parent_id') == 0): ?>
-                                        <td class="text-center"><?= $row->getPayout() ?> <?= $row->getCurrency() ?></td>
+                                        <td class="text-center"><?= $TABLE_FOOTER->getPayout() ?> <?= $TABLE_FOOTER->getCurrency() ?></td>
                                     <? endif; ?>
                                 </tr>
                             </tfoot>
