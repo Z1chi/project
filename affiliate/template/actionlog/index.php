@@ -70,6 +70,19 @@
 								</tr>
 							<? endforeach; ?>
 							</tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center hidden-xs"><?= $row->getDeposit() ?> <?= $row->getCurrency() ?></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center hidden-xs"></td>
+                                    <? if (App::getSession('parent_id') == 0): ?>
+                                        <td class="text-center"><?= $row->getPayout() ?> <?= $row->getCurrency() ?></td>
+                                    <? endif; ?>
+                                </tr>
+                            </tfoot>
 						</table>
 
 					<? endif; ?>

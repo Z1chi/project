@@ -28,7 +28,7 @@ class ActionlogView extends AffiliateController
 	 */
 	private $filter_smartlink = null;
 
-	public function init()
+    public function init()
 	{
 		$this->affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
 	}
@@ -48,16 +48,18 @@ class ActionlogView extends AffiliateController
 		$this->pagination->setItemsCount($leads_count);
 
 		$leads = LogactionCollection::getList($this->affiliate_id, $this->collectFilters(), $this->pagination);
+        $table_sum = array_pop($leads);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
 
 		$this->pushTemplateData([
 			'LIST' => $leads,
+			'TABLE_FOOTER' => $table_sum,
 			'PAGES' => $pages,
 			'ACTION_TYPES' => self::getAffiliateActionsStrings(),
 			'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
 			'FILTER_ACTION' => $this->filter_action,
-			'FILTER_SMARTLINK_ID' => $this->filter_smartlink
+			'FILTER_SMARTLINK_ID' => $this->filter_smartlink,
 		]);
 	}
 
@@ -75,8 +77,8 @@ class ActionlogView extends AffiliateController
 	public function collectFilters ()
 	{
 		$filters = [
-			'action' => $this->filter_action,
-			'smartlink' => $this->filter_smartlink
+            'action' => $this->filter_action,
+            'smartlink' => $this->filter_smartlink,
 		];
 
 		return $filters;
