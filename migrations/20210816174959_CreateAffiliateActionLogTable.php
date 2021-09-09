@@ -20,6 +20,7 @@ final class CreateAffiliateActionLogTable extends Migration
             $table->integer('user_id')->nullable();
             $table->float('deposit')->nullable();
             $table->string('currency', 4)->default(null)->unique();
+            $table->smallInteger('unique')->nullable();
             $table->string('ip')->nullable();
             $table->string('geo',2)->default(null);
             $table->integer('created');
