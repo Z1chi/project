@@ -16,7 +16,7 @@ final class CreateAffiliateActionLogTable extends Migration
             $table->integer('url_id')->nullable();
             $table->smallInteger('offer_id')->default(1);
             $table->smallInteger('action');
-            $table->date('created_dt')->useCurrent();
+            $table->dateTime('created_dt')->useCurrent();
             $table->integer('user_id')->nullable();
             $table->float('deposit')->nullable();
             $table->string('currency', 4)->nullable()->default(null);
