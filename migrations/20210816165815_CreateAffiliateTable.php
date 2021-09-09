@@ -12,8 +12,8 @@ final class CreateAffiliateTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name', 64)->default(NULL);
-            $table->string('last_name', 64)->default(NULL);
+            $table->string('first_name', 64)->nullable()->default('NULL');
+            $table->string('last_name', 64)->nullable()->default('NULL');
             $table->string('email', 128);
             $table->string('telegram', 128)->nullable();;
             $table->string('password', 128)->nullable();;
