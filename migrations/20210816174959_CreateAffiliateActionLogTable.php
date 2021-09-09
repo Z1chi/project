@@ -12,20 +12,20 @@ final class CreateAffiliateActionLogTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('affiliate_id')->nullable(false);
-            $table->integer('url_id');
-            $table->smallInteger('offer_id')->nullable(false)->default(1);
-            $table->smallInteger('action')->nullable(false);
-            $table->date('created_dt')->nullable(false)->useCurrent();
-            $table->integer('user_id');
-            $table->float('deposit');
+            $table->integer('affiliate_id');
+            $table->integer('url_id')->nullable();
+            $table->smallInteger('offer_id')->default(1);
+            $table->smallInteger('action');
+            $table->date('created_dt')->useCurrent();
+            $table->integer('user_id')->nullable();
+            $table->float('deposit')->nullable();
             $table->string('currency', 4)->default(null)->unique();
-            $table->string('ip');
+            $table->string('ip')->nullable();
             $table->string('geo',2)->default(null);
-            $table->integer('created')->nullable(false);
-            $table->float('payout');
-            $table->text('http_referrer');
-            $table->string('user_uid',64);
+            $table->integer('created');
+            $table->float('payout')->nullable();
+            $table->text('http_referrer')->nullable();
+            $table->string('user_uid',64)->nullable();
 
         });
     }

@@ -12,11 +12,11 @@ final class CreateAffiliateWithdrawTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('affiliate_id')->nullable(false);
-            $table->float('amount_btc')->nullable(false);
-            $table->string('btc_address', 128)->nullable(false);
-            $table->integer('created')->nullable(false);
-            $table->smallInteger('deleted')->nullable(false);
+            $table->integer('affiliate_id');
+            $table->float('amount_btc');
+            $table->string('btc_address', 128);
+            $table->integer('created');
+            $table->smallInteger('deleted');
 
         });
     }

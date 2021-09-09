@@ -12,9 +12,9 @@ final class CreateVariablesTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->string('key', 64)->nullable(false);
-            $table->text('value')->nullable(false);
-            $table->integer('updated')->nullable(false)->default(0);
+            $table->string('key', 64);
+            $table->text('value');
+            $table->integer('updated')->default(0);
 
         });
     }
