@@ -12,11 +12,11 @@ final class CreateProjectTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 32)->nullable(false);
-            $table->string('token', 32)->nullable(false);
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at');
-            $table->dateTime('accessed_at');
+            $table->string('title', 32);
+            $table->string('token', 32);
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
+            $table->timestamp('accessed_at');
         });
     }
 
