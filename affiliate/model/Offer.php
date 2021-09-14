@@ -44,7 +44,7 @@ class Offer extends Model
     public static function getOffers(): array
     {
 
-        $q = "SELECT * FROM affiliate_offer ORDER BY id";
+        $q = "SELECT * FROM project ORDER BY id";
 
         $list = DB::getInstance()
 			->run($q);

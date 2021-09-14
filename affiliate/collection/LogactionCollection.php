@@ -34,10 +34,10 @@ class LogactionCollection
             'al.created, ' .
             'al.user_uid, ' .
 			'au.title url_title, ' .
-			'ao.title offer_title ' .
+			'pr.title offer_title ' .
 			'FROM "' . TBL_AFFILIATE_ACTION_LOG . '" al ' .
 			'LEFT JOIN ' . TBL_AFFILIATE_URL . ' au ON al.url_id = au.id ' .
-			'LEFT JOIN affiliate_offer ao ON ao.id = al.offer_id ' .
+			'LEFT JOIN project pr ON pr.id = al.offer_id ' .
 			' WHERE al.affiliate_id =  ' . $affiliate_id;
 
 		if ($filters != null && !empty($filters)) {
