@@ -12,7 +12,7 @@ final class CreateAffiliateActionLogTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('affiliate_id')->nullable(false);
+            $table->integer('affiliate_id')->nullable(true)->default(null);
             $table->integer('url_id');
             $table->smallInteger('offer_id')->nullable(false)->default(1);
             $table->smallInteger('action')->nullable(false);
@@ -25,7 +25,7 @@ final class CreateAffiliateActionLogTable extends Migration
             $table->integer('created')->nullable(false);
             $table->float('payout');
             $table->text('http_referrer');
-            $table->string('user_uid',64);
+            $table->string('user_uid',64)->nullable(true)->default(null);
 
             $table->index('affiliate_id');
             $table->index('url_id');
