@@ -21,7 +21,7 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property string active
  * @property float balance_btc
  * @property float total_income_btc
- * @property int refshare_percent
+ * @property int revshare_percent
  * @property string postback_url
  * @property float balance_eur
  * @property float total_income_eur

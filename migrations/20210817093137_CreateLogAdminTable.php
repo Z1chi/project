@@ -12,11 +12,11 @@ final class CreateLogAdminTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('admin_id')->nullable(false);
-            $table->string('action', 64)->nullable(false);
-            $table->json('data');
-            $table->string('ip', 64)->nullable(false);
-            $table->integer('created')->nullable(false);
+            $table->integer('admin_id');
+            $table->string('action', 64);
+            $table->json('data')->nullable();
+            $table->string('ip', 64);
+            $table->integer('created');
 
             $table->index('admin_id');
         });
