@@ -8,6 +8,7 @@ use Ufo\Exception\AffiliateServiceException;
 use Ufo\Exception\ApiException;
 use Ufo\Exception\UfoException;
 use Ufo\Model\Project;
+use Ufo\Resource\AffiliatePayoutResource;
 use Ufo\Resource\AffiliateResource;
 use Ufo\Resource\AffiliateUrlResource;
 use Ufo\Security\Provider\ApiAuthProvider;
@@ -86,6 +87,7 @@ class ApiView extends Controller
                 $geo = $data['geo'] ?? null;
                 $unique = $data['unique'] ?? null;
                 $httpReferrer = $data['http_referrer'] ?? null;
+                $transactionId = $data['transaction_id'] ?? null;
                 $eventDateTime = $data['datetime'] ? \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['datetime']) : null;
                 if ($smartlink) {
                     $affiliateUrl = $this->affiliateUrlService->getLinkBySmartlink($smartlink);
@@ -112,9 +114,19 @@ class ApiView extends Controller
                 } elseif ('signup' === $eventName) {
                     $affiliateLink = $this->affiliateEventService->logSignup($smartlink, $userUid, $ip, $geo);
                 } elseif ('deposit' === $eventName && $smartlink) {
-                    $affiliateLink = $this->affiliateEventService->logDepositBySmartlink($affiliate, $smartlink, $ip, $geo, $deposit, $payout, $currency);
+                    $logDepositReturn = $this->affiliateEventService->logDepositBySmartlink($affiliate, $smartlink, $ip, $geo, $deposit, $payout, $currency, $userUid, $transactionId);
+                    $this->jsonResponse([
+                        'url' => AffiliateUrlResource::toArray($logDepositReturn->getUrl()),
+                        'affiliate' => $affiliate,
+                        'payout' => AffiliatePayoutResource::toArray($logDepositReturn->getActionLog()),
+                    ]);
                 } elseif ('deposit' === $eventName && $urlId) {
-                    $affiliateLink = $this->affiliateEventService->logDepositByUrlId($affiliate, $urlId, $ip, $geo, $deposit, $payout, $currency);
+                    $logDepositReturn = $this->affiliateEventService->logDepositByUrlId($affiliate, $urlId, $ip, $geo, $deposit, $payout, $currency, $userUid, $transactionId);
+                    $this->jsonResponse([
+                        'url' => AffiliateUrlResource::toArray($logDepositReturn->getUrl()),
+                        'affiliate' => $affiliate,
+                        'payout' => AffiliatePayoutResource::toArray($logDepositReturn->getActionLog()),
+                    ]);
                 } else {
                     throw new ApiException(sprintf('Unhandled %s event', $eventName));
                 }

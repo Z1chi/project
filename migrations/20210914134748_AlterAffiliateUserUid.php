@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+
+use Ufo\Component\Migration\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+final class AlterAffiliateUserUid extends Migration
+{
+    private string $table = 'affiliate';
+
+    public function up(): void
+    {
+        $this->schema->table($this->table, function(Blueprint $table) {
+            $table->string('user_uid',64)->nullable(true)->default(null);
+            $table->index('user_uid');
+        });
+    }
+
+    public function down(): void
+    {
+        $this->schema->table($this->table, function(Blueprint $table) {
+            $table->dropColumn('user_uid');
+        });
+    }
+}
