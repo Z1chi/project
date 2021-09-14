@@ -4,163 +4,166 @@
             <div class="box box-primary">
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">Offer info</h3>
+                    <h3 class="box-title">Statistics</h3>
                 </div>
 
+<!--                <div class="col-xs-12 col-md-4">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="orderFieldFilter">Группировка1</label>-->
+<!--                        <select class="form-control input-sm js_filter" data-param="orderFieldFilter"-->
+<!--                                id="orderFieldFilter">-->
+<!--                            <option value="">All</option>-->
+<!--                            <option value="1">1</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="col-xs-12 col-md-4">-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Period:</label>-->
+<!--                        <div class="input-group">-->
+<!--                            <div class="input-group-addon">-->
+<!--                                <i class="fa fa-calendar"></i>-->
+<!--                            </div>-->
+<!--                            <input type="text" class="form-control pull-right js_date_range">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
                 <div class="box-body">
-                    <table class="table table-bordered table-striped table-hover" style="width: 100%">
+
+                    <table id="tableStatistics" class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center hidden-xs" rowspan="1">Группировки</th>
+                            <th class="text-center hidden-xs" rowspan="1" colspan="4">Трафик</th>
+<!--                            <th class="text-center hidden-xs" rowspan="1" colspan="5">Лиды</th>-->
+<!--                            <th class="text-center hidden-xs" rowspan="1" colspan="2">Доход</th>-->
+
+                        </tr>
+                        <tr>
+                            <th class="text-center" style="display: flex; align-items: center;" rowspan="2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                     class="bi bi-arrow-clockwise" viewBox="0 0 16 14">
+                                    <path fill-rule="evenodd"
+                                          d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                                </svg>
+                                Дата <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
+                            <th rowspan="2" data-orderFieldFilter="section1">Клики <i class="fa fa-arrows-v"
+                                                                                      aria-hidden="true"></i></th>
+                            <th rowspan="2">Уники <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
+                            <th rowspan="2">EPC <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
+                            <th rowspan="2">EPL <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
+<!--                            <th rowspan="2">CPA <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2">%CR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2">%SR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2">%AR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> &nbsp; <i-->
+<!--                                        class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> &nbsp; <i-->
+<!--                                        class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2"><i class="fa fa-clock-o" aria-hidden="true"></i> &nbsp; <i-->
+<!--                                        class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2"><i class="fa fa-calendar-times-o" aria-hidden="true"></i> &nbsp; <i-->
+<!--                                        class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2"><i class="fa fa-trash-o" aria-hidden="true"></i> &nbsp; <i-->
+<!--                                        class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+<!--                                     class="bi bi-wallet" viewBox="0 0 16 16">-->
+<!--                                    <path d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5V3zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a1.99 1.99 0 0 1-1-.268zM1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1z"/>-->
+<!--                                </svg>-->
+<!--                                &nbsp; <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+<!--                            <th rowspan="2"><i class="fa fa-clock-o" aria-hidden="true"></i> &nbsp; <i-->
+<!--                                        class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+                        </tr>
+
+                        </thead>
                         <tbody>
                         <tr>
-                            <td style="min-width: 30%">Website</td>
-                            <td class="text-bold"><?=App::getBaseUrl()?></td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+<!--                            <td>6</td>-->
+<!--                            <td>7</td>-->
+<!--                            <td>8</td>-->
+<!--                            <td>9</td>-->
+<!--                            <td>10</td>-->
+<!--                            <td>11</td>-->
+<!--                            <td>12</td>-->
+<!--                            <td>13</td>-->
+<!--                            <td>14</td>-->
+<!--                            <td>15</td>-->
+<!--                            <td>16</td>-->
                         </tr>
                         <tr>
-                            <td>Flow</td>
-                            <td class="text-bold">Deposit</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <!--                            <td>6</td>-->
+                            <!--                            <td>7</td>-->
+                            <!--                            <td>8</td>-->
+                            <!--                            <td>9</td>-->
+                            <!--                            <td>10</td>-->
+                            <!--                            <td>11</td>-->
+                            <!--                            <td>12</td>-->
+                            <!--                            <td>13</td>-->
+                            <!--                            <td>14</td>-->
+                            <!--                            <td>15</td>-->
+                            <!--                            <td>16</td>-->
+                        </tr>                    <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <!--                            <td>6</td>-->
+                            <!--                            <td>7</td>-->
+                            <!--                            <td>8</td>-->
+                            <!--                            <td>9</td>-->
+                            <!--                            <td>10</td>-->
+                            <!--                            <td>11</td>-->
+                            <!--                            <td>12</td>-->
+                            <!--                            <td>13</td>-->
+                            <!--                            <td>14</td>-->
+                            <!--                            <td>15</td>-->
+                            <!--                            <td>16</td>-->
                         </tr>
-                        <tr>
-                            <td>Type</td>
-                            <td class="text-bold">FTD, RevShare, CPA, CPL</td>
-                        </tr>
-                        <tr>
-                            <td>Payout</td>
-                            <td class="text-bold">Multiple</td>
-                        </tr>
-                        <tr>
-                            <td>Minimum deposits</td>
-                            <td class="text-bold">$100, $50 (Tier 3)</td>
-                        </tr>
-                        <tr>
-                            <td>Allowed countries</td>
-                            <td class="text-bold">Europe, Russia, Belarus, Ukraine, Kazakhstan, USA, Canada, Australia, Turkey, Uzbekistan, South Africa, South America</td>
-                        </tr>
-                        <tr>
-                            <td>OS types</td>
-                            <td class="text-bold">All OS types</td>
-                        </tr>
-                        <tr>
-                            <td>Browser types</td>
-                            <td class="text-bold">All browser types</td>
-                        </tr>
-                        <tr>
-                            <td>Connection types</td>
-                            <td class="text-bold">All connection types</td>
-                        </tr>
-                        <tr>
-                            <td>Devices</td>
-                            <td class="text-bold">All devices</td>
-                        </tr>
-                        <tr>
-                            <td>Traffic sources</td>
-                            <td>
-                                <span class="badge bg-green">seo</span>
-                                <span class="badge bg-green">adult</span>
-                                <span class="badge bg-green">native ads</span>
-                                <span class="badge bg-green">cashback</span>
-                                <span class="badge bg-green">clickunder_popunder</span>
-                                <span class="badge bg-green">doorway</span>
-                                <span class="badge bg-green">email</span>
-                                <span class="badge bg-green">popup</span>
-                                <span class="badge bg-green">sms</span>
-                                <span class="badge bg-green">banners</span>
-                                <span class="badge bg-green">aff_net</span>
-                                <span class="badge bg-green">google_adw</span>
-                                <span class="badge bg-green">mobile</span>
-                                <span class="badge bg-green">social</span>
-                                <span class="badge bg-green">push</span>
-                                <span class="badge bg-red">redirects</span>
-                                <span class="badge bg-red">incentive_traffic</span>
-                            </td>
+
                         </tbody>
-
+                        <tfoot>
+                        <tr>
+                            <th class="bold">Итого:</th>
+                            <th class="bold">17</th>
+                            <th class="bold">17</th>
+                            <th class="bold">94.06</th>
+                            <th class="bold">200</th>
+<!--                            <th class="bold">800</th>-->
+<!--                            <th class="bold">47%</th>-->
+<!--                            <th class="bold">0%</th>-->
+<!--                            <th class="bold">25</th>-->
+<!--                            <th class="bold">8</th>-->
+<!--                            <th class="bold">2</th>-->
+<!--                            <th class="bold">0</th>-->
+<!--                            <th class="bold">6</th>-->
+<!--                            <th class="bold">8</th>-->
+<!--                            <th class="bold">1599 р.</th>-->
+<!--                            <th class="bold">0 р.</th>-->
+                        </tr>
+                        </tfoot>
                     </table>
+
                 </div>
+
+
             </div>
         </div>
     </div>
-
-    <? if (App::getSession('parent_id') == 0): ?>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-primary">
-
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Tariffs</h3>
-                    </div>
-
-                    <div class="box-body">
-                        <table class="table table-bordered table-striped table-hover" style="width: 100%">
-                            <thead>
-                            <tr>
-                                <td>Goal</td>
-                                <td>Country</td>
-                                <td>Payout</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Deposit</td>
-                                <td>Any</td>
-                                <td><?=App::getSession('first_deposit_percent')?>% from deposit</td>
-                            </tr>
-                            <tr>
-                                <td>RevShare</td>
-                                <td>Any</td>
-                                <td><?=App::getSession('revshare_percent')?>% from deposit</td>
-                            </tr>
-                            <tr>
-                                <td>Lead, Registration</td>
-                                <td>Any</td>
-                                <td>Please contact your manager</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <? endif; ?>
-
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-primary">
-
-                <div class="box-header with-border">
-                    <h3 class="box-title">About company</h3>
-                </div>
-
-                <div class="box-body">
-
-                    <p>In 2018, our team decided to create a unique product in the field of cryptocurrency mining. Each member of our team is engaged in their narrow specialization, which allows us to offer a truly superior platform named <?=APP_PUBLIC_NAME?>.</p>
-
-                    <p>Our goal was to create a quality product that would be favorably received by our partners and customers. We also strived to make it comprehensible for users and capable of making them totally immerse in the mining process.</p>
-
-
-                    <p>Our key advantages:</p>
-                    <ul>
-                        <li>1. Transparent system of working with the simple profitability calculator. The user can proceed from his budget without delving into complex figures.</li>
-                        <li>					2. Animation and game effects. We focused not only on the financial efficiency of our platform, but on customer involvement as well. For example, when entering their personal account what the user sees are not only statistics, but also graphic miners which vary based on the power acquired by the user.</li>
-                        <li>	3. Friendly support; call center available.</li>
-                    </ul>
-
-
-
-                    <p>
-                        For our part, we are prepared to offer a percentage of the customer's deposit and RevShare, consider your counter-offer. We are all for dialogue and an open, long-term cooperation!
-                    </p>
-                    <p>
-                        Demo access to the platform:
-                    </p>
-                    <p>
-                        Login: <strong>demo</strong><br />
-                        Password: <strong><?=strtolower(APP_PUBLIC_NAME)?></strong>
-                    </p>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 
 </section>
