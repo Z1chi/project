@@ -37,7 +37,7 @@ final class CreateAffiliateTable extends Migration
             $table->float('total_withdraw_btc')->nullable(false)->default(0);
             $table->unsignedInteger('callcenter_id')->nullable();
             $table->integer('project_id');
-            $table->string('user_uid', 64);
+            $table->string('user_uid',64)->nullable(true)->default(null);
 
             $table->index('active');
             $table->index('parent_id');

@@ -4,9 +4,9 @@ declare(strict_types=1);
 use Ufo\Component\Migration\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-final class AlterActionLogUserUid extends Migration
+final class AlterAffiliateUserUid extends Migration
 {
-    private string $table = 'affiliate_action_log';
+    private string $table = 'affiliate';
 
     public function up(): void
     {
