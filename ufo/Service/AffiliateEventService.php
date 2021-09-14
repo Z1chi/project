@@ -187,8 +187,8 @@ final class AffiliateEventService
                 'UPDATE "' . TBL_AFFILIATE . '" ' .
                 'SET ' .
 
-                'balance_' . $currency . ' = balance_' . $currency . ' + ' . $payout . ' ' .
-                ',total_income_' . $currency . ' = total_income_' . $currency . ' + ' . $payout . ' ' .
+                'balance_' . $currency . ' = balance_' . $currency . ' + ' . $affiliateActionLog->payout_amount . ' ' .
+                ',total_income_' . $currency . ' = total_income_' . $currency . ' + ' . $affiliateActionLog->payout_amount . ' ' .
                 ',total_turnover_' . $currency . ' = total_turnover_' . $currency . ' + ' . $deposit . ' ' .
 
                 'WHERE id = ' . $affiliate->getId());
