@@ -6,10 +6,13 @@ namespace Ufo\Service;
 use app\component\Browser;
 use app\component\HashidHelper;
 use system\components\DB;
+use Ufo\Entity\LogDepositReturn;
 use Ufo\Exception\AffiliateServiceException;
 use Ufo\Model\Affiliate;
+use Ufo\Model\AffiliateActionLog;
 use Ufo\Model\AffiliateUrl;
 use Ufo\ValueObject\AffiliateAction;
+use Ufo\ValueObject\PayoutType;
 
 /**
  * @todo refactor!!!
@@ -119,62 +122,80 @@ final class AffiliateEventService
      * @return AffiliateUrl|null
      * @throws AffiliateServiceException
      */
-    public function logDepositBySmartlink(Affiliate $affiliate, string $smartlink, string $ip, ?string $geo, $deposit, $payout, $currency): ?AffiliateUrl
+    public function logDepositBySmartlink(Affiliate $affiliate, string $smartlink, string $ip, ?string $geo, $deposit, $payout, $currency, string $userUid, string $transactionId): LogDepositReturn
     {
         $affiliateUrl = $this->findAffiliateUrlBySmartlink($smartlink);
         if (!$affiliateUrl) {
             throw new AffiliateServiceException('Url by smartlink not found');
         }
 
-        DB::getInstance()->insert(TBL_AFFILIATE_ACTION_LOG, [
-            'affiliate_id' => $affiliate->getId(),
-            'url_id' => $affiliateUrl->id,
-            'user_uid' => $affiliate->getUserUid(),
-            'offer_id' => 1,
-            'action' => AffiliateAction::DEPOSIT,
-            'created' => time(),
-            'ip' => $ip,
-            'geo' => $geo,
-            'deposit' => $deposit,
-            'currency' => mb_strtoupper($currency),
-            'payout' => $payout
-        ]);
+        $affiliateActionLog = new AffiliateActionLog();
+        $affiliateActionLog->affiliate_id = $affiliate->getId();
+        $affiliateActionLog->url_id = $affiliateUrl->id;
+        $affiliateActionLog->user_uid = $userUid;
+        $affiliateActionLog->action = AffiliateAction::DEPOSIT;
+        $affiliateActionLog->created = time();
+        $affiliateActionLog->ip = $ip;
+        $affiliateActionLog->geo = $geo;
+        $affiliateActionLog->deposit = $deposit;
+        $affiliateActionLog->currency = mb_strtoupper($currency);
+        $affiliateActionLog->transaction_id = $transactionId;
+        if ($affiliate->revshare_percent) {
+            $affiliateActionLog->payout_type = PayoutType::PERCENT;
+            $affiliateActionLog->payout_value = $affiliate->revshare_percent;
+        } else {
+            throw new AffiliateServiceException('Unhandled payout type');
+        }
+        $affiliateActionLog->save();
+        $affiliateActionLog->refresh();
 
-        return $affiliateUrl;
+        return new LogDepositReturn(
+            $affiliateUrl,
+            $affiliateActionLog,
+        );
     }
 
-    public function logDepositByUrlId(Affiliate $affiliate, int $urlId, string $ip, ?string $geo, $deposit, $payout, $currency): ?AffiliateUrl
+    public function logDepositByUrlId(Affiliate $affiliate, int $urlId, string $ip, ?string $geo, $deposit, $payout, $currency, string $userUid, string $transactionId): LogDepositReturn
     {
         $affiliateUrl = $this->findAffiliateUrlByUrlId($urlId);
         if (!$affiliateUrl) {
             throw new AffiliateServiceException('Url by ID not found');
         }
 
-        DB::getInstance()->insert(TBL_AFFILIATE_ACTION_LOG, [
-            'affiliate_id' => $affiliate->getId(),
-            'url_id' => $affiliateUrl->id,
-            'user_uid' => $affiliate->getUserUid(),
-            'offer_id' => 1,
-            'action' => AffiliateAction::DEPOSIT,
-            'created' => time(),
-            'ip' => $ip,
-            'geo' => $geo,
-            'deposit' => $deposit,
-            'currency' => mb_strtoupper($currency),
-            'payout' => $payout
-        ]);
+        $affiliateActionLog = new AffiliateActionLog();
+        $affiliateActionLog->affiliate_id = $affiliate->getId();
+        $affiliateActionLog->url_id = $affiliateUrl->id;
+        $affiliateActionLog->user_uid = $userUid;
+        $affiliateActionLog->action = AffiliateAction::DEPOSIT;
+        $affiliateActionLog->created = time();
+        $affiliateActionLog->ip = $ip;
+        $affiliateActionLog->geo = $geo;
+        $affiliateActionLog->deposit = $deposit;
+        $affiliateActionLog->currency = mb_strtoupper($currency);
+        $affiliateActionLog->transaction_id = $transactionId;
+        if ($affiliate->revshare_percent) {
+            $affiliateActionLog->payout_type = PayoutType::PERCENT;
+            $affiliateActionLog->payout_value = $affiliate->revshare_percent;
+        } else {
+            throw new AffiliateServiceException('Unhandled payout type');
+        }
+        $affiliateActionLog->save();
+        $affiliateActionLog->refresh();
 
         DB::getInstance()
             ->query(
                 'UPDATE "' . TBL_AFFILIATE . '" ' .
                 'SET ' .
 
-                'balance_' . $currency . ' = balance_' . $currency . ' + ' . $payout . ' ' .
-                ',total_income_' . $currency . ' = total_income_' . $currency . ' + ' . $payout . ' ' .
+                'balance_' . $currency . ' = balance_' . $currency . ' + ' . $affiliateActionLog->payout_amount . ' ' .
+                ',total_income_' . $currency . ' = total_income_' . $currency . ' + ' . $affiliateActionLog->payout_amount . ' ' .
                 ',total_turnover_' . $currency . ' = total_turnover_' . $currency . ' + ' . $deposit . ' ' .
 
                 'WHERE id = ' . $affiliate->getId());
 
-        return $affiliateUrl;
+        return new LogDepositReturn(
+            $affiliateUrl,
+            $affiliateActionLog,
+        );
     }
 }

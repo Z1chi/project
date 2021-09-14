@@ -18,3 +18,9 @@ $ cp .env.dist .env2
 ```
 
 5. For authorization use **login: admin password: administrator**
+
+
+## Tests
+```php
+$ vendor/bin/phpunit --filter=SignupTest::testSignup
+```

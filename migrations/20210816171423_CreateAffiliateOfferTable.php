@@ -12,7 +12,8 @@ final class CreateAffiliateOfferTable extends Migration
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 64)->nullable(false);
+            $table->string('title', 64);
+
         });
     }
 
