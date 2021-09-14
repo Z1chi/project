@@ -26,13 +26,11 @@ final class CreateAffiliateActionLogTable extends Migration
             $table->integer('created');
             $table->float('payout')->nullable();
             $table->text('http_referrer')->nullable();
-            $table->string('user_uid',64)->nullable();
 
             $table->index('affiliate_id');
             $table->index('url_id');
             $table->index('offer_id');
             $table->index('user_id');
-            $table->index('user_uid');
         });
     }
 
