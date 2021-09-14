@@ -31,30 +31,33 @@
 <!--                </div>-->
 
                 <div class="box-body">
+                    <? if (empty($LIST)): ?>
+                        <p>List is empty.</p>
+                    <? else: ?>
 
                     <table id="tableStatistics" class="table table-bordered table-hover table-striped">
                         <thead>
-                        <tr>
-                            <th class="text-center hidden-xs" rowspan="1">Группировки</th>
-                            <th class="text-center hidden-xs" rowspan="1" colspan="4">Трафик</th>
+<!--                        <tr>-->
+<!--                            <th class="text-center hidden-xs" rowspan="1">Группировки</th>-->
+<!--                            <th class="text-center hidden-xs" rowspan="1" colspan="4">Трафик</th>-->
 <!--                            <th class="text-center hidden-xs" rowspan="1" colspan="5">Лиды</th>-->
 <!--                            <th class="text-center hidden-xs" rowspan="1" colspan="2">Доход</th>-->
 
-                        </tr>
+<!--                        </tr>-->
                         <tr>
                             <th class="text-center" style="display: flex; align-items: center;" rowspan="2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                <svg style="display:none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                                      class="bi bi-arrow-clockwise" viewBox="0 0 16 14">
                                     <path fill-rule="evenodd"
                                           d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                                     <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
                                 </svg>
-                                Дата <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
-                            <th rowspan="2" data-orderFieldFilter="section1">Клики <i class="fa fa-arrows-v"
+                                Date <i style="display:none;" class="fa fa-arrows-v" aria-hidden="true"></i></th>
+                            <th rowspan="2" data-orderFieldFilter="section1">Cicks <i style="display:none;" class="fa fa-arrows-v"
                                                                                       aria-hidden="true"></i></th>
-                            <th rowspan="2">Уники <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
-                            <th rowspan="2">EPC <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
-                            <th rowspan="2">EPL <i class="fa fa-arrows-v" aria-hidden="true"></i></th>
+                            <th rowspan="2">Unique clicks <i style="display:none;" class="fa fa-arrows-v" aria-hidden="true"></i></th>
+                            <th rowspan="2">Deposit <i style="display:none;"class="fa fa-arrows-v" aria-hidden="true"></i></th>
+<!--                            <th rowspan="2">EPC <i style="display:none;"class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
 <!--                            <th rowspan="2">CPA <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
 <!--                            <th rowspan="2">%CR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
 <!--                            <th rowspan="2">%SR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
@@ -78,71 +81,36 @@
 <!--                            <th rowspan="2"><i class="fa fa-clock-o" aria-hidden="true"></i> &nbsp; <i-->
 <!--                                        class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
                         </tr>
-
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-<!--                            <td>6</td>-->
-<!--                            <td>7</td>-->
-<!--                            <td>8</td>-->
-<!--                            <td>9</td>-->
-<!--                            <td>10</td>-->
-<!--                            <td>11</td>-->
-<!--                            <td>12</td>-->
-<!--                            <td>13</td>-->
-<!--                            <td>14</td>-->
-<!--                            <td>15</td>-->
-<!--                            <td>16</td>-->
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <!--                            <td>6</td>-->
-                            <!--                            <td>7</td>-->
-                            <!--                            <td>8</td>-->
-                            <!--                            <td>9</td>-->
-                            <!--                            <td>10</td>-->
-                            <!--                            <td>11</td>-->
-                            <!--                            <td>12</td>-->
-                            <!--                            <td>13</td>-->
-                            <!--                            <td>14</td>-->
-                            <!--                            <td>15</td>-->
-                            <!--                            <td>16</td>-->
-                        </tr>                    <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <!--                            <td>6</td>-->
-                            <!--                            <td>7</td>-->
-                            <!--                            <td>8</td>-->
-                            <!--                            <td>9</td>-->
-                            <!--                            <td>10</td>-->
-                            <!--                            <td>11</td>-->
-                            <!--                            <td>12</td>-->
-                            <!--                            <td>13</td>-->
-                            <!--                            <td>14</td>-->
-                            <!--                            <td>15</td>-->
-                            <!--                            <td>16</td>-->
-                        </tr>
-
+                            <? foreach ($LIST as $row):?>
+                            <tr>
+                                <td><? echo $row['created_dt']; ?></td>
+                                <td><? echo $row['clicks']; ?></td>
+                                <td><? echo $row['unique_clicks']; ?></td>
+                                <td><? echo $row['sum_deposit']; ?></td>
+<!--                                <td>--><?// echo $row['epc']; ?><!--</td>-->
+                                <!--                            <td>6</td>-->
+                                <!--                            <td>7</td>-->
+                                <!--                            <td>8</td>-->
+                                <!--                            <td>9</td>-->
+                                <!--                            <td>10</td>-->
+                                <!--                            <td>11</td>-->
+                                <!--                            <td>12</td>-->
+                                <!--                            <td>13</td>-->
+                                <!--                            <td>14</td>-->
+                                <!--                            <td>15</td>-->
+                                <!--                            <td>16</td>-->
+                            </tr>
+                            <? endforeach;?>
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th class="bold">Итого:</th>
-                            <th class="bold">17</th>
-                            <th class="bold">17</th>
-                            <th class="bold">94.06</th>
-                            <th class="bold">200</th>
+                            <th class="bold">--</th>
+                            <th class="bold"><? echo $LIST_FOOTER['clicks']; ?></th>
+                            <th class="bold"><? echo $LIST_FOOTER['unique_clicks']; ?></th>
+                            <th class="bold"><? echo $LIST_FOOTER['sum_deposit']; ?></th>
+<!--                            <th class="bold">--><?// echo $LIST_FOOTER['epc']; ?><!--</th>-->
 <!--                            <th class="bold">800</th>-->
 <!--                            <th class="bold">47%</th>-->
 <!--                            <th class="bold">0%</th>-->
@@ -158,8 +126,9 @@
                         </tfoot>
                     </table>
 
-                </div>
+                    <?endif;?>
 
+                </div>
 
             </div>
         </div>
