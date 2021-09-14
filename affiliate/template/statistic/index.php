@@ -56,7 +56,7 @@
                             <th rowspan="2" data-orderFieldFilter="section1">Cicks <i style="display:none;" class="fa fa-arrows-v"
                                                                                       aria-hidden="true"></i></th>
                             <th rowspan="2">Unique clicks <i style="display:none;" class="fa fa-arrows-v" aria-hidden="true"></i></th>
-                            <th rowspan="2">Deposit <i style="display:none;"class="fa fa-arrows-v" aria-hidden="true"></i></th>
+                            <th rowspan="2">Deposit <i style="display:none;" class="fa fa-arrows-v" aria-hidden="true"></i></th>
 <!--                            <th rowspan="2">EPC <i style="display:none;"class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
 <!--                            <th rowspan="2">CPA <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
 <!--                            <th rowspan="2">%CR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
@@ -107,10 +107,10 @@
                         <tfoot>
                         <tr>
                             <th class="bold">--</th>
-                            <th class="bold"><? echo $LIST_FOOTER['clicks']; ?></th>
-                            <th class="bold"><? echo $LIST_FOOTER['unique_clicks']; ?></th>
-                            <th class="bold"><? echo $LIST_FOOTER['sum_deposit']; ?></th>
-<!--                            <th class="bold">--><?// echo $LIST_FOOTER['epc']; ?><!--</th>-->
+                            <th class="bold"><? echo $SUM_ROW['clicks']; ?></th>
+                            <th class="bold"><? echo $SUM_ROW['unique_clicks']; ?></th>
+                            <th class="bold"><? echo $SUM_ROW['sum_deposit']; ?></th>
+<!--                            <th class="bold">--><?// echo $SUM_ROW['epc']; ?><!--</th>-->
 <!--                            <th class="bold">800</th>-->
 <!--                            <th class="bold">47%</th>-->
 <!--                            <th class="bold">0%</th>-->

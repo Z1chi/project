@@ -8,6 +8,8 @@ use affiliate\collection\StatisticCollection;
 use affiliate\model\Smartlink;
 use system\components\Util;
 use system\core\AffiliateController;
+use Ufo\Repository\AffiliateStatisticRepository;
+use Ufo\Service\AffiliateStatisticService;
 
 class StatisticView extends AffiliateController
 {
@@ -23,22 +25,25 @@ class StatisticView extends AffiliateController
     {
         $this->affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
     }
+
     public function showList() {
         $this->initFilters();
 
-        $this->pagination = new Pagination(50);
+        $pagination = new Pagination(50);
 
-        $statistic_count = StatisticCollection::getStatisticCount($this->affiliate_id, $this->collectFilters());
-        $this->pagination->setItemsCount($statistic_count);
+        $statistic_count = AffiliateStatisticRepository::getStatisticCount($this->collectFilters());
+        $pagination->setItemsCount($statistic_count);
 
-        $statistic = StatisticCollection::getList($this->affiliate_id, $this->collectFilters(), [], $this->pagination);
-        $footer = array_pop($statistic);
+        $formatted_statistic =
+            AffiliateStatisticService::getAffiliateStatisticFormatted($this->collectFilters(), [], $pagination);
+        $statistic = $formatted_statistic['list'];
+        $sum_row = $formatted_statistic['sum'];
 
-        $pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
+        $pages = $pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
 
         $this->pushTemplateData([
             'LIST' => $statistic,
-            'LIST_FOOTER' => $footer,
+            'SUM_ROW' => $sum_row,
             'PAGES' => $pages,
             'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
             'FILTER_OFFER' => $this->filter_offer,
@@ -75,6 +80,7 @@ class StatisticView extends AffiliateController
             'offer' => $this->filter_offer,
             'smartlink' => $this->filter_smartlink,
             'geo' => $this->filter_geo,
+            'affiliate' => $this->affiliate_id
         ];
 
         return $filters;

@@ -1,13 +1,13 @@
 <?php
 
-namespace affiliate\collection;
+namespace Ufo\Repository;
 
 use system\components\DB;
 use system\components\Util;
 
-class StatisticCollection
+class AffiliateStatisticRepository
 {
-    public static function getStatisticCount($affiliate_id, $filters)
+    public static function getStatisticCount($filters)
     {
         $andWhere = ' ';
         if ($filters != null && !empty($filters)) {
@@ -22,12 +22,6 @@ class StatisticCollection
                             break;
                         case 'geo':
                             $q .= ' AND geo = ' . Util::sanitize($filter);
-                            break;
-                        case 'from':
-                            $q .= ' AND created_dt >= \'' . Util::sanitize($filter). '\'';
-                            break;
-                        case 'to':
-                            $q .= ' AND created_dt <= \'' . Util::sanitize($filter). '\'';
                             break;
                     }
                 }
@@ -38,7 +32,7 @@ class StatisticCollection
         $query =
             "SELECT COUNT(*) as count FROM (SELECT aal.created_dt
             FROM {$table} aal
-            WHERE aal.affiliate_id = {$affiliate_id} 
+            WHERE aal.affiliate_id = {$filters['affiliate']}  
                     {$andWhere}
             GROUP BY aal.affiliate_id, aal.created_dt) count_table";
 
@@ -48,7 +42,7 @@ class StatisticCollection
         return $row == NULL ? 0 : $row['count'];
     }
 
-    public static function getList($affiliate_id, $filters, $order_by, $pagination = null, $limit = null)
+    public static function getStatistic($affiliate_id, $filters, $order_by = null, $pagination = null, $limit = null)
     {
         $andWhere = ' ';
 
@@ -64,12 +58,6 @@ class StatisticCollection
                             break;
                         case 'geo':
                             $q .= ' AND geo = ' . Util::sanitize($filter);
-                            break;
-                        case 'from':
-                            $q .= ' AND created_dt >= \'' . Util::sanitize($filter). '\'';
-                            break;
-                        case 'to':
-                            $q .= ' AND created_dt <= \'' . Util::sanitize($filter). '\'';
                             break;
                     }
                 }
@@ -94,7 +82,8 @@ class StatisticCollection
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END)  AS clicks,
                     COUNT(DISTINCT unique_click_table.user_id)  AS unique_clicks,
                     --COUNT(CASE WHEN aal.action  = 3 THEN 1 END) AS deposits,
-                    CAST(COUNT(CASE WHEN aal.action  = 3 THEN 1 END) as decimal) / COUNT(CASE WHEN aal.action = 1 THEN 1 END) AS EPC 
+                    CAST(COUNT(CASE WHEN aal.action  = 3 THEN 1 END) as decimal) / 
+                    COUNT(CASE WHEN aal.action = 1 THEN 1 END) AS EPC 
             FROM {$table} aal
                 JOIN (
                     SELECT user_id, created_dt FROM {$table} 
@@ -125,11 +114,6 @@ class StatisticCollection
         $list = DB::getInstance()
             ->run($query);
 
-        foreach ($list as &$row) {
-            if(!empty($row['created_dt']))
-                $row['created_dt'] = explode(' ', $row['created_dt'])[0];
-            $row['epc'] = number_format((float)$row['epc'], 2, '.', '');
-        }
         return $list;
 
     }
