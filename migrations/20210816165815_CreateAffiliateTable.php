@@ -38,7 +38,6 @@ final class CreateAffiliateTable extends Migration
             $table->unsignedInteger('callcenter_id')->nullable()->default(null);
             $table->integer('project_id');
 
-
             $table->index('active');
             $table->index('parent_id');
             $table->index('team_account');
