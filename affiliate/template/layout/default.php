@@ -114,11 +114,6 @@
 						<i class="fa fa-money"></i> <span>Withdraw</span>
 					</a>
 				</li>
-                <li>
-                    <a href="<?=App::createUrl('/statistic')?>">
-                        <i class="fa fa-area-chart"></i> <span>Statistic</span>
-                    </a>
-                </li>
 				<li class="header">Contacts</li>
 
 				<li>
