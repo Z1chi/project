@@ -13,31 +13,31 @@ use Ufo\Service\AffiliateStatisticService;
 
 class StatisticView extends AffiliateController
 {
-    public int $filter_offer = 0;
-    public int $filter_smartlink = 0;
-    public int $filter_geo = 0;
+    public int $filterOffer = 0;
+    public int $filterSmartlink = 0;
+    public int $filterGeo = 0;
     public string $order_by_field = '';
     public string $order_by_direction = '';
 
-    public int $affiliate_id = 0;
+    public int $affiliateId = 0;
 
-    public function init()
+    public function init(): void
     {
-        $this->affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
+        $this->affiliateId = $_SESSION[SESSION_KEY_CURRENT]['id'];
     }
 
-    public function showList() {
+    public function showList() : void {
         $this->initFilters();
 
         $pagination = new Pagination(50);
 
-        $statistic_count = AffiliateStatisticRepository::getStatisticCount($this->collectFilters());
+        $statistic_count = (new AffiliateStatisticRepository())->getStatisticCount($this->collectFilters());
         $pagination->setItemsCount($statistic_count);
 
-        $formatted_statistic =
-            AffiliateStatisticService::getAffiliateStatisticFormatted($this->collectFilters(), [], $pagination);
-        $statistic = $formatted_statistic['list'];
-        $sum_row = $formatted_statistic['sum'];
+        $affiliateStatisticFormatted =
+            (new AffiliateStatisticService())->getAffiliateStatisticFormatted($this->collectFilters(), [], $pagination);
+        $statistic = $affiliateStatisticFormatted['list'];
+        $sum_row = $affiliateStatisticFormatted['sum'];
 
         $pages = $pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
 
@@ -45,24 +45,24 @@ class StatisticView extends AffiliateController
             'LIST' => $statistic,
             'SUM_ROW' => $sum_row,
             'PAGES' => $pages,
-            'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
-            'FILTER_OFFER' => $this->filter_offer,
-            'FILTER_SMARTLINK_ID' => $this->filter_smartlink
+            'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliateId),
+            'FILTER_OFFER' => $this->filterOffer,
+            'FILTER_SMARTLINK_ID' => $this->filterSmartlink
         ]);
     }
 
-    public function initFilters ()
+    public function initFilters(): void
     {
         if (isset($_GET['action'])) {
-            $this->filter_offer = (int) $_GET['action'];
+            $this->filterOffer = (int) $_GET['action'];
         }
 
         if (isset($_GET['smartlink'])) {
-            $this->filter_smartlink = (int) $_GET['smartlink'];
+            $this->filterSmartlink = (int) $_GET['smartlink'];
         }
 
         if (isset($_GET['geo'])) {
-            $this->filter_geo = (int) $_GET['geo'];
+            $this->filterGeo = (int) $_GET['geo'];
         }
 
         if (isset($_GET['orderByField'])) {
@@ -74,23 +74,20 @@ class StatisticView extends AffiliateController
         }
     }
 
-    public function collectFilters ()
+    public function collectFilters(): array
     {
         $filters = [
-            'offer' => $this->filter_offer,
-            'smartlink' => $this->filter_smartlink,
-            'geo' => $this->filter_geo,
-            'affiliate' => $this->affiliate_id
+            'offer' => $this->filterOffer,
+            'smartlink' => $this->filterSmartlink,
+            'geo' => $this->filterGeo,
+            'affiliate' => $this->affiliateId
         ];
 
         return $filters;
     }
 
-    public function indexAction()
+    public function indexAction(): void
     {
         $this->showList();
     }
-
-
-
 }

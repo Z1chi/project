@@ -1,16 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace Ufo\Service;
 
 use Ufo\Repository\AffiliateStatisticRepository;
 
-class AffiliateStatisticService
+final class AffiliateStatisticService
 {
-    public static function getAffiliateStatisticFormatted($filters, $order_by = null, $pagination = null , $limit = null) {
-        $affiliate_id = $filters['affiliate'];
+    public function getAffiliateStatisticFormatted($filters, $orderBy = null, $pagination = null , $limit = null): array
+    {
+        $affiliateId = $filters['affiliate'];
         unset($filters['affiliate']);
 
-        $list = AffiliateStatisticRepository::getStatistic($affiliate_id, $filters, $order_by, $pagination, $limit);
+        $list = (new AffiliateStatisticRepository())->getStatistic($affiliateId, $filters, $orderBy, $pagination, $limit);
 
         foreach ($list as &$row) {
             if(!empty($row['created_dt']))

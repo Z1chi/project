@@ -1,13 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace Ufo\Repository;
 
 use system\components\DB;
 use system\components\Util;
+use Ufo\Model\Affiliate;
+use Ufo\Model\AffiliateUrl;
 
 class AffiliateStatisticRepository
 {
-    public static function getStatisticCount($filters)
+    public function getStatisticCount($filters): int
     {
         $andWhere = ' ';
         if ($filters != null && !empty($filters)) {
@@ -30,19 +33,19 @@ class AffiliateStatisticRepository
 
         $table = TBL_AFFILIATE_ACTION_LOG;
         $query =
-            "SELECT COUNT(*) as count FROM (SELECT aal.created_dt
-            FROM {$table} aal
-            WHERE aal.affiliate_id = {$filters['affiliate']}  
-                    {$andWhere}
-            GROUP BY aal.affiliate_id, aal.created_dt) count_table";
+            'SELECT COUNT(*) as count FROM (SELECT aal.created_dt
+            FROM '.$table.' aal
+            WHERE aal.affiliate_id = '.$filters['affiliate'].'  
+                    '.$andWhere.'
+            GROUP BY aal.affiliate_id, aal.created_dt) count_table';
 
         $row = DB::getInstance()
             ->row($query);
 
-        return $row == NULL ? 0 : $row['count'];
+        return $row['count'] ?? 0;
     }
 
-    public static function getStatistic($affiliate_id, $filters, $order_by = null, $pagination = null, $limit = null)
+    public function getStatistic($affiliateId, $filters, $orderBy = null, $pagination = null, $limit = null): array
     {
         $andWhere = ' ';
 
@@ -51,7 +54,7 @@ class AffiliateStatisticRepository
                 if (!empty($filter)) {
                     switch ($key) {
                         case 'offer':
-                            $q .= ' AND offer_id = ' . Util::sanitize($filter);
+                            $q .= ' AND project_id = ' . Util::sanitize($filter);
                             break;
                         case 'smartlink':
                             $q .= ' AND url_id = ' . Util::sanitize($filter);
@@ -64,38 +67,39 @@ class AffiliateStatisticRepository
             }
         }
 
-        $order_by_str = ' ';
-        if(!empty($order_by)) {
-            $order_by_str = "ORDER BY {$order_by['field']} {$order_by['direction']}";
+        $orderByStr = ' ';
+        if(!empty($orderBy)) {
+            $orderByStr = "ORDER BY {$orderBy['field']} {$orderBy['direction']}";
         }
-        $offset_limit = ' ';
+
+        $offsetLimit = ' ';
         if ($pagination != null) {
-            $offset_limit .= 'LIMIT ' . $pagination->getItemsOnPage() . ' ' .
+            $offsetLimit .= 'LIMIT ' . $pagination->getItemsOnPage() . ' ' .
                 'OFFSET ' . $pagination->getOffset();
         } else if ($limit != null) {
-            $offset_limit .= 'LIMIT ' . (int) $limit;
+            $offsetLimit .= 'LIMIT ' . (int) $limit;
         }
         $table = TBL_AFFILIATE_ACTION_LOG;
         $query =
-            "SELECT aal.created_dt,
+            'SELECT aal.created_dt,
                     SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END)  AS clicks,
                     COUNT(DISTINCT unique_click_table.user_id)  AS unique_clicks,
                     --COUNT(CASE WHEN aal.action  = 3 THEN 1 END) AS deposits,
                     CAST(COUNT(CASE WHEN aal.action  = 3 THEN 1 END) as decimal) / 
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END) AS EPC 
-            FROM {$table} aal
+            FROM '.$table.' aal
                 JOIN (
-                    SELECT user_id, created_dt FROM {$table} 
+                    SELECT user_id, created_dt FROM '.$table.' 
                     WHERE action = 1 
-                    {$andWhere}
+                    '.$andWhere.'
                     GROUP BY created_dt, user_id) 
                     unique_click_table
                 ON aal.created_dt = unique_click_table.created_dt
-            WHERE aal.affiliate_id = {$affiliate_id} 
-                    {$andWhere}
+            WHERE aal.affiliate_id = '.$affiliateId.' 
+                    '.$andWhere.'
             GROUP BY aal.affiliate_id, aal.created_dt 
-            {$order_by_str}
+            '.$orderByStr.'
             UNION ALL(
                 SELECT NULL as created_dt, SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) as clicks,
@@ -103,18 +107,15 @@ class AffiliateStatisticRepository
                     --COUNT(CASE WHEN aal.action  = 3 THEN 1 END) AS deposits,
                     CAST(COUNT(CASE WHEN aal_footer.action  = 3 THEN 1 END) as decimal) /
                         COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) AS EPC
-                FROM {$table} aal_footer
-                JOIN (SELECT user_id, created_dt FROM {$table} 
-                        WHERE action = 1 and affiliate_id = 1  {$andWhere}
+                FROM '.$table.' aal_footer
+                JOIN (SELECT user_id, created_dt FROM '.$table.' 
+                        WHERE action = 1 and affiliate_id = 1  '.$andWhere.'
                 GROUP BY created_dt, user_id) unique_click_table_footer
                   ON aal_footer.created_dt = unique_click_table_footer.created_dt
                 )
-            {$offset_limit}";
+            '.$offsetLimit;
 
-        $list = DB::getInstance()
+        return DB::getInstance()
             ->run($query);
-
-        return $list;
-
     }
 }
