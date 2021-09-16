@@ -37,7 +37,7 @@ class LogactionCollection
 			'pr.title offer_title ' .
 			'FROM "' . TBL_AFFILIATE_ACTION_LOG . '" al ' .
 			'LEFT JOIN ' . TBL_AFFILIATE_URL . ' au ON al.url_id = au.id ' .
-			'LEFT JOIN project pr ON pr.id = al.offer_id ' .
+			'LEFT JOIN project pr ON pr.id = au.project_id ' .
 			' WHERE al.affiliate_id =  ' . $affiliate_id;
 
 		if ($filters != null && !empty($filters)) {
@@ -53,6 +53,13 @@ class LogactionCollection
 							break;
                         case 'offer':
                             $q .= ' AND al.offer_id = ' . $filter;
+                            break;
+                        case 'date':
+                            $filterExp = explode('-', $filter);
+                            $from = $filterExp[0];
+                            $before = $filterExp[1];
+                            $q .= ' AND al.created >= ' .  strtotime($from) ;
+                            $q .= ' AND al.created <= ' .  strtotime($before) ;
                             break;
 					}
 				}
