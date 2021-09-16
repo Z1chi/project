@@ -12,7 +12,7 @@ class Smartlink extends Model
 	private $id;
 	private $affiliate_id;
 	private $title;
-	private $project_id;
+	private $projectId;
 	private $created;
 	private $iframe_conversion;
 	private $iframe_lead;
@@ -29,7 +29,7 @@ class Smartlink extends Model
 		$this->id = $row['id'];
 		$this->affiliate_id = $row['affiliate_id'];
 		$this->title = $row['title'];
-		$this->project_id = $row['project_id'];
+		$this->projectId = $row['project_id'];
 		$this->created = $row['created'];
 		$this->iframe_conversion = $row['iframe_conversion'];
 		$this->iframe_lead = $row['iframe_lead'];
@@ -80,9 +80,9 @@ class Smartlink extends Model
 	/**
 	 * @return int
 	 */
-	public function getProjectId()
-	{
-		return $this->project_id;
+	public function getProjectId(): int
+    {
+		return $this->projectId;
 	}
 
 	/**
@@ -111,20 +111,10 @@ class Smartlink extends Model
 
 	public static function getSmartlinksList ($affiliate_id, $pagination = null)
 	{
-		$q = 'SELECT '.
-            ' au.id, '.
-            ' au.title,'.
-            ' au.affiliate_id,'.
-            ' au.project_id, '.
-            ' au.created, '.
-            ' au.deleted, '.
-            ' au.iframe_conversion, '.
-            ' au.iframe_lead, '.
-            ' pr.title project_title '.
-            ' FROM ' . TBL_AFFILIATE_URL . ' au'.
-            ' LEFT JOIN '.TBL_PROJECT.' pr ON au.project_id = pr.id ' .
-		    ' WHERE affiliate_id =  ' . $affiliate_id . ' AND deleted=0 '.
-		    ' ORDER BY id DESC ';
+		$q = 'SELECT * FROM "' . TBL_AFFILIATE_URL . '" WHERE affiliate_id =  ' . $affiliate_id . ' AND deleted=0';
+
+		$q .= 'ORDER BY id DESC';
+
 		if ($pagination != null)
 		{
 			$q .= ' LIMIT ' . $pagination->getItemsOnPage() . ' ' .
@@ -139,7 +129,7 @@ class Smartlink extends Model
 		foreach ($list as $k => $row)
 		{
 			$smartlink = Smartlink::withRow($row);
-            $smartlink->project_title = $row['project_title'];
+
 			$smartlinks[] = $smartlink;
 		}
 

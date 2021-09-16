@@ -1,6 +1,6 @@
 // Variables
 // --------------------------
-
+@use "sass:list";
 $fa-font-path:                "/assets/fonts/FontAwesome/webfonts" !default;
 $fa-font-size-base:           16px !default;
 $fa-font-display:             block;
@@ -9,7 +9,7 @@ $fa-version:                  "5.7.2" !default;
 $fa-border-color:             #eee !default;
 $fa-inverse:                  #fff !default;
 $fa-li-width:                 2em !default;
-$fa-fw-width:                 (20em / 16);
+$fa-fw-width:                 list.join(20em, 16);
 
 // Convenience function used to set content property
 @function fa-content($fa-var) {

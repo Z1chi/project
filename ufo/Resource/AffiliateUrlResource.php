@@ -15,7 +15,7 @@ final class AffiliateUrlResource
         unset(
             // todo remove and replace with uid $attributes['id'],
             $attributes['affiliate_id'],
-            $attributes['offer_id'],
+            $attributes['project_id'],
             $attributes['deleted'],
         );
 
