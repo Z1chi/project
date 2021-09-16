@@ -138,7 +138,7 @@ class SmartlinksView extends AffiliateController
 			'iframe_lead' => Util::sanitize($_POST['iframe_lead'], null),
 			'affiliate_id' => $this->affiliate_id,
 			'created' => time(),
-			'offer_id' => 1 // todo hardcode
+			'project_id' => 1 // todo hardcode
 		];
 
 		if (mb_strlen($data['title']) < 3)

@@ -14,9 +14,9 @@ final class CreateProjectTable extends Migration
             $table->increments('id');
             $table->string('title', 32);
             $table->string('token', 32);
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
-            $table->timestamp('accessed_at');
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
+            $table->dateTime('accessed_at')->nullable()->default(null);
         });
     }
 

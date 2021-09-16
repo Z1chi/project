@@ -4,21 +4,16 @@ declare(strict_types=1);
 use Ufo\Component\Migration\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-final class CreateLogAffiliateTable extends Migration
+final class CreateAffiliateOfferTable extends Migration
 {
-    private string $table = 'log_affiliate';
+    private string $table = 'affiliate_offer';
 
     public function up(): void
     {
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('affiliate_id');
-            $table->string('action', 64);
-            $table->json('data')->nullable();
-            $table->string('ip', 64);
-            $table->integer('created');
+            $table->string('title', 64);
 
-            $table->index('affiliate_id');
         });
     }
 
