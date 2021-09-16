@@ -114,7 +114,6 @@
 						<i class="fa fa-money"></i> <span>Withdraw</span>
 					</a>
 				</li>
-
 				<li class="header">Contacts</li>
 
 				<li>
