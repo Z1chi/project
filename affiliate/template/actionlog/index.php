@@ -38,9 +38,13 @@
                                 <label for="smartlinkInput">Offer</label>
                                 <select class="form-control input-sm js_filter" data-param="offer" id="offerSelect">
                                     <option value="">All</option>
-                                    <? foreach ($OFFERS as $key => $obj): ?>
-                                        <option value="<?=$obj->getId()?>"<?if ($FILTER_OFFER_ID == $obj->getId()):?> selected="selected"<?endif;?>><?=$obj->getTitle()?></option>
-                                    <? endforeach; ?>
+                                    <?php /** @var \Ufo\Model\Project[] $OFFERS
+                                     * @var int $FILTER_OFFER_ID
+                                     */
+                                    foreach ($OFFERS as $key => $obj): ?>
+                                        <option value="<?= $obj->id ?>"<?php
+                                        if ($FILTER_OFFER_ID == $obj->id):?> selected="selected"<?php endif; ?>><?= $obj->title ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>

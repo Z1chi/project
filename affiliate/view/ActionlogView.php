@@ -9,6 +9,7 @@ use affiliate\model\Offer;
 use affiliate\model\Smartlink;
 use app\controller\Affiliate;
 use system\core\AffiliateController;
+use Ufo\Service\ProjectService;
 
 class ActionlogView extends AffiliateController
 {
@@ -28,11 +29,10 @@ class ActionlogView extends AffiliateController
 	 * @var int
 	 */
 	private $filter_smartlink = null;
-
     /**
      * @var int
      */
-    private $filter_offer = null;
+    private $filterOffer = null;
 
     public function init()
 	{
@@ -56,7 +56,6 @@ class ActionlogView extends AffiliateController
 		$leads = LogactionCollection::getList($this->affiliate_id, $this->collectFilters(), $this->pagination);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
-
 		$this->pushTemplateData([
 			'LIST' => $leads,
 			'PAGES' => $pages,
@@ -64,8 +63,8 @@ class ActionlogView extends AffiliateController
 			'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
 			'FILTER_ACTION' => $this->filter_action,
 			'FILTER_SMARTLINK_ID' => $this->filter_smartlink,
-			'FILTER_OFFER_ID' => $this->filter_offer,
-            'OFFERS' => Offer::getOffers()
+			'FILTER_OFFER_ID' => $this->filterOffer,
+            'OFFERS' => (new ProjectService())->getProjectsForFilter()
 		]);
 	}
 
@@ -80,7 +79,7 @@ class ActionlogView extends AffiliateController
 		}
 
         if (isset($_GET['offer'])) {
-            $this->filter_offer = (int) $_GET['offer'];
+            $this->filterOffer = (int) $_GET['offer'];
         }
 	}
 
@@ -89,7 +88,7 @@ class ActionlogView extends AffiliateController
 		$filters = [
 			'action' => $this->filter_action,
 			'smartlink' => $this->filter_smartlink,
-			'offer' => $this->filter_offer,
+			'offer' => $this->filterOffer,
 		];
 
 		return $filters;
