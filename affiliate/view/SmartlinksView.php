@@ -17,6 +17,7 @@ use system\components\Util;
 use system\core\AffiliateController;
 use Ufo\Model\AffiliateUrl;
 use Ufo\Service\AffiliateUrlService;
+use Ufo\Service\ProjectService;
 
 class SmartlinksView extends AffiliateController
 {
@@ -53,7 +54,7 @@ class SmartlinksView extends AffiliateController
 
 		$this->pushTemplateData([
 			'LIST' => $subscribers,
-			'PROJECTS' => Project::all(),
+			'PROJECTS' => (new ProjectService())->getProjectsForFilter(),
 			'PAGES' => $pages,
 			'QUERY' => $this->query
 		]);
