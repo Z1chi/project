@@ -8,7 +8,6 @@ use affiliate\collection\LogactionCollection;
 use affiliate\model\Smartlink;
 use app\controller\Affiliate;
 use system\core\AffiliateController;
-use DateTime;
 
 class ActionlogView extends AffiliateController
 {
@@ -71,11 +70,11 @@ class ActionlogView extends AffiliateController
     {
         if(!empty($this->filter_date)){
             $date = explode('-', $this->filter_date);
-            $dateFrom = new DateTime($date[0]);
-            $dateBefore = new DateTime($date[1]);
+            $dateFrom = new \DateTime($date[0]);
+            $dateBefore = new \DateTime($date[1]);
             return $dateFrom->format('m/d/Y') . ' - ' . $dateBefore->format('m/d/Y');
         }
-        return date('m/d/Y'). " - " . date('m/d/Y');
+        return date('m/d/Y'). ' - ' . date('m/d/Y');
     }
 
 	public function initFilters ()
@@ -97,7 +96,7 @@ class ActionlogView extends AffiliateController
 		$filters = [
 			'action' => $this->filter_action,
 			'smartlink' => $this->filter_smartlink,
-			'date' => $this->filter_date
+			'date' => $this->filter_date,
 		];
 
 		return $filters;
