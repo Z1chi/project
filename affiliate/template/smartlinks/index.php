@@ -29,11 +29,12 @@
                             <? /* @var $row \affiliate\model\Smartlink */
                             foreach ($LIST as $row): ?>
                                 <tr>
-                                    <td class="text-center hidden-xs"><?= $row->getCreatedFormatted() ?></td>
-                                    <td class="text-center hidden-xs"><?= $row->project_title ?></td>
+
+                                    <td class="text-center hidden-xs"><?= $row->created ?></td>
+                                    <td class="text-center hidden-xs"><?= $row->project->title ?></td>
                                     <td class="text-bold">
 
-                                        <?= htmlspecialchars($row->getTitle(), ENT_QUOTES) ?>
+                                        <?= htmlspecialchars($row->title, ENT_QUOTES) ?>
 
                                         <? /*
 
@@ -47,21 +48,21 @@
 
                                     </td>
                                     <td class="text-center">
-                                        <input type="text" value="<?= $row->getSmartlinkUrl() ?>" class="form-control"
+                                        <input type="text" value="<?= $row->formattedUrl ?>" class="form-control"
                                                readonly>
                                     </td>
                                     <td class="text-center hidden-xs">
-                                        <input type="text" value="<?= $row->getIframeLead() ?>" class="form-control"
+                                        <input type="text" value="<?= $row->iframe_lead ?>" class="form-control"
                                                readonly>
                                     </td>
                                     <td class="text-center hidden-xs">
-                                        <input type="text" value="<?= $row->getIframeConversion() ?>"
+                                        <input type="text" value="<?= $row->iframe_conversion ?>"
                                                class="form-control" readonly>
                                     </td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-danger js_smartlink_delete"
                                                 data-toggle="modal" data-target="#modal-delete"
-                                                data-id="<?= $row->getId() ?>">
+                                                data-id="<?= $row->id ?>">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -113,8 +114,8 @@
                             <select name="project" class="form-control">
                                 <? /* @var $row \affiliate\model\Project */
                                 foreach ($PROJECTS as $row): ?>
-                                    <option value="<?= $row->getId() ?>"
-                                        <? if ($row->getId() == 1): ?> selected="selected"<? endif; ?>><?= $row->getTitle() ?></option>
+                                    <option value="<?= $row->id ?>"
+                                        <? if ($row->id == 1): ?> selected="selected"<? endif; ?>><?= $row->title ?></option>
                                 <? endforeach; ?>
                                 <!--по дефолту стоит 1-->
                             </select>

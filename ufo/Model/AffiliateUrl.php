@@ -5,6 +5,7 @@ namespace Ufo\Model;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ufo\Component\Eloquent\Eloquent;
+use Ufo\Model\Project;
 
 /**
  * @property int id
@@ -44,5 +45,10 @@ final class AffiliateUrl extends Eloquent
     public function affiliate(): BelongsTo
     {
         return $this->belongsTo(Affiliate::class, 'affiliate_id');
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

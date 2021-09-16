@@ -51,4 +51,26 @@ final class AffiliateUrlService
 
         return $affiliateUrl;
     }
+
+    public static function getSmartlinksList ($affiliate_id, $pagination = null)
+    {
+        $q = AffiliateUrl::where([['deleted', 0],['affiliate_id', $affiliate_id]])
+            ->orderBy('id', 'DESC')
+            ->limit($pagination->getItemsOnPage())
+            ->offset($pagination->getOffset())
+            ->get();
+
+        foreach ($q as $row)
+        {
+            $row->formattedUrl = getenv('APP_SCHEME') . '://' . getenv('APP_HOSTNAME') . '/?' . AFFILIATE_URL_GET_KEY . '=' . HashidHelper::encodeSmartlinkId($row->id);
+            $row->created = self::getFormatted($row->created);
+        }
+
+        return $q;
+    }
+
+    public static function getFormatted ($timestamp, $format = 'd.m.Y, H:i')
+    {
+        return date('d.m.Y, H:i', $timestamp);
+    }
 }
