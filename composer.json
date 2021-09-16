@@ -34,7 +34,8 @@
         "doctrine/dbal": "^3.1"
     },
     "require-dev": {
-        "larapack/dd": "^1.1"
+        "larapack/dd": "^1.1",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
@@ -43,6 +44,11 @@
         "files": [
             "helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-install-cmd": [
