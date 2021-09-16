@@ -49,6 +49,13 @@ class LogactionCollection
 						case 'smartlink':
 							$q .= ' AND au.id = ' . $filter;
 							break;
+                        case 'date':
+                            $filterExp = explode('-', $filter);
+                            $from = $filterExp[0];
+                            $before = $filterExp[1];
+                            $q .= ' AND al.created >= ' .  strtotime($from) ;
+                            $q .= ' AND al.created <= ' .  strtotime($before) ;
+                            break;
 					}
 				}
 			}
