@@ -17,25 +17,25 @@ export class Actionlog extends Controller {
 
     }
 
-	initFilters() {
-		const $filterSelects = $('.js_filter, .js_order');
+    initFilters() {
+        const $filterSelects = $('.js_filter, .js_order');
 
-		$filterSelects.on('change', (event) => {
+        $filterSelects.on('change', (event) => {
 
-			const $element = $(event.currentTarget);
-			const param = $element.data('param');
-			const value = $element.val();
+            const $element = $(event.currentTarget);
+            const param = $element.data('param');
+            const value = $element.val();
+            if (value === '') {
+                var originalURL = document.location.href;
+                var alteredURL = Util.removeParam(param, originalURL);
 
-			if (value === '')
-			{
-				var originalURL = document.location.href;
-				var alteredURL = Util.removeParam(param, originalURL);
+                document.location.href = alteredURL;
 
-				document.location.href = alteredURL;
+            } else {
 
-			} else {
-				Util.insertParam(param, value);
-			}
-		});
-	}
+                Util.insertParam(param, value);
+            }
+        });
+    }
+
 }
