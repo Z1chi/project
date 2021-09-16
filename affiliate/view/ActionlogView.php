@@ -5,9 +5,11 @@ namespace affiliate\view;
 
 use admin\component\Pagination;
 use affiliate\collection\LogactionCollection;
+use affiliate\model\Offer;
 use affiliate\model\Smartlink;
 use app\controller\Affiliate;
 use system\core\AffiliateController;
+use Ufo\Service\ProjectService;
 
 class ActionlogView extends AffiliateController
 {
@@ -30,9 +32,13 @@ class ActionlogView extends AffiliateController
     /**
      * @var int
      */
+    private $filterOffer = null;
+    /**
+     * @var int
+     */
     private $filter_date = null;
 
-	public function init()
+    public function init()
 	{
 		$this->affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
 	}
@@ -54,28 +60,18 @@ class ActionlogView extends AffiliateController
 		$leads = LogactionCollection::getList($this->affiliate_id, $this->collectFilters(), $this->pagination);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
-
 		$this->pushTemplateData([
 			'LIST' => $leads,
 			'PAGES' => $pages,
 			'ACTION_TYPES' => self::getAffiliateActionsStrings(),
 			'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
-			'DATES' => $this->getTime(),
 			'FILTER_ACTION' => $this->filter_action,
-			'FILTER_SMARTLINK_ID' => $this->filter_smartlink
+			'FILTER_SMARTLINK_ID' => $this->filter_smartlink,
+			'FILTER_OFFER_ID' => $this->filterOffer,
+            'OFFERS' => (new ProjectService())->getProjectsForFilter(),
+            'DATES' => $this->getTime(),
 		]);
 	}
-
-	public function getTime()
-    {
-        if(!empty($this->filter_date)){
-            $date = explode('-', $this->filter_date);
-            $dateFrom = new \DateTime($date[0]);
-            $dateBefore = new \DateTime($date[1]);
-            return $dateFrom->format('m/d/Y') . ' - ' . $dateBefore->format('m/d/Y');
-        }
-        return date('m/d/Y'). ' - ' . date('m/d/Y');
-    }
 
 	public function initFilters ()
 	{
@@ -86,17 +82,34 @@ class ActionlogView extends AffiliateController
 		if (isset($_GET['smartlink'])) {
 			$this->filter_smartlink = (int) $_GET['smartlink'];
 		}
+
+        if (isset($_GET['offer'])) {
+            $this->filterOffer = (int) $_GET['offer'];
+        }
+
         if (isset($_GET['date'])) {
             $this->filter_date = (string)$_GET['date'];
         }
 	}
+
+    public function getTime()
+    {
+        if(!empty($this->filter_date)){
+            $date = explode('-', $this->filter_date);
+            $dateFrom = new \DateTime($date[0]);
+            $dateBefore = new \DateTime($date[1]);
+            return $dateFrom->format('m/d/Y') . ' - ' . $dateBefore->format('m/d/Y');
+        }
+        return date('m/d/Y'). ' - ' . date('m/d/Y');
+    }
 
 	public function collectFilters ()
 	{
 		$filters = [
 			'action' => $this->filter_action,
 			'smartlink' => $this->filter_smartlink,
-			'date' => $this->filter_date,
+			'offer' => $this->filterOffer,
+            'date' => $this->filter_date,
 		];
 
 		return $filters;
