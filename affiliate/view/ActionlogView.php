@@ -27,6 +27,10 @@ class ActionlogView extends AffiliateController
 	 * @var int
 	 */
 	private $filter_smartlink = null;
+    /**
+     * @var int
+     */
+    private $filter_date = null;
 
 	public function init()
 	{
@@ -56,10 +60,22 @@ class ActionlogView extends AffiliateController
 			'PAGES' => $pages,
 			'ACTION_TYPES' => self::getAffiliateActionsStrings(),
 			'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
+			'DATES' => $this->getTime(),
 			'FILTER_ACTION' => $this->filter_action,
 			'FILTER_SMARTLINK_ID' => $this->filter_smartlink
 		]);
 	}
+
+	public function getTime()
+    {
+        if(!empty($this->filter_date)){
+            $date = explode('-', $this->filter_date);
+            $dateFrom = new \DateTime($date[0]);
+            $dateBefore = new \DateTime($date[1]);
+            return $dateFrom->format('m/d/Y') . ' - ' . $dateBefore->format('m/d/Y');
+        }
+        return date('m/d/Y'). ' - ' . date('m/d/Y');
+    }
 
 	public function initFilters ()
 	{
@@ -70,13 +86,17 @@ class ActionlogView extends AffiliateController
 		if (isset($_GET['smartlink'])) {
 			$this->filter_smartlink = (int) $_GET['smartlink'];
 		}
+        if (isset($_GET['date'])) {
+            $this->filter_date = (string)$_GET['date'];
+        }
 	}
 
 	public function collectFilters ()
 	{
 		$filters = [
 			'action' => $this->filter_action,
-			'smartlink' => $this->filter_smartlink
+			'smartlink' => $this->filter_smartlink,
+			'date' => $this->filter_date,
 		];
 
 		return $filters;

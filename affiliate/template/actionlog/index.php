@@ -32,6 +32,19 @@
 								</select>
 							</div>
 						</div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group">
+                                <label>Period:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                        <input value="<?=$DATES?>" type="text" class="form-control pull-right js_date_range">
+                                </div>
+                            </div>
+                        </div>
+
 					</div>
 				</div>
 
@@ -45,6 +58,7 @@
 							<thead>
 							<tr>
 								<th class="text-center">User ID</th>
+								<th class="text-center">Project</th>
 								<th class="text-center">Smart link</th>
 								<th class="text-center">Action</th>
 								<th class="text-center hidden-xs">Deposit</th>
@@ -59,6 +73,7 @@
 							<? /* @var $row \affiliate\model\Logaction */ foreach ($LIST as $row): ?>
 								<tr>
 									<td class="text-center"><?=$row->getUserUid()?></td>
+									<td class="text-center">1</td>
 									<td class="text-center"><?=$row->url_title?></td>
 									<td class="text-center"><?=$row->getActionString()?></td>
 									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>
