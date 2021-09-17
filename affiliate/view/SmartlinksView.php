@@ -48,7 +48,7 @@ class SmartlinksView extends AffiliateController
 		$calls_count = $this->getSmartlinksCount();
 		$this->pagination->setItemsCount($calls_count);
 
-		$subscribers = AffiliateUrlService::getSmartlinksList($this->affiliate_id, $this->pagination);
+		$subscribers = ( new AffiliateUrlService)->getSmartlinksList($this->affiliate_id, $this->pagination);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
 

@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Ufo\Service;
 
+use admin\component\Pagination;
 use app\component\HashidHelper;
+use Illuminate\Database\Eloquent\Collection;
 use Ufo\Exception\AffiliateServiceException;
 use Ufo\Model\Affiliate;
 use Ufo\Model\AffiliateUrl;
@@ -52,7 +54,7 @@ final class AffiliateUrlService
         return $affiliateUrl;
     }
 
-    public static function getSmartlinksList ($affiliate_id, $pagination = null)
+    public function getSmartlinksList (int $affiliate_id, Pagination $pagination = null): Collection
     {
         $q = AffiliateUrl::where([['deleted', 0],['affiliate_id', $affiliate_id]])
             ->orderBy('id', 'DESC')
@@ -62,15 +64,10 @@ final class AffiliateUrlService
 
         foreach ($q as $row)
         {
-            $row->formattedUrl = getenv('APP_SCHEME') . '://' . getenv('APP_HOSTNAME') . '/?' . AFFILIATE_URL_GET_KEY . '=' . HashidHelper::encodeSmartlinkId($row->id);
-            $row->created = self::getFormatted($row->created);
+            $row->formattedUrl = $row->getFullUrl();
+            $row->created =$row->created_at->format('d.m.Y, H:i');
         }
 
         return $q;
-    }
-
-    public static function getFormatted ($timestamp, $format = 'd.m.Y, H:i')
-    {
-        return date('d.m.Y, H:i', $timestamp);
     }
 }

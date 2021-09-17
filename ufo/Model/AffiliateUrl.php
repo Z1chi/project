@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Ufo\Model;
 
+use app\component\HashidHelper;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ufo\Component\Eloquent\Eloquent;
 use Ufo\Model\Project;
@@ -66,5 +67,10 @@ final class AffiliateUrl extends Eloquent
         $dateTime = (new \DateTimeImmutable())->setTimestamp($this->updated);
 
         return $dateTime ?: null;
+    }
+
+    public function getFullUrl(): string
+    {
+        return getenv('APP_SCHEME') . '://' . getenv('APP_HOSTNAME') . '/?' . AFFILIATE_URL_GET_KEY . '=' . HashidHelper::encodeSmartlinkId($this->id);
     }
 }
