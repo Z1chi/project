@@ -5,7 +5,6 @@ namespace affiliate\view;
 
 use admin\component\Pagination;
 use affiliate\collection\LogactionCollection;
-use affiliate\model\Offer;
 use affiliate\model\Smartlink;
 use app\controller\Affiliate;
 use system\core\AffiliateController;
@@ -32,7 +31,7 @@ class ActionlogView extends AffiliateController
     /**
      * @var int
      */
-    private $filterOffer = null;
+    private $filterProject = null;
     /**
      * @var int
      */
@@ -67,8 +66,8 @@ class ActionlogView extends AffiliateController
 			'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
 			'FILTER_ACTION' => $this->filter_action,
 			'FILTER_SMARTLINK_ID' => $this->filter_smartlink,
-			'FILTER_OFFER_ID' => $this->filterOffer,
-            'OFFERS' => (new ProjectService())->getProjectsForFilter(),
+			'FILTER_PROJECT_ID' => $this->filterProject,
+            'PROJECTS' => (new ProjectService())->getProjectsForFilter(),
             'DATES' => $this->getTime(),
 		]);
 	}
@@ -83,8 +82,8 @@ class ActionlogView extends AffiliateController
 			$this->filter_smartlink = (int) $_GET['smartlink'];
 		}
 
-        if (isset($_GET['offer'])) {
-            $this->filterOffer = (int) $_GET['offer'];
+        if (isset($_GET['project'])) {
+            $this->filterProject = (int) $_GET['project'];
         }
 
         if (isset($_GET['date'])) {
@@ -108,7 +107,7 @@ class ActionlogView extends AffiliateController
 		$filters = [
 			'action' => $this->filter_action,
 			'smartlink' => $this->filter_smartlink,
-			'offer' => $this->filterOffer,
+			'project' => $this->filterProject,
             'date' => $this->filter_date,
 		];
 
