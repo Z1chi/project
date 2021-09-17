@@ -64,7 +64,7 @@ class Affiliate
 			$data = [
 				'affiliate_id' => $url['affiliate_id'],
 				'url_id' => $url['id'],
-				'offer_id' => 1,
+				'project_id' => $url['project_id'],
 				'action' => self::ACTION_CLICK,
 				'created' => time(),
 				'ip' => $ip,
@@ -91,7 +91,7 @@ class Affiliate
 		$ip = $_SERVER['REMOTE_ADDR'];
 		$geo = Browser::getGeo($ip);
 
-		$url = DB::getInstance()->row('SELECT id, affiliate_id FROM ' . TBL_AFFILIATE_URL .' WHERE id = ?', $url_id);
+		$url = DB::getInstance()->row('SELECT id, affiliate_id, project_id FROM ' . TBL_AFFILIATE_URL .' WHERE id = ?', $url_id);
 
 		if ($url)
 		{
@@ -99,7 +99,7 @@ class Affiliate
 				'affiliate_id' => $url['affiliate_id'],
 				'url_id' => $url['id'],
 				'user_id' => $user_id,
-				'offer_id' => 1,
+				'project_id' => $url['project_id'],
 				'action' => self::ACTION_SIGNUP,
 				'created' => time(),
 				'ip' => $ip,
@@ -113,7 +113,7 @@ class Affiliate
     /**
      * @deprecated
      */
-	public static function logDeposit ($user_id, $affiliate_id, $url_id, $deposit, $payout, $currency)
+	public static function logDeposit ($user_id, $affiliate_id, $url_id, $deposit, $payout, $currency, $project_id)
 	{
 		$geo = null;
 
@@ -129,7 +129,7 @@ class Affiliate
 			'affiliate_id' => $affiliate_id,
 			'url_id' => $url_id,
 			'user_id' => $user_id,
-			'offer_id' => 1,
+			'project' => $project_id,
 			'action' => self::ACTION_DEPOSIT,
 			'created' => time(),
 			'ip' => $ip,

@@ -47,7 +47,7 @@ final class AffiliateEventService
             'affiliate_id' => $affiliateUrl->affiliate_id,
             'url_id' => $affiliateUrl->id,
             'user_uid' => $userUid,
-            'offer_id' => 1,
+            'project_id' => $affiliateUrl->project_id,
             'action' => AffiliateAction::CLICK,
             'created' => time(),
             'ip' => $ip,
@@ -101,7 +101,7 @@ final class AffiliateEventService
             'affiliate_id' => $affiliateUrl->affiliate_id,
             'url_id' => $affiliateUrl->id,
             'user_uid' => $userUid,
-            'offer_id' => 1, // todo what for???
+            'project_id' => $affiliateUrl->project_id,
             'action' => AffiliateAction::SIGNUP,
             'created' => time(),
             'ip' => $ip,
@@ -140,6 +140,7 @@ final class AffiliateEventService
         $affiliateActionLog->deposit = $deposit;
         $affiliateActionLog->currency = mb_strtoupper($currency);
         $affiliateActionLog->transaction_id = $transactionId;
+        $affiliateActionLog->project_id = $affiliateUrl->project_id;
         if ($affiliate->revshare_percent) {
             $affiliateActionLog->payout_type = PayoutType::PERCENT;
             $affiliateActionLog->payout_value = $affiliate->revshare_percent;
@@ -173,6 +174,7 @@ final class AffiliateEventService
         $affiliateActionLog->deposit = $deposit;
         $affiliateActionLog->currency = mb_strtoupper($currency);
         $affiliateActionLog->transaction_id = $transactionId;
+        $affiliateActionLog->project_id = $affiliateUrl->project_id;
         if ($affiliate->revshare_percent) {
             $affiliateActionLog->payout_type = PayoutType::PERCENT;
             $affiliateActionLog->payout_value = $affiliate->revshare_percent;

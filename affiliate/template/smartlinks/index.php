@@ -9,9 +9,7 @@
 
                 <div class="box-body">
 
-                    <? use Ufo\Model\Project;
-
-                    if (empty($LIST)): ?>
+                    <? if (empty($LIST)): ?>
                         <p>List is empty.</p>
                     <? else: ?>
 
@@ -112,9 +110,9 @@
                                 tracking code will be loaded in hidden iframe when the user successfully signed up.</p>
                         </div>
                         <div class="form-group">
-                            <label>Smartlink offer:</label>
+                            <label>Smartlink project:</label>
                             <select name="project" class="form-control">
-                                <? /* @var $row Project */
+                                <? /* @var $PROJECTS Ufo\Model\Project[] */
                                 foreach ($PROJECTS as $row): ?>
                                     <option value="<?= $row->id ?>"
                                         <? if ($row->id == 1): ?> selected="selected"<? endif; ?>><?= $row->title ?></option>
