@@ -48,7 +48,7 @@
 
                                     </td>
                                     <td class="text-center">
-                                        <input type="text" value="<?= $row->getFullUrl() ?>" class="form-control"
+                                        <input type="text" value="<?= $row->getUrlByPattern() ?>" class="form-control"
                                                readonly>
                                     </td>
                                     <td class="text-center hidden-xs">
@@ -112,7 +112,7 @@
                         <div class="form-group">
                             <label>Smartlink project:</label>
                             <select name="project" class="form-control">
-                                <? /* @var $PROJECTS \ufo\model\Project[] */
+                                <? /* @var $PROJECTS Ufo\Model\Project[] */
                                 foreach ($PROJECTS as $row): ?>
                                     <option value="<?= $row->id ?>"
                                         <? if ($row->id == 1): ?> selected="selected"<? endif; ?>><?= $row->title ?></option>

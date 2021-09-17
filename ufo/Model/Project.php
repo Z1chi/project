@@ -9,6 +9,7 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property int       id
  * @property string    title
  * @property string    token
+ * @property string    url_pattern
  * @property \DateTime created_at
  * @property \DateTime updated_at
  * @property \DateTime accessed_at
