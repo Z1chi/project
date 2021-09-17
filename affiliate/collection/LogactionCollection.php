@@ -135,7 +135,7 @@ select
 		{
 			$action = Logaction::withRow($row);
 			$action->url_title = $row['url_title'];
-			$action->offer_title = $row['offer_title'];
+			$action->project_title = $row['project_title'];
 			$action->info_url = Url::create('/leads/?id=' . $row['user_uid']);
 
 			$actions[] = $action;
