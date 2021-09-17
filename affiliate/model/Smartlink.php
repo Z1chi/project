@@ -12,7 +12,7 @@ class Smartlink extends Model
 	private $id;
 	private $affiliate_id;
 	private $title;
-	private $offer_id;
+	private $projectId;
 	private $created;
 	private $iframe_conversion;
 	private $iframe_lead;
@@ -29,7 +29,7 @@ class Smartlink extends Model
 		$this->id = $row['id'];
 		$this->affiliate_id = $row['affiliate_id'];
 		$this->title = $row['title'];
-		$this->offer_id = $row['offer_id'];
+		$this->projectId = $row['project_id'];
 		$this->created = $row['created'];
 		$this->iframe_conversion = $row['iframe_conversion'];
 		$this->iframe_lead = $row['iframe_lead'];
@@ -80,9 +80,9 @@ class Smartlink extends Model
 	/**
 	 * @return int
 	 */
-	public function getOfferId()
-	{
-		return $this->offer_id;
+	public function getProjectId(): int
+    {
+		return $this->projectId;
 	}
 
 	/**
