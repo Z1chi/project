@@ -77,6 +77,9 @@ final class AffiliateUrl extends Eloquent
 
     public function getUrlByPattern(): string
     {
-        return sprintf($this->project->url_pattern, HashidHelper::encodeSmartlinkId($this->affiliate->user_uid));
+        $res = 'no data';
+        if ($this->affiliate->user_uid)
+            $res = sprintf($this->project->url_pattern, HashidHelper::encodeSmartlinkId($this->affiliate->user_uid));
+        return $res;
     }
 }
