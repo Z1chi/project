@@ -54,6 +54,11 @@ final class AffiliateUrlService
         return $affiliateUrl;
     }
 
+    /**
+     * @param int $affiliate_id
+     * @param Pagination|null $pagination
+     * @return Collection
+     */
     public function getSmartlinksList (int $affiliate_id, Pagination $pagination = null): Collection
     {
         $q = AffiliateUrl::where([['deleted', 0],['affiliate_id', $affiliate_id]])
@@ -61,12 +66,6 @@ final class AffiliateUrlService
             ->limit($pagination->getItemsOnPage())
             ->offset($pagination->getOffset())
             ->get();
-
-        foreach ($q as $row)
-        {
-            $row->formattedUrl = $row->getFullUrl();
-            $row->created =$row->created_at->format('d.m.Y, H:i');
-        }
 
         return $q;
     }

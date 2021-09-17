@@ -26,11 +26,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <? /* @var $row \affiliate\model\Smartlink */
+                            <? /* @var $row \Ufo\Model\AffiliateUrl */
                             foreach ($LIST as $row): ?>
                                 <tr>
 
-                                    <td class="text-center hidden-xs"><?= $row->created ?></td>
+                                    <td class="text-center hidden-xs"><?= $row->created_at->format('Y-m-d H:i:s'); ?></td>
                                     <td class="text-center hidden-xs"><?= $row->project->title ?></td>
                                     <td class="text-bold">
 
@@ -48,7 +48,7 @@
 
                                     </td>
                                     <td class="text-center">
-                                        <input type="text" value="<?= $row->formattedUrl ?>" class="form-control"
+                                        <input type="text" value="<?= $row->getFullUrl() ?>" class="form-control"
                                                readonly>
                                     </td>
                                     <td class="text-center hidden-xs">
