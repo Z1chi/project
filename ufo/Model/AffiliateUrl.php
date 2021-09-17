@@ -10,7 +10,7 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property int id
  * @property string title
  * @property int affiliate_id
- * @property int offer_id
+ * @property int project_id
  * @property int created
  * @property int updated
  * @property null|\DateTimeImmutable createdAt

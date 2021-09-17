@@ -1,4 +1,6 @@
 import { Environment } from './Environment';
+import $ from "jquery";
+import {Util} from "../lib/Util";
 
 export class Controller {
     constructor (factory, config) {
@@ -31,6 +33,28 @@ export class Controller {
 		url += path;
 
 		return url;
+	}
+
+	initFilters() {
+		const $filterSelects = $('.js_filter, .js_order');
+
+		$filterSelects.on('change', (event) => {
+
+			const $element = $(event.currentTarget);
+			const param = $element.data('param');
+			const value = $element.val();
+
+			if (value === '')
+			{
+				var originalURL = document.location.href;
+				var alteredURL = Util.removeParam(param, originalURL);
+
+				document.location.href = alteredURL;
+
+			} else {
+				Util.insertParam(param, value);
+			}
+		});
 	}
 
 	init () {}
