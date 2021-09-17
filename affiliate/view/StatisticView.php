@@ -3,8 +3,6 @@
 namespace affiliate\view;
 
 use admin\component\Pagination;
-use affiliate\collection\LogactionCollection;
-use affiliate\collection\StatisticCollection;
 use affiliate\model\Smartlink;
 use system\components\Util;
 use system\core\AffiliateController;

@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace Ufo\Service;
 
+use admin\component\Pagination;
 use Ufo\Repository\AffiliateStatisticRepository;
 
 final class AffiliateStatisticService
 {
-    public function getAffiliateStatisticFormatted($filters, $orderBy = null, $pagination = null , $limit = null): array
+    public function getAffiliateStatisticFormatted(
+        array $filters, array $orderBy = null, Pagination $pagination = null , int $limit = null): array
     {
         $affiliateId = $filters['affiliate'];
         unset($filters['affiliate']);

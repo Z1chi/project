@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Ufo\Repository;
 
+use admin\component\Pagination;
 use system\components\DB;
 use system\components\Util;
 use Ufo\Model\Affiliate;
@@ -10,7 +11,7 @@ use Ufo\Model\AffiliateUrl;
 
 class AffiliateStatisticRepository
 {
-    public function getStatisticCount($filters): int
+    public function getStatisticCount(array $filters): int
     {
         $andWhere = ' ';
         if ($filters != null && !empty($filters)) {
@@ -45,7 +46,8 @@ class AffiliateStatisticRepository
         return $row['count'] ?? 0;
     }
 
-    public function getStatistic($affiliateId, $filters, $orderBy = null, $pagination = null, $limit = null): array
+    public function getStatistic(
+        int $affiliateId, array $filters, array $orderBy = null, Pagination $pagination = null, int $limit = null): array
     {
         $andWhere = ' ';
 
