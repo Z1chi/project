@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Ufo\Model;
 
 use app\component\HashidHelper;
-use Google\Service\CloudSearch\Resource\Debug;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ufo\Component\Eloquent\Eloquent;
 use Ufo\Model\Project;

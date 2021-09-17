@@ -6,7 +6,7 @@ namespace affiliate\view;
 use admin\component\Pagination;
 use affiliate\component\Logger;
 use App;
-use U\collection\Miners;
+use app\collection\Miners;
 use app\component\HashidHelper;
 use affiliate\model\Smartlink;
 use app\model\User;
