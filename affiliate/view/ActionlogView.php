@@ -60,7 +60,6 @@ class ActionlogView extends AffiliateController
         $table_sum = array_pop($leads);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
-
 		$this->pushTemplateData([
 			'LIST' => $leads,
 			'TABLE_FOOTER' => $table_sum,

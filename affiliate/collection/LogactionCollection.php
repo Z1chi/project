@@ -39,7 +39,6 @@ class LogactionCollection
         }
 		$q = 'SELECT COUNT(id) FROM "' . TBL_AFFILIATE_ACTION_LOG . '" 
 		WHERE affiliate_id =  ' . $affiliate_id . ' '. $where;
-
 		$row = DB::getInstance()
 			->row($q);
 
@@ -97,7 +96,7 @@ class LogactionCollection
             'al.created, ' .
             'al.user_uid, ' .
             'au.title url_title, ' .
-            'pr.title offer_title ' .
+            'pr.title project_title ' .
             'FROM "' . TBL_AFFILIATE_ACTION_LOG . '" al ' .
             'LEFT JOIN ' . TBL_AFFILIATE_URL . ' au ON al.url_id = au.id ' .
             'LEFT JOIN project pr ON pr.id = au.project_id ' .
@@ -117,7 +116,7 @@ select
         null                          as created,
         null                          as user_uid,
         null                          as url_title,
-        null                          as offer_title
+        null                          as project_title
  from (SELECT al.deposit as deposit,
               al.payout  as payout,
               al.currency
@@ -126,7 +125,8 @@ select
        WHERE al.affiliate_id = '.$affiliate_id.' '.$where.' '.$order_by.'
        '.$limit. ') limited_subquery group by limited_subquery.currency';
         $q = "({$main_query}) UNION ALL ($sum_query)";
-		$list = DB::getInstance()
+
+        $list = DB::getInstance()
 			->run($q);
 
 		$actions = [];
