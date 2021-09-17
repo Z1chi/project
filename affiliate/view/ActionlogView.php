@@ -54,7 +54,7 @@ class ActionlogView extends AffiliateController
 
 		$this->pagination = new Pagination(50);
 
-		$leads_count = LogactionCollection::getActionsCount($this->affiliate_id);
+		$leads_count = LogactionCollection::getActionsCount($this->affiliate_id, $this->collectFilters());
 		$this->pagination->setItemsCount($leads_count);
 
 		$leads = LogactionCollection::getList($this->affiliate_id, $this->collectFilters(), $this->pagination);
