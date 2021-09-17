@@ -21,7 +21,7 @@ class LogactionCollection
                             $where .= ' AND action = ' . $filter;
                             break;
                         case 'smartlink':
-                            $where .= ' AND id = ' . $filter;
+                            $where .= ' AND url_id = ' . $filter;
                             break;
                         case 'offer':
                             $where .= ' AND offer_id = ' . $filter;
