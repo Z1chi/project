@@ -9,7 +9,9 @@
 
                 <div class="box-body">
 
-                    <? if (empty($LIST)): ?>
+                    <? use Ufo\Model\Project;
+
+                    if (empty($LIST)): ?>
                         <p>List is empty.</p>
                     <? else: ?>
 
@@ -48,7 +50,7 @@
 
                                     </td>
                                     <td class="text-center">
-                                        <input type="text" value="<?= $row->getFullUrl() ?>" class="form-control"
+                                        <input type="text" value="<?= $row->getUrlByPattern() ?>" class="form-control"
                                                readonly>
                                     </td>
                                     <td class="text-center hidden-xs">
@@ -112,7 +114,7 @@
                         <div class="form-group">
                             <label>Smartlink offer:</label>
                             <select name="project" class="form-control">
-                                <? /* @var $row \affiliate\model\Project */
+                                <? /* @var $row Project */
                                 foreach ($PROJECTS as $row): ?>
                                     <option value="<?= $row->id ?>"
                                         <? if ($row->id == 1): ?> selected="selected"<? endif; ?>><?= $row->title ?></option>

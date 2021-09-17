@@ -5,9 +5,8 @@ namespace affiliate\view;
 
 use admin\component\Pagination;
 use affiliate\component\Logger;
-use affiliate\model\Project;
 use App;
-use app\collection\Miners;
+use U\collection\Miners;
 use app\component\HashidHelper;
 use affiliate\model\Smartlink;
 use app\model\User;
@@ -16,6 +15,7 @@ use system\components\Url;
 use system\components\Util;
 use system\core\AffiliateController;
 use Ufo\Model\AffiliateUrl;
+use Ufo\Model\Project;
 use Ufo\Service\AffiliateUrlService;
 use Ufo\Service\ProjectService;
 
@@ -48,7 +48,7 @@ class SmartlinksView extends AffiliateController
 		$calls_count = $this->getSmartlinksCount();
 		$this->pagination->setItemsCount($calls_count);
 
-		$subscribers = ( new AffiliateUrlService)->getSmartlinksList($this->affiliate_id, $this->pagination);
+		$subscribers = (new AffiliateUrlService)->getSmartlinksList($this->affiliate_id, $this->pagination);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
 
