@@ -10,6 +10,7 @@ use Ufo\ValueObject\PayoutType;
 /**
  * @property int          id
  *
+ * @property int project_id
  * @property float deposit
  * @property string currency
  *
@@ -60,8 +61,8 @@ final class AffiliateActionLog extends Eloquent
 
     public function save(array $options = [])
     {
-        if (!$this->offer_id) { // todo remove
-            $this->offer_id = 1;
+        if (!$this->project_id) { // todo remove
+            $this->project_id = 1;
         }
         if (!$this->id && $this->deposit && PayoutType::PERCENT === $this->payout_type) { // todo move to service
             $this->payout_amount = $this->deposit / 100 * $this->payout_value;

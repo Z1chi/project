@@ -84,7 +84,7 @@
 				</li>
 
 				<li>
-					<a href="<?=App::createUrl('/offer')?>">
+					<a href="<?=App::createUrl('/project')?>">
 						<i class="fa fa-info"></i> <span>Offer</span>
 					</a>
 				</li>
