@@ -11,7 +11,6 @@ final class RenameOfferIdToProjectIdForAffiliateActionLog extends Migration
     public function up(): void
     {
         $this->schema->table($this->table, function(Blueprint $table) {
-            $table->dropIndex(['offer_id']);
             $table->renameColumn('offer_id', 'project_id');
             $table->index(['project_id']);
         });
