@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Ufo\Service;
 
+use admin\component\Pagination;
 use app\component\HashidHelper;
+use Illuminate\Database\Eloquent\Collection;
 use Ufo\Exception\AffiliateServiceException;
 use Ufo\Model\Affiliate;
 use Ufo\Model\AffiliateUrl;
@@ -50,5 +52,21 @@ final class AffiliateUrlService
         }
 
         return $affiliateUrl;
+    }
+
+    /**
+     * @param int $affiliate_id
+     * @param Pagination|null $pagination
+     * @return Collection
+     */
+    public function getSmartlinksList (int $affiliate_id, Pagination $pagination = null): Collection
+    {
+        $q = AffiliateUrl::where([['deleted', 0],['affiliate_id', $affiliate_id]])
+            ->orderBy('id', 'DESC')
+            ->limit($pagination->getItemsOnPage())
+            ->offset($pagination->getOffset())
+            ->get();
+
+        return $q;
     }
 }

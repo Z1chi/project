@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Ufo\Model;
 
+use app\component\HashidHelper;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ufo\Component\Eloquent\Eloquent;
+use Ufo\Model\Project;
 
 /**
  * @property int id
@@ -48,6 +50,11 @@ final class AffiliateUrl extends Eloquent
         return $this->belongsTo(Affiliate::class, 'affiliate_id');
     }
 
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
     public function getCreatedAtAttribute(): ?\DateTimeImmutable
     {
         $dateTime = (new \DateTimeImmutable())->setTimestamp($this->created);
@@ -60,5 +67,10 @@ final class AffiliateUrl extends Eloquent
         $dateTime = (new \DateTimeImmutable())->setTimestamp($this->updated);
 
         return $dateTime ?: null;
+    }
+
+    public function getFullUrl(): string
+    {
+        return getenv('APP_SCHEME') . '://' . getenv('APP_HOSTNAME') . '/?' . AFFILIATE_URL_GET_KEY . '=' . HashidHelper::encodeSmartlinkId($this->id);
     }
 }
