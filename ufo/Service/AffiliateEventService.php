@@ -101,7 +101,7 @@ final class AffiliateEventService
             'affiliate_id' => $affiliateUrl->affiliate_id,
             'url_id' => $affiliateUrl->id,
             'user_uid' => $userUid,
-            'project_id' => $affiliateUrl->project_id, // todo what for???
+            'project_id' => $affiliateUrl->project_id,
             'action' => AffiliateAction::SIGNUP,
             'created' => time(),
             'ip' => $ip,
