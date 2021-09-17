@@ -19,3 +19,4 @@ define('TBL_AFFILIATE',				'affiliate');
 define('TBL_AFFILIATE_URL',			'affiliate_url');
 define('TBL_AFFILIATE_ACTION_LOG',	'affiliate_action_log');
 define('TBL_AFFILIATE_WITHDRAW',    'affiliate_withdraw');
+define('TBL_PROJECT',    'project');
