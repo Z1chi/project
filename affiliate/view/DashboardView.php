@@ -2,10 +2,10 @@
 
 namespace affiliate\view;
 
-use affiliate\collection\LogactionCollection;
 use app\component\NumbersHelper;
 use system\components\DB;
 use system\core\AffiliateController;
+use Ufo\Service\AffiliateActionLogService;
 
 class DashboardView extends AffiliateController
 {
@@ -24,7 +24,7 @@ class DashboardView extends AffiliateController
 			->row('SELECT * FROM "' . TBL_AFFILIATE .'" WHERE id = ?', $affiliate_id);
 
 //		$leads = LeadsCollection::getList($affiliate_id, null, 10);
-		$actions = LogactionCollection::getList($affiliate_id, null, null, 10);
+		$actions = (new AffiliateActionLogService())->getActions($affiliate_id, null, null, 10);
 
 		$balance_btc = NumbersHelper::formatBtcToOutput($affiliate['balance_btc']);
 		$total_income_btc = NumbersHelper::formatBtcToOutput($affiliate['total_income_btc']);
