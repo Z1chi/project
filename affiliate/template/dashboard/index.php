@@ -129,16 +129,16 @@
 							</tr>
 							</thead>
 							<tbody>
-							<? /* @var $row \affiliate\model\Logaction */ foreach ($ACTIONS as $row): ?>
+							<? /* @var $row \ufo\model\AffiliateActionLog */ foreach ($ACTIONS as $row): ?>
 								<tr>
-									<td class="text-center"><?=$row->getUserUid()?></td>
+									<td class="text-center"><?=$row->user_uid?></td>
 									<td class="text-center"><?=$row->url_title?></td>
 									<td class="text-center"><?=$row->getActionString()?></td>
-									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>
+									<td class="text-center hidden-xs"><?=$row->deposit?> <?=$row->currency?></td>
 									<td class="text-center"><?=$row->getCreatedFormatted()?></td>
 									<td class="text-center hidden-xs"><?=$row->getGeo()?></td>
 									<? if (App::getSession('parent_id') == 0): ?>
-									<td class="text-center"><?=$row->getPayout()?> <?=$row->getCurrency()?></td>
+									<td class="text-center"><?=$row->payout?> <?=$row->currency?></td>
 									<? endif; ?>
 
 								</tr>

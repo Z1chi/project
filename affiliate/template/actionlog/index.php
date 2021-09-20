@@ -5,19 +5,20 @@
         <thead>
         <tr>
             <td style="border:none; font-size: 16px"
-                class="text-center"></td>
+                class="text-center"><?= /** @var array $SUMMARY */
+               $SUMMARY['clicks'] ?></td>
             <td style="border:none; font-size: 16px"
-                class="text-center"><?= number_format($TABLE_FOOTER->getDeposit(), 2, '.', ' ') ?> <?= $TABLE_FOOTER->getCurrency() ?></td>
-            <? if (App::getSession('parent_id') == 0): ?>
-                <td style="border:none; font-size: 16px"
-                    class="text-center"><?= number_format($TABLE_FOOTER->getPayout(), 2, '.', ' ') ?> <?= $TABLE_FOOTER->getCurrency() ?></td>
-            <? endif; ?>
+                class="text-center"><?= $SUMMARY['registrations'] ?></td>
+            <td style="border:none; font-size: 16px"
+                    class="text-center"><?= $SUMMARY['deposits'] ?> |
+                <?= number_format($SUMMARY['sum_deposit'], 2, '.', ' ') ?>
+            </td>
         </tr>
         </thead>
         <tfoot>
         <tr>
 
-            <td style="border:none;" class="text-center "><h3>Click</h3></td>
+            <td style="border:none;" class="text-center "><h3>Clicks</h3></td>
             <td style="border:none;" class="text-center "><h3>Registrations</h3></td>
             <td style="border:none;" class="text-center "><h3>Deposits</h3></td>
 
@@ -112,35 +113,21 @@
 							</tr>
 							</thead>
 							<tbody>
-							<? /* @var $row \affiliate\model\Logaction */ foreach ($LIST as $row): ?>
+							<? /* @var $row \ufo\model\AffiliateActionLog */ foreach ($LIST as $row): ?>
 								<tr>
-									<td class="text-center"><?=$row->getUserUid()?></td>
+									<td class="text-center"><?=$row->used_uid?></td>
 									<td class="text-center"><?=$row->url_title?></td>
 									<td class="text-center"><?=$row->project_title?></td>
 									<td class="text-center"><?=$row->getActionString()?></td>
-									<td class="text-center hidden-xs"><?=number_format($row->getDeposit(), 2, '.', ' ')?> <?=$row->getCurrency()?></td>
+									<td class="text-center hidden-xs"><?=number_format($row->deposit, 2, '.', ' ')?> <?=$row->currency?></td>
 									<td class="text-center"><?=$row->getCreatedFormatted()?></td>
 									<td class="text-center hidden-xs"><?=$row->getGeo()?></td>
 									<? if (App::getSession('parent_id') == 0): ?>
-									<td class="text-center"><?=number_format($row->getPayout(), 2, '.', ' ')?> <?=$row->getCurrency()?></td>
+									<td class="text-center"><?=number_format($row->payout, 2, '.', ' ')?> <?=$row->currency?></td>
 									<? endif; ?>
 								</tr>
 							<? endforeach; ?>
 							</tbody>
-                            <tfoot>
-                            <tr style="background: #ebedf3">
-                                <td class="text-center">-</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center hidden-xs"><?= number_format($TABLE_FOOTER->getDeposit(), 2, '.', ' ') ?> <?= $TABLE_FOOTER->getCurrency() ?></td>
-                                <td class="text-center">-</td>
-                                <td class="text-center hidden-xs">-</td>
-                                <? if (App::getSession('parent_id') == 0): ?>
-                                    <td class="text-center"><?= number_format($TABLE_FOOTER->getPayout(), 2, '.', ' ') ?> <?= $TABLE_FOOTER->getCurrency() ?></td>
-                                <? endif; ?>
-                            </tr>
-                            </tfoot>
                         </table>
 
                     <? endif; ?>
