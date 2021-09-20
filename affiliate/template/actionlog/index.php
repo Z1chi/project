@@ -45,15 +45,15 @@
                         </div>
                         <div class="col-xs-12 col-md-4">
                             <div class="form-group">
-                                <label for="smartlinkInput">Offer</label>
-                                <select class="form-control input-sm js_filter" data-param="offer" id="offerSelect">
+                                <label for="smartlinkInput">Project</label>
+                                <select class="form-control input-sm js_filter" data-param="project" id="projectSelect">
                                     <option value="">All</option>
-                                    <?php /** @var \Ufo\Model\Project[] $OFFERS
-                                     * @var int $FILTER_OFFER_ID
+                                    <?php /** @var \Ufo\Model\Project[] $PROJECTS
+                                     * @var int $FILTER_PROJECT_ID
                                      */
-                                    foreach ($OFFERS as $key => $obj): ?>
+                                    foreach ($PROJECTS as $key => $obj): ?>
                                         <option value="<?= $obj->id ?>"<?php
-                                        if ($FILTER_OFFER_ID == $obj->id):?> selected="selected"<?php endif; ?>><?= $obj->title ?></option>
+                                        if ($FILTER_PROJECT_ID == $obj->id):?> selected="selected"<?php endif; ?>><?= $obj->title ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -72,7 +72,7 @@
 							<tr>
 								<th class="text-center">User ID</th>
 								<th class="text-center">Smart link</th>
-								<th class="text-center">Offer</th>
+								<th class="text-center">Project</th>
 								<th class="text-center">Action</th>
 								<th class="text-center hidden-xs">Deposit</th>
 								<th class="text-center">Datetime</th>
@@ -87,7 +87,7 @@
 								<tr>
 									<td class="text-center"><?=$row->getUserUid()?></td>
 									<td class="text-center"><?=$row->url_title?></td>
-									<td class="text-center"><?=$row->offer_title?></td>
+									<td class="text-center"><?=$row->project_title?></td>
 									<td class="text-center"><?=$row->getActionString()?></td>
 									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>
 									<td class="text-center"><?=$row->getCreatedFormatted()?></td>

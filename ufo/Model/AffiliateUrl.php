@@ -20,6 +20,7 @@ use Ufo\Model\Project;
  * @property null|string iframe_conversion
  * @property null|string iframe_lead
  * @property Affiliate affiliate
+ * @property Project project
  */
 final class AffiliateUrl extends Eloquent
 {
@@ -72,5 +73,16 @@ final class AffiliateUrl extends Eloquent
     public function getFullUrl(): string
     {
         return getenv('APP_SCHEME') . '://' . getenv('APP_HOSTNAME') . '/?' . AFFILIATE_URL_GET_KEY . '=' . HashidHelper::encodeSmartlinkId($this->id);
+    }
+
+    public function getUrlByPattern(): string
+    {
+        $res = 'no data';
+        if ($this->project->url_pattern) {
+            if ($this->affiliate->user_uid) {
+                $res = sprintf($this->project->url_pattern, HashidHelper::encodeSmartlinkId($this->affiliate->user_uid));
+            }
+        }
+        return $res;
     }
 }
