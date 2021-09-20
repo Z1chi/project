@@ -61,13 +61,12 @@
                         </div>
                         <div class="col-xs-12 col-md-4">
                             <div class="form-group">
-                                <label>Period:</label>
+                                <label>Period</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input value="<?= $DATES ?>" type="text"
-                                           class="form-control pull-right js_date_range">
+                                        <input style="max-height: 30px" value="<?=$DATES?>" type="text" class="form-control pull-right js_date_range">
                                 </div>
                             </div>
                         </div>
@@ -86,10 +85,8 @@
                                 </select>
                             </div>
                         </div>
-
-
-                    </div>
-                </div>
+					</div>
+				</div>
 
                 <div class="box-body">
 
