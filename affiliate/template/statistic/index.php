@@ -57,7 +57,7 @@
                                                                                           aria-hidden="true"></i></th>
                                 <th rowspan="2">Unique clicks <i style="display:none;" class="fa fa-arrows-v" aria-hidden="true"></i></th>
                                 <th rowspan="2">Deposit <i style="display:none;" class="fa fa-arrows-v" aria-hidden="true"></i></th>
-                                <!--                            <th rowspan="2">EPC <i style="display:none;"class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
+                                <th rowspan="2">EPC <i style="display:none;" class="fa fa-arrows-v" aria-hidden="true"></i></th>
                                 <!--                            <th rowspan="2">CPA <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
                                 <!--                            <th rowspan="2">%CR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
                                 <!--                            <th rowspan="2">%SR <i class="fa fa-arrows-v" aria-hidden="true"></i></th>-->
@@ -89,7 +89,7 @@
                                     <td><?php echo $row['clicks']; ?></td>
                                     <td><?php echo $row['unique_clicks']; ?></td>
                                     <td><?php echo $row['sum_deposit']; ?></td>
-                                    <!--                                <td>--><?php // echo $row['epc']; ?><!--</td>-->
+                                    <td><?php  echo $row['epc']; ?></td>
                                     <!--                            <td>6</td>-->
                                     <!--                            <td>7</td>-->
                                     <!--                            <td>8</td>-->
@@ -111,7 +111,7 @@
                                     echo $SUM_ROW['clicks']; ?></th>
                                 <th class="bold"><?php echo $SUM_ROW['unique_clicks']; ?></th>
                                 <th class="bold"><?php echo $SUM_ROW['sum_deposit']; ?></th>
-                                <!--                            <th class="bold">--><?php // echo $SUM_ROW['epc']; ?><!--</th>-->
+                                <th class="bold"><?php echo $SUM_ROW['epc']; ?></th>
                                 <!--                            <th class="bold">800</th>-->
                                 <!--                            <th class="bold">47%</th>-->
                                 <!--                            <th class="bold">0%</th>-->
