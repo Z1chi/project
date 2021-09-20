@@ -1,3 +1,8 @@
+<?php
+
+use app\controller\Affiliate;
+
+?>
 <section class="content-header">
     <h1 style="margin-bottom: 20px">Action log</h1>
     <table class="table">
@@ -40,9 +45,9 @@
                                 <label for="actionInput">Action</label>
                                 <select class="form-control input-sm js_filter" data-param="action" id="actionInput">
                                     <option value="">All</option>
-                                    <? foreach ($ACTION_TYPES as $key => $str): ?>
-                                        <option value="<?= $key ?>"<? if ($FILTER_ACTION == $key): ?> selected="selected"<? endif; ?>><?= $str ?></option>
-                                    <? endforeach; ?>
+                                    <?php foreach ($ACTION_TYPES as $key => $str): ?>
+                                        <option value="<?= $key ?>"<?php if ($FILTER_ACTION == $key): ?> selected="selected"<?php endif; ?>><?= $str ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -53,9 +58,14 @@
                                 <select class="form-control input-sm js_filter" data-param="smartlink"
                                         id="smartlinkInput">
                                     <option value="">All</option>
-                                    <? foreach ($SMARTLINKS as $key => $obj): ?>
-                                        <option value="<?= $obj->getId() ?>"<? if ($FILTER_SMARTLINK_ID == $obj->getId()): ?> selected="selected"<? endif; ?>><?= $obj->getTitle() ?></option>
-                                    <? endforeach; ?>
+                                    <?php /** @var \affiliate\model\Smartlink $SMARTLINKS */
+                                    /** @var int $FILTER_SMARTLINK_ID */
+                                    foreach ($SMARTLINKS as $key => $obj): ?>
+                                        <option value="<?= $obj->getId() ?>"
+                                            <?php if ($FILTER_SMARTLINK_ID == $obj->getId()): ?> selected="selected"<?php endif; ?>>
+                                            <?= $obj->getTitle() ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -66,7 +76,8 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                        <input style="max-height: 30px" value="<?=$DATES?>" type="text" class="form-control pull-right js_date_range">
+                                    <input style="max-height: 30px" value="<?= /** @var string $DATES */
+                                        $DATES?>" type="text" class="form-control pull-right js_date_range">
                                 </div>
                             </div>
                         </div>
@@ -90,9 +101,9 @@
 
                 <div class="box-body">
 
-                    <? if (empty($LIST)): ?>
+                    <?php if (empty($LIST)): ?>
                         <p>List is empty.</p>
-                    <? else: ?>
+                    <?php else: ?>
 
 						<table class="table table-bordered table-hover">
 							<thead>
@@ -104,30 +115,44 @@
 								<th class="text-center hidden-xs">Deposit</th>
 								<th class="text-center">Datetime</th>
 								<th class="text-center hidden-xs">GEO</th>
-								<? if (App::getSession('parent_id') == 0): ?>
+                                <?php if (App::getSession('parent_id') == 0): ?>
 								<th class="text-center">Payout</th>
-								<? endif; ?>
+                                <?php endif; ?>
 							</tr>
 							</thead>
 							<tbody>
-							<? /* @var $row \ufo\model\AffiliateActionLog */ foreach ($LIST as $row): ?>
+                            <?php /* @var $row \ufo\model\AffiliateActionLog */ foreach ($LIST as $row): ?>
+                                <?php
+                                $action = '';
+                                switch ($row->action) {
+                                    case Affiliate::ACTION_CLICK:
+                                        $action =  'Click';
+                                        break;
+                                    case Affiliate::ACTION_SIGNUP:
+                                        $action = '<span class="text-orange">Sign up</span>';
+                                        break;
+                                    case Affiliate::ACTION_DEPOSIT:
+                                        $action = '<strong class="text-green">Deposit</strong>';
+                                        break;
+                                }
+                                ?>
 								<tr>
-									<td class="text-center"><?=$row->used_uid?></td>
+									<td class="text-center"><?=$row->user_uid?></td>
 									<td class="text-center"><?=$row->url_title?></td>
 									<td class="text-center"><?=$row->project_title?></td>
-									<td class="text-center"><?=$row->getActionString()?></td>
+									<td class="text-center"><?=$action?></td>
 									<td class="text-center hidden-xs"><?=number_format($row->deposit, 2, '.', ' ')?> <?=$row->currency?></td>
-									<td class="text-center"><?=$row->getCreatedFormatted()?></td>
-									<td class="text-center hidden-xs"><?=$row->getGeo()?></td>
-									<? if (App::getSession('parent_id') == 0): ?>
+									<td class="text-center"><?=date('d.m.Y, H:i', $row->created)?></td>
+									<td class="text-center hidden-xs"><?=$row->geo ?? 'Unknown' ?></td>
+                                    <?php if (App::getSession('parent_id') == 0): ?>
 									<td class="text-center"><?=number_format($row->payout, 2, '.', ' ')?> <?=$row->currency?></td>
-									<? endif; ?>
+                                    <?php endif; ?>
 								</tr>
-							<? endforeach; ?>
+                            <?php endforeach; ?>
 							</tbody>
                         </table>
 
-                    <? endif; ?>
+                    <?php endif; ?>
                 </div>
 
                 <?= $PAGES ?>
