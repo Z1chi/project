@@ -100,7 +100,7 @@ class AffiliateStatisticRepository
                             ELSE null
                     END                                                      AS EPC
             FROM '.$table.' aal
-                JOIN (
+                LEFT JOIN (
                     SELECT user_id, created_dt FROM '.$table.' 
                     WHERE action = 1 
                     '.$andWhere.'
@@ -128,7 +128,7 @@ class AffiliateStatisticRepository
                         ELSE null
                 END                                                      AS EPC
                 FROM '.$table.' aal_footer
-                JOIN (SELECT user_id, created_dt FROM '.$table.' 
+                LEFT JOIN (SELECT user_id, created_dt FROM '.$table.' 
                         WHERE action = 1 and affiliate_id = 1  '.$andWhere.'
                 GROUP BY created_dt, user_id) unique_click_table_footer
                   ON aal_footer.created_dt = unique_click_table_footer.created_dt
