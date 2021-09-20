@@ -87,7 +87,7 @@ class AffiliateStatisticRepository
                     SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END)  AS clicks,
                     COUNT(DISTINCT unique_click_table.user_id)  AS unique_clicks,
-                    CAST(COUNT(CASE WHEN aal.action  = 3 THEN 1 END) as decimal) / 
+                    SUM(deposit) / 
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END) AS EPC 
             FROM '.$table.' aal
                 JOIN (
@@ -105,7 +105,7 @@ class AffiliateStatisticRepository
                 SELECT NULL as created_dt, SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) as clicks,
                     COUNT(DISTINCT unique_click_table_footer.user_id)  AS unique_clicks,
-                    CAST(COUNT(CASE WHEN aal_footer.action  = 3 THEN 1 END) as decimal) /
+                    SUM(deposit) /
                         COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) AS EPC
                 FROM '.$table.' aal_footer
                 JOIN (SELECT user_id, created_dt FROM '.$table.' 
