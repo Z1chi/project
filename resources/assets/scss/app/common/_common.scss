@@ -423,7 +423,7 @@ p {
         height: $border_height_default;
         background: #111;
         bottom: -0.5rem;
-        left: calc(50% - #{$line_width/2});
+        left: calc(50% - #{list.join($line_width, 2) });
         width: $line_width;
     }
 

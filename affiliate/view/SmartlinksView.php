@@ -14,6 +14,10 @@ use system\components\DB;
 use system\components\Url;
 use system\components\Util;
 use system\core\AffiliateController;
+use Ufo\Model\AffiliateUrl;
+use Ufo\Model\Project;
+use Ufo\Service\AffiliateUrlService;
+use Ufo\Service\ProjectService;
 
 class SmartlinksView extends AffiliateController
 {
@@ -44,12 +48,13 @@ class SmartlinksView extends AffiliateController
 		$calls_count = $this->getSmartlinksCount();
 		$this->pagination->setItemsCount($calls_count);
 
-		$subscribers = Smartlink::getSmartlinksList($this->affiliate_id, $this->pagination);
+		$subscribers = (new AffiliateUrlService)->getSmartlinksList($this->affiliate_id, $this->pagination);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
 
 		$this->pushTemplateData([
 			'LIST' => $subscribers,
+			'PROJECTS' => (new ProjectService())->getProjectsForFilter(),
 			'PAGES' => $pages,
 			'QUERY' => $this->query
 		]);
@@ -138,7 +143,7 @@ class SmartlinksView extends AffiliateController
 			'iframe_lead' => Util::sanitize($_POST['iframe_lead'], null),
 			'affiliate_id' => $this->affiliate_id,
 			'created' => time(),
-			'project_id' => 1 // todo hardcode
+			'project_id' => Util::sanitize($_POST['project']),
 		];
 
 		if (mb_strlen($data['title']) < 3)
@@ -146,10 +151,14 @@ class SmartlinksView extends AffiliateController
 			$this->jsonErrorData(['title' => 'The title is too short.']);
 		}
 
-		DB::getInstance()
-			->insert(
-				TBL_AFFILIATE_URL, $data
-			);
+        $model = new AffiliateUrl();
+        $model->title = Util::sanitize($_POST['title']);
+        $model->iframe_conversion = Util::sanitize($_POST['iframe_conversion'], null);
+        $model->iframe_lead = Util::sanitize($_POST['iframe_lead'], null);
+        $model->affiliate_id = $this->affiliate_id;
+        $model->created = time();
+        $model->project_id = Util::sanitize($_POST['project']);
+        $model->save();
 
 		Logger::write(Logger::$ACTION_URL_CREATE, $data);
 

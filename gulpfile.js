@@ -5,7 +5,6 @@ const gulp           = require('gulp'),
     minifyCss        = require('gulp-minify-css'),
     autoprefixer     = require('gulp-autoprefixer'),
     stripCssComments = require('gulp-strip-css-comments'),
-    sass             = require('gulp-sass'),
     browserify       = require('browserify'),
     browserSync      = require('browser-sync'),
     sourcemaps       = require('gulp-sourcemaps'),
@@ -14,7 +13,9 @@ const gulp           = require('gulp'),
     concat           = require('gulp-concat'),
 	edit             = require('gulp-edit'),
 	merge            = require('merge-stream'),
+	sass        = require('gulp-sass')(require('sass')),
 	size 			 = require('gulp-size');
+
 
 const cfg = {
     env: 'dev',
@@ -151,6 +152,7 @@ gulp.task('compile_affiliate_scss', function () {
 		'./node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css',
 		'./node_modules/admin-lte/bower_components/font-awesome/css/font-awesome.min.css',
 		'./node_modules/admin-lte/bower_components/Ionicons/css/ionicons.min.css',
+		'./node_modules/admin-lte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css',
 		'./node_modules/admin-lte/dist/css/AdminLTE.min.css',
 		'./node_modules/admin-lte/dist/css/skins/skin-blue.css',
 		'./node_modules/admin-lte/plugins/pace/pace.min.css',
