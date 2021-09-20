@@ -19,7 +19,7 @@
     "gulp-edit": "0.0.x",
     "gulp-minify-css": "1.2.x",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^3.1.0",
+    "gulp-sass": "^5.0.0",
     "gulp-size": "^3.0.0",
     "gulp-sourcemaps": "2.6.x",
     "gulp-strip-css-comments": "1.2.x",
@@ -48,13 +48,14 @@
     "jquery.scrollto": "^2.1.2",
     "js-cookie": "^2.2.1",
     "moment": "^2.29.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.1",
     "pure-svg-code": "^1.0.6",
     "qrcode-svg": "^1.0.0",
+    "sass": "^1.39.2",
     "satoshi-bitcoin": "^1.0.4",
     "scrollreveal": "^4.0.7",
     "select2": "^4.0.10",
-    "swiper": "^4.5.0"
+    "swiper": "^7.0.5"
   }
 }
 
