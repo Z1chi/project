@@ -48,7 +48,7 @@
 
                                     </td>
                                     <td class="text-center">
-                                        <input type="text" value="<?= $row->getUrlByPattern() ?>" class="form-control"
+                                        <input style="<?=$row->getUrlByPattern() == 'no data' ? "opacity: 0.3; text-align: center; vertical-align: middle" : ''?>" type="text" value="<?= $row->getUrlByPattern() ?>" class="form-control"
                                                readonly>
                                     </td>
                                     <td class="text-center hidden-xs">
