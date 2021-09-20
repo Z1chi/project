@@ -61,7 +61,6 @@ class ActionlogView extends AffiliateController
         $summary = $affiliateActionLogService->getSummary($this->affiliate_id, $this->collectFilters(), $this->pagination);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
-
 		$this->pushTemplateData([
 			'LIST' => $leads,
 			'SUMMARY' => $summary,
