@@ -18,8 +18,8 @@ class AffiliateStatisticRepository
             foreach ($filters as $key => $filter) {
                 if (!empty($filter)) {
                     switch ($key) {
-                        case 'offer':
-                            $q .= ' AND offer_id = ' . Util::sanitize($filter);
+                        case 'project':
+                            $q .= ' AND project_id = ' . Util::sanitize($filter);
                             break;
                         case 'smartlink':
                             $q .= ' AND url_id = ' . Util::sanitize($filter);
@@ -55,7 +55,7 @@ class AffiliateStatisticRepository
             foreach ($filters as $key => $filter) {
                 if (!empty($filter)) {
                     switch ($key) {
-                        case 'offer':
+                        case 'project':
                             $q .= ' AND project_id = ' . Util::sanitize($filter);
                             break;
                         case 'smartlink':
@@ -71,7 +71,7 @@ class AffiliateStatisticRepository
 
         $orderByStr = ' ';
         if(!empty($orderBy)) {
-            $orderByStr = "ORDER BY {$orderBy['field']} {$orderBy['direction']}";
+            $orderByStr = 'ORDER BY '. $orderBy['field'] . ' ' .$orderBy['direction'];
         }
 
         $offsetLimit = ' ';
@@ -87,7 +87,6 @@ class AffiliateStatisticRepository
                     SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END)  AS clicks,
                     COUNT(DISTINCT unique_click_table.user_id)  AS unique_clicks,
-                    --COUNT(CASE WHEN aal.action  = 3 THEN 1 END) AS deposits,
                     CAST(COUNT(CASE WHEN aal.action  = 3 THEN 1 END) as decimal) / 
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END) AS EPC 
             FROM '.$table.' aal
@@ -106,7 +105,6 @@ class AffiliateStatisticRepository
                 SELECT NULL as created_dt, SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) as clicks,
                     COUNT(DISTINCT unique_click_table_footer.user_id)  AS unique_clicks,
-                    --COUNT(CASE WHEN aal.action  = 3 THEN 1 END) AS deposits,
                     CAST(COUNT(CASE WHEN aal_footer.action  = 3 THEN 1 END) as decimal) /
                         COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) AS EPC
                 FROM '.$table.' aal_footer

@@ -31,9 +31,9 @@
                 <!--                </div>-->
 
                 <div class="box-body">
-                    <? if (empty($LIST)): ?>
+                    <?php if (empty($LIST)): ?>
                         <p>List is empty.</p>
-                    <? else: ?>
+                    <?php else: ?>
 
                         <table id="tableStatistics" class="table table-bordered table-hover table-striped">
                             <thead>
@@ -83,13 +83,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <? foreach ($LIST as $row):?>
+                            <?php foreach ($LIST as $row):?>
                                 <tr>
-                                    <td><? echo $row['created_dt']; ?></td>
-                                    <td><? echo $row['clicks']; ?></td>
-                                    <td><? echo $row['unique_clicks']; ?></td>
-                                    <td><? echo $row['sum_deposit']; ?></td>
-                                    <!--                                <td>--><?// echo $row['epc']; ?><!--</td>-->
+                                    <td><?php echo $row['created_dt']; ?></td>
+                                    <td><?php echo $row['clicks']; ?></td>
+                                    <td><?php echo $row['unique_clicks']; ?></td>
+                                    <td><?php echo $row['sum_deposit']; ?></td>
+                                    <!--                                <td>--><?php // echo $row['epc']; ?><!--</td>-->
                                     <!--                            <td>6</td>-->
                                     <!--                            <td>7</td>-->
                                     <!--                            <td>8</td>-->
@@ -102,15 +102,16 @@
                                     <!--                            <td>15</td>-->
                                     <!--                            <td>16</td>-->
                                 </tr>
-                            <? endforeach;?>
+                            <?php endforeach;?>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th class="bold">--</th>
-                                <th class="bold"><? echo $SUM_ROW['clicks']; ?></th>
-                                <th class="bold"><? echo $SUM_ROW['unique_clicks']; ?></th>
-                                <th class="bold"><? echo $SUM_ROW['sum_deposit']; ?></th>
-                                <!--                            <th class="bold">--><?// echo $SUM_ROW['epc']; ?><!--</th>-->
+                                <th class="bold"><?php /** @var array $SUM_ROW */
+                                    echo $SUM_ROW['clicks']; ?></th>
+                                <th class="bold"><?php echo $SUM_ROW['unique_clicks']; ?></th>
+                                <th class="bold"><?php echo $SUM_ROW['sum_deposit']; ?></th>
+                                <!--                            <th class="bold">--><?php // echo $SUM_ROW['epc']; ?><!--</th>-->
                                 <!--                            <th class="bold">800</th>-->
                                 <!--                            <th class="bold">47%</th>-->
                                 <!--                            <th class="bold">0%</th>-->
@@ -126,7 +127,7 @@
                             </tfoot>
                         </table>
 
-                    <?endif;?>
+                    <?php endif;?>
 
                 </div>
 
