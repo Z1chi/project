@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
-                <div class="center-block" style="margin-bottom: 20px; max-width: 720px; max-height: 480px">
+                <div class="center-block" style="margin-top: 20px; max-width: 720px; max-height: 480px">
                     <img class="img-responsive" src="/assets_admin/img/1920x1080-px-BMW-BMW-E36-car-681106.jpg"
                          alt="Site preview">
                     <br>
