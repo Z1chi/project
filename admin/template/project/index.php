@@ -30,18 +30,26 @@ use Ufo\Model\Project;
                             $project = $affiliate->project;
                             if (!empty($project)): ?>
                                 <tr>
-                                    <td class="text-center">
-                                        <img src="<?= $project->img ?>" alt="" style="">
+                                    <td style="width: 50%">
+                                        <div
+                                                style="max-width: 100%;">
+                                            <img
+                                                    style="width: 100%"
+                                                    src="<?= $project->title ?>"
+                                                    alt="Preview site image">
+                                        </div>
+
                                     </td>
-                                    <td class="text-center">
-                                       <?= $project->title ?>
+                                    <td style="vertical-align:middle" class="text-center">
+                                        <?= $project->title ?>
                                     </td>
-                                    <td class="text-center">
+                                    <td style="vertical-align:middle" class="text-center">
                                         <?= $project->getUrlHost() ?>
                                     </td>
-                                    <td>
-                                        <a href="<?= Url::create("project",$project->id)?>" target="_blank">
-                                            <button class="button button-success"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    <td class="text-center" style="width: 3%; vertical-align:middle">
+                                        <a href="<?= Url::create("project", $project->id) ?>" target="_blank">
+                                            <button class="button button-success"><i class="fa fa-eye"
+                                                                                     aria-hidden="true"></i></button>
                                         </a>
                                     </td>
                                 </tr>
