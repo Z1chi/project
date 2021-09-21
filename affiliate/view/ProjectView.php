@@ -22,22 +22,4 @@ class ProjectView extends AffiliateController
 
 		$this->pushTemplateData($data);
 	}
-
-    public function viewAction()
-    {
-        $project_id = explode('/', $_SERVER['REQUEST_URI'])[3] ?? null;
-        if(empty($project_id) || !is_numeric($project_id)) {
-            throw new WrongRouteException();
-        }
-
-        $project = Project::find($project_id);
-
-        if(empty($project)) {
-            throw new WrongRouteException("No such offer");
-        }
-
-        $this->pushTemplateData([
-            'TEST' => $project
-        ]);
-    }
 }

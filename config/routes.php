@@ -18,6 +18,13 @@ define('ROUTES', serialize([
 			'action' => 'index',
 		]
 	],
+    [
+        'match' => '^(?P<module>(' . getenv('APP_ADMIN_PATH') . '))/?(?P<viewcontroller>[a-z-]{3,}+)/([0-9]+)$',
+        'route' => [
+            'module' => ADMIN_MODULE_NAME,
+            'action' => 'view'
+        ]
+    ],
 	[
 		'match' => '^(?P<module>(' . getenv('APP_ADMIN_PATH') . '))/?(?P<viewcontroller>[a-z-]{3,}+)/?(?P<action>[a-z-]+)?$',
 		'route' => [
@@ -35,13 +42,6 @@ define('ROUTES', serialize([
 			'action' => 'index',
 		]
 	],
-    [
-        'match' => '^(?P<module>(' . getenv('APP_AFFILIATE_PATH') . '))/?(?P<viewcontroller>[a-z-]{3,}+)/([0-9]+)$',
-        'route' => [
-            'module' => AFFILIATE_MODULE_NAME,
-            'action' => 'view'
-        ]
-    ],
 	[
 		'match' => '^(?P<module>(' . getenv('APP_AFFILIATE_PATH') . '))/?(?P<viewcontroller>[a-z-]{3,}+)/?(?P<action>[a-z-]+)?$',
 		'route' => [

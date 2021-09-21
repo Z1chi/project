@@ -21,4 +21,14 @@ final class Project extends Eloquent
     protected $casts = [
         'accessed_at' => 'datetime',
     ];
+
+    /**
+     * Get host from url_pattern field
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return parse_url($this->url_pattern, PHP_URL_HOST);
+    }
+
 }
