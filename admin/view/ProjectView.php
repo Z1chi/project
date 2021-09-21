@@ -19,6 +19,7 @@ class ProjectView extends AdminController
     {
         $pagination = new Pagination();
         $projectService = new ProjectService();
+        $this->setMetaTitle('Offers');
 
         $projects_count = $projectService->getProjectsCount();
         $pagination->setItemsCount($projects_count);
@@ -36,7 +37,7 @@ class ProjectView extends AdminController
         if(empty($project_id) || !is_numeric($project_id)) {
             throw new WrongRouteException();
         }
-
+        $this->setMetaTitle('View offer');
         $project = Project::find($project_id);
 
         if(empty($project)) {
