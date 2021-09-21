@@ -26,8 +26,7 @@
                         <tr>
                             <td class="text-bold" style="min-width: 30%">Url</td>
                             <td><?= $PROJECT->url_pattern ?></td>
-                        </tr>s
-
+                        </tr>
                         <tr>
                             <td class="text-bold">Token</td>
                             <td><?= $PROJECT->token ?></td>
