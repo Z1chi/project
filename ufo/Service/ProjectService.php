@@ -19,7 +19,7 @@ final class ProjectService
      * @param Pagination $pagination
      * @return Collection Collection with Project
      */
-    public function getProjectsList(Pagination $pagination = null, int $limit = null): Collection
+    public function getAffiliatesWithProject(Pagination $pagination = null, int $limit = null): Collection
     {
         if (!empty($pagination)) {
             $limit = $pagination->getItemsOnPage();
@@ -34,17 +34,10 @@ final class ProjectService
     }
 
     /**
-     * @return Project []
+     * @return Collection Projects Collection
      */
-    public function getProjectsForFilter(): array
+    public function getProjectsForFilter(): Collection
     {
-        $projectsCollection = Project::get(['id', 'title']);
-        $projects = [];
-
-        $projectsCollection->each(function ($project) use (&$projects){
-            $projects[] = $project;
-        });
-
-        return $projects;
+        return Project::select(['id', 'title'])->orderBy('title')->get();
     }
 }
