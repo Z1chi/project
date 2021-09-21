@@ -26,7 +26,7 @@ class ProjectView extends AdminController
         $projects = $projectService->getProjectsList($pagination);
 
         $this->pushTemplateData([
-            'PROJECTS' => $projects
+            'LIST' => $projects
         ]);
     }
 
@@ -40,7 +40,7 @@ class ProjectView extends AdminController
         $project = Project::find($project_id);
 
         if(empty($project)) {
-            throw new WrongRouteException("No such offer");
+            throw new WrongRouteException("There is no such offer");
         }
 
         $this->pushTemplateData([

@@ -1,10 +1,13 @@
-<section class="content">
+<?php
+/** @var \Ufo\Model\Project $PROJECT */
 
+?>
+<section class="content">
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="center-block" style="margin-top: 20px; max-width: 720px; max-height: 480px">
-                    <img class="img-responsive" src="/assets_admin/img/1920x1080-px-BMW-BMW-E36-car-681106.jpg"
+                    <img class="img-responsive" src="<?= $PROJECT->img ?>"
                          alt="Site preview">
                     <br>
                     <p class="text-center">Site preview</p>
@@ -17,14 +20,29 @@
                     <table class="table table-bordered table-striped table-hover" style="width: 100%">
                         <tbody>
                         <tr>
-                            <td style="min-width: 30%">Website</td>
-                            <td class="text-bold">Site Name</td>
+                            <td class="text-bold">Title</td>
+                            <td><?= $PROJECT->title ?></td>
                         </tr>
                         <tr>
-                            <td>Url</td>
-                            <td class="text-bold">http://localhost:3003</td>
+                            <td class="text-bold" style="min-width: 30%">Url</td>
+                            <td><?= $PROJECT->url_pattern ?></td>
                         </tr>
-
+                        <tr>
+                            <td class="text-bold">Token</td>
+                            <td><?= $PROJECT->token ?></td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">Created At</td>
+                            <td><?= $PROJECT->created_at ?></td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">Updated At</td>
+                            <td><?= $PROJECT->updated_at ?></td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">Accessed At</td>
+                            <td><?= $PROJECT->accessed_at ?></td>
+                        </tr>
                         </tbody>
 
                     </table>

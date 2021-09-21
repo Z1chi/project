@@ -70,4 +70,9 @@ final class Affiliate extends Eloquent
     {
         return $this->belongsTo(Affiliate::class, 'affiliate_id');
     }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 }
