@@ -13,11 +13,13 @@
                         <br>
                         <input type="email" name="email" class="form-control" value="" placeholder="john.d@email.com">
                         <br>
-                        <input type="password" name="newPassword" class="form-control" value="" placeholder="image.png">
+                        <input type="password" name="oldPassword" class="form-control" value="" placeholder="oldPassword">
                         <br>
-                        <input type="password" name="confirmPassword" class="form-control" value="" placeholder="">
+                        <input type="password" name="newPassword" class="form-control" value="" placeholder="newPassword">
                         <br>
-                        <input type="text" name="wallet" class="form-control" value="" placeholder="233EGg23g2gsgg3ag3">
+                        <input type="password" name="confirmPassword" class="form-control" value="" placeholder="confirmPassword">
+                        <br>
+                        <input type="text" name="wallet" class="form-control" value="" placeholder="wallet">
                         <br>
                         <input type="text" name="telegram" class="form-control" value="" placeholder="telegram">
                         <br>
