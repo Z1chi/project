@@ -25,24 +25,24 @@ class ProfileView extends AffiliateController
     public function ajaxUpdate()
     {
         $oldPasswordHash = Affiliate::find($_SESSION[SESSION_KEY_CURRENT]['id'])->password;
-        $notValidOldPassword = !password_verify(Util::sanitize($_POST['old_password']), $oldPasswordHash);
+        $notValidOldPassword = !password_verify(Util::sanitize($_POST['oldPassword']), $oldPasswordHash);
 
         if ($notValidOldPassword)
         {
-            $this->jsonErrorData(['old_password' => 'Password is incorrect']);
+            $this->jsonErrorData(['oldPassword' => 'Password is incorrect']);
         }
 
-        $img_name = basename($_FILES["img"]["name"]);
-        $new_name = Upload::ajaxUploadImage($img_name, null, '/public/assets_affiliate');
+        $imgName = basename($_FILES["img"]["name"]);
+        $newName = Upload::ajaxUploadImage($imgName, null, '/public/assets_affiliate');
 
         $data = [
             'wallet' => Util::sanitize($_POST['wallet']),
-            'img' => '/public/assets_affiliate/'.$new_name,
+            'img' => '/public/assets_affiliate/'.$newName,
             'email' => Util::sanitize($_POST['email']),
-            'password' => password_hash(Util::sanitize($_POST['new_password']), PASSWORD_BCRYPT),
+            'password' => password_hash(Util::sanitize($_POST['newPassword']), PASSWORD_BCRYPT),
             'telegram' => Util::sanitize($_POST['telegram']),
-            'first_name' => Util::sanitize($_POST['first_name']),
-            'last_name' => Util::sanitize($_POST['last_name']),
+            'first_name' => Util::sanitize($_POST['firstName']),
+            'last_name' => Util::sanitize($_POST['lastName']),
         ];
 
         $isUpdated = Affiliate::update($data);
