@@ -1,13 +1,13 @@
 import {Controller} from "../../core/Controller";
 import { Util } from "../../lib/Util";
 import $ from "jquery";
+import "jquery-validation";
 
 export class Profile extends Controller {
     init() {
         super.init();
 
         this.initChange();
-        this.initDelete();
     }
 
     initChange() {

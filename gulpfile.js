@@ -180,7 +180,9 @@ gulp.task('compile_affiliate_es6', function ()
 		// './node_modules/admin-lte/bower_components/ckeditor/ckeditor.js',
 		'./node_modules/admin-lte/bower_components/PACE/pace.min.js',
 		'./node_modules/admin-lte/bower_components/moment/min/moment.min.js',
+		'./node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.js',
 		'./node_modules/select2/dist/js/select2.js',
+		// './node_modules/jquery-validation/dist/jquery.validate.js',
 		// './node_modules/admin-lte/plugins/iCheck/icheck.min.js'
 	])
 		.pipe(isProduction ? uglify() : util.noop());

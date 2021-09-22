@@ -5,23 +5,40 @@
 
                 <div class="box-body">
                     <form style="max-width: 720px" method="post" class="js_profile_changes">
-                        <input type="file" name="img" class="form-control text-center" value="" placeholder="image.png">
+                        <label for="img">Profile avatar</label>
+                        <input type="file" id="img" name="img" class="form-control text-center" value=""
+                               placeholder="image.png">
                         <br>
-                        <input type="text" name="firstName" class="form-control" value="" placeholder="John">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" value=""
+                               placeholder="John">
                         <br>
-                        <input type="text" name="lastName" class="form-control" value="" placeholder="Deer">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" value=""
+                               placeholder="Deer">
                         <br>
-                        <input type="email" name="email" class="form-control" value="" placeholder="john.d@email.com">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value=""
+                               placeholder="john.d@email.com">
                         <br>
-                        <input type="password" name="oldPassword" class="form-control" value="" placeholder="oldPassword">
+                        <label for="oldPassword">Old password</label>
+                        <input type="password" id="oldPassword" name="oldPassword" class="form-control" value=""
+                               placeholder="oldPassword">
                         <br>
-                        <input type="password" name="newPassword" class="form-control" value="" placeholder="newPassword">
+                        <label for="newPassword">New password</label>
+                        <input type="password" id="newPassword" name="newPassword" class="form-control" value=""
+                               placeholder="newPassword">
                         <br>
-                        <input type="password" name="confirmPassword" class="form-control" value="" placeholder="confirmPassword">
+                        <label for="confirmPassword">Confirm password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" value=""
+                               placeholder="confirmPassword">
                         <br>
-                        <input type="text" name="wallet" class="form-control" value="" placeholder="wallet">
+                        <label for="wallet">BTC wallet</label>
+                        <input type="text" id="wallet" name="wallet" class="form-control" value="" placeholder="wallet">
                         <br>
-                        <input type="text" name="telegram" class="form-control" value="" placeholder="telegram">
+                        <label for="telegram">Telegram</label>
+                        <input type="text" id="telegram" name="telegram" class="form-control" value=""
+                               placeholder="telegram">
                         <br>
                         <button type="submit" class="btn btn-success btn-sm js_admin_add_button">Save</button>
                     </form>
