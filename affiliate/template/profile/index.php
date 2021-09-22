@@ -1,3 +1,7 @@
+<?php
+/** @var \Ufo\Model\Affiliate $AFFILIATE */
+
+?>
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
