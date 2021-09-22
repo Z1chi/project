@@ -31,6 +31,8 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property int parent_id
  * @property int team_count
  * @property float total_withdraw_btc
+ * @property string wallet
+ * @property string img
  */
 final class Affiliate extends Eloquent
 {

@@ -14,6 +14,7 @@ class Logger
 	public static $ACTION_URL_UPDATE = 'affiliate_url_update';
 	public static $ACTION_URL_DELETE = 'affiliate_url_delete';
 	public static $ACTION_URL_CREATE = 'affiliate_url_create';
+	public static $ACTION_AFFILIATE_UPDATE = 'affiliate_update';
 
 	public static function write ($action, array $data_array = NULL)
 	{
