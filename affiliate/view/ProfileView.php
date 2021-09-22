@@ -10,34 +10,40 @@ use Ufo\Model\Affiliate;
 
 class ProfileView extends AffiliateController
 {
+    public int $affiliateId = 0;
+
     public function init()
     {
-
+        $this->affiliateId = $_SESSION[SESSION_KEY_CURRENT]['id'];
     }
 
     public function indexAction()
     {
+        $affiliate = Affiliate::find($this->affiliateId);
+
         $this->pushTemplateData([
-            'TEST' => 'Hello World',
+            'AFFILIATE' => $affiliate
         ]);
     }
 
     public function ajaxUpdate()
     {
-        $oldPasswordHash = Affiliate::find($_SESSION[SESSION_KEY_CURRENT]['id'])->password;
-        $notValidOldPassword = !password_verify(Util::sanitize($_POST['oldPassword']), $oldPasswordHash);
-
-        if ($notValidOldPassword)
-        {
-            $this->jsonErrorData(['oldPassword' => 'Password is incorrect']);
+        if(!empty($_POST['oldPassword'])) {
+            $oldPasswordHash = Affiliate::find($this->affiliateId)->password;
+            $notValidOldPassword = !password_verify($_POST['oldPassword'], $oldPasswordHash);
+            if ($notValidOldPassword)
+            {
+                $this->jsonErrorData(['oldPassword' => 'Password is incorrect']);
+            }
         }
 
-        $imgName = basename($_FILES["img"]["name"]);
-        $newName = Upload::ajaxUploadImage($imgName, null, '/public/assets_affiliate');
+
+        $imgName = $_FILES["img"]["tmp_name"];
+        $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/assets_affiliate/img');
 
         $data = [
             'wallet' => Util::sanitize($_POST['wallet']),
-            'img' => '/public/assets_affiliate/'.$newName,
+            'img' => '/public/assets_affiliate/img'.$newName,
             'email' => Util::sanitize($_POST['email']),
             'password' => password_hash(Util::sanitize($_POST['newPassword']), PASSWORD_BCRYPT),
             'telegram' => Util::sanitize($_POST['telegram']),
