@@ -667,3 +667,15 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
 
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
+
+.error {
+  color: #ff233d;
+}
+
+.valid {
+  color: #0aba0e;
+}
+
+.color__default {
+  color: black;
+}

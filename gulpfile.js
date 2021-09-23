@@ -147,6 +147,16 @@ gulp.task('compile_admin_es6', function ()
 
 // ******************** AFFILIATE
 
+gulp.task('compile_affiliate_custom_scss', function () {
+	return gulp.src(cfg.path.affiliate.scss + '/main.scss')
+		.pipe(isProduction ? util.noop() : sourcemaps.init())
+		.pipe(sass({ outputStyle: 'expanded'}).on('error', sass.logError))
+		.pipe(isProduction ? util.noop() : sourcemaps.write())
+		.pipe(rename({ basename: 'transfer' }))
+		.pipe(gulp.dest('./resources/assets/scss/affiliate/transfer'))
+		.pipe(browserSync.reload({ stream: true }));
+});
+
 gulp.task('compile_affiliate_scss', function () {
 	return gulp.src([
 		'./node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css',
@@ -157,6 +167,7 @@ gulp.task('compile_affiliate_scss', function () {
 		'./node_modules/admin-lte/dist/css/skins/skin-blue.css',
 		'./node_modules/admin-lte/plugins/pace/pace.min.css',
 		'./node_modules/select2/dist/css/select2.css',
+		'./resources/assets/scss/affiliate/transfer/transfer.css',
 		// './node_modules/admin-lte/plugins/iCheck/square/blue.css'
 	])
 		.pipe(autoprefixer({
@@ -240,6 +251,7 @@ gulp.task('default', gulp.series(
 	'compile_admin_es6',
 	'compile_admin_scss',
 	'compile_affiliate_es6',
+	'compile_affiliate_custom_scss',
 	'compile_affiliate_scss',
     gulp.parallel('watch', 'serve')
 ));
@@ -258,6 +270,7 @@ gulp.task('build', gulp.series(
 	'compile_admin_scss',
 	'compile_admin_es6',
 	'compile_affiliate_es6',
+	'compile_affiliate_custom_scss',
 	'compile_affiliate_scss',
 ));
 
