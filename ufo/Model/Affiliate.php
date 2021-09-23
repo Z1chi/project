@@ -39,6 +39,8 @@ final class Affiliate extends Eloquent
     protected $table = 'affiliate';
     public $timestamps = false;
 
+    protected $guarded = ['id'];
+
     /**
      * The name of the "created at" column.
      *

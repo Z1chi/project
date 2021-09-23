@@ -28,6 +28,8 @@ class ProfileView extends AffiliateController
 
     public function ajaxUpdate()
     {
+        $data = [];
+
         if(!empty($_POST['oldPassword'])) {
             $oldPasswordHash = Affiliate::find($this->affiliateId)->password;
             $notValidOldPassword = !password_verify($_POST['oldPassword'], $oldPasswordHash);
@@ -35,23 +37,36 @@ class ProfileView extends AffiliateController
             {
                 $this->jsonErrorData(['oldPassword' => 'Password is incorrect']);
             }
+
+            $data['password'] = password_hash($_POST['newPassword'], PASSWORD_BCRYPT);
         }
 
+        $affiliate = Affiliate::find($this->affiliateId);
 
-        $imgName = $_FILES["img"]["tmp_name"];
-        $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/assets_affiliate/img');
+        if(!empty($_FILES["img"]["tmp_name"])) {
+            $imgName = $_FILES["img"]["tmp_name"];
+            $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/public/upload/');
 
-        $data = [
-            'wallet' => Util::sanitize($_POST['wallet']),
-            'img' => '/public/assets_affiliate/img'.$newName,
-            'email' => Util::sanitize($_POST['email']),
-            'password' => password_hash(Util::sanitize($_POST['newPassword']), PASSWORD_BCRYPT),
-            'telegram' => Util::sanitize($_POST['telegram']),
-            'first_name' => Util::sanitize($_POST['firstName']),
-            'last_name' => Util::sanitize($_POST['lastName']),
-        ];
+            unlink(ROOT.'/public/'.$affiliate->img); //deleting old img
+            $data['img'] = '/upload/'.$newName.'.jpg';
+        }
+        if(!empty(Util::sanitize($_POST['wallet']))) {
+            $data['wallet'] = Util::sanitize($_POST['wallet']);
+        }
+        if(!empty(Util::sanitize($_POST['email']))) {
+            $data['email'] = Util::sanitize($_POST['email']);
+        }
+        if(!empty(Util::sanitize($_POST['telegram']))) {
+            $data['telegram'] = Util::sanitize($_POST['telegram']);
+        }
+        if(!empty(Util::sanitize($_POST['firstName']))) {
+            $data['firstName'] = Util::sanitize($_POST['firstName']);
+        }
+        if(!empty(Util::sanitize($_POST['lastName']))) {
+            $data['lastName'] = Util::sanitize($_POST['lastName']);
+        }
 
-        $isUpdated = Affiliate::update($data);
+        $isUpdated = $affiliate->update($data);
         if($isUpdated) {
             Logger::write(Logger::$ACTION_AFFILIATE_UPDATE, $data);
 

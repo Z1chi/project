@@ -9,6 +9,7 @@
 
                 <div class="box-body">
                     <form style="max-width: 720px" method="post" class="js_profile_changes">
+                        <img src="<?= $AFFILIATE->img?>" alt="">
                         <input type="file" name="img" class="form-control text-center"
                                value="<?= $AFFILIATE->img?>" placeholder="image.png">
                         <br>
