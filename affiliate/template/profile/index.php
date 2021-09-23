@@ -9,6 +9,7 @@
 
                 <div class="box-body">
                     <form style="max-width: 720px" method="post" class="js_profile_changes">
+                        <img src="" alt="">
                         <label for="img">Profile avatar</label>
                         <input type="file" id="img" name="img" class="form-control text-center" value=""
                                placeholder="image.png">
