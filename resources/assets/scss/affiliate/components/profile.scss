@@ -1,9 +1,15 @@
 .error {
   color: #ff233d;
+  font-weight: 700;
 }
 .valid {
   color: #0aba0e;
 }
 .color__default {
   color: black;
+}
+.profile__form {
+    &__errorOldPassword {
+      display: none;
+    }
 }

@@ -42,6 +42,7 @@ const cfg = {
 		affiliate: {
 			es6: './resources/assets/es6/affiliate',
 			scss: './resources/assets/scss/affiliate',
+			css: './resources/assets/scss/affiliate/transfer',
 			bundle: {
 				css: './public/assets_affiliate/css',
 				js: './public/assets_affiliate/js'
@@ -153,7 +154,7 @@ gulp.task('compile_affiliate_custom_scss', function () {
 		.pipe(sass({ outputStyle: 'expanded'}).on('error', sass.logError))
 		.pipe(isProduction ? util.noop() : sourcemaps.write())
 		.pipe(rename({ basename: 'transfer' }))
-		.pipe(gulp.dest('./resources/assets/scss/affiliate/transfer'))
+		.pipe(gulp.dest(cfg.path.affiliate.css))
 		.pipe(browserSync.reload({ stream: true }));
 });
 
@@ -238,9 +239,9 @@ gulp.task('watch', function (done) {
 	gulp.watch(cfg.path.admin.es6 + '/**/*.es6', gulp.parallel('compile_admin_es6'));
 	gulp.watch(cfg.path.admin.scss + '/**/*.scss', gulp.parallel('compile_admin_scss'));
 	gulp.watch(cfg.path.affiliate.es6 + '/**/*.es6', gulp.parallel('compile_affiliate_es6'));
-    gulp.watch(cfg.watch, function () {
-        gulp.src('./app').pipe(browserSync.reload({ stream: true }));
-    });
+	gulp.watch(cfg.path.affiliate.scss + '/**/*.scss', gulp.parallel('compile_affiliate_custom_scss'));
+	gulp.watch(cfg.path.affiliate.css + '/**/*.css', gulp.parallel('compile_affiliate_scss'));
+    gulp.watch(cfg.watch, function () {gulp.src('./app').pipe(browserSync.reload({ stream: true }))});
     done();
 });
 

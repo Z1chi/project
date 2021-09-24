@@ -8,11 +8,11 @@
             <div class="box box-primary">
 
                 <div class="box-body">
-                    <form style="max-width: 720px" method="post" class="js_profile_changes">
-                        <img src="" alt="">
+                    <form method="post" class="js_profile_changes profile__form">
+<!--                        <img src="" alt="Profile avatar">-->
                         <label for="img">Profile avatar</label>
                         <input type="file" id="img" name="img" class="form-control text-center color__default" value=""
-                               placeholder="image.png">
+                               placeholder="">
                         <br>
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" name="firstName" class="name form-control color__default" value=""
@@ -27,23 +27,24 @@
                                placeholder="john.d@email.com">
                         <br>
                         <label for="oldPassword">Old password</label>
-                        <input type="password" id="oldPassword" name="oldPassword" class="password form-control color__default" value=""
-                               placeholder="oldPassword">
+                        <input type="password" id="oldPassword" name="oldPassword" class="oldPassword form-control color__default" value=""
+                               placeholder="">
+                        <span class="error profile__form__errorOldPassword" id="oldPasswordError">Invalid password</span>
                         <br>
                         <label for="newPassword">New password</label>
-                        <input type="password" id="newPassword" name="newPassword" class="password form-control color__default" value=""
-                               placeholder="newPassword">
+                        <input type="password" id="newPassword" name="newPassword" class="newPassword form-control color__default" value=""
+                               placeholder="">
                         <br>
                         <label for="confirmPassword">Confirm password</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" class="password form-control color__default" value=""
-                               placeholder="confirmPassword">
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="password_confirm form-control color__default" value=""
+                               placeholder="">
                         <br>
                         <label for="wallet">BTC wallet</label>
-                        <input type="text" id="wallet" name="wallet" class="wallet form-control color__default" value="" placeholder="wallet">
+                        <input type="text" id="wallet" name="wallet" class="wallet form-control color__default" value="" placeholder="">
                         <br>
                         <label for="telegram">Telegram</label>
                         <input type="text" id="telegram" name="telegram" class="form-control" value=""
-                               placeholder="telegram">
+                               placeholder="">
                         <br>
                         <button type="submit" class="btn btn-success buttonSubmit">Save</button>
                     </form>

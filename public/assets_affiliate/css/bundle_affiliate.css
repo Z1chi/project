@@ -670,6 +670,7 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
 
 .error {
   color: #ff233d;
+  font-weight: 700;
 }
 
 .valid {
@@ -678,4 +679,8 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
 
 .color__default {
   color: black;
+}
+
+.profile__form__errorOldPassword {
+  display: none;
 }
