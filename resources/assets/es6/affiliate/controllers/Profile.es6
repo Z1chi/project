@@ -84,7 +84,7 @@ export class Profile extends Controller {
                     this.oldPasswordError (!response.data.oldPassword);
                     Util.handleBootstrapErrors($createForm, response);
                 } else {
-                    // Util.reload();
+                    Util.reload();
                 }
             });
 
