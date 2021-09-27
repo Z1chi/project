@@ -10,11 +10,6 @@ use Ufo\Service\ProjectService;
 
 class ProjectView extends AdminController
 {
-    public function init()
-    {
-
-    }
-
     public function indexAction()
     {
         $pagination = new Pagination();
