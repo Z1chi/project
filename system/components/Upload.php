@@ -37,8 +37,6 @@ class Upload
             return $image_name;
 
         } catch (\ImagickException $e) {
-            console($e->getMessage(), 'Imagick exception');
-            throw new RequestException();
         }
     }
 

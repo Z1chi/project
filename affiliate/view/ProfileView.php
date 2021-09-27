@@ -45,7 +45,11 @@ class ProfileView extends AffiliateController
 
         if(!empty($_FILES["img"]["tmp_name"])) {
             $imgName = $_FILES["img"]["tmp_name"];
-            $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/public/upload/');
+            try {
+                $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/public/upload/');
+            } catch (\ImagickException $e) {
+                $this->jsonErrorMsg($e);
+            }
 
             unlink(ROOT.'/public/'.$affiliate->img); //deleting old img
             $data['img'] = '/upload/'.$newName.'.jpg';
