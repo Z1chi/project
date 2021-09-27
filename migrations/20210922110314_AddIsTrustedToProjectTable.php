@@ -11,7 +11,7 @@ final class AddIsTrustedToProjectTable extends Migration
     public function up(): void
     {
         $this->schema->table($this->table, function(Blueprint $table) {
-            $table->tinyInteger('is_trusted')->default(0);
+            $table->boolean('is_trusted')->default(false);
         });
     }
 
