@@ -681,6 +681,35 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
   color: black;
 }
 
+.profile__form {
+  max-width: 50%;
+  margin: 0 auto;
+}
+@media (max-width: 1280px) {
+  .profile__form {
+    max-width: unset;
+  }
+}
+.profile__form__avatar-label {
+  margin: 10px 0;
+}
+.profile__form__avatar-wrapper {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-width: 300px;
+}
+@media (max-width: 1280px) {
+  .profile__form__avatar-wrapper {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+}
 .profile__form__errorOldPassword {
   display: none;
 }

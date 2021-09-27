@@ -9,8 +9,10 @@
 
                 <div class="box-body">
                     <form method="post" class="js_profile_changes profile__form">
-                        <img src="<?= $AFFILIATE->img?>" style="width: 200px;" alt="Profile avatar">
-                        <label for="img">Profile avatar</label>
+                        <div class="profile__form__avatar-wrapper">
+                        <img src="<?= $AFFILIATE->img?>" class="profile__form__avatar-wrapper__avatar-img" alt="Profile avatar">
+                        </div>
+                        <label class="profile__form__avatar-label" for="img">Profile avatar</label>
                         <input type="file" id="img" name="img" class="form-control text-center color__default" value=""
                                placeholder="">
                         <br>
