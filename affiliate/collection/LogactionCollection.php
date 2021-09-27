@@ -30,7 +30,8 @@ class LogactionCollection
 			'al.deposit, ' .
 			'al.currency, ' .
 			'al.geo, ' .
-			'al.payout, ' .
+            'al.payout, ' . // deprecated, todo: create migration from payout -> payout_amount
+            'al.payout_amount, ' .
             'al.created, ' .
             'al.user_uid, ' .
 			'au.title url_title ' .
