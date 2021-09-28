@@ -107,6 +107,12 @@
                     </a>
                 </li>
 
+                <li data-controller="account">
+                    <a href="<?=App::createUrl('/support')?>">
+                        <i class="fa fa-info-circle"></i> <span>Support</span>
+                    </a>
+                </li>
+
 				<? if (admin\model\Admin::getLevel() >= admin\model\Admin::$LEVEL_CALL_CENTER_SUPERVISOR): ?>
 
 				<li class="header">Supervisor</li>
