@@ -27,12 +27,12 @@
                             <? /* @var $row \ufo\model\Support */ foreach ($LIST as $row): ?>
                                 <tr>
                                     <td class="text-center">
-                                        <?=$row->getId()?>
+                                        <?=$row->id?>
                                     </td>
-                                    <td style="word-break: break-all"><?=$row->name?></td>
-                                    <td style="text-align: center"><img src="<?=$row->image?>"></td>
+                                    <td class="name"><a href="<?=App::createRawUrl('/support/?id=' . $row->id)?>"><?=$row->name?></a></td>
+                                    <td class="img-wrapper"><img class="img-wrapper__image" src="<?=$row->image?>"></td>
                                     <td style="text-align: center"><?=$row->tg_link?></td>
-                                    <td class="text-center"><?=$row->isActive() ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>'?></td>
+                                    <td class="text-center"><?=$row->active ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>'?></td>
                                 </tr>
                             <? endforeach; ?>
                             </tbody>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="box-body">
-                    <form method="post" class="js_support_add_form">
+                    <form method="post" data-form-id="support/add" class="js_support_add_form">
                         <table class="table table-bordered ">
                             <thead>
                             <tr>
@@ -68,16 +68,19 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" name="name" class="form-control" value="" placeholder="John Deer">
+                                    <input type="text" name="name" class="form-control nameValidate" value="" placeholder="John Deer">
                                 </td>
                                 <td>
                                     <input type="file" name="image" class="form-control" value="">
                                 </td>
                                 <td>
-                                    <input type="text" name="tg_link" class="form-control">
+                                    <input type="text" name="tg_link" class="form-control telegramLinkValidate">
                                 </td>
                                 <td>
-                                    <input type="text" name="active" class="form-control" value="" placeholder="1">
+                                    <select type="text" name="active" class="form-control">
+                                        <option value="0">Disable</option>
+                                        <option value="1" selected="selected">Active</option>
+                                    </select>
                                 </td>
                                 <td class="text-center">
                                     <button type="submit" class="btn btn-success btn-sm js_support_add_button">Add</button>

@@ -52,6 +52,7 @@ class SupportView extends AdminController
 
     public function showList()
     {
+
         $this->setMetaTitle('Supports');
 
         $this->pagination = new Pagination(KEY_ON_PAGE_COUNT);
@@ -97,8 +98,8 @@ class SupportView extends AdminController
             $this->jsonErrorMsg('Ссылка на телеграм является обязательным полем');
         }
 
-        if(!empty($_FILES["img"]["tmp_name"])) {
-            $imgName = $_FILES["img"]["tmp_name"];
+        if(!empty($_FILES["image"]["tmp_name"])) {
+            $imgName = $_FILES["image"]["tmp_name"];
             try {
                 $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/public/upload/');
             } catch (\ImagickException $e) {
