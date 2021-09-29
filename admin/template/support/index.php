@@ -50,11 +50,11 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    Add admin
+                    Add Support
                 </div>
 
                 <div class="box-body">
-                    <form method="post" class="js_admin_add_form">
+                    <form method="post" class="js_support_add_form">
                         <table class="table table-bordered ">
                             <thead>
                             <tr>
@@ -62,6 +62,7 @@
                                 <th>Image</th>
                                 <th class="text-center">telegram link</th>
                                 <th class="text-center">Active</th>
+                                <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -70,7 +71,7 @@
                                     <input type="text" name="name" class="form-control" value="" placeholder="John Deer">
                                 </td>
                                 <td>
-                                    <input type="image" name="image" class="form-control" value="">
+                                    <input type="file" name="image" class="form-control" value="">
                                 </td>
                                 <td>
                                     <input type="text" name="tg_link" class="form-control">
@@ -78,8 +79,8 @@
                                 <td>
                                     <input type="text" name="active" class="form-control" value="" placeholder="1">
                                 </td>
-                                <td>
-                                    <button type="submit" class="btn btn-success btn-sm js_admin_add_button">Add</button>
+                                <td class="text-center">
+                                    <button type="submit" class="btn btn-success btn-sm js_support_add_button">Add</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -88,7 +89,7 @@
                 </div>
 
                 <div class="box-footer">
-                    <div class="hidden js_admin_add_result">
+                    <div class="hidden js_support_add_result">
                         <div class="callout callout-danger">
                             <p></p>
                         </div>
