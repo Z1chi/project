@@ -5,7 +5,9 @@
 <section class="content">
 	<div class="row">
 
-		<? if (App::getSession('parent_id') == 0): // todo refactor ?>
+		<? use app\controller\Affiliate;
+
+        if (App::getSession('parent_id') == 0): // todo refactor ?>
 
 		<div class="col-sm-4 col-xs-12">
 			<div class="small-box bg-aqua">
@@ -129,16 +131,30 @@
 							</tr>
 							</thead>
 							<tbody>
-							<? /* @var $row \affiliate\model\Logaction */ foreach ($ACTIONS as $row): ?>
+							<? /* @var $row \ufo\model\AffiliateActionLog */ foreach ($ACTIONS as $row): ?>
+                                <?php
+                                $action = '';
+                                switch ($row->action) {
+                                    case Affiliate::ACTION_CLICK:
+                                        $action =  'Click';
+                                        break;
+                                    case Affiliate::ACTION_SIGNUP:
+                                        $action = '<span class="text-orange">Sign up</span>';
+                                        break;
+                                    case Affiliate::ACTION_DEPOSIT:
+                                        $action = '<strong class="text-green">Deposit</strong>';
+                                        break;
+                                }
+                                ?>
 								<tr>
-									<td class="text-center"><?=$row->getUserUid()?></td>
+									<td class="text-center"><?=$row->user_uid?></td>
 									<td class="text-center"><?=$row->url_title?></td>
-									<td class="text-center"><?=$row->getActionString()?></td>
-									<td class="text-center hidden-xs"><?=$row->getDeposit()?> <?=$row->getCurrency()?></td>
-									<td class="text-center"><?=$row->getCreatedFormatted()?></td>
-									<td class="text-center hidden-xs"><?=$row->getGeo()?></td>
+									<td class="text-center"><?=$action?></td>
+									<td class="text-center hidden-xs"><?=$row->deposit?> <?=$row->currency?></td>
+									<td class="text-center"><?=date('d.m.Y, H:i', $row->created)?></td>
+									<td class="text-center hidden-xs"><?=$row->geo ?? 'Unknown' ?></td>
 									<? if (App::getSession('parent_id') == 0): ?>
-									<td class="text-center"><?=$row->getPayout()?> <?=$row->getCurrency()?></td>
+									<td class="text-center"><?=$row->payout?> <?=$row->currency?></td>
 									<? endif; ?>
 
 								</tr>

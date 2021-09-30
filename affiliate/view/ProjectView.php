@@ -5,7 +5,7 @@ namespace affiliate\view;
 
 use system\core\AffiliateController;
 
-class OfferView extends AffiliateController
+class ProjectView extends AffiliateController
 {
 	public $authorizationRequired = true;
 

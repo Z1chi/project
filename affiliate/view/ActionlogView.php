@@ -4,10 +4,11 @@ namespace affiliate\view;
 
 
 use admin\component\Pagination;
-use affiliate\collection\LogactionCollection;
 use affiliate\model\Smartlink;
 use app\controller\Affiliate;
 use system\core\AffiliateController;
+use Ufo\Service\AffiliateActionLogService;
+use Ufo\Service\ProjectService;
 
 class ActionlogView extends AffiliateController
 {
@@ -27,8 +28,16 @@ class ActionlogView extends AffiliateController
 	 * @var int
 	 */
 	private $filter_smartlink = null;
+    /**
+     * @var int
+     */
+    private $filterProject = null;
+    /**
+     * @var int
+     */
+    private $filter_date = null;
 
-	public function init()
+    public function init()
 	{
 		$this->affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
 	}
@@ -43,21 +52,26 @@ class ActionlogView extends AffiliateController
 		$this->initFilters();
 
 		$this->pagination = new Pagination(50);
-
-		$leads_count = LogactionCollection::getActionsCount($this->affiliate_id);
+        $affiliateActionLogService = new AffiliateActionLogService();
+		$leads_count = $affiliateActionLogService->getActionsCount($this->affiliate_id, $this->collectFilters());
 		$this->pagination->setItemsCount($leads_count);
 
-		$leads = LogactionCollection::getList($this->affiliate_id, $this->collectFilters(), $this->pagination);
+        $leads = $affiliateActionLogService->getActions($this->affiliate_id, $this->collectFilters(), $this->pagination);
+
+        $summary = $affiliateActionLogService->getSummary($this->affiliate_id, $this->collectFilters(), $this->pagination);
 
 		$pages = $this->pagination->getPaginationHtml(MODULE_TEMPLATE . '/pagination.php');
-
 		$this->pushTemplateData([
 			'LIST' => $leads,
+			'SUMMARY' => $summary,
 			'PAGES' => $pages,
 			'ACTION_TYPES' => self::getAffiliateActionsStrings(),
 			'SMARTLINKS' => Smartlink::getSmartlinksList($this->affiliate_id),
 			'FILTER_ACTION' => $this->filter_action,
-			'FILTER_SMARTLINK_ID' => $this->filter_smartlink
+			'FILTER_SMARTLINK_ID' => $this->filter_smartlink,
+			'FILTER_PROJECT_ID' => $this->filterProject,
+            'PROJECTS' => (new ProjectService())->getProjectsForFilter(),
+            'DATES' => $this->getTime(),
 		]);
 	}
 
@@ -70,13 +84,34 @@ class ActionlogView extends AffiliateController
 		if (isset($_GET['smartlink'])) {
 			$this->filter_smartlink = (int) $_GET['smartlink'];
 		}
+
+        if (isset($_GET['project'])) {
+            $this->filterProject = (int) $_GET['project'];
+        }
+
+        if (isset($_GET['date'])) {
+            $this->filter_date = (string)$_GET['date'];
+        }
 	}
+
+    public function getTime()
+    {
+        if(!empty($this->filter_date)){
+            $date = explode('-', $this->filter_date);
+            $dateFrom = new \DateTime($date[0]);
+            $dateBefore = new \DateTime($date[1]);
+            return $dateFrom->format('m/d/Y') . ' - ' . $dateBefore->format('m/d/Y');
+        }
+        return date('m/d/Y'). ' - ' . date('m/d/Y');
+    }
 
 	public function collectFilters ()
 	{
 		$filters = [
 			'action' => $this->filter_action,
-			'smartlink' => $this->filter_smartlink
+			'smartlink' => $this->filter_smartlink,
+			'project' => $this->filterProject,
+            'date' => $this->filter_date,
 		];
 
 		return $filters;

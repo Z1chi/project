@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Ufo\Model;
 
+use app\controller\Affiliate;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ufo\Component\Eloquent\Eloquent;
 use Ufo\ValueObject\PayoutType;
@@ -10,16 +11,25 @@ use Ufo\ValueObject\PayoutType;
 /**
  * @property int          id
  *
+ * @property int project_id
  * @property float deposit
  * @property string currency
+ * @property int affiliate_id
+ * @property int action
+ * @property string geo
+ * @property int created
+ *
+ * @property int url_id
  *
  * @property string transaction_id
  * @property string payout_type
  * @property float payout_value
  * @property float payout_amount
  * @property string payout_currency
+ * @property string payout
  *
  * @property string user_uid
+ * @property int user_id
  *
  * @property Affiliate    affiliate
  * @property AffiliateUrl affiliateUrl
@@ -60,8 +70,8 @@ final class AffiliateActionLog extends Eloquent
 
     public function save(array $options = [])
     {
-        if (!$this->offer_id) { // todo remove
-            $this->offer_id = 1;
+        if (!$this->project_id) { // todo remove
+            $this->project_id = 1;
         }
         if (!$this->id && $this->deposit && PayoutType::PERCENT === $this->payout_type) { // todo move to service
             $this->payout_amount = $this->deposit / 100 * $this->payout_value;

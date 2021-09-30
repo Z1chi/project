@@ -6,7 +6,7 @@
 	<title>Affiliate Panel</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="/assets_affiliate/css/bundle_affiliate.css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -84,7 +84,7 @@
 				</li>
 
 				<li>
-					<a href="<?=App::createUrl('/offer')?>">
+					<a href="<?=App::createUrl('/project')?>">
 						<i class="fa fa-info"></i> <span>Offer</span>
 					</a>
 				</li>
@@ -114,7 +114,11 @@
 						<i class="fa fa-money"></i> <span>Withdraw</span>
 					</a>
 				</li>
-
+                <li>
+                    <a href="<?=App::createUrl('/statistic')?>">
+                        <i class="fa fa-bar-chart"></i> <span>Statistic</span>
+                    </a>
+                </li>
 				<li class="header">Contacts</li>
 
 				<li>

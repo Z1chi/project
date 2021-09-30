@@ -19,7 +19,7 @@ export const config = {
         Home,
         Smartlinks,
         Actionlog,
-        Withdraw
+        Withdraw,
     },
     component: {
 
