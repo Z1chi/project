@@ -31,7 +31,8 @@
         "illuminate/console": "^8.55",
         "illuminate/events": "^8.55",
         "illuminate/cache": "^8.55",
-        "doctrine/dbal": "^3.1"
+        "doctrine/dbal": "^3.1",
+        "php-ffmpeg/php-ffmpeg": "^0.18.0"
     },
     "require-dev": {
         "larapack/dd": "^1.1",
