@@ -4,18 +4,14 @@ namespace admin\view;
 
 use admin\model\Admin;
 use App;
-use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Illuminate\Database\Eloquent\Collection;
-use system\components\DB;
 use admin\component\Logger;
 use admin\component\Pagination;
 use system\components\Upload;
 use system\components\Util;
 use system\core\AdminController;
 use Ufo\Exception\UfoException;
-use Ufo\Model\AdminShift;
 use Ufo\Model\Support;
-use Ufo\Service\AdminShiftService;
 
 
 class SupportView extends AdminController
