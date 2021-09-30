@@ -70,4 +70,9 @@ final class Affiliate extends Eloquent
     {
         return $this->belongsTo(Affiliate::class, 'affiliate_id');
     }
+
+    public function support()
+    {
+        return $this->hasOne(Support::class, 'id', 'support_id');
+    }
 }
