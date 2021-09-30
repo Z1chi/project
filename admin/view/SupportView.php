@@ -147,7 +147,7 @@ class SupportView extends AdminController
         $log = $data;
         $log['id'] = $id;
 
-        if(!empty($_FILES["image"]["tmp_name"])) {
+        if(is_uploaded_file($_FILES["image"]["tmp_name"])) {
             $imgName = $_FILES["image"]["tmp_name"];
             try {
                 $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/public/upload/');
@@ -156,11 +156,11 @@ class SupportView extends AdminController
             }
             unlink(ROOT.'/public/'.$support->img); //deleting old img
             $data['image'] = '/upload/'.$newName.'.jpg';
+            $support->image = $data['image'];
         }
 
         $support->name = $data['name'];
         $support->tg_link = $data['tg_link'];
-        $support->image = $data['image'];
         $support->active = $data['active'];
 
 

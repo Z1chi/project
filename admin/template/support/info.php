@@ -31,7 +31,7 @@
 
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="file" class="form-control" id="image" name="image" value="">
+                    <input type="file" class="form-control" id="image" name="image" >
                 </div>
 
                 <div class="form-group">
@@ -42,9 +42,11 @@
 
                 <div class="form-group">
                     <label for="active">Active</label>
-                    <input type="text" class="form-control" id="active" name="active" value="<?= $SUPPORT->active ?>">
+                    <select name="active" class="form-control" >
+                        <option value="0">Disabled</option>
+                        <option value="1"<?if ($SUPPORT->active):?> selected="selected"<?endif;?>>Active</option>
+                    </select>
                 </div>
-
             </div>
 
             <div class="box-footer">

@@ -3,9 +3,6 @@ import {Util} from "../../lib/Util";
 import $ from "jquery";
 import "jquery-validation";
 
-
-
-
 export class Support extends Controller {
 
     init() {
@@ -15,7 +12,7 @@ export class Support extends Controller {
 
     findForm() {
 
-       const form =  [$('.js_supportInfo-form') , $('.js_support_add_form')].filter((oneForm)=> oneForm.length > 0);
+        const form = [$('.js_supportInfo-form'), $('.js_support_add_form')].filter((oneForm) => oneForm.length > 0);
 
         this.initChange(form[0])
     }
