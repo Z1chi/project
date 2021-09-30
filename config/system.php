@@ -45,7 +45,7 @@ define('CURRENCY_ISO', 'USD');
 define('AFFILIATE_REVSHARE_PERCENT', 40);
 define('AFFILIATE_DEPOSIT_PERCENT', 40);
 
-define('AFFILIATE_URL_GET_KEY', 'aff');
+define('AFFILIATE_URL_GET_KEY', 'url');
 define('AFFILIATE_URL_COOKIE_KEY', 'aff_url');
 
 define('AFFILIATE_IFRAME_KEY_SIGNUP', 'aff_signup');
