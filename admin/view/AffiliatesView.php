@@ -126,8 +126,7 @@ class AffiliatesView extends AdminController
 	{
 		$id = (int) $_GET['id'];
 
-		$row = DB::getInstance()
-			->row('SELECT * FROM "' . TBL_AFFILIATE . '" WHERE id = ?', $id);
+		$row = \Ufo\Model\Affiliate::where('id', $id)->first();;
 
 		if ($row) {
 			Affiliate::setSession($row);

@@ -2,6 +2,7 @@
 
 namespace affiliate\view;
 
+use App;
 use app\component\NumbersHelper;
 use system\components\DB;
 use system\core\AffiliateController;
@@ -18,6 +19,7 @@ class DashboardView extends AffiliateController
 
 	public function indexAction()
 	{
+//        var_dump(App::getSession('support_image'));die();
 		$affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
 
 		$affiliate = DB::getInstance()

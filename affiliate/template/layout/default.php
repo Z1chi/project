@@ -141,7 +141,7 @@
                                 <img src="/img/telegram-icon.svg" alt="telegram link">
                             </a>
                             <div style="display: flex; margin: auto 0">
-                                <img style="width: 55px" src="<?= App::getSession('support_tg_image') ?>" alt="manager avatar">
+                                <img style="width: 55px" src="<?= App::getSession('support_image') ?>" alt="manager avatar">
                             </div>
                         </div>
                     </div>
