@@ -7,6 +7,7 @@ use app\component\Browser;
 use app\component\HashidHelper;
 use system\components\DB;
 use Ufo\Entity\LogDepositReturn;
+use Ufo\Exception\AffiliateDuplicateTransactionException;
 use Ufo\Exception\AffiliateServiceException;
 use Ufo\Model\Affiliate;
 use Ufo\Model\AffiliateActionLog;
@@ -128,6 +129,9 @@ final class AffiliateEventService
         if (!$affiliateUrl) {
             throw new AffiliateServiceException('Url by smartlink not found');
         }
+        if ($transactionId && ($transactionCount = AffiliateActionLog::where('transaction_id', $transactionId)->count())) {
+            throw new AffiliateDuplicateTransactionException($transactionId, $transactionCount);
+        }
 
         $affiliateActionLog = new AffiliateActionLog();
         $affiliateActionLog->affiliate_id = $affiliate->getId();
@@ -161,6 +165,9 @@ final class AffiliateEventService
         $affiliateUrl = $this->findAffiliateUrlByUrlId($urlId);
         if (!$affiliateUrl) {
             throw new AffiliateServiceException('Url by ID not found');
+        }
+        if ($transactionId && ($transactionCount = AffiliateActionLog::where('transaction_id', $transactionId)->count())) {
+            throw new AffiliateDuplicateTransactionException($transactionId, $transactionCount);
         }
 
         $affiliateActionLog = new AffiliateActionLog();
