@@ -92,7 +92,7 @@ class SupportView extends AdminController
     {
         $data['name'] = Util::sanitize($_POST['name']);
         $data['tg_link'] = Util::sanitize($_POST['tg_link']);
-        $data['active'] = 1;
+        $data['active'] = (int)$_POST['active'];
 
         if ($data['tg_link'] == '') {
             $this->jsonErrorMsg('Ссылка на телеграм является обязательным полем');
@@ -134,7 +134,7 @@ class SupportView extends AdminController
 
         $id = Util::sanitize($_POST['id']);
 
-        $support = Support::where('id', $id)->one();
+        $support = Support::where('id', $id)->first();
 
         if (!$support) {
             $this->jsonErrorMsg('Пользователь не найден!');
@@ -142,13 +142,13 @@ class SupportView extends AdminController
 
         $data['name'] = Util::sanitize($_POST['name']);
         $data['tg_link'] = Util::sanitize($_POST['tg_link']);
-        $data['active'] = 1;
+        $data['active'] = (int)$_POST['active'];
 
         $log = $data;
         $log['id'] = $id;
 
-        if(!empty($_FILES["img"]["tmp_name"])) {
-            $imgName = $_FILES["img"]["tmp_name"];
+        if(!empty($_FILES["image"]["tmp_name"])) {
+            $imgName = $_FILES["image"]["tmp_name"];
             try {
                 $newName = Upload::ajaxUploadImage($imgName, null, ROOT.'/public/upload/');
             } catch (\ImagickException $e) {
@@ -160,6 +160,7 @@ class SupportView extends AdminController
 
         $support->name = $data['name'];
         $support->tg_link = $data['tg_link'];
+        $support->image = $data['image'];
         $support->active = $data['active'];
 
 
