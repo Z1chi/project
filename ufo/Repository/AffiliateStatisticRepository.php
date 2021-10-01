@@ -87,10 +87,20 @@ class AffiliateStatisticRepository
                     SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal.action = 1 THEN 1 END)  AS clicks,
                     COUNT(DISTINCT unique_click_table.user_id)  AS unique_clicks,
-                    SUM(deposit) / 
-                    COUNT(CASE WHEN aal.action = 1 THEN 1 END) AS EPC 
+                    CASE
+                        WHEN COUNT(CASE WHEN aal.action = 1 THEN 1 END) != 0
+                            THEN (CAST(COUNT(CASE WHEN aal.action = 3 THEN 1 END) as decimal) * 100) /
+                                COUNT(CASE WHEN aal.action = 1 THEN 1 END)
+                            ELSE null
+                    END                                                      AS CR,
+                    CASE
+                        WHEN COUNT(CASE WHEN aal.action = 1 THEN 1 END) != 0
+                            THEN SUM(deposit) /
+                                COUNT(CASE WHEN aal.action = 1 THEN 1 END)
+                            ELSE null
+                    END                                                      AS EPC
             FROM '.$table.' aal
-                JOIN (
+                LEFT JOIN (
                     SELECT user_id, created_dt FROM '.$table.' 
                     WHERE action = 1 
                     '.$andWhere.'
@@ -105,10 +115,20 @@ class AffiliateStatisticRepository
                 SELECT NULL as created_dt, SUM(deposit) as sum_deposit,
                     COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) as clicks,
                     COUNT(DISTINCT unique_click_table_footer.user_id)  AS unique_clicks,
-                    SUM(deposit) /
-                        COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) AS EPC
+                CASE
+                    WHEN COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) != 0
+                        THEN (CAST(COUNT(CASE WHEN aal_footer.action = 3 THEN 1 END) as decimal) * 100) /
+                            COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END)
+                        ELSE null
+                END                                                      AS CR,
+                CASE
+                    WHEN COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END) != 0
+                        THEN SUM(deposit) /
+                            COUNT(CASE WHEN aal_footer.action = 1 THEN 1 END)
+                        ELSE null
+                END                                                      AS EPC
                 FROM '.$table.' aal_footer
-                JOIN (SELECT user_id, created_dt FROM '.$table.' 
+                LEFT JOIN (SELECT user_id, created_dt FROM '.$table.' 
                         WHERE action = 1 and affiliate_id = 1  '.$andWhere.'
                 GROUP BY created_dt, user_id) unique_click_table_footer
                   ON aal_footer.created_dt = unique_click_table_footer.created_dt
