@@ -108,7 +108,7 @@ class SupportView extends AdminController
         $support->name = $data['name'];
         $support->image = $data['image'];
         $support->tg_link = $data['tg_link'];
-        $support->active = $data['active'];
+        $support->is_active = $data['active'];
 
         Logger::write(
             Logger::$ACTION_SUPPORT_ADD,
@@ -157,7 +157,7 @@ class SupportView extends AdminController
 
         $support->name = $data['name'];
         $support->tg_link = $data['tg_link'];
-        $support->active = $data['active'];
+        $support->is_active = $data['active'];
 
 
         Logger::write(

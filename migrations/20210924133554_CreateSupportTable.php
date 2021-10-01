@@ -15,11 +15,12 @@ final class CreateSupportTable extends Migration
             $table->string('name', 255)->nullable();
             $table->string('image', 255)->nullable();
             $table->string('tg_link', 255);
-            $table->integer('active')->nullable()->default(1);
+            $table->integer('is_active')->nullable()->default(1);
 
-            $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
 
+            $table->index('is_active');
             $table->index('created_at');
         });
     }

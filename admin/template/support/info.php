@@ -44,7 +44,7 @@
                     <label for="active">Active</label>
                     <select name="active" class="form-control" >
                         <option value="0">Disabled</option>
-                        <option value="1"<?if ($SUPPORT->active):?> selected="selected"<?endif;?>>Active</option>
+                        <option value="1"<?if ($SUPPORT->is_active):?> selected="selected"<?endif;?>>Active</option>
                     </select>
                 </div>
             </div>

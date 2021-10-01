@@ -32,7 +32,7 @@
                                     <td class="name"><a href="<?=App::createRawUrl('/support/?id=' . $row->id)?>"><?=$row->name?></a></td>
                                     <td class="img-wrapper"><img class="img-wrapper__image" src="<?=$row->image?>"></td>
                                     <td style="text-align: center"><?=$row->tg_link?></td>
-                                    <td class="text-center"><?=$row->active ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>'?></td>
+                                    <td class="text-center"><?=$row->is_active ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>'?></td>
                                 </tr>
                             <? endforeach; ?>
                             </tbody>

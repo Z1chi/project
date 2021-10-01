@@ -10,9 +10,9 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property string    name
  * @property string    image
  * @property string    tg_link
- * @property int    active
- * @property null|\DateTimeImmutable created_at
- * @property null|\DateTimeImmutable updated_at
+ * @property int    is_active
+ * @property \DateTime created_at
+ * @property \DateTime updated_at
  */
 final class Support extends Eloquent
 {

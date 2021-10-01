@@ -20,8 +20,6 @@ final class AddSupportIdToAffiliateTable extends Migration
     public function down(): void
     {
         $this->schema->table($this->table, function (Blueprint $table) {
-            $table->dropForeign('support_id');
-            $table->dropIndex('support_id');
             $table->dropColumn('support_id');
         });
     }
