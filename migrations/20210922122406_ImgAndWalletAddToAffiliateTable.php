@@ -11,7 +11,7 @@ final class ImgAndWalletAddToAffiliateTable extends Migration
     public function up(): void
     {
         $this->schema->table($this->table, function(Blueprint $table) {
-            $table->string('wallet', 70)->default('');
+            $table->string('wallet_address', 70)->default('');
             $table->string('img', 255)->default('');
         });
     }
@@ -19,7 +19,7 @@ final class ImgAndWalletAddToAffiliateTable extends Migration
     public function down(): void
     {
         $this->schema->table($this->table, function(Blueprint $table) {
-            $table->dropColumn('wallet');
+            $table->dropColumn('wallet_address');
             $table->dropColumn('img');
         });
     }
