@@ -19,7 +19,7 @@ final class ProjectService
      * @param Pagination $pagination
      * @return Collection Collection with Project
      */
-    public function getAffiliatesWithProject(Pagination $pagination = null, int $limit = null): Collection
+    public function getProjectsList(Pagination $pagination = null, int $limit = null): Collection
     {
         if (!empty($pagination)) {
             $limit = $pagination->getItemsOnPage();
@@ -30,7 +30,7 @@ final class ProjectService
                 $limit = 50;
             }
         }
-        return Affiliate::with(TBL_PROJECT)->limit($limit)->offset($offset)->get();
+        return Project::limit($limit)->offset($offset)->get();
     }
 
     /**

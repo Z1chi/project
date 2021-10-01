@@ -6,8 +6,10 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
-                <div class="center-block" style="margin-top: 20px; max-width: 720px; max-height: 480px">
-                    <img class="img-responsive" src="<?= $PROJECT->img ?>"
+                <div class="center-block" style="margin-top: 20px;">
+                    <img class="img-responsive"
+                         style="max-width: 720px; max-height: 480px; margin: 0 auto; border: 1px solid #eee;"
+                         src="<?= $PROJECT->img ?>"
                          alt="Site preview">
                     <br>
                     <p class="text-center">Site preview</p>

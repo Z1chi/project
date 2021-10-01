@@ -19,7 +19,7 @@ class ProjectView extends AdminController
         $projects_count = $projectService->getProjectsCount();
         $pagination->setItemsCount($projects_count);
 
-        $projects = $projectService->getAffiliatesWithProject($pagination);
+        $projects = $projectService->getProjectsList($pagination);
 
         $this->pushTemplateData([
             'LIST' => $projects

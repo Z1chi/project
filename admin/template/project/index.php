@@ -26,16 +26,14 @@ use Ufo\Model\Project;
                         </thead>
                         <tbody>
                         <?php
-                        foreach ($LIST as $affiliate):
-                            $project = $affiliate->project;
+                        foreach ($LIST as $project):
                             if (!empty($project)): ?>
                                 <tr>
-                                    <td style="width: 50%">
-                                        <div
-                                                style="max-width: 100%;">
+                                    <td>
+                                        <div>
                                             <img
-                                                    style="width: 100%"
-                                                    src="<?= $project->title ?>"
+                                                    style="max-height: 150px; max-width: 300px"
+                                                    src="<?= $project->img ?>"
                                                     alt="Preview site image">
                                         </div>
 
