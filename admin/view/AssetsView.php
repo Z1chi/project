@@ -29,6 +29,7 @@ class AssetsView extends AdminController
 
     public function indexAction(): void
     {
+        $this->setMetaTitle('Project assets');
         $this->initFilters();
         $projects = (new ProjectService())->getProjectsForFilter();
 
