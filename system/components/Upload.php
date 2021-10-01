@@ -59,26 +59,32 @@ class Upload
         rename($old_path, $new_path);
     }
 
-    public static function uploadGIF($current_path, $image_name = null, $path_to_save = UPLOAD_DIR . '/temp')
+    /**
+     * @param $currentPath
+     * @param $pathToSave
+     * @return string
+     * @throws \ImagickException
+     */
+    public static function uploadGif($currentPath, $pathToSave): string
     {
-        if (empty($current_path)) {
-            throw new RequestException();
-        }
+        $imageName = md5(microtime());
 
-        if ($image_name == null) {
-            $image_name = md5(microtime());
-        }
-
-        $imagick = new \Imagick($current_path);
-
+        $imagick = new \Imagick($currentPath);
 
         $imagick->setImageFormat('gif');
-        $imagick->writeImage($path_to_save . '/' . $image_name . '.gif');
-
+        $imagick->setImageCompression(\Imagick::COMPRESSION_JPEG);
+        $imagick->setCompressionQuality(100);
+        $imagick->setInterlaceScheme(\Imagick::INTERLACE_JPEG);
+        if($pathToSave[strlen($pathToSave) - 1] !== '/') {
+            $pathToSave .= '/' . $imageName . '.gif';
+        } else {
+            $pathToSave .= $imageName . '.gif';
+        }
+        $imagick->writeImages($pathToSave, true);
 
         $imagick->clear();
         $imagick->destroy();
 
-        return $image_name;
+        return $imageName;
     }
 }

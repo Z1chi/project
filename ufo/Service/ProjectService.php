@@ -12,7 +12,7 @@ final class ProjectService
      */
     public function getProjectsForFilter(): array
     {
-        $projectsCollection = Project::get(['id', 'title']);
+        $projectsCollection = Project::orderBy('title')->get(['id', 'title']);
         $projects = [];
 
         $projectsCollection->each(function ($project) use (&$projects){

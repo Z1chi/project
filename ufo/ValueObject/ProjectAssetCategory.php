@@ -14,11 +14,11 @@ class ProjectAssetCategory
     public static function getCategories(): array
     {
         return [
-            self::VIDEO => 'Video',
-            self::BANNER => 'Banner',
             self::ANIMATED => 'Animated banner',
-            self::LANDING => 'Landing',
             self::ARCHIVE => 'Archive',
+            self::BANNER => 'Banner',
+            self::LANDING => 'Landing',
+            self::VIDEO => 'Video',
         ];
     }
 }

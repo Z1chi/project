@@ -6,7 +6,9 @@ export class Assets extends Controller {
     init() {
         super.init();
 
+        super.initFilters();
         this.initCreate();
+        this.initAssets();
     }
 
     validateForm() {
@@ -52,7 +54,9 @@ export class Assets extends Controller {
                         contentType: false
                     },
                     response => {
-
+                        if (response.result === 'success') {
+                            Util.reload();
+                        }
                     });
             }
         });
@@ -74,5 +78,21 @@ export class Assets extends Controller {
         $createForm.find('#preview, #file').on('change', function () {
             $(this).siblings('.error').remove();
         });
+    }
+
+    initAssets() {
+        const assets = $('.asset-block');
+        assets.find('.delete-icon').on('click', (event) => {
+            const assetId = $(event.currentTarget).data('assetid');
+            Util.ajax({
+                    url: this.url('/assets/delete'),
+                    data: {id: assetId}
+                },
+                response => {
+                    if (response.result === 'success') {
+                        $(event.currentTarget).parent().remove();
+                    }
+                });
+        })
     }
 }
