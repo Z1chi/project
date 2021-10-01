@@ -30,15 +30,15 @@ use Ufo\Model\Project;
                             if (!empty($project)): ?>
                                 <tr>
                                     <td>
-                                        <div>
+                                        <div style="text-align: center">
                                             <img
-                                                    style="max-height: 150px; max-width: 300px"
+                                                    style="max-height: 150px; max-width: 300px;"
                                                     src="<?= $project->img ?>"
                                                     alt="Preview site image">
                                         </div>
 
                                     </td>
-                                    <td style="vertical-align:middle" class="text-center">
+                                    <td style="vertical-align:middle; width: 40%" class="text-center">
                                         <?= $project->title ?>
                                     </td>
                                     <td style="vertical-align:middle" class="text-center">
