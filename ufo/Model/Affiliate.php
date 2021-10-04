@@ -31,11 +31,15 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property int parent_id
  * @property int team_count
  * @property float total_withdraw_btc
+ * @property string wallet_address
+ * @property string img
  */
 final class Affiliate extends Eloquent
 {
     protected $table = 'affiliate';
     public $timestamps = false;
+
+    protected $guarded = ['id'];
 
     /**
      * The name of the "created at" column.
