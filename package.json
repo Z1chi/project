@@ -33,6 +33,8 @@
   "dependencies": {
     "admin-lte": "^2.4.15",
     "array-each": "^1.0.1",
+    "bootstrap-daterangepicker": "^3.1.0",
+    "bootstrap": "^5.1.1",
     "bitcoin-address-validation": "^2.1.0",
     "bootstrap-datepicker": "^1.9.0",
     "bootstrap-datetimepicker": "^0.0.7",
@@ -61,3 +63,4 @@
     "swiper": "^7.0.5"
   }
 }
+
