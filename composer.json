@@ -32,6 +32,7 @@
         "illuminate/events": "^8.55",
         "illuminate/cache": "^8.55",
         "doctrine/dbal": "^3.1",
+        "ext-imagick": "^3.4",
         "php-ffmpeg/php-ffmpeg": "^0.18.0"
     },
     "require-dev": {
