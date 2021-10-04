@@ -79,9 +79,7 @@ final class AffiliateUrl extends Eloquent
     {
         $res = 'no data';
         if ($this->project->url_pattern) {
-            if ($this->affiliate->user_uid) {
-                $res = sprintf($this->project->url_pattern, HashidHelper::encodeSmartlinkId($this->affiliate->user_uid));
-            }
+            $res = sprintf($this->project->url_pattern, HashidHelper::encodeSmartlinkId($this->id));
         }
         return $res;
     }

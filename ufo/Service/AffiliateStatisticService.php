@@ -19,7 +19,19 @@ final class AffiliateStatisticService
         foreach ($list as &$row) {
             if(!empty($row['created_dt']))
                 $row['created_dt'] = explode(' ', $row['created_dt'])[0];
-            $row['epc'] = number_format((float)$row['epc'], 2, '.', '');
+
+            if(!empty($row['cr'])) {
+                $row['cr'] = number_format((float)$row['cr'], 2, '.', '');
+            } else {
+                $row['cr'] = 'N/A';
+            }
+
+            if(!empty($row['epc'])) {
+                $row['epc'] = number_format((float)$row['epc'], 2, '.', '');
+            } else {
+                $row['epc'] = 'N/A';
+            }
+
             $row['sum_deposit'] =
                 number_format((float)$row['sum_deposit'], 2, '.', ' ');
         }
