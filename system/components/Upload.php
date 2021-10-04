@@ -23,7 +23,6 @@ class Upload
             $image_name = md5(microtime());
         }
 
-        try {
             $imagick = new \Imagick($current_path);
 
             $imagick->setImageFormat('jpg');
@@ -36,10 +35,6 @@ class Upload
 
             return $image_name;
 
-        } catch (\ImagickException $e) {
-            console($e->getMessage(), 'Imagick exception');
-            throw new RequestException();
-        }
     }
 
     /**
