@@ -62,6 +62,7 @@ class RunApp
 		}
 
 		session_set_cookie_params(0, '/', null, PRODUCTION, true);
+        session_name(getenv('APP_NAME'));
 		session_start();
 
 		$this->router = new Router();
