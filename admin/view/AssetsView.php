@@ -7,7 +7,6 @@ use system\components\Upload;
 use system\components\Util;
 use system\core\AdminController;
 use Ufo\Model\ProjectAsset;
-use Ufo\Service\ProjectAssetService;
 use Ufo\Service\ProjectService;
 use Ufo\ValueObject\ProjectAssetCategory;
 
@@ -67,17 +66,10 @@ class AssetsView extends AdminController
             'category' => $_POST['category'],
             'project_id' => (int)Util::sanitize($_POST['projectId']),
         ];
-        $projectAssetService = new ProjectAssetService();
         $newFileNames = [];
 
         try {
             switch ($category) {
-                case ProjectAssetCategory::VIDEO:
-                    $newFileNames = $projectAssetService->uploadVideoWithPreview($fileName, $uploadDir);
-                    if (empty($newFileNames)) {
-                        $this->jsonErrorMsg('Upload failed: ' . ProjectAssetCategory::getCategories()[$category]);
-                    }
-                    break;
                 case ProjectAssetCategory::BANNER:
                     $newFileNames['file'] = Upload::ajaxUploadImage($fileName, null, $uploadDir) . '.jpg';
                     $newFileNames['preview'] = Upload::ajaxUploadImage($fileName, null, $uploadDir) . '.jpg';
@@ -88,6 +80,7 @@ class AssetsView extends AdminController
                     break;
                 case ProjectAssetCategory::LANDING:
                 case ProjectAssetCategory::ARCHIVE:
+                case ProjectAssetCategory::VIDEO:
                     $previewName = $_FILES['preview']['tmp_name'];
                     $newFileNames['preview'] = Upload::ajaxUploadImage($previewName, null, $uploadDir) . '.jpg';
 

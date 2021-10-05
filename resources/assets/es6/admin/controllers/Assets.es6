@@ -28,14 +28,14 @@ export class Assets extends Controller {
 
         const category = $createForm.find('#category').val()
         const preview = $createForm.find('#preview')
-        if (["4", "5"].includes(category) && preview.val().length === 0) {
+        if (["1", "4", "5"].includes(category) && preview.val().length === 0) {
             if (preview.siblings('.error').length === 0) {
                 const error = $('<label for="preview" class="error">Choose preview</label>');
                 preview.after(error);
             }
             isValid = false;
-        } else if (["4", "5"].includes(category) && preview.val().length !== 0
-            || !["4", "5"].includes(category)) {
+        } else if (["1","4", "5"].includes(category) && preview.val().length !== 0
+            || !["1","4", "5"].includes(category)) {
             preview.siblings('.error').remove();
         }
         return isValid;
@@ -68,7 +68,7 @@ export class Assets extends Controller {
         $createForm.find('#category').on('change', function () {
             let previewFormGroup = $('#preview').parent();
             $('#preview').siblings('.error').remove();
-            if (["4", "5"].includes($(this).val())) {
+            if (["1","4", "5"].includes($(this).val())) {
                 previewFormGroup.removeClass('hidden');
             } else {
                 previewFormGroup.addClass('hidden');
