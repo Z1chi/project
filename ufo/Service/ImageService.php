@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace system\components;
+namespace Ufo\Service;
 
-class Image
+class ImageService
 {
     /**
      * Optimize image
@@ -14,7 +15,7 @@ class Image
      * @param string $filePath Path of the file
      * @throws \ImagickException
      */
-    public static function optimize(string $filePath): void
+    public function optimize(string $filePath): void
     {
         /**
          * Compress image

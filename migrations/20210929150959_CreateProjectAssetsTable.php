@@ -13,14 +13,14 @@ final class CreateProjectAssetsTable extends Migration
         $this->schema->create($this->table, function(Blueprint $table) {
             $table->increments('id');
             $table->string('file');
-            $table->string('preview')->nullable();
+            $table->string('preview_src');
             $table->integer('project_id');
-            $table->integer('category');
+            $table->integer('category_id');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
 
             $table->index('project_id');
-            $table->index('category');
+            $table->index('category_id');
         });
     }
 

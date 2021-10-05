@@ -2,11 +2,11 @@
 
 namespace admin\view;
 
-use system\components\Image;
 use system\components\Upload;
 use system\components\Util;
 use system\core\AdminController;
 use Ufo\Model\ProjectAsset;
+use Ufo\Service\ImageService;
 use Ufo\Service\ProjectService;
 use Ufo\ValueObject\ProjectAssetCategory;
 
@@ -37,7 +37,7 @@ class AssetsView extends AdminController
         $assets =
             ProjectAsset::with('project')
                 ->when(!empty($this->filterCategory), function ($query) {
-                    return $query->where('category', $this->filterCategory);
+                    return $query->where('category_id', $this->filterCategory);
                 })
                 ->when(!empty($this->filterProject), function ($query) {
                     return $query->where('project_id', $this->filterProject);
@@ -63,7 +63,7 @@ class AssetsView extends AdminController
         $uploadDir = ROOT . '/public/upload/';
 
         $data = [
-            'category' => $_POST['category'],
+            'category_id' => $_POST['category'],
             'project_id' => (int)Util::sanitize($_POST['projectId']),
         ];
         $newFileNames = [];
@@ -92,7 +92,7 @@ class AssetsView extends AdminController
                     break;
             }
 
-            Image::optimize($uploadDir.$newFileNames['preview']);
+            (new ImageService())->optimize($uploadDir.$newFileNames['preview']);
         } catch (\ImagickException $e) {
             $this->jsonErrorMsg('Category: '.ProjectAssetCategory::getCategories()[$category].'. ImagickError: '. $e->getMessage());
         } catch (\Exception $e) {
@@ -100,7 +100,7 @@ class AssetsView extends AdminController
         }
 
         $data['file'] = '/upload/' . $newFileNames['file'];
-        $data['preview'] = '/upload/' . $newFileNames['preview'] ;
+        $data['preview_src'] = '/upload/' . $newFileNames['preview'] ;
 
         $projectAsset = new ProjectAsset($data);
         $isSaved = $projectAsset->save();

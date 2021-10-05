@@ -85,9 +85,9 @@ use Ufo\ValueObject\ProjectAssetCategory;
                 foreach ($ASSETS as $asset): ?>
                     <div class="asset-block">
                         <span class="delete-icon" data-assetId="<?= $asset->id ?>"><span class="delete-tip">Delete</span></span>
-                        <img class="asset-preview" src="<?= $asset->preview ?>" alt="">
+                        <img class="asset-preview" src="<?= $asset->preview_src ?>" alt="">
                         <div class="badges">
-                            <span class="badge badge-category-<?=$asset->category?>"><?= $categories[$asset->category] ?></span>
+                            <span class="badge badge-category-<?=$asset->category_id?>"><?= $categories[$asset->category_id] ?></span>
                             <span class="badge badge-project"><?= $asset->project->title ?></span>
                         </div>
                     </div>
