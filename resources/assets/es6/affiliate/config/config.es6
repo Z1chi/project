@@ -6,6 +6,7 @@ import { Home } from '../controllers/Home';
 import { Smartlinks } from '../controllers/Smartlinks';
 import { Actionlog } from '../controllers/Actionlog';
 import { Withdraw } from '../controllers/Withdraw';
+import { Profile } from '../controllers/Profile';
 
 export const config = {
     debug: ENV === 'dev',
@@ -20,6 +21,7 @@ export const config = {
         Smartlinks,
         Actionlog,
         Withdraw,
+        Profile,
     },
     component: {
 
