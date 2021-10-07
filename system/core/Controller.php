@@ -153,7 +153,7 @@ abstract class Controller
     public function redirectToPath($path = null)
     {
         $url = Url::createRaw($path);
-        head("Location: {$url}");
+        header("Location: {$url}");
         exit();
     }
 

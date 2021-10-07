@@ -118,12 +118,12 @@
                 </ul>
                 <ul class="sing-block">
                     <li class="menu-item">
-                        <a href="" class="js_login_modal eng-text">sign in</a>
-                        <a href="" class="js_login_modal rus-text">войти</a>
+                        <a href="" class="js_login_modal js-menu-mobile-item eng-text">sign in</a>
+                        <a href="" class="js_login_modal js-menu-mobile-item rus-text">войти</a>
                     </li>
                     <li class="menu-item">
-                        <a href="" class="js_sign_modal eng-text">sign up</a>
-                        <a href="" class="js_sign_modal rus-text">зарегистрироваться</a>
+                        <a href="" class="js_sign_modal js-menu-mobile-item eng-text">sign up</a>
+                        <a href="" class="js_sign_modal js-menu-mobile-item rus-text">зарегистрироваться</a>
                     </li>
                 </ul>
             </nav>
