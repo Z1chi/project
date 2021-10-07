@@ -1,0 +1,105 @@
+@import '../config/variables';
+@import '../common/mixins';
+
+.form-group{
+  width: 50%;
+  position: relative;
+  padding: 0 1.875rem;
+  margin-bottom: 2.75rem;
+  box-sizing: border-box;
+
+  &.w-100{
+    width: 100%;
+  }
+
+  &.error{
+    input{
+      border-bottom: 1px solid $color_red;
+    }
+  }
+
+  input{
+    width: 100%;
+    display: block;
+    height: 3.125rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $color_white;
+    transition: all .3s ease;
+    padding: 0 1rem;
+    color: $color_white;
+    box-sizing: border-box;
+
+    &:focus{
+      outline: none
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      border: none;
+      border-bottom: 1px solid $color_white;
+      -webkit-text-fill-color: $color_white;
+      -webkit-box-shadow: 0 0 0 62.5rem $color_dark_black inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+
+  img{
+    top: 1.25rem;
+    right: 3.125rem;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  label{
+    position: absolute;
+    cursor: text;
+    z-index: 2;
+    top: 0.813rem;
+    left: 2.125rem;
+    padding: 0 0.625rem;
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1rem;
+    letter-spacing: -0.02em;
+    color: $color_white;
+    transition: all .3s ease
+  }
+
+  input:focus{
+    + label{
+      font-size: 0.813rem;
+      top: -0.313rem
+    }
+  }
+
+
+  input:valid{
+    + label{
+      font-size: 0.75rem;
+      top: -0.313rem
+    }
+  }
+
+  @media #{$breakpointXS} {
+    width: 100%;
+    padding: unset;
+    margin-bottom: 1.625rem;
+
+    input{
+      height: 2.5rem;
+    }
+
+    label{
+      left: 0.313rem;
+      font-size: 1rem;
+      line-height: 0.875rem;
+    }
+
+    img{
+      right: 1rem;
+      top: 1rem;
+    }
+  }
+}
