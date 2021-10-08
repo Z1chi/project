@@ -8,6 +8,7 @@ import { Users } from '../controllers/Users';
 import { Affiliates } from '../controllers/Affiliates';
 import {Admins} from "../controllers/Admins";
 import {Account} from "../controllers/Account";
+import {Assets} from "../controllers/Assets";
 
 export const config = {
     debug: ENV === 'dev',
@@ -23,7 +24,8 @@ export const config = {
         Users,
         Affiliates,
         Admins,
-        Account
+        Account,
+        Assets
     },
     component: {
 
