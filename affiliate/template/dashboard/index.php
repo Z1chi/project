@@ -154,7 +154,7 @@
 									<td class="text-center"><?=date('d.m.Y, H:i', $row->created)?></td>
 									<td class="text-center hidden-xs"><?=$row->geo ?? 'Unknown' ?></td>
 									<? if (App::getSession('parent_id') == 0): ?>
-									<td class="text-center"><?=$row->payout?> <?=$row->currency?></td>
+									<td class="text-center"><? if ($row->payout_amount > 0): ?><?=$row->payout_amount?> <?=$row->currency?><? endif; ?></td>
 									<? endif; ?>
 
 								</tr>

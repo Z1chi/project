@@ -78,7 +78,7 @@ class AffiliateActionLogService
                 'geo',
                 TBL_AFFILIATE_ACTION_LOG . '.created',
                 'user_uid',
-                'payout',
+                'payout_amount',
                 'au.title as url_title',
                 'pr.title as project_title'
             )
