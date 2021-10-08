@@ -121,7 +121,11 @@ gulp.task('compile_admin_scss', function () {
         './node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.css',
         './node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
         './node_modules/bootstrap-timepicker/css/bootstrap-timepicker.css',
-    ])
+		cfg.path.admin.scss + '/main.scss',
+	])
+		.pipe(isProduction ? util.noop() : sourcemaps.init())
+		.pipe(sass({ outputStyle: 'expanded'}).on('error', sass.logError))
+		.pipe(isProduction ? util.noop() : sourcemaps.write())
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
