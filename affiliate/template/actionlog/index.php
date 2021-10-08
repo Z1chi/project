@@ -145,7 +145,7 @@ use app\controller\Affiliate;
 									<td class="text-center"><?=date('d.m.Y, H:i', $row->created)?></td>
 									<td class="text-center hidden-xs"><?=$row->geo ?? 'Unknown' ?></td>
                                     <?php if (App::getSession('parent_id') == 0): ?>
-									<td class="text-center"><?=number_format($row->payout, 2, '.', ' ')?> <?=$row->currency?></td>
+									<td class="text-center"><? if ($row->payout_amount > 0): ?><?=$row->payout_amount?> <?=$row->currency?><? endif; ?></td>
                                     <?php endif; ?>
 								</tr>
                             <?php endforeach; ?>
