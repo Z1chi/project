@@ -1,6 +1,5 @@
-<section class="main-screen-privacy">
-    <?php require TEMPLATE . '/layout/parts/navigation.php'; ?>
-
+<?php require TEMPLATE . '/layout/header.php'; ?>
+<section class="main-screen-privacy js_section">
     <div class="container">
         <div class="privacy-text-wrapp eng-text">
             <p class="privacy-text-wrapp-title">
@@ -187,7 +186,7 @@
 
             <p class="privacy-text-wrapp-desc">
                 Смотрите <span class="bold">
-						<a href="javascript:void(0)">оригинал</a>
+						<a href="javascript:void(0)" class="languages-en">оригинал</a>
 					</span> на английском языке.
             </p>
 

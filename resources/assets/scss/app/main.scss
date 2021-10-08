@@ -2,28 +2,19 @@
 @import 'common/normalize';
 @import 'common/mixins';
 
-// todo: refactor
-@import '../../../../node_modules/ion-rangeslider/css/ion.rangeSlider';
-
-@import 'vendor/fontawesome/fontawesome';
-@import 'vendor/fontawesome/solid';
-@import 'vendor/fontawesome/regular';
-@import 'vendor/fontawesome/light';
-@import 'vendor/fontawesome/brands';
-
-@import 'vendor/swiper';
-@import 'vendor/tel_input';
-@import 'vendor/select2';
 
 @import 'common/common';
 @import 'common/fonts';
 @import 'common/notification';
+@import 'common/borders';
+@import 'common/terms';
 
 @import 'components/layout_lobby';
 @import 'components/layout_page';
 
-@import 'components/blocks';
-@import 'components/footer';
+@import 'components/header';
+@import 'components/modal';
+@import 'components/forms';
 @import 'components/buttons';
 @import 'components/popup';
 @import 'components/slider';
@@ -32,6 +23,7 @@
 @import 'components/faq';
 
 @import 'viewcontroller/home';
+@import 'viewcontroller/footer';
 @import 'viewcontroller/404';
 @import 'viewcontroller/page';
 @import 'viewcontroller/miners';

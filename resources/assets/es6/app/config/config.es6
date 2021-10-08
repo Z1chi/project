@@ -4,8 +4,10 @@ import { MainController } from '../controllers/MainController';
 import { Default } from "../controllers/Default";
 
 import { Home } from '../controllers/Home';
+import { Header } from '../controllers/Header';
 
 import { InputError } from '../component/InputError';
+
 
 export const config = {
     debug: ENV === 'dev',
@@ -17,7 +19,9 @@ export const config = {
     controller: {
         MainController,
         Default,
-        Home
+        Home,
+        Header,
+
     },
     component: {
 		InputError
