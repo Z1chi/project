@@ -41,7 +41,7 @@ class ActionlogView extends AffiliateController
     public function init()
 	{
 		$this->affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
-        HomeView::ajaxForgot();
+//        HomeView::ajaxForgot();
 	}
 
 	public function indexAction()
