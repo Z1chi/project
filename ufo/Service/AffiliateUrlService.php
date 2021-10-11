@@ -20,7 +20,7 @@ final class AffiliateUrlService
     {
         $affiliateUrl = AffiliateUrl::where('id', $affiliateUrlId)->first();
         if (!$affiliateUrl) {
-            throw new AffiliateServiceException(sprintf('Link #%d not found', $affiliateUrlId));
+            throw new AffiliateServiceException(sprintf('Affiliate url id #%d not found', $affiliateUrlId));
         }
 
         return $affiliateUrl;
@@ -36,7 +36,7 @@ final class AffiliateUrlService
         $urlId = HashidHelper::decodeSmartlinkId($smartLink);
         $affiliateUrl = AffiliateUrl::find($urlId);
         if (!$affiliateUrl) {
-            throw new AffiliateServiceException(sprintf('Link #%d not found', $urlId));
+            throw new AffiliateServiceException(sprintf('Url id from smart link #%d not found', $urlId));
         }
 
         return $affiliateUrl;
@@ -46,7 +46,7 @@ final class AffiliateUrlService
     {
         $affiliateUrl = AffiliateUrl::find($urlId);
         if (!$affiliateUrl) {
-            throw new AffiliateServiceException(sprintf('Link #%d not found', $urlId));
+            throw new AffiliateServiceException(sprintf('Url id #%d not found', $urlId));
         }
 
         return $affiliateUrl;
