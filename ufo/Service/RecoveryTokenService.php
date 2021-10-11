@@ -34,7 +34,7 @@ class RecoveryTokenService
         $mail = App::getMailer();
 
         $mail->addAddress($email);
-        $mail->Subject = 'recovery_subject';
+        $mail->Subject = 'Password recovery';
         $mail->MsgHTML($html);
 
         try {
