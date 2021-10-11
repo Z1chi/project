@@ -7,8 +7,7 @@ import { Smartlinks } from '../controllers/Smartlinks';
 import { Actionlog } from '../controllers/Actionlog';
 import { Withdraw } from '../controllers/Withdraw';
 import { Profile } from '../controllers/Profile';
-import { RecoveryPassword } from '../controllers/RecoveryPassword';
-import { ForgotPassword } from '../controllers/ForgotPassword';
+
 
 export const config = {
     debug: ENV === 'dev',
@@ -24,8 +23,6 @@ export const config = {
         Actionlog,
         Withdraw,
         Profile,
-        RecoveryPassword,
-        ForgotPassword,
     },
     component: {
 
