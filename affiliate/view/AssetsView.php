@@ -25,8 +25,8 @@ class AssetsView extends AffiliateController
             $this->filterProject = $projectId;
         }
 
-        if (isset($_GET['category'])) {
-            $this->filterCategory = (int) $_GET['category'];
+        if (isset($_GET['categoryId'])) {
+            $this->filterCategory = (int) $_GET['categoryId'];
         }
     }
 
@@ -37,7 +37,7 @@ class AssetsView extends AffiliateController
         $assets = ProjectAsset::when(!empty($this->filterProject), function ($query){
             return $query->where('project_id', $this->filterProject);
         })->when(!empty($this->filterCategory), function ($query){
-            return $query->where('category', $this->filterCategory);
+            return $query->where('category_id', $this->filterCategory);
         })->get();
 
         $categories = ProjectAssetCategory::getCategories();

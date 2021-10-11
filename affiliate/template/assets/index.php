@@ -16,8 +16,8 @@ use Ufo\ValueObject\ProjectAssetCategory;
                 <div class="row">
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
-                            <label for="categoryInput">Category</label>
-                            <select class="form-control input-sm js_filter" data-param="category" id="categoryInput">
+                            <label for="categoryIdInput">Category</label>
+                            <select class="form-control input-sm js_filter" data-param="categoryId" id="categoryIdInput">
                                 <option value="">All</option>
                                 <?php /** @var array $CATEGORIES */
                                 foreach ($CATEGORIES as $categoryId => $categoryTitle): ?>
@@ -37,9 +37,9 @@ use Ufo\ValueObject\ProjectAssetCategory;
                     foreach ($ASSETS as $asset): ?>
                         <div class="asset-block">
                             <a download href="<?=$asset->file?>" class="btn btn-success tooltip">Download</a>
-                            <img class="asset-preview" src="<?= $asset->preview ?>" alt="">
+                            <img class="asset-preview" src="<?= $asset->preview_src ?>" alt="">
                             <div class="badges">
-                                <span class="badge badge-category-<?= $asset->category ?>"><?= $categories[$asset->category] ?></span>
+                                <span class="badge badge-category-<?= $asset->category_id ?>"><?= $categories[$asset->category_id] ?></span>
                             </div>
                         </div>
                     <?php endforeach; ?>
