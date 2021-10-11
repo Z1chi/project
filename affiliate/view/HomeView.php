@@ -144,27 +144,12 @@ class HomeView extends AffiliateController
     public function ajaxForgot(): void
     {
         $email = Util::sanitize($_POST['email'], null, 128);
-//        $email = 'korzinkayablok@gmail.com';
-        $affiliate = \Ufo\Model\Affiliate::firstWhere('email', $email);
 
-        if (!empty($affiliate)) {
-            $token = new RecoveryToken();
-            $token->affiliate_id = $affiliate->id;
-            $tokenStr = bin2hex(random_bytes(16));
-            $token->token = $tokenStr;
-            if ($token->save()) {
-                $recoveryService = new RecoveryTokenService();
-                if ($recoveryService->sendRecoveryMail($email, $tokenStr)) {
-                    $this->jsonSuccess();
-                } else {
-                    $this->jsonErrorMsg("Message hasn't been sent");
-                }
-            } else {
-                $this->jsonErrorMsg("Token hasn't been saved");
-            }
-
+        $result = (new RecoveryTokenService())->sendToken($email);
+        if($result['success']) {
+            $this->jsonSuccess();
         } else {
-            $this->jsonErrorMsg("There is no such user");
+            $this->jsonErrorMsg($result['message']);
         }
     }
 
@@ -172,46 +157,12 @@ class HomeView extends AffiliateController
     {
         $token = Util::sanitize($_POST['token'], null, 32);
 
-        $token = RecoveryToken::where(['token' => $token])->first();
-        $message = '';
+        $result = (new RecoveryTokenService())->changePasswordByToken($token);
 
-        if (!empty($token)) {
-            $created_at = $token->created_at;
-            $now = new \DateTime();
-            $diff = $now->diff($created_at)->h;
-
-
-            if ($diff >= 1) {
-                // Token lifetime(1h) is over
-                $token->delete();
-                $this->jsonErrorMsg("Token is expired");
-            } else {
-                if ($_POST['password'] != $_POST['repeatPassword']) {
-                    $error = new \stdClass();
-                    $error->password_repeat = 'The passwords do not match!';
-                    $this->jsonErrorData($error);
-                } else {
-                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-                    $affiliate = \Ufo\Model\Affiliate::find($token->affiliate_id);
-                    if (!empty($affiliate)) {
-                        $affiliate->password = $password;
-                        if ($affiliate->save()) {
-                            // delete all tokens
-                            RecoveryToken::where('affiliate_id', $affiliate->id)->delete();
-                            $this->jsonSuccess();
-                        } else {
-                            $message = "New password hasn't been saved";
-                        }
-                    } else {
-                        $message = "No such affiliate";
-                    }
-                }
-            }
-        } else {
-            $message = "Token doesn't exist";
+        if($result['success']) {
+            $this->jsonSuccess();
         }
-        $this->jsonErrorMsg($message);
+        $this->jsonErrorMsg($result['message']);
     }
 
 	public static function create ($data)
