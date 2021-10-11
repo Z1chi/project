@@ -172,7 +172,7 @@ class HomeView extends AffiliateController
     {
         $token = Util::sanitize($_POST['token'], null, 32);
 
-        $token = RecoveryToken::whereFirst(['token' => $token]);
+        $token = RecoveryToken::where(['token' => $token])->first();
         $message = '';
 
         if (!empty($token)) {
