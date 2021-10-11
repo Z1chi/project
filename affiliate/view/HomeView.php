@@ -168,6 +168,52 @@ class HomeView extends AffiliateController
         }
     }
 
+    public function ajaxRecovery(): void
+    {
+        $token = Util::sanitize($_POST['token'], null, 32);
+
+        $token = RecoveryToken::whereFirst(['token' => $token]);
+        $message = '';
+
+        if (!empty($token)) {
+            $created_at = $token->created_at;
+            $now = new \DateTime();
+            $diff = $now->diff($created_at)->h;
+
+            // Token lifetime(1h) isn't over
+            if ($diff >= 1) {
+                $token->delete();
+                $this->jsonErrorMsg("Token is expired");
+            } else {
+                if ($_POST['password'] != $_POST['password_repeat']) {
+                    $error = new \stdClass();
+                    $error->password_repeat = 'The passwords do not match!';
+                    $this->jsonErrorData($error);
+                } else {
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+                    $affiliate = Affiliate::find($token->affiliate_id);
+
+                    if (!empty($affiliate)) {
+                        $affiliate->password = $password;
+                        if ($affiliate->save()) {
+                            // delete all tokens;
+                            RecoveryToken::where('affiliate_id', $affiliate->id)->delete();
+                            $this->redirectToPath('/');
+                        } else {
+                            $message = "New password hasn't been saved";
+                        }
+                    } else {
+                        $message = "No such affiliate";
+                    }
+                }
+            }
+        } else {
+            $message = "Token doesn't exist";
+        }
+        $this->jsonErrorMsg($message);
+    }
+
 	public static function create ($data)
 	{
 		$user_id = false;

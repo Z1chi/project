@@ -49,7 +49,7 @@ class ActionlogView extends AffiliateController
 		$this->showList();
 	}
 
-	public function showList ()
+	public function showList()
 	{
 		$this->initFilters();
 
