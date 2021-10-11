@@ -63,15 +63,13 @@
         <form method="POST" class="js_forgot_form">
             <label>Enter the e-mail address specified during registration.</label>
             <div class="form-group has-feedback">
-
-                <input name="email" type="email" class="form-control" placeholder="Email">
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                <input name="email" type="email" class="form-control userEmail" placeholder="Email">
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <button class="btn btn-primary btn-block btn-flat js_forgot_password_button">Send me message</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat js_forgot_password_button">Send me message</button>
                 </div>
-                <div class="col-xs-6 js_forgot_messages"></div>
+                <div class="col-xs-6 js_forgot_messages"><p class="error"></p></div>
             </div>
         </form>
     </div>
@@ -81,20 +79,20 @@
         <div class="register-box-body">
             <form method="POST" class="js_recovery_form">
                 <div class="form-group has-feedback">
-                    <input name="password" type="password" class="form-control" placeholder="New password">
-                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    <input name="password" type="password" id="newPassword" class="form-control password" placeholder="New password">
+
                 </div>
                 <div class="form-group has-feedback">
-                    <input name="repeatPassword" type="password" class="form-control" placeholder="Repeat password">
-                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    <input name="repeatPassword" type="password"  class="form-control confirmPassword" placeholder="Repeat password">
+
                 </div>
-                <input name="token" type="hidden" class="form-control" placeholder="Repeat password" value="<?= $_GET['token'] ?? '' ?>">
+                <input name="token" type="hidden" class="form-control"  placeholder="Repeat password" value="<?= $_GET['token'] ?? '' ?>">
 
                 <div class="row">
                     <div class="col-xs-6">
-                        <button class="btn btn-primary btn-block btn-flat js_recovery_password_button">Create new password</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat js_recovery_password_button">Create new password</button>
                     </div>
-                    <div class="col-xs-6 js_recovery_messages"></div>
+                    <div class="col-xs-6 js_recovery_messages"><p class="error"></p></div>
                 </div>
             </form>
         </div>
@@ -113,17 +111,17 @@
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Sign in</button>
                 </div>
-                <div class="col-xs-8 js_auth_message"></div>
+                <a class=" col-xs-6 btn btn-flat" href="<?=App::createRawUrl('/?start=forgot')?>">Forgot password</a>
             </div>
+            <div class="js_auth_message"></div>
             <br>
             <div class="row">
                 <div class="col-xs-12">
                     <p>
                         <a class="btn btn-default btn-block btn-flat" href="<?=App::createRawUrl('/?start=signup')?>">Signup</a>
-                        <a class="btn btn-default btn-block btn-flat" href="<?=App::createRawUrl('/?start=forgot')?>">Forgot password</a>
                     </p>
                 </div>
             </div>

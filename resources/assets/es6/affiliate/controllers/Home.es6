@@ -4,89 +4,136 @@ import $ from "jquery";
 import "jquery-validation";
 
 export class Home extends Controller {
-	init ()
-	{
-		super.init();
+    init() {
+        super.init();
 
-		this.initSignup();
-		this.initRecoveryPassword();
-		this.initForgotPassword();
-	}
+        this.initSignup();
+        this.initRecoveryPassword();
+        this.initForgotPassword();
+    }
 
-	initSignup ()
-	{
-		const $form = $('.js_signup_form');
+    initSignup() {
+        const $form = $('.js_signup_form');
 
-		$form.on('submit', (event) => {
-			event.preventDefault();
+        $form.on('submit', (event) => {
+            event.preventDefault();
 
-			Util.ajax({url: this.url('/home/signup'), data: $form.serialize() }, response =>
-			{
-				if (response.result === 'error') {
+            Util.ajax({url: this.url('/home/signup'), data: $form.serialize()}, response => {
+                if (response.result === 'error') {
 
-					Util.handleBootstrapErrors($form, response);
+                    Util.handleBootstrapErrors($form, response);
 
-				} else {
-					Util.changeLocation(this.url('/home'));
-				}
-			});
-		});
-	}
+                } else {
+                    Util.changeLocation(this.url('/home'));
+                }
+            });
+        });
+    }
 
-	initForgotPassword()
-	{
-		const $submitButton = $('.js_forgot_password_button');
-		const $form = $('.js_forgot_form');
-		const $result = $('.js_forgot_messages');
+    initForgotPassword() {   // Форма отправки Email на восстановление пароля
+        const $form = $('.js_forgot_form');
+        const $result = $('.js_forgot_messages');
 
-		$submitButton
-			.on('click', (event) => {
-				event.preventDefault();
-				$form.submit();
-			});
+        $.validator.methods.email = (value) =>
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
 
-		$form.on('submit', (event) =>
-		{
-			event.preventDefault();
+        $form
+            .on('submit', (event) => {
+                event.preventDefault();
+                validateForm();
+            });
 
-			Pace.restart();
+        $form.on('change', (event) => {
+            event.preventDefault();
+            validateForm();
+        });
 
-			Util.ajax({url: this.url('/home/forgot'), data: $form.serialize() }, response =>
-			{
-				$result.removeClass('hidden');
-				$result.find('p').html(response.message);
+        const validateForm = () => {
+            return $form.validate( //Валидация
+                {
+                    rules: {
+                        userEmail: {
+                            required: true,
+                            email: true,
+                        },
+                    },
+                    submitHandler: function () {
+                        submitForm();
+                    }
+                }
+            )
+        };
 
-				Pace.stop();
-			});
-		});
-	}
+        const submitForm = () => {
+            Pace.restart();
+
+            Util.ajax({url: this.url('/home/forgot'), data: $form.serialize()}, response => {
+                Pace.stop();
+                if (response.result === 'error') {
+                    $result.removeClass('hidden');
+                    $result.find('p').html(response.message);
+                } else {
+                    $result.removeClass('hidden');
+                    $result.find('p').html(response.result);
+                }
+            });
+        }
+    }
 
 
-	initRecoveryPassword()
-	{
-		const $submitButton = $('.js_recovery_password_button');
-		const $form = $('.js_recovery_form');
-		const $result = $('.js_recovery_messages');
+    initRecoveryPassword() {
+        const $form = $('.js_recovery_form');
+        const $result = $('.js_recovery_messages');
 
-		$submitButton
-			.on('click', (event) => {
-				event.preventDefault();
-				$form.submit();
-			});
+        $form
+            .on('submit', (event) => {
+                event.preventDefault();
 
-		$form.on('submit', (event) =>
-		{
-			event.preventDefault();
+                validateForm();
+            });
 
-			Pace.restart();
+        $form.on('change', (event) => {
+            event.preventDefault();
+            validateForm();
+        });
 
-			Util.ajax({url: this.url('/home/recovery'), data: $form.serialize() }, response =>
-			{
-				$result.removeClass('hidden');
-				$result.find('p').html(response.message);
+        $.validator.addClassRules({  //Добавление правил валидации
+            newPassword: {
+                required: true,
+                minlength: 12,
+            },
+            confirmPassword: {
+                required: true,
+                minlength: 12,
+                equalTo: "#newPassword",
+            },
+        });
 
-				Pace.stop();
-			});
-		});
-	}
+        const validateForm = () => {
+
+            return $form.validate( //Валидация
+                {
+                    submitHandler: function () {
+                        submitForm();
+                    }
+                }
+            )
+        };
+
+        const submitForm = () => {
+
+            Pace.restart();
+            Util.ajax({url: this.url('/home/recovery'), data: $form.serialize()}, response => {
+                Pace.stop();
+                if (response.result === 'error') {
+                    $result.removeClass('hidden');
+                    $result.find('p').html(response.message);
+                } else {
+                    document.location.href = this.url("");
+                }
+            });
+        };
+
+
+    }
 }
