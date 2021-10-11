@@ -9,6 +9,7 @@ use app\controller\Affiliate;
 use system\core\AffiliateController;
 use Ufo\Service\AffiliateActionLogService;
 use Ufo\Service\ProjectService;
+use Ufo\Service\RecoveryTokenService;
 
 class ActionlogView extends AffiliateController
 {
@@ -40,6 +41,7 @@ class ActionlogView extends AffiliateController
     public function init()
 	{
 		$this->affiliate_id = $_SESSION[SESSION_KEY_CURRENT]['id'];
+        HomeView::ajaxForgot();
 	}
 
 	public function indexAction()

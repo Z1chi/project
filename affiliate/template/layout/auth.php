@@ -58,9 +58,10 @@
 </div>
 <!-- /.register-box -->
 <?php elseif($PAGE == 'forgot'): ?>
-    <h1>Hello Forgot</h1>
+    <h1><?= bin2hex(random_bytes(32)) ?></h1>
 <?php elseif($PAGE == 'recovery'): ?>
     <h1>Hello Recovery</h1>
+
 <? elseif(empty($PAGE)): ?>
 <div class="login-box">
 	<div class="login-box-body">

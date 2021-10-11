@@ -13,13 +13,13 @@ abstract class AffiliateController extends Controller
 
 		App::$app->setLanguage('en');
 
-		$signup = false;
+        $PAGE = '';
 
         if (!Affiliate::isSigned())
         {
 			$this->layout  = MODULE_LAYOUT . '/auth.php';
 
-            $PAGE = '';
+
         	if (isset($_GET['start'])) {
 				$PAGE = $_GET['start'];
 			}

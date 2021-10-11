@@ -106,8 +106,12 @@ class App
 		$mail = new PHPMailer(true);
 
 		if (!PRODUCTION) {
-
-			$mail->Host = getenv('SMTP_HOST');
+            $mail->SMTPAuth = true;
+			$mail->Host = 'ssl://smtp.gmail.com';
+			$mail->Username = 'korzinkayablok@gmail.com';
+			$mail->Password = 'cyxqneijftqdkkjg';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
 			$mail->isSMTP();
 
 			$mail->SMTPOptions = array(

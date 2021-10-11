@@ -5,12 +5,15 @@ namespace affiliate\view;
 use affiliate\component\Logger;
 use App;
 use app\controller\UserSession;
+use PHPUnit\Exception;
 use system\components\DB;
 use system\components\Util;
 use system\core\AffiliateController;
 use system\components\Tokenizer;
 use affiliate\model\Affiliate;
 use system\exceptions\RequestException;
+use Ufo\Model\RecoveryToken;
+use Ufo\Service\RecoveryTokenService;
 
 class HomeView extends AffiliateController
 {
@@ -137,6 +140,33 @@ class HomeView extends AffiliateController
 			$this->jsonError();
 		}
 	}
+
+    public function ajaxForgot(): void
+    {
+//        $email = Util::sanitize($_POST['email'], null, 128);
+        $email = 'korzinkayablok@gmail.com';
+        $affiliate = \Ufo\Model\Affiliate::firstWhere('email', $email);
+
+        if (!empty($affiliate)) {
+            $token = new RecoveryToken();
+            $token->affiliate_id = $affiliate->id;
+            $tokenStr = bin2hex(random_bytes(16));
+            $token->token = $tokenStr;
+            if ($token->save()) {
+                $recoveryService = new RecoveryTokenService();
+                if ($recoveryService->sendRecoveryMail($email, $tokenStr)) {
+                    $this->jsonSuccess();
+                } else {
+                    $this->jsonErrorMsg("Message hasn't been sent");
+                }
+            } else {
+                $this->jsonErrorMsg("Token hasn't been saved");
+            }
+
+        } else {
+            $this->jsonErrorMsg("There is no such user");
+        }
+    }
 
 	public static function create ($data)
 	{
