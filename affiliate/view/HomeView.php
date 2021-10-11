@@ -180,8 +180,9 @@ class HomeView extends AffiliateController
             $now = new \DateTime();
             $diff = $now->diff($created_at)->h;
 
-            // Token lifetime(1h) isn't over
+
             if ($diff >= 1) {
+                // Token lifetime(1h) is over
                 $token->delete();
                 $this->jsonErrorMsg("Token is expired");
             } else {
