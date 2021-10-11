@@ -143,8 +143,8 @@ class HomeView extends AffiliateController
 
     public function ajaxForgot(): void
     {
-//        $email = Util::sanitize($_POST['email'], null, 128);
-        $email = 'korzinkayablok@gmail.com';
+        $email = Util::sanitize($_POST['email'], null, 128);
+//        $email = 'korzinkayablok@gmail.com';
         $affiliate = \Ufo\Model\Affiliate::firstWhere('email', $email);
 
         if (!empty($affiliate)) {
