@@ -55,95 +55,119 @@ let isProduction;
 
 // ******************** APP
 
-gulp.task('compile_es6', function ()
-{
-    return browserify(cfg.path.app.es6 + '/entry.es6', { debug: !isProduction, extensions: ['.js', '.es6'] })
-        .transform('babelify', { presets: ['es2015'] })
+gulp.task('compile_es6', function () {
+
+    let vendorScripts = gulp.src([
+        './node_modules/swiper/dist/js/swiper.js',
+        './node_modules/wowjs/dist/wow.js',
+    ])
+        .pipe(isProduction ? uglify() : util.noop());
+
+    let es6Scripts
+        = browserify(cfg.path.app.es6 + '/entry.es6', {debug: !isProduction, extensions: ['.js', '.es6']})
+        .transform('babelify', {presets: ['es2015']})
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(buffer())
-        .pipe(isProduction ? util.noop() : sourcemaps.init({ loadMaps: true }))
+        .pipe(isProduction ? util.noop() : sourcemaps.init({loadMaps: true}))
         .pipe(isProduction ? util.noop() : sourcemaps.write())
         .pipe(isProduction ? uglify() : util.noop())
-		.pipe(size())
+        .pipe(size());
+
+    return merge(vendorScripts, es6Scripts)
+        .pipe(concat('bundle.js'))
         .pipe(gulp.dest(cfg.path.app.bundle.js))
-        .pipe(browserSync.reload({ stream: true }));
+        .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('compile_scss', function () {
-	return gulp.src(cfg.path.app.scss + '/main.scss')
-		.pipe(isProduction ? util.noop() : sourcemaps.init())
-		.pipe(sass({ outputStyle: 'expanded'}).on('error', sass.logError))
-		.pipe(isProduction ? util.noop() : sourcemaps.write())
-		.pipe(autoprefixer({
-			browsers: ['last 2 versions'],
-			cascade: false
-		}))
-		.pipe(isProduction ? stripCssComments({ preserve: false }) : util.noop())
-		.pipe(isProduction ? minifyCss() : util.noop())
-		.pipe(rename({ basename: 'bundle' }))
-		.pipe(gulp.dest(cfg.path.app.bundle.css))
-		.pipe(browserSync.reload({ stream: true }));
+
+    let vendorStyles = gulp.src([
+        './node_modules/swiper/dist/css/swiper.css',
+        './node_modules/animate.css/animate.css',
+        './node_modules/wowjs/css/libs/animate.css',
+        './node_modules/hamburgers/dist/hamburgers.css',
+    ]);
+
+    let customStyles = gulp.src(cfg.path.app.scss + '/main.scss')
+        .pipe(isProduction ? util.noop() : sourcemaps.init())
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(isProduction ? util.noop() : sourcemaps.write())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }));
+
+    return merge(vendorStyles, customStyles)
+
+        .pipe(isProduction ? stripCssComments({preserve: false}) : util.noop())
+        .pipe(isProduction ? minifyCss() : util.noop())
+        .pipe(concat('bundle.css'))
+        .pipe(gulp.dest(cfg.path.app.bundle.css))
+        .pipe(browserSync.reload({stream: true}));
 });
 
 // ******************** ADMIN
 
 gulp.task('compile_admin_scss', function () {
-	return gulp.src([
-		'./node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css',
-		'./node_modules/admin-lte/bower_components/font-awesome/css/font-awesome.min.css',
-		'./node_modules/admin-lte/bower_components/Ionicons/css/ionicons.min.css',
-		'./node_modules/admin-lte/dist/css/AdminLTE.min.css',
-		'./node_modules/admin-lte/dist/css/skins/skin-blue-light.css',
-		'./node_modules/admin-lte/plugins/pace/pace.min.css',
-		'./node_modules/select2/dist/css/select2.css',
-		'./node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.css',
-		'./node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
-		'./node_modules/bootstrap-timepicker/css/bootstrap-timepicker.css',
+    return gulp.src([
+        './node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css',
+        './node_modules/admin-lte/bower_components/font-awesome/css/font-awesome.min.css',
+        './node_modules/admin-lte/bower_components/Ionicons/css/ionicons.min.css',
+        './node_modules/admin-lte/dist/css/AdminLTE.min.css',
+        './node_modules/admin-lte/dist/css/skins/skin-blue-light.css',
+        './node_modules/admin-lte/plugins/pace/pace.min.css',
+        './node_modules/select2/dist/css/select2.css',
+        './node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.css',
+        './node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+        './node_modules/bootstrap-timepicker/css/bootstrap-timepicker.css',
+		cfg.path.admin.scss + '/main.scss',
 	])
-		.pipe(autoprefixer({
-			browsers: ['last 2 versions'],
-			cascade: false
-		}))
-		.pipe(isProduction ? stripCssComments({ preserve: false }) : util.noop())
-		.pipe(isProduction ? minifyCss() : util.noop())
-		.pipe(concat('bundle_admin.css'))
-		.pipe(gulp.dest(cfg.path.admin.bundle.css));
+		.pipe(isProduction ? util.noop() : sourcemaps.init())
+		.pipe(sass({ outputStyle: 'expanded'}).on('error', sass.logError))
+		.pipe(isProduction ? util.noop() : sourcemaps.write())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(isProduction ? stripCssComments({preserve: false}) : util.noop())
+        .pipe(isProduction ? minifyCss() : util.noop())
+        .pipe(concat('bundle_admin.css'))
+        .pipe(gulp.dest(cfg.path.admin.bundle.css));
 });
 
-gulp.task('compile_admin_es6', function ()
-{
-	let vendorScripts = gulp.src([
-		'./node_modules/admin-lte/bower_components/jquery/dist/jquery.min.js',
-		'./node_modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js',
-		'./node_modules/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js',
-		'./node_modules/admin-lte/bower_components/fastclick/lib/fastclick.js',
-		'./node_modules/admin-lte/bower_components/moment/min/moment.min.js',
-		// './node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.js',
-		// './node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
-		'./node_modules/admin-lte/dist/js/adminlte.min.js',
-		// './node_modules/admin-lte/bower_components/ckeditor/ckeditor.js',
-		'./node_modules/admin-lte/bower_components/PACE/pace.min.js',
-		'./node_modules/select2/dist/js/select2.js',
-		// './node_modules/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
-	])
-		.pipe(isProduction ? uglify() : util.noop());
+gulp.task('compile_admin_es6', function () {
+    let vendorScripts = gulp.src([
+        './node_modules/admin-lte/bower_components/jquery/dist/jquery.min.js',
+        './node_modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js',
+        './node_modules/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js',
+        './node_modules/admin-lte/bower_components/fastclick/lib/fastclick.js',
+        './node_modules/admin-lte/bower_components/moment/min/moment.min.js',
+        // './node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.js',
+        // './node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+        './node_modules/admin-lte/dist/js/adminlte.min.js',
+        // './node_modules/admin-lte/bower_components/ckeditor/ckeditor.js',
+        './node_modules/admin-lte/bower_components/PACE/pace.min.js',
+        './node_modules/select2/dist/js/select2.js',
+        // './node_modules/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+    ])
+        .pipe(isProduction ? uglify() : util.noop());
 
-	let es6Scripts
-		= browserify(cfg.path.admin.es6 + '/entry.es6', { debug: !isProduction, extensions: ['.js', '.es6'] })
-		.transform('babelify', { presets: ['es2015'] })
-		.bundle()
-		.pipe(source('bundle.js'))
-		.pipe(buffer())
-		.pipe(isProduction ? util.noop() : sourcemaps.init({ loadMaps: true }))
-		.pipe(isProduction ? util.noop() : sourcemaps.write())
-		.pipe(isProduction ? uglify() : util.noop())
-		.pipe(size());
+    let es6Scripts
+        = browserify(cfg.path.admin.es6 + '/entry.es6', {debug: !isProduction, extensions: ['.js', '.es6']})
+        .transform('babelify', {presets: ['es2015']})
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(isProduction ? util.noop() : sourcemaps.init({loadMaps: true}))
+        .pipe(isProduction ? util.noop() : sourcemaps.write())
+        .pipe(isProduction ? uglify() : util.noop())
+        .pipe(size());
 
-	return merge(vendorScripts, es6Scripts)
-		.pipe(concat('bundle_admin.js'))
-		.pipe(gulp.dest(cfg.path.admin.bundle.js))
-		.pipe(browserSync.reload({ stream: true }));
+    return merge(vendorScripts, es6Scripts)
+        .pipe(concat('bundle_admin.js'))
+        .pipe(gulp.dest(cfg.path.admin.bundle.js))
+        .pipe(browserSync.reload({stream: true}));
 });
 
 // ******************** AFFILIATE

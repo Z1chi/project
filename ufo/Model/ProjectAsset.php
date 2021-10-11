@@ -9,9 +9,9 @@ use Ufo\Component\Eloquent\Eloquent;
 /**
  * @property int       id
  * @property string    file
- * @property string    preview
+ * @property string    $preview_src
  * @property int    project_id
- * @property int    category
+ * @property int    $category_id
  * @property \DateTime created_at
  */
 class ProjectAsset extends Eloquent

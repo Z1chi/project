@@ -1,103 +1,66 @@
-.lobby_miners {
+@import '../config/variables';
+@import '../common/mixins';
 
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: flex-start;
-	//justify-items: flex-start;
-	padding: $spacing_medium $spacing_medium 0 $spacing_medium;
-
-	@media #{$breakpointXS} {
-		padding: 1rem 1rem 0 1rem;
-		justify-content: space-between;
-	}
-
-	.miner_wrapper {
-		width: 27%;
-		margin: $spacing_small calc(19%/3/2);
-		background: $color_light_grey;
-		border-radius: $border_radius_default;
-		position: relative;
-
-		@media #{$breakpointXS} {
-			width: 31%;
-			margin: 0 0 1rem 0;
-		}
-
-		.miner_content {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			overflow: hidden;
-			padding-bottom: 4rem;
-
-			&.plus {
-				padding-bottom: 0;
-				cursor: pointer;
-
-				svg {
-					width: 100%;
-					height: 100%;
-				}
-			}
-
-			//padding: 2rem;
-		}
-
-		.miner_text {
-			position: absolute;
-			bottom: 5%;
-			width: 100%;
-			text-align: center;
-
-			.ghs {
-				color: $color_black;
-				font-size: 1.4rem;
-
-				@media #{$breakpointXS} {
-					font-size: 1.2rem;
-				}
-			}
-
-			.stop {
-				color: $color_dark_grey;
-				font-size: 1.2rem;
-
-				@media #{$breakpointXS} {
-					font-size: 1.1rem;
-				}
-			}
-		}
-
-		&:after{
-			content: '';
-			display: block;
-			padding-bottom: 100%;
-		}
-	}
-
-	&.suspended {
-		.miner_content {
-			filter: grayscale(100%);
-			opacity: 0.4;
-		}
-	}
+p.privacy-text-wrapp-title {
+  font-family: Compose, sans-serif;
+  font-weight: 600;
+  font-size: 5rem;
+  line-height: 87.2%;
+  color: #FFFFFF;
+  margin-bottom: 30px;
+  @media #{$breakpointS} {
+    font-size: 3rem;
+  }
+  @media #{$breakpointXS} {
+    font-size: 1.5rem;
+  }
 }
 
-.buy_button_wrapper {
-	padding: $spacing_small 0 $spacing_medium 0;
+p.privacy-text-wrapp-desc {
+  font-family: Compose, sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  margin-top: 15px;
+}
 
-	@media #{$breakpointXS} {
-		padding: 1rem 0 $spacing_small 0;
+p.privacy-text-wrapp-pre-title {
+  font-family: Compose, sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 77.2%;
+  color: #FFFFFF;
+  margin-top: 40px;
+}
+
+.main-screen-privacy {
+  background-size: cover;
+  padding: 14.375rem 0;
+	@media #{$breakpointS} {
+		padding: 8.375rem 0
 	}
+  background: #020c11 url('/assets/img/work-back-2.png');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #000000;
 
-	.button_start_earn {
-		clear: both;
 
-		@media #{$breakpointXS} {
-			width: 20rem;
-		}
-	}
+
+
+}
+
+.languages:hover {
+  cursor: pointer;
+}
+
+p.privacy-text-wrapp-desc a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+span.bold {
+  font-weight: 600;
 }

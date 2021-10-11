@@ -2,6 +2,7 @@
 
 $_path_font_awesome: '#{$path_fonts}/FontAwesome/webfonts';
 $_path_font_Roboto: '#{$path_fonts}/Roboto';
+$_path_font_Compose: '#{$path_fonts}/Compose';
 // $_path_font_Gotham: '#{$path_fonts}/GothamPro';
 
 @font-face {
@@ -45,3 +46,13 @@ $_path_font_Roboto: '#{$path_fonts}/Roboto';
 //     font-weight: 600;
 //     src: local('GothamPro Bold'), url('#{$_path_font_Gotham}/GothamPro-Bold.woff') format('truetype');
 // }
+
+@font-face {
+    font-family: 'Compose-Bold';
+    src: local('Compose-Bold'), url('#{$_path_font_Compose}/Compose-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Compose-Regular';
+    src: local('Compose-Regular'), url('#{$_path_font_Compose}/Compose-Regular.ttf') format('truetype');
+}
