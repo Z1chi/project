@@ -14,7 +14,7 @@ class RecoveryTokenService
     {
         $url = Url::createRaw('/?token=' . $token. '&start=recovery');
 
-        $tpl_file = SYSTEM . '/template/email/text_button_url.php';
+        $tpl_file = SYSTEM . '/template/email/recovery_password.php';
         $tpl = new Template($tpl_file);
 
         $tpl->init([
@@ -34,7 +34,7 @@ class RecoveryTokenService
         $mail = App::getMailer();
 
         $mail->addAddress($email);
-        $mail->Subject = 'recovery_subject';
+        $mail->Subject = 'Password recovery';
         $mail->MsgHTML($html);
 
         try {
