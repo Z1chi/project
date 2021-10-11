@@ -81,6 +81,7 @@
                 <div class="col-xs-12">
                     <p>
                         <a class="btn btn-default btn-block btn-flat" href="<?=App::createRawUrl('/?start=signup')?>">Signup</a>
+                        <a class="btn btn-default btn-block btn-flat" href="<?=App::createRawUrl('/?start=recovery')?>">Recovery</a>
                     </p>
                 </div>
             </div>
