@@ -56,12 +56,47 @@
 	</div>
 	<!-- /.form-box -->
 </div>
-<!-- /.register-box -->
+<!-- /.forgot-box -->
 <?php elseif($PAGE == 'forgot'): ?>
-    <h1><?= bin2hex(random_bytes(32)) ?></h1>
-<?php elseif($PAGE == 'recovery'): ?>
-    <h1>Hello Recovery</h1>
+<div class="register-box">
+    <div class="register-box-body">
+        <form method="POST" class="js_forgot_form">
+            <label>Enter the e-mail address specified during registration.</label>
+            <div class="form-group has-feedback">
 
+                <input name="email" type="email" class="form-control" placeholder="Email">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button class="btn btn-primary btn-block btn-flat js_forgot_password_button">Send me message</button>
+                </div>
+                <div class="col-xs-6 js_forgot_messages"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<?php elseif($PAGE == 'recovery'): ?>
+    <div class="register-box">
+        <div class="register-box-body">
+            <form method="POST" class="js_recovery_form">
+                <div class="form-group has-feedback">
+                    <input name="" type="password" class="form-control" placeholder="New password">
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input name="repeatPassword" type="password" class="form-control" placeholder="Repeat password">
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button class="btn btn-primary btn-block btn-flat js_recovery_password_button">Create new password</button>
+                    </div>
+                    <div class="col-xs-6 js_recovery_messages"></div>
+                </div>
+            </form>
+        </div>
+    </div>
 <? elseif(empty($PAGE)): ?>
 <div class="login-box">
 	<div class="login-box-body">
