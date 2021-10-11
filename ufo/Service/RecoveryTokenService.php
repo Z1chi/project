@@ -39,13 +39,11 @@ class RecoveryTokenService
 
         try {
             $mail->send();
-        } catch (phpmailerException $e) {
+        } catch (\PHPMailer\PHPMailer\Exception $e) {
 //			Log::e('phpmailerException', $e->errorMessage());
             return false;
-        } catch (\PHPMailer\PHPMailer\Exception $e) {
-
         }
-        $gello = $mail->ErrorInfo;
+
         return true;
     }
 }

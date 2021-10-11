@@ -192,14 +192,13 @@ class HomeView extends AffiliateController
                 } else {
                     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-                    $affiliate = Affiliate::find($token->affiliate_id);
-
+                    $affiliate = \Ufo\Model\Affiliate::find($token->affiliate_id);
                     if (!empty($affiliate)) {
                         $affiliate->password = $password;
                         if ($affiliate->save()) {
-                            // delete all tokens;
+                            // delete all tokens
                             RecoveryToken::where('affiliate_id', $affiliate->id)->delete();
-                            $this->redirectToPath('/');
+                            $this->jsonSuccess();
                         } else {
                             $message = "New password hasn't been saved";
                         }
