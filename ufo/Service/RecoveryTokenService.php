@@ -14,7 +14,7 @@ class RecoveryTokenService
     {
         $url = Url::createRaw('/?token=' . $token. '&start=recovery');
 
-        $tpl_file = SYSTEM . '/template/email/text_button_url.php';
+        $tpl_file = SYSTEM . '/template/email/recovery_password.php';
         $tpl = new Template($tpl_file);
 
         $tpl->init([
