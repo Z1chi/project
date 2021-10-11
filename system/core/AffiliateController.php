@@ -19,12 +19,13 @@ abstract class AffiliateController extends Controller
         {
 			$this->layout  = MODULE_LAYOUT . '/auth.php';
 
-        	if (isset($_GET['start']) && $_GET['start'] == 'signup') {
-				$signup = true;
+            $PAGE = '';
+        	if (isset($_GET['start'])) {
+				$PAGE = $_GET['start'];
 			}
         }
 
-		$this->pushLayoutData(['SIGNUP' => $signup]);
+		$this->pushLayoutData(['PAGE' => $PAGE]);
     }
 
     public function beforeAction($is_ajax)

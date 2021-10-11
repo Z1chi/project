@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page" data-controller="<?=$CONTROLLER?>">
-<? if ($SIGNUP): ?>
+<? if ($PAGE == 'signup'): ?>
 <div class="register-box">
 	<div class="register-box-body">
 		<form method="POST" class="js_signup_form">
@@ -57,7 +57,11 @@
 	<!-- /.form-box -->
 </div>
 <!-- /.register-box -->
-<? else: ?>
+<?php elseif($PAGE == 'forgot'): ?>
+    <h1>Hello Forgot</h1>
+<?php elseif($PAGE == 'recovery'): ?>
+    <h1>Hello Recovery</h1>
+<? elseif(empty($PAGE)): ?>
 <div class="login-box">
 	<div class="login-box-body">
 		<form method="post" class="js_auth_form">
@@ -81,7 +85,7 @@
                 <div class="col-xs-12">
                     <p>
                         <a class="btn btn-default btn-block btn-flat" href="<?=App::createRawUrl('/?start=signup')?>">Signup</a>
-                        <a class="btn btn-default btn-block btn-flat" href="<?=App::createRawUrl('/?start=recovery')?>">Recovery</a>
+                        <a class="btn btn-default btn-block btn-flat" href="<?=App::createRawUrl('/?start=forgot')?>">Forgot password</a>
                     </p>
                 </div>
             </div>
