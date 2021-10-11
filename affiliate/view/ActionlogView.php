@@ -9,7 +9,6 @@ use app\controller\Affiliate;
 use system\core\AffiliateController;
 use Ufo\Service\AffiliateActionLogService;
 use Ufo\Service\ProjectService;
-use Ufo\Service\RecoveryTokenService;
 
 class ActionlogView extends AffiliateController
 {
