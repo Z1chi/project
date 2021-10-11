@@ -81,13 +81,15 @@
         <div class="register-box-body">
             <form method="POST" class="js_recovery_form">
                 <div class="form-group has-feedback">
-                    <input name="" type="password" class="form-control" placeholder="New password">
+                    <input name="password" type="password" class="form-control" placeholder="New password">
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <input name="repeatPassword" type="password" class="form-control" placeholder="Repeat password">
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
+                <input name="token" type="hidden" class="form-control" placeholder="Repeat password" value="<?= $_GET['token'] ?? '' ?>">
+
                 <div class="row">
                     <div class="col-xs-6">
                         <button class="btn btn-primary btn-block btn-flat js_recovery_password_button">Create new password</button>

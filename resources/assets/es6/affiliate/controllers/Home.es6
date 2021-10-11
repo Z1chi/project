@@ -1,6 +1,7 @@
 import {Controller} from "../../core/Controller";
 import {Util} from "../../lib/Util";
 import $ from "jquery";
+import "jquery-validation";
 
 export class Home extends Controller {
 	init ()
@@ -34,7 +35,6 @@ export class Home extends Controller {
 
 	initForgotPassword()
 	{
-		console.log("forgot");
 		const $submitButton = $('.js_forgot_password_button');
 		const $form = $('.js_forgot_form');
 		const $result = $('.js_forgot_messages');
@@ -64,7 +64,6 @@ export class Home extends Controller {
 
 	initRecoveryPassword()
 	{
-		console.log("rec");
 		const $submitButton = $('.js_recovery_password_button');
 		const $form = $('.js_recovery_form');
 		const $result = $('.js_recovery_messages');

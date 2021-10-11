@@ -185,7 +185,7 @@ class HomeView extends AffiliateController
                 $token->delete();
                 $this->jsonErrorMsg("Token is expired");
             } else {
-                if ($_POST['password'] != $_POST['password_repeat']) {
+                if ($_POST['password'] != $_POST['repeatPassword']) {
                     $error = new \stdClass();
                     $error->password_repeat = 'The passwords do not match!';
                     $this->jsonErrorData($error);
