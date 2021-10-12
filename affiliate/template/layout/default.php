@@ -140,7 +140,7 @@
                         <label style="text-align: center;width: 100%;color: #b8c7ce;margin-top: 30px;">You personal manager</label>
                         <div style="display: flex; justify-content: space-evenly;">
                             <a href="<?= App::getSession('support_tg_link') ?>" style=" display: block">
-                                <img src="/img/telegram-icon.svg" alt="telegram link">
+                                <img src="/assets_affiliate/img/telegram-icon.svg" alt="telegram link">
                             </a>
                             <div style="display: flex; margin: auto 0">
                                 <img style="width: 55px" src="<?= App::getSession('support_image') ?>" alt="manager avatar">
