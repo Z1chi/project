@@ -1,0 +1,78 @@
+.card-border-right{
+  border-right: 1px solid $color_border;
+  padding-right: 2.75rem;
+  margin-right: 2.75rem;
+}
+
+.border-right{
+  border-right: 1px solid $color_white;
+  padding-right: 2.87rem;
+  margin-right: 2.31rem;
+
+  @media #{$breakpointM} {
+    padding-right: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}
+
+.border-bottom{
+  border-bottom: 0.125rem solid $color_white;
+  margin-top: 3.75rem;
+}
+
+.boost-line{
+  height: 0.125rem;
+  background-color: $color_red;
+  width: 45%;
+}
+
+.line{
+  position: absolute;
+  height: 0.188rem;
+  border-bottom-right-radius: 0.625rem;
+  width: 14.25rem;
+  top: 1px;
+  left: 0;
+
+  &.blue{
+    background: linear-gradient(90deg, $color_blue_light 17.11%, $color_blue_dark 86.4%);
+    box-shadow: 0 0 1.5rem 0.1rem $color_blue_light;
+  }
+
+  &.gold{
+    box-shadow: 0 0 1.5rem 0.1rem $color_gold;
+    background: $color_gold;
+  }
+
+  &.silver{
+    box-shadow: 0 0 1.5rem 0.1rem $color_silver;
+    background: $color_silver;
+  }
+
+  &.bronze{
+    box-shadow: 0 0 1.5rem 0.1rem $color_bronze;
+    background: $color_bronze;
+  }
+
+  @media #{$breakpointXS} {
+    &.gold{
+      box-shadow: 0 -0.3rem 0.7rem 0.1rem $color_gold;
+    }
+
+    &.silver{
+      box-shadow: 0 -0.3rem 0.7rem 0.1rem $color_silver;
+    }
+
+    &.bronze{
+      box-shadow: 0 -0.3rem 0.7rem 0.1rem $color_bronze;
+    }
+  }
+}
+
+.border-green{
+  border-top: 1px solid $color_green;
+}
+
+.border-red{
+  border-top: 1px solid $color_red;
+}

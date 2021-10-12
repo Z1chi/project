@@ -23,7 +23,6 @@ class Upload
             $image_name = md5(microtime());
         }
 
-        try {
             $imagick = new \Imagick($current_path);
 
             $imagick->setImageFormat('jpg');
@@ -36,10 +35,6 @@ class Upload
 
             return $image_name;
 
-        } catch (\ImagickException $e) {
-            console($e->getMessage(), 'Imagick exception');
-            throw new RequestException();
-        }
     }
 
     /**
@@ -57,5 +52,34 @@ class Upload
         console($new_path);
 
         rename($old_path, $new_path);
+    }
+
+    /**
+     * @param $currentPath
+     * @param $pathToSave
+     * @return string
+     * @throws \ImagickException
+     */
+    public static function uploadGif($currentPath, $pathToSave): string
+    {
+        $imageName = md5(microtime());
+
+        $imagick = new \Imagick($currentPath);
+
+        $imagick->setImageFormat('gif');
+        $imagick->setImageCompression(\Imagick::COMPRESSION_JPEG);
+        $imagick->setCompressionQuality(100);
+        $imagick->setInterlaceScheme(\Imagick::INTERLACE_JPEG);
+        if($pathToSave[strlen($pathToSave) - 1] !== '/') {
+            $pathToSave .= '/' . $imageName . '.gif';
+        } else {
+            $pathToSave .= $imageName . '.gif';
+        }
+        $imagick->writeImages($pathToSave, true);
+
+        $imagick->clear();
+        $imagick->destroy();
+
+        return $imageName;
     }
 }

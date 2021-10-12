@@ -16,7 +16,7 @@ class Logaction extends Model
 	private $deposit;
 	private $currency;
 	private $geo;
-	private $payout;
+	private $payout_amount;
 	private $created;
     private $id;
     private $user_uid;
@@ -38,7 +38,7 @@ class Logaction extends Model
 		$this->deposit = $row['deposit'];
 		$this->currency = $row['currency'];
 		$this->geo = $row['geo'];
-		$this->payout = $row['payout'];
+		$this->payout_amount = $row['payout_amount'];
         $this->created = $row['created'];
         $this->user_uid = $row['user_uid'];
 	}
@@ -146,7 +146,7 @@ class Logaction extends Model
 	 */
 	public function getPayout()
 	{
-		return $this->payout;
+		return $this->payout_amount;
 	}
 
 	/**

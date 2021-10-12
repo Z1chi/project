@@ -9,6 +9,7 @@ import { Affiliates } from '../controllers/Affiliates';
 import {Admins} from "../controllers/Admins";
 import {Account} from "../controllers/Account";
 import {Support} from "../controllers/Support";
+import {Assets} from "../controllers/Assets";
 
 export const config = {
     debug: ENV === 'dev',

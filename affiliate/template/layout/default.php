@@ -64,19 +64,21 @@
         </nav>
     </header>
 
-    <aside class="main-sidebar">
-        <section class="sidebar">
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="/assets_affiliate/img/avatar.jpg" class="img-circle" alt="User Image">
+	<aside class="main-sidebar">
+		<section class="sidebar">
+            <a href="<?= App::createUrl('/profile') ?>">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="/assets_affiliate/img/avatar.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p><?= App::getSession('name') ?></p>
+                        <span><?= App::getSession('email') ?></span>
+                    </div>
                 </div>
-                <div class="pull-left info">
-                    <p><?= App::getSession('name') ?></p>
-                    <span><?= App::getSession('email') ?></span>
-                </div>
-            </div>
-            <ul class="sidebar-menu js_side_menu" data-widget="tree">
-                <li class="header">Menu</li>
+            </a>
+			<ul class="sidebar-menu js_side_menu" data-widget="tree">
+				<li class="header">Menu</li>
 
                 <li>
                     <a href="<?= App::createUrl('/home') ?>">

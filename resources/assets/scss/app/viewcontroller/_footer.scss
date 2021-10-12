@@ -1,0 +1,151 @@
+@import '../config/variables';
+@import '../common/mixins';
+footer{
+  background-image: url('/assets/img/footer-bg.png');
+  padding-top: 4.188rem;
+  padding-bottom: 3.125rem;
+  border-top: 1px solid rgba($color: $color_white, $alpha: 0.2);
+
+  .address-block{
+    display: flex;
+
+    .f-small{
+      font-size: 0.75rem;
+      line-height: 0.75rem;
+      color: $color_gray;
+      margin-right: 3.125rem;
+    }
+
+    .f-normal{
+      font-size: 0.875rem;
+      line-height: 0.875rem;
+      color: $color_white;
+    }
+  }
+
+  .social-block{
+    .title{
+      font-size: 0.75rem;
+      line-height: 0.75rem;
+      font-weight: 400;
+      color: $color_gray;
+      margin-right: 2.813rem;
+    }
+
+    .circle{
+      cursor: pointer;
+      width: 4.188rem;
+      height: 4.063rem;
+      border-radius: 1.875rem;
+      border: 0.6px solid rgba($color: $color_social, $alpha: 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:not(:last-child){
+        margin-right: 0.75rem;
+      }
+
+      &:hover{
+        border-color: $color_blue;
+      }
+    }
+  }
+
+  .logo-mob{
+    display: none;
+  }
+
+  .footer-nav{
+    margin-top: 3.75rem;
+
+    .copyright{
+      font-family: Roboto;
+      font-size: 0.75rem;
+      line-height: 0.75rem;
+      font-weight: 400;
+      color: $color_gray;
+      margin-right: 25.5%;
+    }
+
+    nav{
+      font-size: 0.813rem;
+      line-height: 0.813rem;
+      font-weight: 500;
+
+      li{
+        &:not(:last-child){
+          margin-right: 2.25rem;
+        }
+
+        a{
+          color: $color_light_gray;
+          text-decoration: underline;
+
+          &:hover{
+            color: $color_white;
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$breakpointM} {
+    padding-top: 2.5rem;
+
+    .footer-line{
+      display: block;
+    }
+
+    .logo-mob, .address-block{
+      width: max-content;
+      margin: 0 auto;
+    }
+
+    .logo-mob{
+      display: block;
+      margin-top: 2.5rem;
+    }
+
+    .social-block{
+      margin-top: 1.625rem;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      width: max-content;
+
+      .title{
+        margin-bottom: 1.875rem;
+      }
+
+      .circle{
+        height: 3.438rem;
+        width: 3.438rem;
+      }
+    }
+
+    .footer-nav{
+      margin-top: 1.875rem;
+      justify-content: center;
+      display: block;
+
+      nav{
+        font-size: 0.688rem;
+        max-width: 18.75rem;
+        margin: 0 auto;
+
+        ul{
+          justify-content: space-between;
+
+          li{
+            margin: 0 !important;
+          }
+        }
+      }
+
+      .copyright{
+        display: none;
+      }
+    }
+  }
+}

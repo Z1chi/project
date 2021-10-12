@@ -135,6 +135,11 @@
 
 					<li class="header">Super user</li>
 
+                    <li data-controller="assets">
+                        <a href="<?=App::createUrl('/assets')?>">
+                            <i class="fa fa-upload"></i> <span>Project assets</span>
+                        </a>
+                    </li>
 					<li data-controller="preferences">
 						<a href="<?=App::createUrl('/preferences')?>">
 							<i class="fa fa-list-alt"></i> <span>Global variables</span>

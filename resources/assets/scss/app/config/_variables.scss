@@ -23,6 +23,8 @@ $breakpointXS: 'only screen and (max-width: 767px)'; // mobile layout (width: 37
 $breakpointS: 'only screen and (max-width: 991px)';  // tablet layout
 $breakpointM: 'only screen and (max-width: 1210px)'; // small desktop
 $breakpointL: 'only screen and (min-width: 1400px) and (min-height: 800px)'; // large desktop
+$breakpointXL: 'only screen and (min-width: 2700px)'; // small desktop
+
 
 // colors
 
@@ -59,3 +61,30 @@ $color_fail: red;
 
 $box_shadow_color: rgba(#01013F, 0.07);
 $shadow_default: 0 0 3rem $box_shadow_color;
+
+
+$color_black:           #1E1E1E;
+$color_dark_black:      #000000;
+$color_affiliate_bg:    #282828;
+$color_white:           #ffffff;
+$color_blue:            #49B3FF;
+$color_gray:            #878787;
+$color_light_gray:      #B0B0B0;
+$color_dark_gray:       #7A7A7A;
+$color_mid_gray:        #738DA4;
+$color_bitter_gray:     #CDD7E3;
+$color_border:          #30363A;
+$color_social:          #A3A6C5;
+$color_red:             #E61B4A;
+$color_nr:              #373737;
+$color_bg:              #121317;
+$color_blue_light:      #1BA9E6;
+$color_mid_blue:        #219FE5;
+$color_blue_dark:       #1B85E6;
+$color_card_bg:         #3A7B89;
+$color_green:           #2ECB76;
+$color_modal_bg:        #054064;
+$color_gold:            #F3933A;
+$color_silver:          #C6C6C6;
+$color_bronze:          #CF6D36;
+$color_lang_bg:         #263646;
