@@ -13,6 +13,7 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property \DateTime created_at
  * @property \DateTime updated_at
  * @property \DateTime accessed_at
+ * @property string img
  */
 final class Project extends Eloquent
 {
@@ -21,4 +22,18 @@ final class Project extends Eloquent
     protected $casts = [
         'accessed_at' => 'datetime',
     ];
+
+    /**
+     * Get host from url_pattern field
+     * @return string
+     */
+    public function getUrlHost(): string
+    {
+        if(empty($this->url_pattern)) {
+            return '';
+        }
+
+        return parse_url($this->url_pattern, PHP_URL_HOST);
+    }
+
 }
