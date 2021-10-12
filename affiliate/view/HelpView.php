@@ -6,11 +6,6 @@ use system\core\AffiliateController;
 
 class HelpView extends AffiliateController
 {
-    public function init()
-    {
-
-    }
-
     public function indexAction()
     {
         $data = [];
