@@ -4,6 +4,8 @@ namespace affiliate\view;
 
 
 use system\core\AffiliateController;
+use system\exceptions\WrongRouteException;
+use Ufo\Model\Project;
 
 class ProjectView extends AffiliateController
 {
