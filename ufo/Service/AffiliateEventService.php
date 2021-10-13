@@ -145,12 +145,12 @@ final class AffiliateEventService
         $affiliateActionLog->currency = mb_strtoupper($currency);
         $affiliateActionLog->transaction_id = $transactionId;
         $affiliateActionLog->project_id = $affiliateUrl->project_id;
-        if ($affiliate->revshare_percent) {
+//        if ($affiliate->revshare_percent) { // TODO: pri 0% dlja svoih ne rabotaet - kidaet oshibku
             $affiliateActionLog->payout_type = PayoutType::PERCENT;
             $affiliateActionLog->payout_value = $affiliate->revshare_percent;
-        } else {
-            throw new AffiliateServiceException('Unhandled payout type');
-        }
+//        } else {
+//            throw new AffiliateServiceException('Unhandled payout type');
+//        }
         $affiliateActionLog->save();
         $affiliateActionLog->refresh();
 
@@ -182,12 +182,12 @@ final class AffiliateEventService
         $affiliateActionLog->currency = mb_strtoupper($currency);
         $affiliateActionLog->transaction_id = $transactionId;
         $affiliateActionLog->project_id = $affiliateUrl->project_id;
-        if ($affiliate->revshare_percent) {
+//        if ($affiliate->revshare_percent) { // TODO: pri 0% dlja svoih ne rabotaet - kidaet oshibku
             $affiliateActionLog->payout_type = PayoutType::PERCENT;
             $affiliateActionLog->payout_value = $affiliate->revshare_percent;
-        } else {
-            throw new AffiliateServiceException('Unhandled payout type');
-        }
+//        } else {
+//            throw new AffiliateServiceException('Unhandled payout type');
+//        }
         $affiliateActionLog->save();
         $affiliateActionLog->refresh();
 
