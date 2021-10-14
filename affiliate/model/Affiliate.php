@@ -7,6 +7,9 @@ use system\components\DB;
 use system\core\Model;
 use system\exceptions\RequestException;
 
+/**
+ * @property int id;
+ */
 class Affiliate extends Model
 {
 	private $id;
