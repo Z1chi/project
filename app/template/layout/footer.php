@@ -1,5 +1,7 @@
 <?php
+
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
+
 $CrawlerDetect = new CrawlerDetect;
 ?>
 
@@ -41,13 +43,13 @@ $CrawlerDetect = new CrawlerDetect;
             <nav>
                 <ul class="d-flex">
                     <li>
-                        <a href="<?=\system\components\Url::create('privacypolicy')?>">Privacy Policy</a>
+                        <a href="<?= \system\components\Url::create('privacypolicy') ?>">Privacy Policy</a>
                     </li>
                     <li>
-                        <a href="<?=\system\components\Url::create('terms')?>">Terms & conditions</a>
+                        <a href="<?= \system\components\Url::create('terms') ?>">Terms & conditions</a>
                     </li>
                     <li>
-                        <a href="<?=\system\components\Url::create('agreement')?>">Client agreement</a>
+                        <a href="<?= \system\components\Url::create('agreement') ?>">Client agreement</a>
                     </li>
                 </ul>
             </nav>
@@ -57,7 +59,7 @@ $CrawlerDetect = new CrawlerDetect;
 
 
 <div class="modal login-modal" style="display: none;">
-    <form class="modal-dialog js_auth_form" action="" id="sing-in"  method="POST">
+    <form class="modal-dialog js_auth_form" action="" id="sing-in" method="POST">
         <div class="modal-content small-modal">
             <div class="modal-header pos-relative">
                 <img src="/assets/svg/close.svg" class="btn-close js_close_modal" alt="close">
@@ -66,18 +68,21 @@ $CrawlerDetect = new CrawlerDetect;
                 <div class="modal-title">sign in</div>
                 <div class="form-block">
                     <div class="form-group w-100">
-                        <input type="text" name="username" required>
-                        <label for="email">e-mail</label>
+                        <input type="text" name="username" class="userEmailAuth" required>
+                        <div class="labelForm">e-mail</div>
                     </div>
                 </div>
                 <div class="form-block">
                     <div class="form-group w-100">
                         <img src="/assets/svg/eye-view.svg" class="js_view_pass" alt="eye-view">
-                        <input type="password"  name="password" required>
-                        <label for="password">password</label>
+                        <input type="password" name="password" class="passwordAuth" required>
+                        <div class="labelForm">password</div>
                     </div>
                 </div>
-                <div class="caption"><a href="#" class="term">forget password</a></div>
+                <div class="caption caption__signIn">
+                    <a href="#" class="term">forget password</a>
+                    <label class="error-label"></label>
+                </div>
                 <a href="" class="d-flex sign-center-block js_auth_form_submit">
                     <div class="title">sign in</div>
                     <img src="/assets/svg/arrow-right.svg" height="47" alt="arrow-right">
@@ -100,33 +105,38 @@ $CrawlerDetect = new CrawlerDetect;
                 <div class="modal-title">sign up</div>
                 <div class="form-block">
                     <div class="form-group">
-                        <input type="text" name="email" required>
-                        <label for="email">e-mail</label>
-                    </div>
-                    <div class="form-group error">
-                        <input type="text" name="last_name" required>
-                        <label for="name">name</label>
+                        <input type="text" name="first_name" class="firstNameSignUp" required>
+                        <div class="labelForm">first name</div>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="telegram" required>
-                        <label for="telegram">telegram</label>
+                        <input class="lastNameSignUp" type="text" name="last_name" required>
+                        <div class="labelForm">last name</div>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="telegram-account" required>
-                        <label for="telegram-account">telegram account</label>
+                        <input type="text" name="email" class="userEmailSignUp" required>
+                        <div class="labelForm">e-mail</div>
                     </div>
                     <div class="form-group">
-                        <img src="/assets/svg/eye-view.svg" class="js_view_pass" alt="eye-view">
-                        <input type="password"  name="password" required>
-                        <label for="password">password</label>
+                        <input type="text" name="telegram" class="telegramLink" required>
+                        <div class="labelForm">telegram</div>
                     </div>
                     <div class="form-group">
                         <img src="/assets/svg/eye-view.svg" class="js_view_pass" alt="eye-view">
-                        <input type="password" name="password_repeat" required>
-                        <label for="re-enter-pass">re-entry password</label>
+                        <input type="password" name="password" id="passwordSignUp" class="passwordSignUp" required>
+                        <div class="labelForm">password</div>
+                    </div>
+                    <div class="form-group">
+                        <img src="/assets/svg/eye-view.svg" class="js_view_pass" alt="eye-view">
+                        <input type="password" name="password_repeat" class="password_repeat" required>
+                        <div class="labelForm">re-entry password</div>
                     </div>
                 </div>
-                <div class="caption">If you push the button you <a href="#" class="term">confirm terms</a></div>
+                <div class="caption form__error-wrapper">
+                    <p>If you push the button you
+                    <a href="<?= \system\components\Url::create('terms') ?>" target="_blank" class="term">confirm terms</a>
+                    </p>
+                    <label class="error-label"></label>
+                </div>
                 <a class="d-flex sign-center-block js_signup_form_submit">
                     <div class="title">create account</div>
                     <img src="/assets/svg/arrow-right.svg" height="47" alt="arrow-right">
@@ -190,9 +200,9 @@ $CrawlerDetect = new CrawlerDetect;
     <div class="modal-backdrop"></div>
 </div>
 
-<script src="/assets/js/bundle.js?<?=$MTIME_JS?>"></script>
+<script src="/assets/js/bundle.js?<?= $MTIME_JS ?>"></script>
 <? if (PRODUCTION && getenv('JIVO_CHAT_KEY')): ?>
-    <script src="//code.jivosite.com/widget/<?=getenv('JIVO_CHAT_KEY')?>" async></script>
+    <script src="//code.jivosite.com/widget/<?= getenv('JIVO_CHAT_KEY') ?>" async></script>
 <? endif; ?>
 
 </body>

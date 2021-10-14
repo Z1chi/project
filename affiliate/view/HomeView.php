@@ -126,10 +126,12 @@ class HomeView extends AffiliateController
 			'telegram' => $telegram,
 			'password' => password_hash($password, PASSWORD_BCRYPT),
 			'created' => time(),
+			'updated' => time(),
 			'active' => 0,
 			'revshare_percent' => AFFILIATE_REVSHARE_PERCENT,
 			'first_deposit_percent' => AFFILIATE_DEPOSIT_PERCENT
 		);
+
 
 		$signup_result = self::create($data);
 
@@ -173,6 +175,8 @@ class HomeView extends AffiliateController
 			$user_id = DB::getInstance()
 				->insertGet(TBL_AFFILIATE, $data, 'id');
 		} catch (\Exception $e) {
+		    var_dump($e->getMessage());
+		    die();
 		}
 
 		return $user_id;

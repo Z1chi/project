@@ -33,7 +33,7 @@
     <?= $this->headers ?>
 
 </head>
-<body class="body-<?= $LANGUAGE ?>" data-controller="<?= $CONTROLLER ?>" data-language="<?= $LANGUAGE ?>"
+<body data-controller="<?= $CONTROLLER ?>"
       data-signed="<?= (\app\controller\UserSession::isSigned() == 1) ? 'true' : 'false' ?>"
       data-geo="<?= \app\component\Browser::getCurrentUserGeo() ?>" data-currency="<?= CURRENCY ?>">
 <div class="opacity-layer"></div>
