@@ -68,7 +68,7 @@ $CrawlerDetect = new CrawlerDetect;
                 <div class="modal-title">sign in</div>
                 <div class="form-block">
                     <div class="form-group w-100">
-                        <input type="text" name="username" class="userEmailAuth" required>
+                        <input type="text" name="login" class="userEmailAuth" required>
                         <div class="labelForm">e-mail</div>
                     </div>
                 </div>
