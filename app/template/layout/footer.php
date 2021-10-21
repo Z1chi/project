@@ -80,7 +80,7 @@ $CrawlerDetect = new CrawlerDetect;
                     </div>
                 </div>
                 <div class="caption caption__signIn">
-                    <a href="#" class="term">forget password</a>
+                    <a href="<?= App::getBaseUrl() . "/affiliate/?start=forgot" ?>" class="term">forget password</a>
                     <label class="error-label"></label>
                 </div>
                 <a href="" class="d-flex sign-center-block js_auth_form_submit">
