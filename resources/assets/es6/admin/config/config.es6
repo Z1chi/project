@@ -9,6 +9,7 @@ import { Affiliates } from '../controllers/Affiliates';
 import {Admins} from "../controllers/Admins";
 import {Account} from "../controllers/Account";
 import {Logs} from "../controllers/Logs";
+import {Affiliatewithdraw} from "../controllers/Affiliatewithdraw";
 
 export const config = {
     debug: ENV === 'dev',
@@ -25,7 +26,8 @@ export const config = {
         Affiliates,
         Admins,
         Account,
-        Logs
+        Logs,
+        Affiliatewithdraw
     },
     component: {
 
