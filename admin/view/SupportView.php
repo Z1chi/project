@@ -3,14 +3,11 @@
 namespace admin\view;
 
 use admin\model\Admin;
-use App;
-use Illuminate\Database\Eloquent\Collection;
 use admin\component\Logger;
 use admin\component\Pagination;
 use system\components\Upload;
 use system\components\Util;
 use system\core\AdminController;
-use Ufo\Exception\UfoException;
 use Ufo\Model\Support;
 
 
@@ -30,7 +27,7 @@ class SupportView extends AdminController
             $this->show404();
         }
 
-        $id = App::getCurrentUrl()->query->get('id');
+        $id = \App::getCurrentUrl()->query->get('id');
 
         $this->id = $id;
     }

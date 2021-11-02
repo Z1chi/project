@@ -24,7 +24,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <? /* @var $row \ufo\model\Support */ foreach ($LIST as $row): ?>
+                            <? /* @var $row \Ufo\Model\Support */ foreach ($LIST as $row): ?>
                                 <tr>
                                     <td class="text-center">
                                         <?=$row->id?>

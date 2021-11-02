@@ -6,7 +6,7 @@
         <li class="active">Support profile</li>
     </ol>
 </section>
-<? /* @var $SUPPORT \ufo\model\Support */ ?>
+<? /* @var $SUPPORT \Ufo\Model\Support */ ?>
 <section class="content js_supportInfo supportInfo" data-support-id="<?= $SUPPORT->id ?>">
     <div class="box box-primary supportInfo__lte">
 
