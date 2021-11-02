@@ -56,11 +56,6 @@ class RunApp
      */
 	private function initWeb()
 	{
-		if (in_array(App::getUserGeo(), ['LT', 'EE', 'LV'])) {
-			require_once SYSTEM . '/template/service_unavailable.php';
-			exit();
-		}
-
 		session_set_cookie_params(0, '/', null, PRODUCTION, true);
         session_name(getenv('APP_NAME'));
 		session_start();

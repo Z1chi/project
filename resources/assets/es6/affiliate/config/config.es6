@@ -9,6 +9,7 @@ import { Withdraw } from '../controllers/Withdraw';
 import { Profile } from '../controllers/Profile';
 import { Assets } from '../controllers/Assets';
 
+
 export const config = {
     debug: ENV === 'dev',
     default: {
