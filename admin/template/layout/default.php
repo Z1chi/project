@@ -86,6 +86,12 @@
 				<li class="header">Affiliates</li>
 
                 <li data-controller="affiliates">
+                    <a href="<?=App::createUrl('/project')?>">
+                        <i class="fa fa-gift"></i>
+                        <span>Offers</span>
+                    </a>
+                </li>
+                <li data-controller="affiliates">
                     <a href="<?=App::createUrl('/affiliates')?>">
                         <i class="fa fa-rocket"></i>
                         <span>Affiliates</span>
@@ -129,6 +135,11 @@
 
 					<li class="header">Super user</li>
 
+                    <li data-controller="assets">
+                        <a href="<?=App::createUrl('/assets')?>">
+                            <i class="fa fa-upload"></i> <span>Project assets</span>
+                        </a>
+                    </li>
 					<li data-controller="preferences">
 						<a href="<?=App::createUrl('/preferences')?>">
 							<i class="fa fa-list-alt"></i> <span>Global variables</span>

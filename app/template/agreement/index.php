@@ -1,5 +1,6 @@
-<section class="main-screen-privacy">
-    <?php require TEMPLATE . '/layout/parts/navigation.php'; ?>
+<?php require TEMPLATE . '/layout/header.php'; ?>
+
+<section class="main-screen-privacy js_section">
 
     <div class="container">
         <div class="privacy-text-wrapp eng-text">

@@ -3,264 +3,194 @@ use Jaybizzle\CrawlerDetect\CrawlerDetect;
 $CrawlerDetect = new CrawlerDetect;
 ?>
 
-<footer>
+<footer class="footer-bg bg">
     <div class="container">
-        <div class="footer-top-line">
-            <a href="javascript:void(0)" class="footer-logo">
-                <img src="/img/logo-all-red.png" alt="">
+        <div class="d-flex content-space-between footer-line">
+            <a href="#" class="logo d-m-none">
+                <img src="/assets/svg/trafburg-red.svg" width="205" alt="trafburg-red">
             </a>
-
-            <div class="footer-adress">
-                <p class="footer-adress-desc eng-text">
-                    Our address
-                </p>
-                <p class="footer-adress-desc rus-text">
-                    Наш адрес
-                </p>
-                <p class="footer-adress-title eng-text">
-                    190 High Road<br>Wood Green, London<br>United Kingdom
-                </p>
-                <p class="footer-adress-title rus-text">
-                    United Knighdom,<br>London, Wood Green,<br>High Road 190
-                </p>
+            <div class="address-block">
+                <div class="font-400 f-small">Our address</div>
+                <div class="font-400 f-normal">United Knighdom, <br> London, Wood Green, <br> High Road 190</div>
             </div>
-
-            <? if (false): ?>
-            <div class="footer-socials">
-                <p class="footer-socials-desc eng-text">
-                    Follow us on social media.
-                </p>
-                <p class="footer-socials-desc rus-text">
-                    Социальные сети, ждем в гости
-                </p>
-
-                <a href="javascript:void(0)">
-                    <img src="/img/facebook.png" alt="">
-                </a>
-                <a href="javascript:void(0)">
-                    <img src="/img/in.png" alt="">
-                </a>
-                <a href="javascript:void(0)">
-                    <img src="/img/inst.png" alt="">
-                </a>
-                <a href="javascript:void(0)">
-                    <img src="/img/vk.png" alt="">
+            <div class="social-block d-flex">
+                <div class="title">Follow us in social <br> networks</div>
+                <div class="d-flex">
+                    <div class="circle">
+                        <img src="/assets/svg/facebook.svg" alt="facebook">
+                    </div>
+                    <div class="circle">
+                        <img src="/assets/svg/linked-in.svg" alt="linked-in">
+                    </div>
+                    <div class="circle">
+                        <img src="/assets/svg/instagram.svg" alt="instagram">
+                    </div>
+                    <div class="circle">
+                        <img src="/assets/svg/vk.svg" alt="vk">
+                    </div>
+                </div>
+            </div>
+            <div class="logo-mob">
+                <a href="/">
+                    <img src="/assets/svg/trafburg-red.svg" width="205" alt="trafburg-red">
                 </a>
             </div>
-            <? endif; ?>
         </div>
-
-        <div class="footer-last-line">
-            <p class="footer-last-line-c eng-text">
-                © 2021 trafburg
-            </p>
-            <p class="footer-last-line-c rus-text">
-                © 2021 trafburg
-            </p>
-
-            <ul class="footer-last-line-ul">
-                <li>
-                    <a href="<?=\system\components\Url::create('privacypolicy')?>" class="eng-text">
-                        Privacy Policy
-                    </a>
-                    <a href="<?=\system\components\Url::create('privacypolicy')?>" class="rus-text">
-                        Политика конфиденциальности
-                    </a>
-                </li>
-                <li>
-                    <a href="<?=\system\components\Url::create('terms')?>" class="eng-text">
-                        Terms & Conditions
-                    </a>
-                    <a href="<?=\system\components\Url::create('terms')?>" class="rus-text">
-                        Правила и условия
-                    </a>
-                </li>
-                <li>
-                    <a href="<?=\system\components\Url::create('agreement')?>" class="eng-text">
-                        Client Agreement
-                    </a>
-                    <a href="<?=\system\components\Url::create('agreement')?>" class="rus-text">
-                        Клиентское соглашение
-                    </a>
-                </li>
-            </ul>
+        <div class="footer-nav d-flex">
+            <div class="copyright">© 2021 trafburg</div>
+            <nav>
+                <ul class="d-flex">
+                    <li>
+                        <a href="<?=\system\components\Url::create('privacypolicy')?>">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="<?=\system\components\Url::create('terms')?>">Terms & conditions</a>
+                    </li>
+                    <li>
+                        <a href="<?=\system\components\Url::create('agreement')?>">Client agreement</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </footer>
 
 
-<div class="hidden">
-    <form action="" id="sing-in" class="js_auth_form" method="POST">
-        <a id="close" href="javascript:void(0)" class="modal__back__wrapp__close mfp-close">
-            <img src="/img/close.png" alt="">
-        </a>
-        <div class="sing-in-back"></div>
-        <div class="sing-in-wrapp">
-            <p class="sing-in-title eng-text">
-                sign in
-            </p>
-            <p class="sing-in-title rus-text">
-                вход
-            </p>
-            <div class="input-data input-data-hide">
-                <input type="text" name="username">
-                <label class="eng-text">e-mail <span class="error-label"></span></label>
-                <label class="rus-text">электронная почта <span class="error-label"></span></label>
+<div class="modal login-modal" style="display: none;">
+    <form class="modal-dialog js_auth_form" action="" id="sing-in"  method="POST">
+        <div class="modal-content small-modal">
+            <div class="modal-header pos-relative">
+                <img src="/assets/svg/close.svg" class="btn-close js_close_modal" alt="close">
             </div>
-            <div class="input-data input-data-hide">
-                <input type="password" name="password">
-                <label class="eng-text">password</label>
-                <label class="rus-text">пароль</label>
-                <a href="javascript:void(0)"><img src="/img/sleep.png" alt=""></a>
+            <div class="modal-body">
+                <div class="modal-title">sign in</div>
+                <div class="form-block">
+                    <div class="form-group w-100">
+                        <input type="text" name="username" required>
+                        <label for="email">e-mail</label>
+                    </div>
+                </div>
+                <div class="form-block">
+                    <div class="form-group w-100">
+                        <img src="/assets/svg/eye-view.svg" class="js_view_pass" alt="eye-view">
+                        <input type="password"  name="password" required>
+                        <label for="password">password</label>
+                    </div>
+                </div>
+                <div class="caption"><a href="#" class="term">forget password</a></div>
+                <a href="" class="d-flex sign-center-block js_auth_form_submit">
+                    <div class="title">sign in</div>
+                    <img src="/assets/svg/arrow-right.svg" height="47" alt="arrow-right">
+                </a>
             </div>
-            <p class="sing-in-under-inputs eng-text">
-                forget password?
-            </p>
-            <p class="sing-in-under-inputs rus-text">
-                забыли пароль?
-            </p>
-
-            <a href="#" class="sing-in-submit js_auth_form_submit">
-                <p class="eng-text">sing in</p>
-                <p class="rus-text">войти</p>
-                <img src="/img/reviews-arrow.png" alt="">
-            </a>
         </div>
-
         <input type="submit" style="position: absolute; left: -9999px; display: none; width: 0; height: 0"/>
     </form>
+
+    <div class="modal-backdrop"></div>
 </div>
 
-<div class="hidden">
-    <form action="" id="sign-up" method="POST" class="js_signup_form">
-        <a id="close2" href="javascript:void(0)" class="modal__back__wrapp__close mfp-close">
-            <img src="/img/close.png" alt="">
-        </a>
-        <div class="sign-up-back"></div>
-        <div class="sign-up-wrapp">
-            <p class="sing-in-title eng-text">
-                sign up
-            </p>
-            <p class="sing-in-title rus-text">
-                регистрация
-            </p>
-            <div class="sign-up-container">
-                <div class="sign-up-container-wrapp">
-                    <div class="input-data input-data-hide">
-                        <input type="text" name="email">
-                        <label class="eng-text">e-mail</label>
-                        <label class="rus-text">электронная почта</label>
-                    </div>
-                    <div class="input-data input-data-hide">
-                        <input type="text" name="first_name">
-                        <label class="eng-text">name</label>
-                        <label class="rus-text">имя</label>
-                    </div>
-                    <div class="input-data input-data-hide">
-                        <input type="text" name="last_name">
-                        <label class="eng-text">last name</label>
-                        <label class="rus-text">фамилия</label>
-                    </div>
-                </div>
-                <div class="sign-up-container-wrapp">
-                    <div class="input-data input-data-hide">
-                        <input type="text" name="telegram">
-                        <label class="eng-text">telegram</label>
-                        <label class="rus-text">telegram</label>
-                    </div>
-                    <div class="input-data input-data-hide">
-                        <input type="password" name="password">
-                        <label class="eng-text">password</label>
-                        <label class="rus-text">пароль</label>
-                        <img src="/img/sleep.png" alt="">
-                    </div>
-                    <div class="input-data input-data-hide">
-                        <input type="password" name="password_repeat">
-                        <label class="eng-text">re-entry password</label>
-                        <label class="rus-text">пароль ещё раз</label>
-                        <img src="/img/sleep.png" alt="">
-                    </div>
-                </div>
+<div class="modal sign-modal" style="display: none;">
+    <form class="modal-dialog js_signup_form" action="" id="" method="POST">
+        <div class="modal-content large-modal">
+            <div class="modal-header pos-relative">
+                <img src="/assets/svg/close.svg" class="btn-close js_close_modal" alt="close">
             </div>
-
-            <p class="sing-in-under-inputs eng-text">
-                By pressing the button you <a href="javascript:void(0)">confirm terms</a>
-            </p>
-            <p class="sing-in-under-inputs rus-text">
-                Нажимая кнопу вы соглашаетесь c <a href="javascript:void(0)"> условиями и правилами</a>
-            </p>
-
-            <a href="javascript:void(0)" class="sing-in-submit">
-                <p class="eng-text">create account</p>
-                <p class="rus-text">создать аккаунт</p>
-                <img src="/img/reviews-arrow.png" alt="">
-            </a>
+            <div class="modal-body">
+                <div class="modal-title">sign up</div>
+                <div class="form-block">
+                    <div class="form-group">
+                        <input type="text" name="email" required>
+                        <label for="email">e-mail</label>
+                    </div>
+                    <div class="form-group error">
+                        <input type="text" name="last_name" required>
+                        <label for="name">name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="telegram" required>
+                        <label for="telegram">telegram</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="telegram-account" required>
+                        <label for="telegram-account">telegram account</label>
+                    </div>
+                    <div class="form-group">
+                        <img src="/assets/svg/eye-view.svg" class="js_view_pass" alt="eye-view">
+                        <input type="password"  name="password" required>
+                        <label for="password">password</label>
+                    </div>
+                    <div class="form-group">
+                        <img src="/assets/svg/eye-view.svg" class="js_view_pass" alt="eye-view">
+                        <input type="password" name="password_repeat" required>
+                        <label for="re-enter-pass">re-entry password</label>
+                    </div>
+                </div>
+                <div class="caption">If you push the button you <a href="#" class="term">confirm terms</a></div>
+                <a class="d-flex sign-center-block js_signup_form_submit">
+                    <div class="title">create account</div>
+                    <img src="/assets/svg/arrow-right.svg" height="47" alt="arrow-right">
+                </a>
+            </div>
         </div>
-
         <input type="submit" style="position: absolute; left: -9999px; display: none; width: 0; height: 0"/>
     </form>
+
+    <div class="modal-backdrop"></div>
 </div>
 
-<div class="hidden">
-    <form action="" id="cheers">
-        <a id="close" href="javascript:void(0)" class="modal__back__wrapp__close mfp-close">
-            <img src="/img/close.png" alt="">
-        </a>
-        <div class="sing-in-back"></div>
-        <div class="sing-in-wrapp">
-            <div class="error-wrapp">
-                <img src="/img/cheers.png" alt="">
-                <div class="erroe-wrapp-text">
-                    <p class="erroe-wrapp-text-title">
-                        cheers!
-                    </p>
-                    <p class="erroe-wrapp-text-desc">
-                        new account has<br>been created
-                    </p>
+<div class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content large-modal">
+            <div class="modal-header pos-relative">
+                <img src="/assets/svg/close.svg" class="btn-close js_close_modal" alt="close">
+            </div>
+            <div class="modal-body">
+                <div class="d-flex block">
+                    <img src="/assets/svg/user-success.svg" height="91" alt="user-success">
+                    <div>
+                        <div class="modal-title">cheers!</div>
+                        <div class="modal-subtitle">new account has <br> been created</div>
+                    </div>
+                </div>
+
+                <div class="d-flex sign-center-block border-green">
+                    <div class="title">ok</div>
                 </div>
             </div>
-            <a href="javascript:void(0)" class="error-wrapp-btn">
-                ok
-            </a>
         </div>
-    </form>
+    </div>
+
+    <div class="modal-backdrop"></div>
 </div>
 
-<div class="hidden">
-    <form action="" id="oops">
-        <a id="close" href="javascript:void(0)" class="modal__back__wrapp__close mfp-close">
-            <img src="/img/close.png" alt="">
-        </a>
-        <div class="sing-in-back"></div>
-        <div class="sing-in-wrapp">
-            <div class="error-wrapp">
-                <img src="/img/oops.png" alt="">
-                <div class="erroe-wrapp-text">
-                    <p class="erroe-wrapp-text-title">
-                        oops!
-                    </p>
-                    <p class="erroe-wrapp-text-desc">
-                        some wrong, may you try<br>again?
-                    </p>
+<div class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content large-modal">
+            <div class="modal-header pos-relative">
+                <img src="/assets/svg/close.svg" class="btn-close js_close_modal" alt="close">
+            </div>
+            <div class="modal-body">
+                <div class="d-flex block">
+                    <img src="/assets/svg/fail.svg" height="70" alt="fail">
+                    <div>
+                        <div class="modal-title">oops!</div>
+                        <div class="modal-subtitle">some wrong, may you try <br> again?</div>
+                    </div>
+                </div>
+
+                <div class="d-flex sign-center-block border-red">
+                    <img src="/assets/svg/arrow-right.svg" height="47" alt="arrow-right">
+                    <div class="title">try again</div>
                 </div>
             </div>
-            <a href="javascript:void(0)" class="error-wrapp-btn">
-                <img src="/img/oops-back.png" alt="">
-                try again
-            </a>
         </div>
-    </form>
+    </div>
+
+    <div class="modal-backdrop"></div>
 </div>
 
-<script
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous"></script>
-<script src="/js/jquery.magnific-popup.min.js?<?=$MTIME_JS?>"></script>
-<script src="/js/owl.carousel.min.js?<?=$MTIME_JS?>"></script>
-<script src="/js/wow.min.js?<?=$MTIME_JS?>"></script>
-<script src="/js/jquery.formstyler.min.js?<?=$MTIME_JS?>"></script>
-<script src="/js/main.js?<?=$MTIME_JS?>"></script>
+<script src="/assets/js/bundle.js?<?=$MTIME_JS?>"></script>
 <? if (PRODUCTION && getenv('JIVO_CHAT_KEY')): ?>
     <script src="//code.jivosite.com/widget/<?=getenv('JIVO_CHAT_KEY')?>" async></script>
 <? endif; ?>

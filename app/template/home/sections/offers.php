@@ -1,240 +1,84 @@
-<section class="offers" id="offers">
+<div class="fourth-section bg" id="offers">
     <div class="container">
-        <h3 class="offers-title eng-text">
-            our offers
-        </h3>
-        <h3 class="offers-title rus-text">
-            наши предложения
-        </h3>
-        <p class="offers-desc eng-text">
-            Trafburg Affiliate Program
-        </p>
-        <p class="offers-desc rus-text">
-            Trafburg программы
-        </p>
-    </div>
-
-    <div class="offers-owl-wrapp">
-        <div class="offer-owl">
-            <div class="offers-owl-arrow-wrapp">
-                <a href="javascript:void(0)" class="offers-owl-arrow offers-owl-arrow-prev">
-                    <img src="img/offer-arrow.png" alt="">
-                </a>
-            </div>
-
-            <div class="offer-owl-carousel">
-                <div class="owl-carousel-offer owl-carousel">
-                    <div class="offer-owl-item">
-                        <div class="offer-owl-item-back"></div>
-                        <div class="line"></div>
-                        <div class="line-back"></div>
-                        <div class="offer-owl-item-line">
-                            <div class="offer-owl-item-line-name">
-                                <p class="offer-owl-item-title eng-text">
-                                    Profit CPA
-                                </p>
-                                <p class="offer-owl-item-title rus-text">
-                                    Profit CPA
-                                </p>
-                                <p class="offer-owl-item-desc eng-text">
-                                    CPA model
-                                </p>
-                                <p class="offer-owl-item-desc rus-text">
-                                    CPA model
-                                </p>
-                            </div>
-                            <div class="offer-owl-item-line-price">
-                                <p class="offer-owl-item-price-title eng-text">
-                                    Available in
-                                </p>
-                                <p class="offer-owl-item-price-title rus-text">
-                                    Доступно в странах
-                                </p>
-                                <p class="offer-owl-item-price-desc eng-text">
-                                    Tier 1/2
-                                </p>
-                                <p class="offer-owl-item-price-desc rus-text">
-                                    Tier 1/2
-                                </p>
-                            </div>
-                            <div class="offer-owl-item-line-price">
-                                <p class="offer-owl-item-price-title eng-text">
-                                    CPA up to USD 1,000
-                                </p>
-                                <p class="offer-owl-item-price-title rus-text">
-                                    CPA до USD 1,000
-                                </p>
-                                <p class="offer-owl-item-price-desc eng-text">
-                                    CR 12-15%
-                                </p>
-                                <p class="offer-owl-item-price-desc rus-text">
-                                    CR 12-15%
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="offer-owl-item-last-line">
-                            <div class="offer-owl-item-last-line-countries">
-								<span>
-									<img src="img/offers__country-1.png" alt="">
-									<img src="img/offers__country-2.png" alt="">
-								</span>
-                                <p class="eng-text">Available in</p>
-                                <p class="rus-text">Доступно в</p>
-                            </div>
-                            <div class="offer-owl-item-last-line-line"></div>
-                            <p class="offer-owl-item-last-line-desc eng-text">
-                                CPA: cost per action, where "action"<br> means that your lead<br> made a deposit
-                            </p>
-                            <p class="offer-owl-item-last-line-desc rus-text">
-                                CPA - Оплата за целевое действие - "действие"<br>значит что ваш лид<br>сделал депозит
-                            </p>
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="offer-owl-item">
-                        <div class="offer-owl-item-back"></div>
-                        <div class="line"></div>
-                        <div class="line-back"></div>
-                        <div class="offer-owl-item-line">
-                            <div class="offer-owl-item-line-name">
-                                <p class="offer-owl-item-title eng-text">
-                                    Profit <br>
-                                    Maximaizer
-                                </p>
-                                <p class="offer-owl-item-title rus-text">
-                                    Profit <br>
-                                    Maximaizer
-                                </p>
-                                <p class="offer-owl-item-desc eng-text">
-                                    Revshare model
-                                </p>
-                                <p class="offer-owl-item-desc rus-text">
-                                    Revshare model
-                                </p>
-                            </div>
-                            <div class="offer-owl-item-line-price">
-                                <p class="offer-owl-item-price-title eng-text">
-                                    Available in
-                                </p>
-                                <p class="offer-owl-item-price-title rus-text">
-                                    Доступно в странах
-                                </p>
-                                <p class="offer-owl-item-price-desc eng-text">
-                                    Tier 1/2/3
-                                </p>
-                                <p class="offer-owl-item-price-desc rus-text">
-                                    Tier 1/2/3
-                                </p>
-                            </div>
-                            <div class="offer-owl-item-line-price">
-                                <p class="offer-owl-item-price-title eng-text">
-                                    Revshare up to 40%
-                                </p>
-                                <p class="offer-owl-item-price-title rus-text">
-                                    Revshare до 40%
-                                </p>
-                                <p class="offer-owl-item-price-desc eng-text">
-                                    CR 12-15%
-                                </p>
-                                <p class="offer-owl-item-price-desc rus-text">
-                                    CR 12-15%
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="offer-owl-item-last-line">
-                            <div class="offer-owl-item-last-line-countries">
-								<span>
-									<img src="img/offers__country-1.png" alt="">
-									<img src="img/offers__country-2.png" alt="">
-								</span>
-                                <p class="eng-text">Available in</p>
-                                <p class="rus-text">Доступно в</p>
-                            </div>
-                            <div class="offer-owl-item-last-line-line"></div>
-                            <p class="offer-owl-item-last-line-desc eng-text">
-                                Revshare: where 40% of deposit <br>(unlimited lifetime) from your lead<br> goes to you
-                            </p>
-                            <p class="offer-owl-item-last-line-desc rus-text">
-                                Revshare - значит что 40% от депозита,<br>который сделал вами приведенный<br>пользователь, ваш доход.
-                            </p>
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-                    <div class="offer-owl-item">
-                        <div class="offer-owl-item-back"></div>
-                        <div class="line"></div>
-                        <div class="line-back"></div>
-                        <div class="offer-owl-item-line">
-                            <div class="offer-owl-item-line-name">
-                                <p class="offer-owl-item-title eng-text">
-                                    Custom Profit
-                                </p>
-                                <p class="offer-owl-item-title rus-text">
-                                    Custom Profit
-                                </p>
-                                <p class="offer-owl-item-desc eng-text">
-                                    Custom model
-                                </p>
-                                <p class="offer-owl-item-desc rus-text">
-                                    Специальная модель
-                                </p>
-                            </div>
-                            <div class="offer-owl-item-line-price">
-                                <p class="offer-owl-item-price-title eng-text">
-                                    Available in
-                                </p>
-                                <p class="offer-owl-item-price-title rus-text">
-                                    Доступно в странах
-                                </p>
-                                <p class="offer-owl-item-price-desc eng-text">
-                                    Tier 1/2/3
-                                </p>
-                                <p class="offer-owl-item-price-desc rus-text">
-                                    Tier 1/2/3
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="offer-owl-item-last-line">
-                            <div class="offer-owl-item-last-line-countries">
-								<span>
-									<img src="img/offers__country-1.png" alt="">
-									<img src="img/offers__country-2.png" alt="">
-								</span>
-                                <p class="eng-text">Available in</p>
-                                <p class="rus-text">Доступно в</p>
-                            </div>
-                            <div class="offer-owl-item-last-line-line"></div>
-                            <p class="offer-owl-item-last-line-desc eng-text">
-                                Custom model: Contact our manager<br> to earn something special.
-                            </p>
-                            <p class="offer-owl-item-last-line-desc rus-text">
-                                Особенные условия — свяжитесь с менеджером<br>чтобы получить особые условия
-                            </p>
-                        </div>
-
-
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="offers-owl-arrow-wrapp offers-owl-arrow-wrapp-2">
-                <a href="javascript:void(0)" class="offers-owl-arrow offers-owl-arrow-next">
-                    <img src="img/offer-arrow.png" alt="">
-                </a>
+        <div class="section-title-block">
+            <div>
+                <div class="title">our offers</div>
+                <div class="caption">trafburg affiliate program</div>
             </div>
         </div>
     </div>
-</section>
+    <div class="card-line">
+        <div class="swiper-container js_offers_swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card-bg"></div>
+                    <div class="card-block">
+                        <div class="line blue"></div>
+                        <div class="card-header">
+                            <div class="w-50">
+                                <div class="card-title">Profit <br> Maximaizer</div>
+                                <div class="card-caption">CPA-network</div>
+                            </div>
+                            <div class="w-50 price-block">
+                                <div class="section">
+                                    <div class="card-title">$500</div>
+                                    <div class="card-caption">CPA</div>
+                                </div>
+                                <div class="section">
+                                    <div class="card-title">12-15%</div>
+                                    <div class="card-caption">CR</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="w-50 lng-block d-flex relative">
+                                <img src="/assets/svg/poland.svg" alt="poland">
+                                <img src="/assets/svg/uk.svg" alt="uk">
+                                <p class="available">Available in</p>
+                            </div>
+                            <div class="w-50">
+                                <div class="card-text">Business cooperation between <br> the seller and partners, when <br> selling any product or providing <br> services.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card-bg"></div>
+                    <div class="card-block">
+                        <div class="line blue"></div>
+                        <div class="card-header">
+                            <div class="w-50">
+                                <div class="card-title">Profit <br> Maximaizer</div>
+                                <div class="card-caption">CPA-network</div>
+                            </div>
+                            <div class="w-50 price-block">
+                                <div class="section">
+                                    <div class="card-title">$500</div>
+                                    <div class="card-caption">CPA</div>
+                                </div>
+                                <div class="section">
+                                    <div class="card-title">12-15%</div>
+                                    <div class="card-caption">CR</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="w-50 lng-block d-flex relative">
+                                <img src="/assets/svg/poland.svg" alt="poland">
+                                <img src="/assets/svg/uk.svg" alt="uk">
+                                <p class="available">Available in</p>
+                            </div>
+                            <div class="w-50">
+                                <div class="card-text">Business cooperation between <br> the seller and partners, when <br> selling any product or providing <br> services.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="swiper-button-next d-m-none"></div>
+        <div class="swiper-button-prev d-m-none"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
