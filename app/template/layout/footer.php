@@ -2,7 +2,7 @@
 
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 
-$CrawlerDetect = new CrawlerDetect;
+$сrawlerDetect = new CrawlerDetect;
 ?>
 
 <footer class="footer-bg bg">

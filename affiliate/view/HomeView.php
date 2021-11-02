@@ -175,8 +175,6 @@ class HomeView extends AffiliateController
 			$user_id = DB::getInstance()
 				->insertGet(TBL_AFFILIATE, $data, 'id');
 		} catch (\Exception $e) {
-		    var_dump($e->getMessage());
-		    die();
 		}
 
 		return $user_id;
