@@ -18,7 +18,9 @@ class Logger
     public static $ACTION_ADMIN_ACTIVATE = 'admin_activate';
     public static $ACTION_ADMIN_DEACTIVATE = 'admin_deactivate';
     public static $ACTION_ADMIN_UPDATE = 'admin_update';
+    public static $ACTION_SUPPORT_UPDATE = 'support_update';
     public static $ACTION_ADMIN_ADD = 'admin_add';
+    public static $ACTION_SUPPORT_ADD = 'support_add';
 
 	public static function write ($action, array $data_array = NULL)
 	{

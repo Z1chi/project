@@ -34,6 +34,7 @@ const cfg = {
 		admin: {
 			es6: './resources/assets/es6/admin',
 			scss: './resources/assets/scss/admin',
+			css: './resources/assets/scss/admin/transfer',
 			bundle: {
 				css: './public/assets_admin/css',
 				js: './public/assets_admin/js'
@@ -109,6 +110,26 @@ gulp.task('compile_scss', function () {
 
 // ******************** ADMIN
 
+
+gulp.task('compile_admin_custom_scss', function () {
+
+	return gulp.src(cfg.path.admin.scss + '/main.scss')
+
+		.pipe(isProduction ? util.noop() : sourcemaps.init())
+
+		.pipe(sass({ outputStyle: 'expanded'}).on('error', sass.logError))
+
+		.pipe(isProduction ? util.noop() : sourcemaps.write())
+
+		.pipe(rename({ basename: 'transfer' }))
+
+		.pipe(gulp.dest(cfg.path.admin.css))
+
+		.pipe(browserSync.reload({ stream: true }));
+
+});
+
+
 gulp.task('compile_admin_scss', function () {
     return gulp.src([
         './node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css',
@@ -122,6 +143,7 @@ gulp.task('compile_admin_scss', function () {
         './node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
         './node_modules/bootstrap-timepicker/css/bootstrap-timepicker.css',
 		cfg.path.admin.scss + '/main.scss',
+		'./resources/assets/scss/admin/transfer/transfer.css',
 	])
 		.pipe(isProduction ? util.noop() : sourcemaps.init())
 		.pipe(sass({ outputStyle: 'expanded'}).on('error', sass.logError))
@@ -265,7 +287,9 @@ gulp.task('watch', function (done) {
 	gulp.watch(cfg.path.affiliate.es6 + '/**/*.es6', gulp.parallel('compile_affiliate_es6'));
 	gulp.watch(cfg.path.affiliate.scss + '/**/*.scss', gulp.parallel('compile_affiliate_custom_scss'));
 	gulp.watch(cfg.path.affiliate.css + '/**/*.css', gulp.parallel('compile_affiliate_scss'));
-    gulp.watch(cfg.watch, function () {gulp.src('./app').pipe(browserSync.reload({ stream: true }))});
+	gulp.watch(cfg.path.admin.scss + '/**/*.scss', gulp.parallel('compile_admin_custom_scss'));
+	gulp.watch(cfg.path.admin.css + '/**/*.css', gulp.parallel('compile_admin_scss'));
+	gulp.watch(cfg.watch, function () {gulp.src('./app').pipe(browserSync.reload({ stream: true }))});
     done();
 });
 
@@ -278,6 +302,7 @@ gulp.task('default', gulp.series(
 	'compile_affiliate_es6',
 	'compile_affiliate_custom_scss',
 	'compile_affiliate_scss',
+	'compile_admin_custom_scss',
     gulp.parallel('watch', 'serve')
 ));
 
@@ -297,5 +322,6 @@ gulp.task('build', gulp.series(
 	'compile_affiliate_es6',
 	'compile_affiliate_custom_scss',
 	'compile_affiliate_scss',
+	'compile_admin_custom_scss',
 ));
 
