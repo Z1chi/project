@@ -1,0 +1,73 @@
+.assets-wrapper {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: auto;
+  grid-auto-flow: row dense;
+  padding: 20px;
+
+  &:before, &:after {
+    display: none;
+  }
+
+  .asset-block {
+    display: flex;
+    flex-direction: column;
+    background-color: #eeedff;
+    border-radius: 10px;
+    padding: 10px 10px 5px;
+    align-items: center;
+    position: relative;
+
+    .tooltip {
+      position: absolute;
+      width: 120px;
+      background-color: #00a65a;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      top: -36px;
+      font-size: 14px;
+      opacity: initial;
+
+      display: none;
+    }
+
+    .asset-preview {
+      max-height: 150px;
+      max-width: 200px;
+      cursor: pointer;
+    }
+
+    .badges {
+      .badge {
+        font-size: 11px;
+      }
+
+      margin-top: 5px;
+
+      .badge-category-1 {
+        background-color: #0d6efd;
+      }
+
+      .badge-category-2 {
+        background-color: #198754;
+      }
+
+      .badge-category-3 {
+        background-color: #dc3545;
+      }
+
+      .badge-category-4 {
+        background-color: #ffc107;
+        color: rgb(33, 37, 41);
+      }
+
+      .badge-category-5 {
+        background-color: #0dcaf0;
+        color: rgb(33, 37, 41);
+      }
+    }
+  }
+}
