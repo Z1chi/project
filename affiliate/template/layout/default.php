@@ -122,7 +122,12 @@
                         <i class="fa fa-bar-chart"></i> <span>Statistic</span>
                     </a>
                 </li>
-                <li class="header">Contacts</li>
+                <li>
+                    <a href="<?=App::createUrl('/help')?>">
+                        <i class="fa fa-question"></i> <span>FAQ</span>
+                    </a>
+                </li>
+				<li class="header">Contacts</li>
 
                 <li>
                     <a href="mailto:<?= App::getVar('telegram_affiliate_email') ?>">

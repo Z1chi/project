@@ -5,12 +5,15 @@ namespace affiliate\view;
 use affiliate\component\Logger;
 use App;
 use app\controller\UserSession;
+use PHPUnit\Exception;
 use system\components\DB;
 use system\components\Util;
 use system\core\AffiliateController;
 use system\components\Tokenizer;
 use affiliate\model\Affiliate;
 use system\exceptions\RequestException;
+use Ufo\Model\RecoveryToken;
+use Ufo\Service\RecoveryTokenService;
 
 class HomeView extends AffiliateController
 {
@@ -123,10 +126,12 @@ class HomeView extends AffiliateController
 			'telegram' => $telegram,
 			'password' => password_hash($password, PASSWORD_BCRYPT),
 			'created' => time(),
+			'updated' => time(),
 			'active' => 0,
 			'revshare_percent' => AFFILIATE_REVSHARE_PERCENT,
 			'first_deposit_percent' => AFFILIATE_DEPOSIT_PERCENT
 		);
+
 
 		$signup_result = self::create($data);
 
@@ -137,6 +142,30 @@ class HomeView extends AffiliateController
 			$this->jsonError();
 		}
 	}
+
+    public function ajaxForgot(): void
+    {
+        $email = Util::sanitize($_POST['email'], null, 128);
+
+        $result = (new RecoveryTokenService())->sendToken($email);
+        if($result['success']) {
+            $this->jsonSuccess();
+        } else {
+            $this->jsonErrorMsg($result['message']);
+        }
+    }
+
+    public function ajaxRecovery(): void
+    {
+        $token = Util::sanitize($_POST['token'], null, 32);
+
+        $result = (new RecoveryTokenService())->changePasswordByToken($token);
+
+        if($result['success']) {
+            $this->jsonSuccess();
+        }
+        $this->jsonErrorMsg($result['message']);
+    }
 
 	public static function create ($data)
 	{

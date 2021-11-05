@@ -79,6 +79,12 @@
 				<li class="header">Affiliates</li>
 
                 <li data-controller="affiliates">
+                    <a href="<?=App::createUrl('/project')?>">
+                        <i class="fa fa-gift"></i>
+                        <span>Offers</span>
+                    </a>
+                </li>
+                <li data-controller="affiliates">
                     <a href="<?=App::createUrl('/affiliates')?>">
                         <i class="fa fa-rocket"></i>
                         <span>Affiliates</span>

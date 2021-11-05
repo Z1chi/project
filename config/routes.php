@@ -18,6 +18,14 @@ define('ROUTES', serialize([
 			'action' => 'index',
 		]
 	],
+    // url '/admin/project/1' going to ProjectView, action view
+    [
+        'match' => '^(?P<module>(' . getenv('APP_ADMIN_PATH') . '))/?(?P<viewcontroller>[a-z-]{3,}+)/([0-9]+)$',
+        'route' => [
+            'module' => ADMIN_MODULE_NAME,
+            'action' => 'view'
+        ]
+    ],
 	[
 		'match' => '^(?P<module>(' . getenv('APP_ADMIN_PATH') . '))/?(?P<viewcontroller>[a-z-]{3,}+)/?(?P<action>[a-z-]+)?$',
 		'route' => [
