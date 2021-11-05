@@ -15,44 +15,34 @@
         </div>
         <nav class="d-flex d-s-none">
             <ul class="d-flex font-400 h-100 main-nav">
+
                 <li class="active">
-                    <a href="<?= App::createUrl() ?>#why-choice-us" data-href="#why-choice-us" class="js-menu-item eng-text">
+                    <a href="<?= App::createUrl() ?>#why-choice-us" data-href="#why-choice-us" class="js-menu-item ">
                         why choise us
                     </a>
-                    <a href="<?= App::createUrl() ?>#why-choice-us" data-href="#why-choice-us" class="js-menu-item rus-text">
-                        о нас
-                    </a>
+
                 </li>
                 <li class="">
-                    <a href="<?= App::createUrl() ?>#offers" data-href="#offers" class="js-menu-item eng-text">
+                    <a href="<?= App::createUrl() ?>#offers" data-href="#offers" class="js-menu-item ">
                         offers
                     </a>
-                    <a href="<?= App::createUrl() ?>#offers" data-href="#offers" class="js-menu-item rus-text">
-                        предложения
-                    </a>
+
                 </li>
                 <li class="">
-                    <a href="<?= App::createUrl() ?>#how-it-work" data-href="#how-it-work" class="js-menu-item eng-text">
+                    <a href="<?= App::createUrl() ?>#how-it-work" data-href="#how-it-work" class="js-menu-item ">
                         how it work
                     </a>
-                    <a href="<?= App::createUrl() ?>#how-it-work" data-href="#how-it-work" class="js-menu-item rus-text">
-                        как это<br>работает
-                    </a>
+
                 </li>
                 <li class="">
-                    <a href="<?= App::createUrl() ?>#statistic" data-href="#statistic" class="js-menu-item eng-text">
+                    <a href="<?= App::createUrl() ?>#statistic" data-href="#statistic" class="js-menu-item ">
                         statistic
                     </a>
-                    <a href="<?= App::createUrl() ?>#statistic" data-href="#statistic" class="js-menu-item rus-text">
-                        статистика
-                    </a>
+
                 </li>
                 <li class="">
-                    <a href="<?= App::createUrl() ?>#reviews" data-href="#reviews" class="js-menu-item eng-text">
+                    <a href="<?= App::createUrl() ?>#reviews" data-href="#reviews" class="js-menu-item ">
                         reviews
-                    </a>
-                    <a href="<?= App::createUrl() ?>#reviews" data-href="#reviews" class="js-menu-item rus-text">
-                        отзывы
                     </a>
                 </li>
             </ul>
@@ -76,54 +66,44 @@
             <nav>
                 <ul>
                     <li class="menu-item active">
-                        <a href="<?= App::createUrl() ?>#why-choice-us" data-href="#why-choice-us" class="js-menu-mobile-item js-menu-item eng-text">
+                        <a href="<?= App::createUrl() ?>#why-choice-us" data-href="#why-choice-us" class="js-menu-mobile-item js-menu-item ">
                             why choise us
                         </a>
-                        <a href="<?= App::createUrl() ?>#why-choice-us" data-href="#why-choice-us" class="js-menu-mobile-item js-menu-item rus-text">
-                            о нас
-                        </a>
+
                     </li>
                     <li class="menu-item">
-                        <a href="<?= App::createUrl() ?>#offers" data-href="#offers" class="js-menu-mobile-item js-menu-item eng-text">
+                        <a href="<?= App::createUrl() ?>#offers" data-href="#offers" class="js-menu-mobile-item js-menu-item ">
                             offers
                         </a>
-                        <a href="<?= App::createUrl() ?>#offers" data-href="#offers" class="js-menu-mobile-item js-menu-item rus-text">
-                            предложения
-                        </a>
+
                     </li>
                     <li class="menu-item">
-                        <a href="<?= App::createUrl() ?>#how-it-work" data-href="#how-it-work" class="js-menu-mobile-item js-menu-item eng-text">
+                        <a href="<?= App::createUrl() ?>#how-it-work" data-href="#how-it-work" class="js-menu-mobile-item js-menu-item">
                             how it work
                         </a>
-                        <a href="<?= App::createUrl() ?>#how-it-work" data-href="#how-it-work" class="js-menu-mobile-item js-menu-item rus-text">
-                            как это<br>работает
-                        </a>
+
                     </li>
                     <li class="menu-item">
-                        <a href="<?= App::createUrl() ?>#statistic" data-href="#statistic" class="js-menu-mobile-item js-menu-item eng-text">
+                        <a href="<?= App::createUrl() ?>#statistic" data-href="#statistic" class="js-menu-mobile-item js-menu-item">
                             statistic
                         </a>
-                        <a href="<?= App::createUrl() ?>#statistic" data-href="#statistic" class="js-menu-mobile-item js-menu-item rus-text">
-                            статистика
-                        </a>
+
                     </li>
                     <li class="menu-item">
-                        <a href="<?= App::createUrl() ?>#reviews" data-href="#reviews" class="js-menu-mobile-item js-menu-item eng-text">
+                        <a href="<?= App::createUrl() ?>#reviews" data-href="#reviews" class="js-menu-mobile-item js-menu-item ">
                             reviews
                         </a>
-                        <a href="<?= App::createUrl() ?>#reviews" data-href="#reviews" class="js-menu-mobile-item js-menu-item rus-text">
-                            отзывы
-                        </a>
+
                     </li>
                 </ul>
                 <ul class="sing-block">
                     <li class="menu-item">
-                        <a href="" class="js_login_modal js-menu-mobile-item eng-text">sign in</a>
-                        <a href="" class="js_login_modal js-menu-mobile-item rus-text">войти</a>
+                        <a href="" class="js_login_modal js-menu-mobile-item ">sign in</a>
+
                     </li>
                     <li class="menu-item">
-                        <a href="" class="js_sign_modal js-menu-mobile-item eng-text">sign up</a>
-                        <a href="" class="js_sign_modal js-menu-mobile-item rus-text">зарегистрироваться</a>
+                        <a href="" class="js_sign_modal js-menu-mobile-item ">sign up</a>
+
                     </li>
                 </ul>
             </nav>

@@ -59,6 +59,48 @@ export class Controller {
         });
     }
 
+    headerModal() {
+
+        $('.js_close_modal').on('click', function (e) {
+            e.preventDefault();
+            $('.modal').fadeOut(400);
+        });
+
+        $('.js_login_modal').on('click', function (e) {
+            e.preventDefault();
+            $('.login-modal').fadeIn(400);
+        });
+
+        $('.js_sign_modal').on('click', function (e) {
+            e.preventDefault();
+            $('.sign-modal').fadeIn(400);
+        });
+
+        $(document).mouseup(function (e) {
+            let container = $('.modal-content');
+
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                $('.modal').fadeOut(400);
+            }
+        });
+
+        $('.js_view_pass').each(function () {
+            let eye = $(this);
+            eye.on('click', function () {
+                eye.siblings("input").each(function () {
+                    if ($(this).attr('type') === 'password') {
+                        $(this).attr('type', 'text');
+                        eye.attr('src', '/assets/svg/eye-open-view.svg')
+                    } else {
+                        $(this).attr('type', 'password');
+                        eye.attr('src', '/assets/svg/eye-view.svg')
+                    }
+                });
+            });
+        });
+    }
+
+
     init() {
 
     }
