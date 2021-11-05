@@ -220,14 +220,14 @@ class AdminsView extends AdminController
 
     public function ajaxAddadmin ()
     {
-        $time = time();
+        $time = date("Y-m-d H:i:s");
 
         $data['name'] = Util::sanitize($_POST['name']);
         $data['email'] = Util::sanitize($_POST['email']);
         $data['callcenter_percent'] = (int) $_POST['callcenter_percent'];
         $data['callcenter_id'] = (int) $_POST['callcenter_id'];
-        $data['created'] = $time;
-        $data['updated'] = $time;
+        $data['created_at'] = $time;
+        $data['updated_at'] = $time;
         $data['active'] = 1;
         $data['level'] = Admin::$LEVEL_CALL_CENTER_WORKER;
         $data['password'] = 'null';
