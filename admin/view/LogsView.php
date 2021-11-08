@@ -46,7 +46,7 @@ class LogsView extends AdminController
 				  	FROM ' . TBL_LOG_ADMIN . ' l 
 				  LEFT JOIN admin a 
 				  	ON l.admin_id = a.id 
-				  ORDER BY created DESC ' .
+				  ORDER BY created_at DESC ' .
 			'LIMIT ' . $this->pagination->getItemsOnPage() . ' ' .
 			'OFFSET ' . $this->pagination->getOffset();
 

@@ -29,7 +29,7 @@ class Logger
 			'action' => $action,
 			'data' => $data_array != NULL ? json_encode($data_array) : NULL,
 			'ip' => $_SERVER['REMOTE_ADDR'],
-			'created' => time()
+			'created_at' => date("Y-m-d H:i:s")
 		];
 
 		DB::getInstance()
