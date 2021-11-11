@@ -156,4 +156,14 @@ WHERE al.affiliate_id = ' . $affiliate_id . $where . $order_by . $limit . ') aff
         return DB::getInstance()
                 ->run($query)[0] ?? [];
     }
+
+    public function fillEmptyUserUid(): int
+    {
+        $query =
+            'UPDATE affiliate_action_log
+            SET user_uid = (SELECT user_uid FROM affiliate WHERE affiliate.id = affiliate_action_log.affiliate_id)
+            WHERE id IN (SELECT id FROM affiliate_action_log WHERE user_uid IS NULL OR char_length(user_uid) = 0)';
+
+        return count(DB::getInstance()->run($query));
+    }
 }
