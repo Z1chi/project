@@ -159,11 +159,19 @@ WHERE al.affiliate_id = ' . $affiliate_id . $where . $order_by . $limit . ') aff
 
     public function fillEmptyUserUid(): int
     {
-        $query =
-            'UPDATE affiliate_action_log
-            SET user_uid = (SELECT user_uid FROM affiliate WHERE affiliate.id = affiliate_action_log.affiliate_id)
-            WHERE id IN (SELECT id FROM affiliate_action_log WHERE user_uid IS NULL OR char_length(user_uid) = 0)';
-
-        return count(DB::getInstance()->run($query));
+        $queryUsersWithoutUserUid =
+            "SELECT id, user_id FROM affiliate_action_log 
+                WHERE (user_uid IS NULL OR char_length(user_uid) = 0) AND user_id IS NOT NULL";
+        $usersWithoutUserUid = DB::getInstance()->run($queryUsersWithoutUserUid);
+        if(empty($usersWithoutUserUid)) {
+            return 0;
+        }
+        $userService = new UserService();
+        foreach ($usersWithoutUserUid as $user) {
+            $query = 'UPDATE affiliate_action_log set user_uid = \''.$userService->shaEncodeId($user['user_id']).'\' 
+                where id = '.$user['id'];
+            DB::getInstance()->run($query);
+        }
+        return count($usersWithoutUserUid);
     }
 }
