@@ -192,8 +192,7 @@ class Affiliate extends Model
             throw new RequestException();
         }
 
-        $row = DB::getInstance()
-			->row('SELECT * FROM "' . TBL_AFFILIATE . '" WHERE email = ?', $email);
+        $row = \Ufo\Model\Affiliate::where('email', $email)->first();
 
         if (!$row || !password_verify($password, $row['password'])) {
             throw new RequestException('Incorrect login');
@@ -217,7 +216,9 @@ class Affiliate extends Model
 		    'parent_id' => $row['parent_id'],
 		    'first_deposit_percent' => $row['first_deposit_percent'],
 		    'revshare_percent' => $row['revshare_percent'],
-		    'time'  => time()
+		    'time'  => time(),
+            'support_tg_link' => $row->support->tg_link,
+            'support_image' => $row->support->image
 	    ];
     }
 

@@ -18,15 +18,19 @@ class Logger
     public static $ACTION_ADMIN_ACTIVATE = 'admin_activate';
     public static $ACTION_ADMIN_DEACTIVATE = 'admin_deactivate';
     public static $ACTION_ADMIN_UPDATE = 'admin_update';
+    public static $ACTION_SUPPORT_UPDATE = 'support_update';
     public static $ACTION_ADMIN_ADD = 'admin_add';
+    public static $ACTION_SUPPORT_ADD = 'support_add';
 
-    public static function write ($action, array $data_array = NULL)
-    {
-        $array = [
-            'admin_id' => App::getSession('id'),
-            'action' => $action,
-            'data' => $data_array != NULL ? json_encode($data_array) : NULL,
-            'ip' => $_SERVER['REMOTE_ADDR']
+	public static function write ($action, array $data_array = NULL)
+	{
+		$array = [
+			'admin_id' => App::getSession('id'),
+			'action' => $action,
+			'data' => $data_array != NULL ? json_encode($data_array) : NULL,
+			'ip' => $_SERVER['REMOTE_ADDR'],
+            'created_at' => date("Y-m-d H:i:s")
+
         ];
 
         (new LogAdmin($array))->save();

@@ -65,7 +65,6 @@ export class Profile extends Controller {
         });
 
         form.on('change', () => {
-            event.preventDefault();
             this.validateForm();
         });
     }

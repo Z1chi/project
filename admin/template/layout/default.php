@@ -7,13 +7,6 @@
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="/assets_admin/css/bundle_admin.css">
 
-	<script src="/assets_admin/js/ckeditor.js"></script>
-	<script src="/ckfinder/ckfinder.js"></script>
-
-<!--	<script type="text/javascript">-->
-<!--		CKEDITOR_BASEPATH = '/ckeditor/';-->
-<!--	</script>-->
-
 	<script src="/assets_admin/js/bundle_admin.js"></script>
 
     <? if (PRODUCTION): ?>
@@ -110,6 +103,12 @@
                 <li data-controller="account">
                     <a href="<?=App::createUrl('/account')?>">
                         <i class="fa fa-key"></i> <span>Account</span>
+                    </a>
+                </li>
+
+                <li data-controller="account">
+                    <a href="<?=App::createUrl('/support')?>">
+                        <i class="fa fa-info-circle"></i> <span>Support</span>
                     </a>
                 </li>
 

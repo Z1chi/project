@@ -2,6 +2,7 @@
 
 namespace affiliate\view;
 
+use App;
 use app\component\NumbersHelper;
 use system\components\DB;
 use system\core\AffiliateController;

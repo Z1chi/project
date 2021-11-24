@@ -10,6 +10,7 @@ import {Admins} from "../controllers/Admins";
 import {Account} from "../controllers/Account";
 import {Logs} from "../controllers/Logs";
 import {Affiliatewithdraw} from "../controllers/Affiliatewithdraw";
+import {Support} from "../controllers/Support";
 import {Assets} from "../controllers/Assets";
 
 export const config = {
@@ -29,7 +30,8 @@ export const config = {
         Account,
         Logs,
         Affiliatewithdraw,
-        Assets
+        Assets,
+        Support
     },
     component: {
 

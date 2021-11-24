@@ -1,0 +1,21 @@
+.support_index {
+  width: 5%;
+  text-align: center;
+}
+
+.name {
+  width: 15%;
+  word-break: break-all;
+}
+
+.img-wrapper{
+  width: 30%;
+  text-align: center;
+  &__image
+  {
+    width: 100%;
+  }
+}
+.error {
+  color: #e0292d
+}
