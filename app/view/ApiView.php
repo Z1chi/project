@@ -131,6 +131,14 @@ class ApiView extends Controller
                     throw new ApiException(sprintf('Unhandled %s event', $eventName));
                 }
 
+                if ($project->is_trusted) {
+                    $affiliate = [
+                        'id' => $affiliate->id,
+                        'first_name' => $affiliate->first_name,
+                        'last_name' => $affiliate->last_name
+                    ];
+                }
+
                 $this->jsonResponse([
                     'url' => AffiliateUrlResource::toArray($affiliateLink),
                     'affiliate' => $affiliate,
