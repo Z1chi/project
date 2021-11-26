@@ -13,6 +13,7 @@ use Ufo\Component\Eloquent\Eloquent;
  * @property \DateTime created_at
  * @property \DateTime updated_at
  * @property \DateTime accessed_at
+ * @property bool      is_trusted
  * @property string img
  */
 final class Project extends Eloquent
