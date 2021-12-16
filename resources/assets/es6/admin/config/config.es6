@@ -27,7 +27,6 @@ export const config = {
         Users,
         Affiliates,
         Admins,
-        Account,
         Support,
         Account,
         Logs,
