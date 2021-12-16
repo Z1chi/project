@@ -4,7 +4,7 @@ namespace admin\component;
 
 
 use App;
-use system\components\DB;
+use Ufo\Model\LogAdmin;
 
 class Logger
 {
@@ -22,19 +22,34 @@ class Logger
     public static $ACTION_ADMIN_ADD = 'admin_add';
     public static $ACTION_SUPPORT_ADD = 'support_add';
 
-	public static function write ($action, array $data_array = NULL)
-	{
-		$array = [
-			'admin_id' => App::getSession('id'),
-			'action' => $action,
-			'data' => $data_array != NULL ? json_encode($data_array) : NULL,
-			'ip' => $_SERVER['REMOTE_ADDR'],
-			'created_at' => date("Y-m-d H:i:s")
-		];
+    public static function write ($action, array $data_array = NULL)
+    {
+        $array = [
+            'admin_id' => App::getSession('id'),
+            'action' => $action,
+            'data' => $data_array != NULL ? json_encode($data_array) : NULL,
+            'ip' => $_SERVER['REMOTE_ADDR']
+        ];
 
-		DB::getInstance()
-			->insert(TBL_LOG_ADMIN, $array);
-	}
+        (new LogAdmin($array))->save();
+    }
+
+    public static function getActionList() {
+        return [
+            self::$ACTION_LOGIN => 'login',
+            self::$ACTION_LOGOUT => 'logout',
+            self::$ACTION_CHANGE_PASSWORD => 'change password',
+            self::$ACTION_UPDATE_VARIABLE => 'update variable',
+            self::$ACTION_AFFILIATE_ACTIVATE => 'affiliate activate',
+            self::$ACTION_AFFILIATE_DEACTIVATE => 'affiliate deactivate',
+            self::$ACTION_AFFILIATE_WITHDRAW_REQUEST_CLOSE => 'withdraw request close',
+            self::$ACTION_ADMIN_ACTIVATE => 'admin activate',
+            self::$ACTION_ADMIN_DEACTIVATE => 'admin deactivate',
+            self::$ACTION_ADMIN_UPDATE => 'admin update',
+            self::$ACTION_ADMIN_ADD => 'admin create',
+
+        ];
+    }
 
 	public static function getLastRow ($user_id, $action) {
 
