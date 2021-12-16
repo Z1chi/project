@@ -12,7 +12,7 @@ final class AlterAffiliateTable extends Migration
     {
         $this->schema->table($this->table, function(Blueprint $table) {
             $table->text('postback_url')->nullable()->change();
-            $table->integer('project_id')->nullable()->change();
+            $table->integer('project_id')->nullable();
         });
     }
 
@@ -20,7 +20,7 @@ final class AlterAffiliateTable extends Migration
     {
         $this->schema->table($this->table, function(Blueprint $table) {
             $table->text('postback_url')->nullable(false)->change();
-            $table->integer('project_id')->nullable(false)->change();
+            $table->integer('project_id')->nullable(false);
         });
     }
 }
