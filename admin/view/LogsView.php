@@ -36,10 +36,10 @@ class LogsView extends AdminController
         $this->initFilters();
 
         $calls_count = $this->getListCount();
+
         $this->pagination->setItemsCount($calls_count);
 
         $subscribers = $this->getList();
-
         $manager_list = Manager::getList();
 
         $actions_list = Logger::getActionList();
