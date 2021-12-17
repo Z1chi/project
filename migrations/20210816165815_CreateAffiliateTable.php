@@ -43,7 +43,6 @@ final class CreateAffiliateTable extends Migration
             $table->index('team_account');
             $table->index('callcenter_id');
             $table->index('project_id');
-            $table->index('user_uid');
         });
     }
 
