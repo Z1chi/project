@@ -25,7 +25,7 @@ use Ufo\ValueObject\ProjectAssetCategory;
                     </div>
                     <div class="form-group col-xs-6">
                         <label for="category">Asset category</label>
-                        <select id="category" name="category" class="form-control">
+                        <select id="category" autocomplete="off" name="category" class="form-control">
                             <?php /** @var array $CATEGORIES */
                             foreach ($CATEGORIES as $categoryId => $categoryTitle): ?>
                                 <option value="<?= $categoryId ?>"><?= $categoryTitle ?></option>

@@ -30,7 +30,8 @@ export const config = {
         Support,
         Account,
         Logs,
-        Affiliatewithdraw
+        Affiliatewithdraw,
+        Assets,
     },
     component: {
 
