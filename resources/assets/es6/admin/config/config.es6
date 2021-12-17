@@ -29,9 +29,9 @@ export const config = {
         Admins,
         Account,
         Support,
-        Account,
         Logs,
-        Affiliatewithdraw
+        Affiliatewithdraw,
+        Assets
     },
     component: {
 
