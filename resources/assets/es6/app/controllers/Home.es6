@@ -139,6 +139,7 @@ export class Home extends Controller {
         const home = this;
         $('.js_signup_form_home').validate(
             {
+                onfocusout: true,
                 submitHandler: function () {
                     home.signUpSubmit()
                 }

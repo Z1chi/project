@@ -131,6 +131,7 @@ export class Header extends Controller {
         const home = this;
         $('.js_signup_form').validate(
             {
+                onfocusout: true,
                 submitHandler: function () {
                     home.signUpSubmit()
                 }
