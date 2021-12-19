@@ -84,7 +84,7 @@ class AssetsView extends AdminController
                     $previewName = $_FILES['preview']['tmp_name'];
                     $newFileNames['preview'] = Upload::ajaxUploadImage($previewName, null, $uploadDir) . '.jpg';
 
-                    $newFileNames['file'] = md5(microtime()) . '.' . explode(".", $_FILES['file']['name'])[1];
+                    $newFileNames['file'] = md5(microtime()) . '.' . pathinfo($_FILES['file']['name'],  PATHINFO_EXTENSION);
                     $newFilePath = $uploadDir . $newFileNames['file'];
                     if (!move_uploaded_file($_FILES['file']['tmp_name'], $newFilePath)) {
                         $this->jsonErrorMsg('Upload failed: ' . ProjectAssetCategory::getCategories()[$category]);
@@ -119,7 +119,7 @@ class AssetsView extends AdminController
 
         if (!empty($asset)) {
             $filePath = $asset->file;
-            $previewPath = $asset->preview;
+            $previewPath = $asset->preview_src;
             if ($asset->delete()) {
                 $filePath = ROOT . '/public' . $filePath;
                 unlink($filePath);

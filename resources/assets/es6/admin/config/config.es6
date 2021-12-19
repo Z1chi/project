@@ -27,11 +27,11 @@ export const config = {
         Users,
         Affiliates,
         Admins,
-        Account,
         Support,
+        Account,
         Logs,
         Affiliatewithdraw,
-        Assets
+        Assets,
     },
     component: {
 

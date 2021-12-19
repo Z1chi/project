@@ -67,7 +67,8 @@ class WithdrawView extends AffiliateController
 			'created' => time(),
 			'amount_btc' => $amount,
 			'btc_address' => $address,
-			'status' => Withdraw::$STATUS_NEW
+			'status' => Withdraw::$STATUS_NEW,
+			'deleted' => 0
 		];
 
 		DB::getInstance()
