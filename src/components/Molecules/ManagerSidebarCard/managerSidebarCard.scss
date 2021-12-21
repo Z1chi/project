@@ -1,0 +1,54 @@
+.managerSidebarCard {
+  transition: width ease 0.3s;
+  background: #131826;
+  box-shadow: -3px 0px 10px rgba(0, 99, 255, 0.31), 3px 0px 10px rgba(33, 159, 230, 0.28);
+  border: 1px solid transparent;
+  border-image: linear-gradient(263.11deg, #41BBFF 1.44%, #0F4BE6 44.12%, #21C2E6 99.63%);
+  border-image-slice: 1;
+  border-radius: 13px;
+  overflow: hidden;
+
+  &__title {
+    color: #898A98;
+    font-weight: 800;
+    font-size: 10px;
+    line-height: 14px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: center;
+    padding-top: 10px;
+    margin: 0;
+  }
+
+  &__info {
+    height: 51px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__infoItem {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    justify-content: center;
+
+    & > span {
+      display: block;
+      text-shadow: 0 0 14px #FFFFFF;
+      font-size: 10px;
+      margin-bottom: -3px;
+      white-space: nowrap;
+    }
+
+    & > p {
+      white-space: nowrap;
+      font-size: 13px;
+      margin: 0 0 0 10px;
+    }
+
+    &--telegramImg {
+      margin-bottom: -11px;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.editFieldForm {
+  margin-top: 25px;
+
+
+  &__input {
+     > * {
+       margin: 15px 0 ;
+     }
+
+  }
+}

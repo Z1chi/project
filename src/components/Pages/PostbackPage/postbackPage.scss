@@ -1,0 +1,42 @@
+.postbackPage {
+    &__content {
+        padding: 20px 25px 52px 25px;
+        background-color: #131826;
+
+        &>* {
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    &__conversion {
+        &Item {
+            margin-top: 15px;
+        }
+    }
+
+    &__characteristics {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__link {
+        &Input {
+            display: flex;
+        }
+
+        &Url {
+            width: 566px;
+        }
+
+        &Copy {
+            margin-left: 10px;
+        }
+
+        &Buttons {
+            margin-top: 26px;
+            display: flex;
+            column-gap: 10px;
+        }
+    }
+}

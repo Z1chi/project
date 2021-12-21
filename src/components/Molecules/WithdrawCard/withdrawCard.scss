@@ -1,0 +1,15 @@
+.withdrawCard {
+    margin-top: 11px;
+    padding: 11px 10px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 11px;
+
+    background-color: #131826;
+
+    &__field {
+        width: 100%;
+    }
+}

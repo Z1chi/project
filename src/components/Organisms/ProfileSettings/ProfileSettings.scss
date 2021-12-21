@@ -1,0 +1,17 @@
+.profileSettings {
+  background: #131826;
+  box-shadow: 0 14px 56px rgba(39, 107, 146, 0.5);
+
+  width: 262px;
+  height: 299px;
+
+  &__email {
+    color: #FFF;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 19px 20px;
+    margin: 0 20px 2px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}

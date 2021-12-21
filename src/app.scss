@@ -1,0 +1,28 @@
+.app {
+  position: relative;
+  & > * {
+
+  }
+}
+
+* {
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;               /* ширина scrollbar */
+  height: 5px;               /* высота scrollbar */
+}
+*::-webkit-scrollbar-track {
+  background: #282828;        /* цвет дорожки */
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #219FE6;    /* цвет плашки */
+  border-radius: 20px;       /* закругления плашки */
+  //border: 3px solid orange;  /* padding вокруг плашки */
+}

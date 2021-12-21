@@ -1,0 +1,37 @@
+.contactUs {
+    padding: 20px 25px 25px 25px;
+    background: #131826;
+    border-radius: 4px;
+
+    &__separator {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &__manager {
+        &Title {
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 22px;
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+
+        &Subtitle {
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 22px;
+            display: flex;
+            align-items: center;
+            color: #219FE6;
+        }
+
+        &Info {
+            margin-top: 14px;
+        }
+    }
+}

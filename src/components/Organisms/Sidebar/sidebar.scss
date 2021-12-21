@@ -1,0 +1,118 @@
+.sidebar {
+  position: fixed;
+  z-index: 2;
+  overflow-x: hidden;
+  background-color: #1F2431;
+  transition: width ease 0.3s;
+  height: 100vh;
+  &::-webkit-scrollbar {
+    width: 5px;               /* ширина scrollbar */
+    //height: 80px;               /* ширина scrollbar */
+  }
+  &::-webkit-scrollbar-track {
+    background: #282828;        /* цвет дорожки */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #219FE6;    /* цвет плашки */
+    border-radius: 20px;       /* закругления плашки */
+    //border: 3px solid orange;  /* padding вокруг плашки */
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+
+  &__header {
+    position: fixed;
+    background-color: #1F2431;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 13.5px 17px 13.5px 17px;
+    align-items: center;
+    flex-direction: column;
+    transition: all ease 0.3s;
+    width: 70px;
+    @media (max-width: 480px) {
+      overflow-x: 'clip';
+      transition: all ease 0.3s;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      width: 70%;
+      background-color: #131826;
+      height: 60px;
+    }
+  }
+
+  &__icon {
+    min-width: 33px;
+    margin-bottom: 30px;
+    @media (max-width: 480px) {
+      margin-bottom: 0;
+      margin-right: 3px;
+    }
+  }
+
+  &__title {
+    margin-left: 3px;
+    display: none;
+
+    &Wrapper {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+  }
+
+  &__menu {
+    z-index: 2;
+    transition: width ease 0.3s;
+    width: 70px;
+    @media (max-width: 480px) {
+      width: 0;
+      transition: height ease 0.3s;
+
+    }
+  }
+
+  &.open {
+    transition: all ease 0.3s;
+    .sidebar {
+      &__header {
+        transition: all ease 0.3s;
+        width: 280px;
+        flex-direction: row;
+        @media (max-width: 480px) {
+          flex-direction: row-reverse;
+          width: 70%;
+          transition: all ease 0.3s;
+        }
+      }
+
+      &__title {
+        overflow-x: 'hidden';
+        display: initial;
+    
+        @media (max-width: 480px) {
+          overflow-x: 'hidden';
+        }
+      }
+
+      &__icon {
+        margin-bottom: 0;
+        @media (max-width: 480px) {
+          transition: all ease 0.3s;
+        }
+      }
+
+      &__menu {
+        width: 280px;
+        @media (max-width: 480px) {
+          height: auto;
+          width: 100%;
+          transition: height ease 0.3s;
+        }
+      }
+    }
+
+  }
+}

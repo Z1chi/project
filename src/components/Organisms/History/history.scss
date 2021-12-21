@@ -1,0 +1,27 @@
+.history {
+    background: #131826;
+    border-radius: 4px;
+    padding: 25px 16px 16px 16px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        color: #FFFFFF;
+    }
+
+    &__showAll {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: #219FE5;
+    }
+}

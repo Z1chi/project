@@ -1,0 +1,29 @@
+.contactSocials {
+
+    &__title {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 27px;
+        color: #FFFFFF;
+    }
+
+    &__subtitle {
+        margin-top: 10px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+    }
+
+    &__links {
+        margin-top: 15px;
+
+        &Item {
+            margin-top: 15px;
+        }
+    }
+}

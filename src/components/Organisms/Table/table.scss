@@ -1,0 +1,10 @@
+.table {
+    border-radius: 4px;
+    width: 100%;
+    &__data {
+        background-color: #131826;
+        overflow-x: scroll;
+        overflow-y: scroll;
+        max-height: 87vh;
+    }
+}

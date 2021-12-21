@@ -1,0 +1,47 @@
+.tableEmpty {
+    width: 100%;
+    height: 243px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 25px 0;
+    background: #131826;
+
+    @media (max-width: 480px) {
+        background-color: transparent;
+    }
+
+    &__icon {
+        margin-top: 4px;
+
+        @media (max-width: 480px) {
+            margin-top: 130px;
+        }
+    }
+
+    &__text {
+        width: 446px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+
+        @media (max-width: 480px) {
+            margin-top: 27px;
+            width: 258px;
+        }
+    }
+
+    &__button {
+
+        @media (max-width: 480px) {
+            margin-top: 20px;
+        }
+        
+    }
+}

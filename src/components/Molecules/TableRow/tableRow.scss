@@ -1,0 +1,15 @@
+.tableRow {
+    //padding: 10px 25px;
+    height: 60px;
+    width: 100%;
+    background-color: #131826;
+    display: flex;
+    //align-items: center;
+    //column-gap: 30px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #282D3A;
+
+    &__cell {
+        height: 100%;
+    }
+}

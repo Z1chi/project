@@ -1,0 +1,23 @@
+.withdrawCardField {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    
+    &__name {
+        color: #898A98;
+        font-family: 'Open Sans';
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 14px;
+    }
+
+    &__value {
+        font-family: 'Open Sans';
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 14px;
+        color: #FFFFFF;
+    }
+}

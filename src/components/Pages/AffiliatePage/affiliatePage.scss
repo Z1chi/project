@@ -1,0 +1,16 @@
+.affiliatePage {
+    &__statistics {
+        margin-top: 16px;
+        display: flex;
+        column-gap: 16px;
+        width: 100%;
+
+        &Item {
+            width: 100%;
+        }
+    }
+
+    &__filters {
+        margin-top: 16px;
+    }
+}

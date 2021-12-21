@@ -1,0 +1,36 @@
+.creativesCard {
+    height: 320px;
+    width: 262px;
+    background-color: #131826;
+
+    &__logo {
+        height: 270px;
+    }
+
+    &__footer {
+        height: 50px;
+        padding: 13px 10px;
+        background-color: #000000;
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__categories {
+        padding: 5px 10px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 25px;
+        color: #FFFFFF;
+    }
+
+    &__more {
+        margin-left: 29px;
+    }
+
+    &__download {
+        margin-left: 18px;
+    }
+}

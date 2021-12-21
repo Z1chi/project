@@ -1,0 +1,10 @@
+.selectInput {
+    background: #2D313D;
+    padding-right: 9px;
+
+    &__input {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}

@@ -1,0 +1,21 @@
+.checkbox {
+    
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__input {
+        border: 1px solid #898A98;
+        border-radius: 4px;
+    }
+
+    &__label {
+        margin-left: 12px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
+}

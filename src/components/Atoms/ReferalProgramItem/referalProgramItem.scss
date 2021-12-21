@@ -1,0 +1,75 @@
+.referalProgramItem {
+    padding-left: 2rem;
+
+    @media (max-width: 480px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
+    }
+
+    &__image {
+        
+    }
+
+    &__title {
+        margin-top: 45px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        &Step {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #219FE6;
+            border-radius: 50%;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        &Text {
+            margin-left: 10px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 22px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: #FFFFFF;
+        }
+    }
+
+    &__description {
+        margin-top: 5px;
+        width: 315px;
+
+        @media (max-width: 480px) {
+            margin-top: 15px;
+        }
+
+        p {
+            margin: 0;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 19px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: left;
+            color: #FFFFFF;
+
+            @media (max-width: 480px) {
+                text-align: center;
+            }
+        }
+    }
+}

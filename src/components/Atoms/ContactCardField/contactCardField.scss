@@ -1,0 +1,27 @@
+.contactCardField {
+    height: 38px;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &__parameter {;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 18px;
+
+        color: rgba(255, 255, 255, 0.72);
+    }
+
+    &__value {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 18px;
+
+        color: #FFFFFF;
+    }
+}

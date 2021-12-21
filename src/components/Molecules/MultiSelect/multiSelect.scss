@@ -1,0 +1,134 @@
+.multiSelect {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #131826;
+    padding: 11px 15px 7px 15px;
+    position: relative;
+    z-index: 1001;
+    min-width: 195px;
+
+    &__mobile {
+        &Header {
+            display: none;
+
+            @media (max-width: 480px) {
+                display: flex;
+                margin-bottom: 30px;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        &Title {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 25px;
+            color: #FFFFFF;
+        }
+    }
+
+    @media (max-width: 480px) {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        position: fixed;
+        z-index: 1000;
+    }
+
+    &__search {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border: 1px solid #219FE6;
+        border-radius: 4px;
+
+        padding-right: 13px;
+
+        @media (max-width: 480px) {
+            border: none;
+            background-color: #2D313D;
+        }
+
+        &Input {
+            width: 100%;
+            input {
+                width: 100%;
+                padding: 10px;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 15px;
+                line-height: 20px;
+                background-color: transparent;
+                border: none;
+                outline: none;
+                color: #FFFFFF;
+            }
+        }
+
+        &Icon {
+            @media (max-width: 480px) {
+                * {
+                    stroke: #898A98;
+                }
+            }
+        }
+    }
+
+    &__options {
+        height: 190px;
+        overflow-y: scroll;
+    }
+
+    &__selectors {
+        position: absolute;
+        bottom: 0;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__reset {
+        width: 28px;
+        height: 27px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border: 1px solid #219FE6;
+        border-radius: 4px;
+
+        @media (max-width: 480px) {
+            width: 42px;
+            height: 40px;
+        }
+    }
+
+    &__selectAll {
+        margin-left: 7px;
+
+        button {
+            width: 130px;
+            height: 27px;
+            background: #219FE5;
+            border: 1px solid #219FE6;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 16px;
+            color: #FFFFFF;
+
+            @media (max-width: 480px) {
+                width: 229px;
+                height: 40px;
+            }
+        }
+    }
+}

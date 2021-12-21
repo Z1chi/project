@@ -1,0 +1,14 @@
+.creativesCategory {
+    padding: 5px 10px;
+    background: #2F3440;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 25px;
+    color: #FFFFFF;
+
+    &--selected {
+        background: #FF1616;
+    }
+}

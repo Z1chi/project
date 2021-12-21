@@ -1,0 +1,39 @@
+.flowItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    * {
+        color: #FFF;
+        fill: #FFF;
+    }
+
+    &--up {
+        * {
+            color: #16FFAC !important;
+            fill: #16FFAC !important;
+        }
+    }
+
+    &--down {
+        * {
+            color: #FF1616 !important;
+            fill: #FF1616 !important;
+        }
+    }
+
+    &__arrow {
+        @media (max-width: 480px) {
+            margin-top: 4px;
+        }
+    }
+
+    &__difference {
+        margin-top: 2px;
+        margin-left: 3px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 18px;
+    }
+}

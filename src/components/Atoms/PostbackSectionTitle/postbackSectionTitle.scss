@@ -1,0 +1,21 @@
+.postbackSectionTitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 18px;
+
+    &__text {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        margin-left: 11px;
+    }
+}

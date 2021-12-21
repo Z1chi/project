@@ -1,0 +1,21 @@
+.logoutButton {
+
+  margin: 10px 16px 10px;
+
+  cursor: pointer;
+  background: #219FE5;
+  border-radius: 6px;
+
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+
+    & > * {
+      margin: 10px;
+      color: #FFF;
+    }
+  }
+}

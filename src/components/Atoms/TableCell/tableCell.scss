@@ -1,0 +1,15 @@
+.tableCell {
+    width: 100%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    height: 100%;
+    padding: 10px 25px;
+    &--last {
+        border-right: 1px solid #282D3A;
+    }
+}

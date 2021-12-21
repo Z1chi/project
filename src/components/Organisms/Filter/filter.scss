@@ -1,0 +1,27 @@
+.filter {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-color: #131826;
+    border-radius: 4px;
+    padding: 0 15px;
+
+    &__reset {
+        padding: 19px 25px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &Title {
+            margin-left: 9px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 20px;
+            color: #00A3FF;
+        }
+    }
+}

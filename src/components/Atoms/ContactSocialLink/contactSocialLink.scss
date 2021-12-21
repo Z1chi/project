@@ -1,0 +1,30 @@
+.contactSocialLink {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.1);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__text {
+        margin-left: 15px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+
+        a {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+    }
+}

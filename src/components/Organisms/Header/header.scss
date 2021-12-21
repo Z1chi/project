@@ -1,0 +1,87 @@
+.header {
+  background-color: #1F2431;
+  height: 60px;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+
+  @media (max-width: 480px) {
+    width: 30%;
+    z-index: 2;
+    background-color: #131826;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    @media (max-width: 480px) {
+      display: none;
+    }
+
+    & > p {
+      margin: 0;
+    }
+
+    &Name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      color: #fff;
+    }
+
+    &Id {
+      font-size: 12px;
+      font-weight: 400;
+      color: #898A98;
+    }
+  }
+
+  &__dropdownArrow {
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+
+  &__profileSettings {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+
+    .dropdown__content {
+      top: 60px;
+      right: 30px;
+    }
+
+    &Switcher {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      cursor: pointer;
+      float: right;
+      margin-right: 32px;
+      width: 240px;
+      height: 100%;
+      @media (max-width: 510px) {
+        margin-right: 8px;
+        z-index: 2;
+        position: absolute;
+        right: 0;
+      }
+      @media (max-width: 480px) {
+        margin-right: 8px;
+        width: 70px;
+      }
+
+      & > * {
+        margin: 0 10px;
+      }
+    }
+
+    &Content {
+
+    }
+  }
+}

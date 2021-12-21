@@ -1,0 +1,68 @@
+.referalMapMarker {
+    position: relative;
+    width: 100px;
+    background: #219FE6;
+    box-shadow: 0 4px 20px rgba(33, 159, 230, 0.46);
+    border-radius: 4px;
+
+    &__info {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 5px;
+
+        h4 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 15px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+    }
+
+    &__income {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.16);
+        height: 32px;
+        width: 100%;
+
+        span {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 20px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+    }
+
+    &__pointer {
+        position: absolute;
+        bottom: 0;
+    }
+
+    &__line {
+        width: 2px;
+        height: 33px;
+        background-color: #fff;
+    }
+
+    &__circle {
+        position: absolute;
+        bottom: 28px;
+        width: 10px;
+        height: 10px;
+        background: #FFFFFF;
+        box-shadow: 0 0 18px #219FE6;
+    }
+}

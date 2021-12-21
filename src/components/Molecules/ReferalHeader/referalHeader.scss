@@ -1,0 +1,133 @@
+.referalHeader {
+  padding: 3rem 1.25rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+
+  &--isMobile {
+    flex-direction: column;
+
+    .referalHeader {
+      &__title {
+        width: 450px;
+
+        h1 {
+          font-size: 38px;
+        }
+      }
+
+      &__getPaid {
+        font-size: 38px;
+
+        &:before, &:after {
+          width: 169.52px;
+          height: 63.09px;
+        }
+      }
+
+      &__info {
+        width: 100%;
+      }
+
+      &__description {
+        margin-top: 16px;
+      }
+    }
+  }
+
+  & > * {
+    width: 40%;
+  }
+
+  &__title {
+    width: 550px;
+
+    @media (max-width: 480px) {
+      width: 100%;
+    }
+
+    h1 {
+      position: relative;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 60px;
+      line-height: 119.18%;
+      letter-spacing: -0.05em;
+      color: #FFFFFF;
+      text-align: left;
+
+      @media (max-width: 480px) {
+        font-size: 38px;
+      }
+    }
+  }
+
+  &__getPaid {
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    text-align: left;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 119.18%;
+    letter-spacing: -0.05em;
+    text-shadow: 0px 4px 40px rgba(251, 0, 69, 0.54);
+    background: linear-gradient(90deg, #FB0045 0%, #FE3C12 33%, #FF3D00 66%, #FF0000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 259.52px;
+      height: 93.09px;
+      left: -9.54px;
+      top: -5px;
+      border: 1px solid #FF3D0C;
+
+      transform: rotate(2.79deg);
+      border-radius: 50%;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 259.52px;
+      height: 93.09px;
+      left: -10.35px;
+      top: -6px;
+      border: 1px solid #FF3D0C;
+
+      transform: rotate(0.29deg);
+      border-radius: 50%;
+    }
+  }
+
+  &__info {
+    @media (max-width: 480px) {
+      margin-top: 15px;
+      width: 100%;
+    }
+  }
+
+  &__description {
+    p {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 22px;
+      display: flex;
+      align-items: center;
+      color: #898A98;
+      text-align: left;
+    }
+
+
+  }
+
+  &__link {
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,44 @@
+.referalTemplate {
+    background-color: #262A37;
+
+    &--isMobile {
+        .referalTemplate {
+            &__cards {
+                flex-direction: column;
+
+                &>* {
+                    margin-bottom: 16px;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    &__cards {
+        background: #1F232E;
+        padding: 1.25rem 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 -30px;
+
+        &>* {
+            margin-left: 16px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
+    &__program {
+        padding: 4.3rem 2rem;
+
+    }
+
+    &__income {
+        margin: 0 -30px;
+        padding: 0 32px;
+        background: #1F232E;
+    }
+}

@@ -1,0 +1,32 @@
+.withdrawPage {
+    &__statistics {
+        background-color: #131826;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px 0 3px;
+    }
+
+    &__withdraw {
+        button {
+            padding: 10px 15px;
+            background: #219FE6;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
+            color: #FFFFFF;
+            border: none;
+            outline: none;
+        }
+    }
+
+    &__tableCard {
+        width: 100%;
+    }
+}
