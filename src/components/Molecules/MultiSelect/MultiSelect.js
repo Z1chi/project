@@ -6,7 +6,7 @@ import { images } from './images'
 
 import './multiSelect.scss';
 
-export const MultiSelect = ({ options, mobileConfig }) => {
+export const MultiSelect = ({ options, renderItem, mobileConfig }) => {
     const [searchValue, setSearchValue] = useState('');
     const [optionsSelectable, setOptionsSelectable] = useState(options.map( option => {
         return {
@@ -47,7 +47,7 @@ export const MultiSelect = ({ options, mobileConfig }) => {
                                 } : option
                             })
                         )}>
-                            <MultiSelectOption option={option} />
+                            <MultiSelectOption option={option} renderOption={renderItem} />
                         </div>
                     )
                 })

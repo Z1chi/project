@@ -1,22 +1,39 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
+import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
 import { InfoCard } from '../../Molecules/InfoCard/InfoCard';
+import { WithdrawCard } from '../../Molecules/WithdrawCard/WithdrawCard';
 import { Filter } from '../../Organisms/Filter/Filter';
 import { Table } from '../../Organisms/Table/Table';
-import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
 
-import AutoSizer from 'react-virtualized-auto-sizer';
+import request from '../../../api/request';
 
 import { statistics, filters, table } from './data';
 
 import './withdrawPage.scss';
-import { WithdrawCard } from '../../Molecules/WithdrawCard/WithdrawCard';
 
 export const WithdrawPage = () => {
+
+    const withdrawQuery = useQuery(['withdraw-table'], () => {
+        return request('withdraw/get-withdraws').then(res => res.data);
+    })
+
+    const statusFilterQuery = useQuery(['withdraw-statuses'], () => {
+        return request('withdraw/get-statuses').then(res => res.data);
+    })
+
+    const filtersData = [
+        [], 
+        [], 
+        statusFilterQuery.data || [],
+    ]
+
     return (
         <div className='withdrawPage'>
             <PageTemplate 
-                renderPage={()=>{
+                renderPage={({ width })=>{
                     return (
                         <div className='withdrawPage__content'>
                             <div className='withdrawPage__statistics'>
@@ -36,30 +53,26 @@ export const WithdrawPage = () => {
                                 </div>
                             </div>
                             <div className='withdrawPage__filters'>
-                                <Filter filters={filters} />
+                                <Filter filters={filters} data={filtersData} />
                             </div>
-                            <AutoSizer>
-                                {({height, width}) => {
-                                    return (
-                                        width > 480
-                                        ? <div className='withdrawPage__table' style={{height, width}}>
-                                            <Table {...table} />
-                                        </div>
-                                        : <div>
-                                            {
-                                                table.data.map( item => {
-                                                    return (
-                                                        <div className='withdrawPage__tableCard'  style={{width}}>
-                                                            <WithdrawCard fields={item} config={table.tableConfig} />
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    )
-                            }}
-                            </AutoSizer>
-                            
+                            {   
+                                (withdrawQuery.data && withdrawQuery.data.table) &&
+                                ( width > 480
+                                ? <div className='withdrawPage__table'>
+                                    <Table {...table} data={withdrawQuery.data.table} />
+                                </div>
+                                : <div>
+                                    {
+                                        withdrawQuery.data.table.map( item => {
+                                            return (
+                                                <div className='withdrawPage__tableCard'  style={{width}}>
+                                                    <WithdrawCard fields={item} config={table.tableConfig} />
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div> )
+                            }                            
                         </div>
                     )
                 }}
