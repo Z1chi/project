@@ -16,44 +16,21 @@ export const statistics = [{
 }];
 
 export const filters = [{
-    title: 'Date',
-    mobileTitle: 'Select date',
+    title: 'Request date',
+    mobileTitle: 'Select request date',
     type: dropdownTypes.DATE,
-    items: {
-        options: [
-            'All',
-            'FIRST',
-            'SECOND',
-        ],
-        selectedIndex: 0,
-    },
     width: '204px',
 }, {
-    title: 'Amount',
-    mobileTitle: 'Select amount',
-    type: dropdownTypes.SELECT,
-    items: {
-        options: [
-            'All',
-            'FIRST',
-            'SECOND',
-        ],
-        selectedIndex: 0,
-    },
+    title: 'Pay date',
+    mobileTitle: 'Select pay date',
+    type: dropdownTypes.DATE,
     width: '154px',
 }, {
     title: 'Status',
     mobileTitle: 'Select status',
     type: dropdownTypes.SELECT,
-    items: {
-        options: [
-            'All',
-            'FIRST',
-            'SECOND',
-        ],
-        selectedIndex: 0,
-    },
     width: '154px',
+    renderItem: ({ id, label }) => label,
 }, ];
 
 export const table = {
@@ -63,27 +40,27 @@ export const table = {
         columnName: 'Request Date',
         columnWidth: '170px',
     }, {
-        columnId: 'payDate',
+        columnId: 'paid_at',
         columnName: 'Pay Date',
         columnWidth: '159px',
     }, {
-        columnId: 'amount',
+        columnId: 'amount_btc',
         columnName: 'Amount',
         columnWidth: '133px',
 
         renderHeadItem: ({ rowItem, columnName }) => {
-            return `${columnName} (${rowItem.currency.symbol})`
+            return `${columnName} (${rowItem ? rowItem.currency.symbol : ''})`
         },
 
         renderRowItem: (item) => {
-            return (
+            return item ? (
                 <div>
-                    {item.currency.symbol} {item.amount}
+                    {item.symbol} {item.amount}
                 </div>
-            )
+            ) : null
         }
     }, {
-        columnId: 'amountConverted',
+        columnId: 'amount',
         columnName: 'Amount',
         columnWidth: '164px',
 
@@ -92,11 +69,11 @@ export const table = {
         }, 
 
         renderRowItem: (item) => {
-            return (
+            return item ? (
                 <div>
-                    {item.currency.symbol} {item.amount}
+                    {item.symbol} {item.amount}
                 </div>
-            )
+            ) : null
         }
     }, {
         columnId: 'status',
@@ -104,12 +81,9 @@ export const table = {
         columnWidth: '150px',
 
         renderRowItem: (item) => {
-            const status = withdrawStatusData[item];
             return (
-                <div 
-                    style={status.styles}
-                >
-                    {status.text}
+                <div>
+                    {item.value}
                 </div>
             )
         }

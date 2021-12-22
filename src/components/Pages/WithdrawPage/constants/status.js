@@ -1,7 +1,7 @@
 export const withdrawStatusList = {
-    REQUESTED: 'WITHDRAWS/STATUS/REQUESTED',
-    SENT: 'WITHDRAWS/STATUS/SENT',
-    COMPLETED: 'WITHDRAWS/STATUS/COMPLETED',
+    REQUESTED: 10,
+    SENT: 20,
+    COMPLETED: 30,
 };
 
 export const withdrawStatusData = {

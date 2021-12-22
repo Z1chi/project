@@ -16,18 +16,18 @@ const renderFilterContent = (type) => (props) => {
     return Component ? <Component {...props} /> : null;
 }
 
-export const FilterItem = ({ title, mobileTitle, items, onSelect, type, }) => {
+export const FilterItem = ({ title, mobileTitle, items=[], renderItem, onSelect, type, }) => {
     return (
         <div className='filterItem'>
             <div className='filterItem__info'>
                 <div className='filterItem__title'>
                     {title}
                 </div>
-                <div className='filterItem__selected'>
-                {
-                    items.options[items.selectedIndex]
-                }
-                </div>
+                { items && items.options && <div className='filterItem__selected'>
+                    {
+                        items.options[items.selectedIndex]
+                    }
+                </div> }
             </div>
             <div className='filterItem__dropdown'>
                 <Dropdown
@@ -43,7 +43,8 @@ export const FilterItem = ({ title, mobileTitle, items, onSelect, type, }) => {
                             <div className='filterItem__dropdownContent'>
                             {
                                 renderFilterContent(type)({
-                                    options: items.options, 
+                                    options: items, 
+                                    renderItem,
                                     mobileConfig: { 
                                         title: mobileTitle,
                                         onClose: () => setIsOpened(false)

@@ -7,7 +7,7 @@ import { dropdownTypes } from '../dropdown';
 
 export const fieldComponentsList = {
     [dropdownTypes.INPUT]: Input,
-    [dropdownTypes.SELECT]: SelectInput,
+    [dropdownTypes.SELECT]: (props) => <SelectInput {...props} />,
     [dropdownTypes.MULTISELECT]: (props) => <SelectInput {...props} SelectComponent={MultiSelect} />,
     [dropdownTypes.DATE]: (props) => <SelectInput {...props} SelectComponent={Calendar} />,
 };

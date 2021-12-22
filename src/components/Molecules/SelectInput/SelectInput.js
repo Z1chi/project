@@ -9,7 +9,7 @@ import { images } from './images';
 
 import './selectInput.scss'
 
-export const SelectInput = ({ placeholder, options=[], SelectComponent = Select, mobileConfig }) => {
+export const SelectInput = ({ placeholder, options=[], renderItem, SelectComponent = Select, mobileConfig }) => {
     return (
         <div className='selectInput'>
             <Dropdown 
@@ -27,7 +27,7 @@ export const SelectInput = ({ placeholder, options=[], SelectComponent = Select,
                     ({ setIsOpened }) => {
                         return (
                             <div className='selectInput__select'>
-                                <SelectComponent options={options} mobileConfig={{...mobileConfig, onClose: ()=>setIsOpened(false)}} />
+                                <SelectComponent options={options} renderItem={renderItem} mobileConfig={{...mobileConfig, onClose: ()=>setIsOpened(false)}} />
                             </div>
                         )
                     }
