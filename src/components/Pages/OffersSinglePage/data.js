@@ -5,11 +5,13 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import {Table} from "../../Organisms/Table/Table";
 import {Map} from "../../Organisms/Map/Map";
 import {AItem} from "../../Atoms/AdItem/AItem";
+import {OfferPaymentParam} from "../../Atoms/OfferPaymentParam/OfferPaymentParam";
 
 import 'swiper/css';
 
 import {images} from "./images/index";
 
+import {offerTypeNameList} from "../OffersPage/data";
 
 export const descriptionData = {
     benefits: ["Преимущества кратко:",
@@ -35,36 +37,6 @@ export const descriptionData = {
 
 };
 
-const demoAccountTable = {
-    tableConfig: [{
-        columnId: 'login',
-        columnName: 'Login',
-        columnWidth: '170px',
-    }, {
-        columnId: 'password',
-        columnName: 'Password',
-        columnWidth: '116px',
-    }, {
-        columnId: 'link',
-        columnName: 'Link',
-        columnWidth: '116px',
-
-        renderRowItem: (item) => {
-            return (
-                <div>
-                    <a href={item.to}>{item.text}</a>
-                </div>
-            )
-        }
-    },],
-
-    data: [{
-        login: 'examplelogincredentials',
-        password: 'examplepasswordfordemo',
-        link: 'randomlinkfordemoaccount...',
-    }],
-
-};
 
 const adData = [
     {
@@ -91,26 +63,49 @@ export const rowsConfig = [
         id: 'model',
         icon: images.modelIcon,
         title: 'Model',
-        renderContent: ({data = '40%'}) => {
+        renderContent: ({type, cpa, revshare}) => {
+
             return (
-                <div style={{
-                    background: 'rgba(255, 22, 190, 0.26)',
-                    border: '1px solid rgba(255, 22, 190, 0.4)',
-                    borderRadius: '4px',
-                    width: 'fit-content',
-                    padding: '4px',
-                    color: '#FF16BE'
-                }}>
-                    Revshare: <span style={{fontWeight: '700'}}>{data} FTD</span>
-                </div>
+                <> {(type === 0 || type === 2) && <OfferPaymentParam
+                    styles={{margin: '5px 10px 5px 0'}}
+                    param={[
+
+                        <div style={{
+                            padding: '5px 10px',
+                            color: '#16FFAC',
+                            background: 'rgba(22, 255, 172, 0.26)',
+                            border: '1px solid rgba(22, 255, 172, 0.4)',
+                            cursor: 'default',
+                            borderRadius: "4px"
+                        }}>
+                            {`${offerTypeNameList[0]} $${Number(cpa).toFixed(2)}`}
+                        </div>
+                    ]}
+
+                />}
+                    {(type === 1 || type === 2) && <OfferPaymentParam
+                        styles={{margin: '5px 0'}}
+                        param={[
+
+                            <div style={{
+                                padding: '5px 10px',
+                                color: '#FF16BE',
+                                background: 'rgba(255, 22, 190, 0.26)',
+                                border: '1px solid rgba(255, 22, 190, 0.4)',
+                                cursor: 'default',
+                                borderRadius: "4px"
+                            }}>
+                                {`${offerTypeNameList[1]} ${Number(revshare).toFixed(1)}% `}<b>FTD</b>
+                            </div>
+                        ]}/>}</>
             )
         }
     }, {
         id: 'conversion',
         icon: images.conversionIcon,
         title: 'Conversion',
-        renderContent: () => {
-            return 'Открытие расчётного счёта';
+        renderContent: ({conversion_type}) => {
+            return String(conversion_type);
         }
     }],
 
@@ -118,42 +113,108 @@ export const rowsConfig = [
         id: 'demoAccount',
         icon: images.demoAccountIcon,
         title: 'Demo Account',
-        renderContent: () => {
+        renderContent: ({demoAccounts}) => {
+            const demoAccountTable = {
+                tableConfig: [
+                    {
+                        columnId: 'login',
+                        columnName: 'Login',
+                        columnWidth: '170px',
+                    },
+                    {
+                        columnId: 'password',
+                        columnName: 'Password',
+                        columnWidth: '156px',
+                    },
+                    {
+                        columnId: 'link',
+                        columnName: 'Link',
+                        columnWidth: '216px',
+
+                        renderRowItem: (item) => {
+                            return (
+                                <div>
+                                    <a style={{color: '#219FE5'}} href={item}>{item}</a>
+                                </div>
+                            )
+                        }
+                    },
+                ],
+                data: demoAccounts,
+                emptyTable: {
+                    icon: images.emptyTableIcon,
+                    text: 'Action logs will appear here once you’ll lorem ipsum dolomir loret galor. ',
+                    button: {
+                        text: 'Explore offers',
+                        onClick: () => {
+                        }
+                    }
+                }
+            };
+
             return (
                 <Table {...demoAccountTable} />
             )
         }
     }],
 
-    [{
-        id: 'trafficSource',
-        icon: images.trafficSourceIcon,
-        title: 'Traffic Source',
-        renderContent: () => {
-            return (
-                <Table {...demoAccountTable} />
-            )
-        }
-    }],
+    // [{
+    //     id: 'trafficSource',
+    //     icon: images.trafficSourceIcon,
+    //     title: 'Traffic Source',
+    //     renderContent: () => {
+    //         return (
+    //             <Table {...demoAccountTable} />
+    //         )
+    //     }
+    // }],
 
-    [{
-        id: 'statistic',
-        icon: images.statisticsIcon,
-        title: 'Statistic',
-        renderContent: () => {
-            return (
-                <Table {...demoAccountTable} />
-            )
-        }
-    }],
+    // [{
+    //     id: 'statistic',
+    //     icon: images.statisticsIcon,
+    //     title: 'Statistic',
+    //     renderContent: () => {
+    //         return (
+    //             <Table {...demoAccountTable} />
+    //         )
+    //     }
+    // }],
 
     [{
         id: 'geo',
         icon: images.demoAccountIcon,
         title: 'GEO',
-        renderContent: () => {
+        renderContent: ({countries}) => {
             return (
-                <Map countryIdList={[16]}/>
+                <>
+                    <div
+                        style={{display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>
+                        <span
+                            style={{
+                                width: '12px',
+                                height: '12px',
+                                background: '#219FE6',
+                                borderRadius: '2px',
+                                marginRight: '5px'
+                            }}/>
+                        <p
+                            style={{marginRight: '10px'}}>Available</p>
+                        <span
+                            style={{
+                                width: '12px',
+                                height: '12px',
+                                background: '#3C3F4B',
+                                borderRadius: '2px',
+                                marginRight: '5px'
+                            }}/>
+                        <p>Unavailable</p></div>
+                    <Map countryIdList={countries}/>
+
+                    <p style={{color: '#898A98'}}>Available Country list:</p>
+                    {
+
+                    }
+                </>
             )
         }
     }],
@@ -163,7 +224,7 @@ export const rowsConfig = [
         isSlider: true,
         icon: images.advertismentExamplesIcon,
         title: 'Advertisment examples',
-        renderContent: ({width}) => {
+        renderContent: ({width, assets}) => {
             const isMobile = width < 510;
             if (isMobile) {
 
@@ -177,7 +238,7 @@ export const rowsConfig = [
                         loop={true}>
 
                         {
-                            adData.map((adItem, key) => (
+                            assets && assets.map((adItem, key) => (
                                 <SwiperSlide style={{width: "100%", height: "200px"}} key={key}>
                                     <AItem {...adItem} isMobile={isMobile}/>
                                 </SwiperSlide>
@@ -190,7 +251,7 @@ export const rowsConfig = [
             } else {
                 return (
 
-                    adData.map((adItem, key) => (
+                    assets && assets.map((adItem, key) => (
                         <div style={{width: '50%', height: 'auto'}}
                              key={key}>
                             <AItem {...adItem}/>
@@ -233,6 +294,7 @@ export const description = {
                 <ul style={{
                     listStyle: 'none',
                     padding: 0,
+                    marginBottom: '15px',
                 }}>
                     {data.service.map((item, key) => {
                         return (
@@ -247,7 +309,7 @@ export const description = {
                     }}>
                     {data.superiority.map((item, key) => {
                         return (
-                            <li key={key}>
+                            <li style={{marginBottom: '5px'}} key={key}>
                                 {item}
                             </li>
                         )

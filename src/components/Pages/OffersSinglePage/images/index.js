@@ -7,6 +7,7 @@ import statisticsIcon from './statistics.svg'
 import geoIcon from './geo.svg'
 import advertismentExamplesIcon from './advertismentExamples.svg'
 import superiorityListItem from './iconLi.svg'
+import emptyTable from './emptyTable.svg'
 
 //далее после подключения бэка удалить
 import prostoImg from '../../../Molecules/ManagerSidebarCard/images/i.jpeg'
@@ -22,8 +23,9 @@ export const images = {
     geoIcon,
     advertismentExamplesIcon,
     superiorityListItem,
+    emptyTable,
     //далее после подключения бэка удалить
     prostoImg,
-    remove
+    remove,
 
 };

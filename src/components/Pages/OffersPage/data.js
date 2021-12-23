@@ -2,7 +2,7 @@ import React from "react";
 
 import {OfferPaymentParam} from "../../Atoms/OfferPaymentParam/OfferPaymentParam";
 
-const offerTypeNameList = {
+export const offerTypeNameList = {
     0: 'CPA:',
     1: 'Revshare:',
     2: 'CPA, Revshare:',
@@ -12,15 +12,15 @@ export const paymentParamsConfig = {
     payout: {
         renderValue: ({value, isMobile}) => {
             const type = value[1].type;
-            console.log('t', type)
             const typeName = offerTypeNameList[type];
             return (
                 <>
                     <OfferPaymentParam
                         isMobile={isMobile}
+                        styles={{rowGap: '5px'}}
                         param={[
                             'Type:',
-                            typeName.slice(0, -1)
+                            typeName?.slice(0, -1)
                         ]}/>
                     {(type === 0 || type === 2) && <OfferPaymentParam
                         isMobile={isMobile}

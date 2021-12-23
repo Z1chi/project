@@ -5,7 +5,7 @@ import {OfferGridItem} from '../../Molecules/OfferGridItem/OfferGridItem';
 
 import './offerGrid.scss';
 
-export const OfferGrid = ({description, descriptionData, rows}) => {
+export const OfferGrid = ({description, descriptionData, rows, offerQuery}) => {
 
     const {width, height, ref} = useResizeDetector();
 
@@ -23,11 +23,9 @@ export const OfferGrid = ({description, descriptionData, rows}) => {
                             <div key={rowKey}
                                  className={`offerGrid__row${isSingleSlider ? ' offerGrid__row--slider' : ""}`}>
                                 {row.map((rowItem, rowItemKey) => {
-
-
                                         return (
                                             <div key={rowItemKey} className='offerGrid__rowItem'>
-                                                <OfferGridItem {...rowItem} width={width}/>
+                                                <OfferGridItem offerQuery={offerQuery} {...rowItem} width={width}/>
                                             </div>)
                                     }
                                 )}
