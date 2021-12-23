@@ -2,7 +2,7 @@ import emptyTableIcon from './images/emptyTable.svg'
 
 import { images } from './images';
 
-import { withdrawStatusList, withdrawStatusData } from './constants/status';
+import { withdrawStatusList, } from './constants/status';
 import { dropdownTypes } from '../../../constants/dropdown';
 
 export const statistics = [{

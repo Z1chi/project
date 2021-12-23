@@ -6,14 +6,16 @@ import { images } from './images'
 
 import './multiSelect.scss';
 
-export const MultiSelect = ({ options, renderItem, mobileConfig }) => {
+export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig }) => {
     const [searchValue, setSearchValue] = useState('');
     const [optionsSelectable, setOptionsSelectable] = useState(options.map( option => {
         return {
-            text: option,
+            item: option,
             isSelected: false,
         }
     }));
+
+    console.log('1', options[0], matchPropName)
 
     const searchRegexp = new RegExp(searchValue, 'g');
 
@@ -37,16 +39,13 @@ export const MultiSelect = ({ options, renderItem, mobileConfig }) => {
             </div>
             <div className='multiSelect__options'>
             {
-                optionsSelectable.filter(option => option.match(searchRegexp)).map((option, index) => {
+                
+                options.filter(option => (matchPropName && option[matchPropName]) 
+                    ? option[matchPropName].match(searchRegexp)
+                    : option.match(searchRegexp)
+                ).map((option, index) => {
                     return (
-                        <div className='multiSelect__options' onClick={()=>setOptionsSelectable(
-                            optionsSelectable.map( (_, indexToCompare)=> {
-                                return index===indexToCompare ? {
-                                    ...option,
-                                    isSelected: !option.isSelected
-                                } : option
-                            })
-                        )}>
+                        <div className='multiSelect__optionsItem'>
                             <MultiSelectOption option={option} renderOption={renderItem} />
                         </div>
                     )
