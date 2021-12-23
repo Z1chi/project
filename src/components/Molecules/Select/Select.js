@@ -21,7 +21,6 @@ export const Select = ({ options, renderItem=option=>option, mobileConfig }) => 
             <div className='select__options'>
             {
                 options.map( (option, index) => {
-                    console.log('option', option, renderItem(option))
                     return (
                         <div className={`select__optionsItem${index === indexSelected?' select__optionsItem--selected':''}`} 
                             onClick={()=>{setIndexSelected(index)}}

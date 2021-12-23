@@ -16,7 +16,7 @@ const renderFilterContent = (type) => (props) => {
     return Component ? <Component {...props} /> : null;
 }
 
-export const FilterItem = ({ title, mobileTitle, items=[], renderItem, onSelect, type, }) => {
+export const FilterItem = ({ title, matchPropName, mobileTitle, items=[], renderItem, onSelect, type, }) => {
     return (
         <div className='filterItem'>
             <div className='filterItem__info'>
@@ -45,6 +45,7 @@ export const FilterItem = ({ title, mobileTitle, items=[], renderItem, onSelect,
                                 renderFilterContent(type)({
                                     options: items, 
                                     renderItem,
+                                    matchPropName,
                                     mobileConfig: { 
                                         title: mobileTitle,
                                         onClose: () => setIsOpened(false)

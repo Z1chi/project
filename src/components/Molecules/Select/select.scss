@@ -2,7 +2,6 @@
     min-width: 204px;
     min-height: 112px;
     background-color: #131826;
-    padding: 11px 15px 7px 15px;
     position: relative;
     z-index: 1001;
 
@@ -12,6 +11,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
+        padding: 11px 15px 7px 15px;
 
         position: fixed;
         z-index: 1000;
@@ -39,9 +39,9 @@
     }
 
     &__options {
-        padding: 9px 24px 13px 15px;
 
         &Item {
+            padding: 8px 24px 8px 15px;
             width: 100%;
             font-style: normal;
             font-weight: normal;
