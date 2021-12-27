@@ -25,7 +25,8 @@ export const OfferGrid = ({description, descriptionData, rows, offerQuery}) => {
                                 {row.map((rowItem, rowItemKey) => {
                                         return (
                                             <div key={rowItemKey} className='offerGrid__rowItem'>
-                                                <OfferGridItem offerQuery={offerQuery} {...rowItem} width={width}/>
+                                                {offerQuery &&
+                                                <OfferGridItem offerQuery={offerQuery} {...rowItem} width={width}/>}
                                             </div>)
                                     }
                                 )}

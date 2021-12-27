@@ -20,7 +20,7 @@ export const OffersSinglePage = (props) => {
     return (
         <div className='offersSinglePage'>
             <PageTemplate
-                renderPage={({width}) => {
+                renderPage={() => {
                     return (
                         <>
                             <OfferHeader

@@ -34,7 +34,7 @@ export default function App() {
             <div className="app">
                 <reatomContext.Provider value={store}>
                     <Router basename='affiliate'>
-                        {auth && auth ?
+
                             <Switch>
                                 <Route exact path='/' component={MainPage}/>
                                 <Route exact path='/dashboard' component={DashboardPage}/>
@@ -52,11 +52,9 @@ export default function App() {
                                 <Route exact path='/faq' component={FAQPage}/>
                                 <Route exact path='/settings' component={SettingsPage}/>
                                 <Route exact path='?' component={SettingsPage}/>
-                            </Switch> :
-                            <Switch>
-                                <Route path='*' component={LeadsPage}/>
                             </Switch>
-                        }
+
+
 
                     </Router>
                 </reatomContext.Provider>

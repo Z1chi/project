@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useAtom} from '@reatom/react';
-import { useResizeDetector } from 'react-resize-detector';
+import {useResizeDetector} from 'react-resize-detector';
 
 import {Header} from "../../Organisms/Header/Header";
 import {Sidebar} from '../../Organisms/Sidebar/Sidebar';
@@ -8,20 +8,24 @@ import {Alert} from '../../Molecules/Alert/Alert';
 import {Modal} from "../../Organisms/Modal/Modal";
 // import {PageNesting} from "../../Molecules/PageNesting/PageNesting";
 
-import { sidebarAtom } from '../../../store/Sidebar';
-import { modalAtom } from '../../../store/Modal';
-import { alertAtom } from '../../../store/Alert';
+import {sidebarAtom} from '../../../store/Sidebar';
+import {modalAtom} from '../../../store/Modal';
+import {alertAtom} from '../../../store/Alert';
 
 
 import './pageTemplate.scss'
 
 
 export const PageTemplate = ({renderPage}) => {
-    const { width, height, ref } = useResizeDetector();
+    const {width, height, ref} = useResizeDetector();
 
     const [alertData] = useAtom(alertAtom);
     const [modalData] = useAtom(modalAtom);
-    const [sidebarData] = useAtom(sidebarAtom);
+    const [sidebarData, sidebarActions] = useAtom(sidebarAtom);
+
+    useEffect(() => {
+        (window.innerWidth < 710 && window.innerWidth > 479) ? sidebarActions.close() : '';
+    }, [window.innerWidth]);
 
     return (
         <div className={`pageTemplate${sidebarData.isOpened ? ' pageTemplate--compressed' : ''}`}>
@@ -36,9 +40,9 @@ export const PageTemplate = ({renderPage}) => {
                 </div>
 
                 <div ref={ref} className='pageTemplate__content'>
-                {
-                    renderPage({ width })
-                }
+                    {
+                        renderPage({width})
+                    }
                 </div>
             </div>
 

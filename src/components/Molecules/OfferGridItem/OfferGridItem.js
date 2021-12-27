@@ -19,7 +19,7 @@ export const OfferGridItem = ({id, icon, title, renderContent, data, width, offe
                 </div>
             </div>
             <div className='offerGridItem__content'>
-                {renderContent({data , width, ...offerQuery})}
+                {renderContent({data, width, ...offerQuery})}
             </div>
         </div>
     )

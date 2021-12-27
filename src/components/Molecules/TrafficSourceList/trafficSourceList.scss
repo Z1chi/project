@@ -1,0 +1,44 @@
+.trafficSourceList {
+  width: 100%;
+
+  &__item {
+    width: calc(50% - 16px);
+    margin: 8px 8px;
+  }
+
+  &__showList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    &--isMobile {
+      .trafficSourceList {
+        &__item {
+          width: 100%;
+          margin: 8px 0;
+        }
+      }
+    }
+  }
+
+  &__showButton {
+    color: #219FE5;
+    font-size: 13px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  &__arrowIcon {
+    margin-left: 10px;
+    transition: all ease 0.3s;
+
+    &--open {
+      transition: all ease 0.3s;
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import SVG from 'react-inlinesvg'
 import styled from "styled-components";
+import request from "../../../api/request";
 
 import logOut from './images/logOutSvg.svg'
 
@@ -15,8 +16,17 @@ const StyledLogoutButton = styled.div`
 `;
 
 export const LogoutButton = ({sidebar}) => {
+
+    const logoutFn = () => {
+        request('/logout', {method: 'post'});
+        sessionStorage.removeItem('token');
+    };
+
     return (
-        <StyledLogoutButton sidebar={sidebar} className='logoutButton'>
+        <StyledLogoutButton
+            sidebar={sidebar}
+            className='logoutButton'
+            onClick={() => logoutFn()}>
             <div>
                 <SVG src={logOut}/>
                 <p>Log out</p>
