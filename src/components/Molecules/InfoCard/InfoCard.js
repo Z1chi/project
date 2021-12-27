@@ -1,25 +1,35 @@
 import React from 'react';
 
-import { useResizeDetector } from 'react-resize-detector';
+import {useResizeDetector} from 'react-resize-detector';
 
 import SVG from 'react-inlinesvg';
 
 import './infoCard.scss';
 
-export const InfoCard = ({ isMobile, icon, backgroundColor, title, value, renderSubtitle=(value)=>value?.amount, renderConverted }) => {
+export const InfoCard = (
+    {
+        isMobile,
+        icon,
+        backgroundColor,
+        title,
+        value,
+        renderSubtitle = (value) => value?.amount,
+        renderConverted,
+        iconSize = '50px'
+    }) => {
     return (
-        <div className={`infoCard${isMobile?' infoCard--isMobile':''}`}>
-            <div className='infoCard__icon' style={{ backgroundColor }}>
-                <SVG src={icon} />
+        <div className={`infoCard${isMobile ? ' infoCard--isMobile' : ''}`}>
+            <div className='infoCard__icon' style={{backgroundColor: backgroundColor, width: iconSize, height: iconSize}}>
+                <SVG src={icon}/>
             </div>
             <div className='infoCard__text'>
                 <div className='infoCard__title'>
                     {title}
                 </div>
                 <div className='infoCard__subtitle'>
-                {
-                    renderSubtitle(value)
-                }
+                    {
+                        renderSubtitle(value)
+                    }
                     <span className='infoCard__converted'>
                     {
                         renderConverted && renderConverted(value)
@@ -29,4 +39,4 @@ export const InfoCard = ({ isMobile, icon, backgroundColor, title, value, render
             </div>
         </div>
     )
-}
+};

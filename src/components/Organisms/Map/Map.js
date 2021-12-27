@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { scaleLinear } from "d3-scale";
 import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Sphere,
-  Graticule
+    ComposableMap,
+    Geographies,
+    Geography,
+    Sphere,
+    Graticule,
 } from "react-simple-maps";
 
 import { GEO_URL } from './constants/geo';
@@ -28,14 +28,13 @@ export const Map = ({ countryIdList }) => {
                 <Geographies geography={GEO_URL}>
                     {({ geographies }) =>
                         geographies.map((geo, countryId) => {
-                            if(countryId==16) {
-                                // console.log('geo', geo)
-                            }
+                            const countryISOA2 = geo.properties.ISO_A2;
+
                         return (
                             <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={countryIdList.find( item => item === countryId) ? '#b21': '#12b'}
+                            fill={countryIdList.find( item => item.code === countryISOA2) ? '#219FE5': '#3C3F4B'}
                             />
                         );
                         })

@@ -64,7 +64,22 @@ export const objToArray = obj => {
     return array;
 };
 
-export const dclare = payment => {
+export const localeString = ({value = 0, currencySymbol = 'USD', locales = 'ja-JP'}) =>
+    (value).toLocaleString(locales, {style: 'currency', currency: currencySymbol});
 
+export const dateFormator = (dateTimeString) => {
+    const monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const [date, time] = dateTimeString.split('T');
+    const [year, month, day] = date.split('-');
+    const [hour, minutes] = time.split(':');
+    const timeFn = () => {
+        let hourFn = hour;
+        if (hour > 12) {
+            hourFn = hour - 12
+        }
+        return `${hourFn}:${minutes} ${hour > 12 ? 'PM' : 'AM'}`
+    };
+    return `${monthArr.find((item, key) =>
+        key + 1 === Number(month) ? item : '')} ${day}, ${year} ${timeFn()}`
 };
-

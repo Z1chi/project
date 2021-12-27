@@ -5,7 +5,8 @@ import './menu.scss'
 
 export const Menu = ({links, sidebarIsOpened}) => {
     const {pathname} = useLocation();
-    const [activePageLink, setActivePageLink] = useState(pathname);
+    const [activePageLink, setActivePageLink] = useState('/'+pathname.match(/(\w+)/)[0]);
+
     return (
         <div className='menu'>
             {

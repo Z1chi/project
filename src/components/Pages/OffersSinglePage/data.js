@@ -5,11 +5,19 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import {Table} from "../../Organisms/Table/Table";
 import {Map} from "../../Organisms/Map/Map";
 import {AItem} from "../../Atoms/AdItem/AItem";
+import {OfferPaymentParam} from "../../Atoms/OfferPaymentParam/OfferPaymentParam";
+import {SelectionItem} from "../../Atoms/SelectionItem/SelectionItem";
+import {InfoCard} from "../../Molecules/InfoCard/InfoCard";
+import {TrafficSourceList} from "../../Molecules/TrafficSourceList/TrafficSourceList";
+import {OfferDemoAccount} from "../../Organisms/OfferDemoAccount/OfferDemoAccount";
 
 import 'swiper/css';
 
 import {images} from "./images/index";
 
+import {offerTypeNameList} from "../OffersPage/data";
+
+import {dateFormator, localeString} from "../../../helpers/lib";
 
 export const descriptionData = {
     benefits: ["Преимущества кратко:",
@@ -32,58 +40,7 @@ export const descriptionData = {
         "Регулярные акции и бонусы",
         "1 000 000+ ставок ежедневно"
     ],
-
 };
-
-const demoAccountTable = {
-    tableConfig: [{
-        columnId: 'login',
-        columnName: 'Login',
-        columnWidth: '170px',
-    }, {
-        columnId: 'password',
-        columnName: 'Password',
-        columnWidth: '116px',
-    }, {
-        columnId: 'link',
-        columnName: 'Link',
-        columnWidth: '116px',
-
-        renderRowItem: (item) => {
-            return (
-                <div>
-                    <a href={item.to}>{item.text}</a>
-                </div>
-            )
-        }
-    },],
-
-    data: [{
-        login: 'examplelogincredentials',
-        password: 'examplepasswordfordemo',
-        link: 'randomlinkfordemoaccount...',
-    }],
-
-};
-
-const adData = [
-    {
-        link: '/',
-        backgroundImage: images.prostoImg
-    },
-    {
-        link: '/',
-        backgroundImage: images.remove
-    },
-    {
-        link: '/',
-        backgroundImage: images.prostoImg
-    },
-    {
-        link: '/',
-        backgroundImage: images.remove
-    }
-];
 
 
 export const rowsConfig = [
@@ -91,26 +48,49 @@ export const rowsConfig = [
         id: 'model',
         icon: images.modelIcon,
         title: 'Model',
-        renderContent: ({data = '40%'}) => {
+        renderContent: ({type, cpa, revshare}) => {
+
             return (
-                <div style={{
-                    background: 'rgba(255, 22, 190, 0.26)',
-                    border: '1px solid rgba(255, 22, 190, 0.4)',
-                    borderRadius: '4px',
-                    width: 'fit-content',
-                    padding: '4px',
-                    color: '#FF16BE'
-                }}>
-                    Revshare: <span style={{fontWeight: '700'}}>{data} FTD</span>
-                </div>
+                <> {(type === 0 || type === 2) && <OfferPaymentParam
+                    styles={{margin: '5px 10px 5px 0'}}
+                    param={[
+
+                        <span style={{
+                            padding: '5px 10px',
+                            color: '#16FFAC',
+                            background: 'rgba(22, 255, 172, 0.26)',
+                            border: '1px solid rgba(22, 255, 172, 0.4)',
+                            cursor: 'default',
+                            borderRadius: "4px"
+                        }}>
+                            {`${offerTypeNameList[0]} $${Number(cpa).toFixed(2)}`}
+                        </span>
+                    ]}
+
+                />}
+                    {(type === 1 || type === 2) && <OfferPaymentParam
+                        styles={{margin: '5px 0'}}
+                        param={[
+
+                            <span style={{
+                                padding: '5px 10px',
+                                color: '#FF16BE',
+                                background: 'rgba(255, 22, 190, 0.26)',
+                                border: '1px solid rgba(255, 22, 190, 0.4)',
+                                cursor: 'default',
+                                borderRadius: "4px"
+                            }}>
+                                {`${offerTypeNameList[1]} ${Number(revshare).toFixed(1)}% `}<b>FTD</b>
+                            </span>
+                        ]}/>}</>
             )
         }
     }, {
         id: 'conversion',
         icon: images.conversionIcon,
         title: 'Conversion',
-        renderContent: () => {
-            return 'Открытие расчётного счёта';
+        renderContent: ({conversion_type}) => {
+            return String(conversion_type);
         }
     }],
 
@@ -118,9 +98,50 @@ export const rowsConfig = [
         id: 'demoAccount',
         icon: images.demoAccountIcon,
         title: 'Demo Account',
-        renderContent: () => {
+        renderContent: ({demoAccounts, width}) => {
+
+            const demoAccountTable = {
+                tableConfig: [
+                    {
+                        columnId: 'login',
+                        columnName: 'Login',
+                        columnWidth: '170px',
+                    },
+                    {
+                        columnId: 'password',
+                        columnName: 'Password',
+                        columnWidth: '156px',
+                    },
+                    {
+                        columnId: 'link',
+                        columnName: 'Link',
+                        columnWidth: '216px',
+
+                        renderRowItem: (item) => {
+                            return (
+
+                                <a style={{color: '#219FE5'}} href={item}>{item}</a>
+
+                            )
+                        }
+                    },
+                ],
+                data: demoAccounts,
+                emptyTable: {
+                    icon: images.emptyTableIcon,
+                    text: 'Action logs will appear here once you’ll lorem ipsum dolomir loret galor. ',
+                    button: {
+                        text: 'Explore offers',
+                        onClick: () => {
+                        }
+                    }
+                }
+            };
+
             return (
-                <Table {...demoAccountTable} />
+                width < 511 ?
+                    <OfferDemoAccount demoAccounts={demoAccounts}/> :
+                    <Table {...demoAccountTable} />
             )
         }
     }],
@@ -129,9 +150,9 @@ export const rowsConfig = [
         id: 'trafficSource',
         icon: images.trafficSourceIcon,
         title: 'Traffic Source',
-        renderContent: () => {
+        renderContent: ({sources, width}) => {
             return (
-                <Table {...demoAccountTable} />
+                <TrafficSourceList width={width} sources={sources}/>
             )
         }
     }],
@@ -140,22 +161,110 @@ export const rowsConfig = [
         id: 'statistic',
         icon: images.statisticsIcon,
         title: 'Statistic',
-        renderContent: () => {
+        renderContent: ({statistic, width}) => {
+
+            const isMobile = width < 511
+            statistics = [
+                {
+                    icon: images.created_at,
+                    title: 'Creation date:',
+                    value: dateFormator(statistic.created_at),
+                },
+                {
+                    icon: images.avg_deposit,
+                    title: 'Avg. deposit:',
+                    value: localeString({value: statistic.avg_deposit}).slice(0, -3),
+                },
+                {
+                    icon: images.deposits,
+                    title: 'Deposit record: ',
+                    value: localeString({value: statistic.deposits}).slice(0, -3),
+                },
+                {
+                    icon: images.avg_turnover,
+                    title: 'Avg. turnover (30d)',
+                    value: localeString({value: statistic.avg_turnover}).slice(0, -3),
+                },
+                {
+                    icon: images.registrations_amount,
+                    title: 'Registration amount:',
+                    value: statistic.registrations_amount,
+                },
+                {
+                    icon: images.deposits_amount,
+                    title: 'Deposit amount:',
+                    value: statistic.deposits_amount,
+                },
+
+            ];
             return (
-                <Table {...demoAccountTable} />
+                <>
+                    {statistic && statistics.map((card, key) => {
+
+
+                            return <div
+                                className={`offerStatisticCard${isMobile ? ' offerStatisticCard--isMobile' : ''}`}
+                                key={`offerStatisticCard${key}`}>
+                                <InfoCard {...card} iconSize='80px' backgroundColor='#2D313D'
+                                          renderSubtitle={value => <p>{value}</p>}/>
+                            </div>
+                        }
+                    )}
+                </>
             )
         }
     }],
 
     [{
         id: 'geo',
-        icon: images.demoAccountIcon,
+        icon: images.geoIcon,
         title: 'GEO',
-        renderContent: () => {
-            return (
-                <Map countryIdList={[16]}/>
-            )
-        }
+        renderContent: ({countries, width}) =>
+            <>
+                {width > 350 ?
+                    <>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexWrap: 'nowrap',
+                                alignItems: 'center'
+                            }}>
+                        <span
+                            style={{
+                                width: '12px',
+                                height: '12px',
+                                background: '#219FE6',
+                                borderRadius: '2px',
+                                marginRight: '5px'
+                            }}/>
+                            <p
+                                style={{marginRight: '10px'}}>Available</p>
+                            <span
+                                style={{
+                                    width: '12px',
+                                    height: '12px',
+                                    background: '#3C3F4B',
+                                    borderRadius: '2px',
+                                    marginRight: '5px'
+                                }}/>
+                            <p>Unavailable</p></div>
+                        <Map countryIdList={countries}/> </> : ''}
+
+                <p style={{color: '#898A98', marginBottom: '20px'}}>Available Country list:</p>
+                <div style={{width: '100%', display: 'flex', flexWrap: 'wrap'}}>
+
+                    {countries && countries.map((item, key) =>
+
+                        <SelectionItem
+                            key={key}
+                            isSelected={true}
+                            title={item.name}
+                            styles={{width: width < 511 ? '100%' : 'calc(50% - 10px)', margin: '10px 0'}}/>
+                    )}
+                </div>
+            </>
+
+
     }],
 
     [{
@@ -163,7 +272,7 @@ export const rowsConfig = [
         isSlider: true,
         icon: images.advertismentExamplesIcon,
         title: 'Advertisment examples',
-        renderContent: ({width}) => {
+        renderContent: ({width, assets}) => {
             const isMobile = width < 510;
             if (isMobile) {
 
@@ -177,7 +286,7 @@ export const rowsConfig = [
                         loop={true}>
 
                         {
-                            adData.map((adItem, key) => (
+                            assets && assets.map((adItem, key) => (
                                 <SwiperSlide style={{width: "100%", height: "200px"}} key={key}>
                                     <AItem {...adItem} isMobile={isMobile}/>
                                 </SwiperSlide>
@@ -190,7 +299,7 @@ export const rowsConfig = [
             } else {
                 return (
 
-                    adData.map((adItem, key) => (
+                    assets && assets.map((adItem, key) => (
                         <div style={{width: '50%', height: 'auto'}}
                              key={key}>
                             <AItem {...adItem}/>
@@ -204,12 +313,6 @@ export const rowsConfig = [
         }
     }],
 ];
-
-
-export const gridData = {
-    model: '40%',
-    demoAccount: {}
-};
 
 
 export const description = {
@@ -226,17 +329,18 @@ export const description = {
                 }}>
                     {data.benefits.map((item, key) => {
                         return (
-                            <li key={key}>{item}</li>
+                            <li key={`benefits${key}`}>{item}</li>
                         )
                     })}
                 </ul>
                 <ul style={{
                     listStyle: 'none',
                     padding: 0,
+                    marginBottom: '15px',
                 }}>
                     {data.service.map((item, key) => {
                         return (
-                            <li key={key}>{item}</li>
+                            <li key={`service${key}`}>{item}</li>
                         )
                     })}
                 </ul>
@@ -247,7 +351,7 @@ export const description = {
                     }}>
                     {data.superiority.map((item, key) => {
                         return (
-                            <li key={key}>
+                            <li style={{marginBottom: '5px'}} key={`superiority${key}`}>
                                 {item}
                             </li>
                         )

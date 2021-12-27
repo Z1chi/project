@@ -1,5 +1,4 @@
 import React from 'react'
-import {useAtom} from '@reatom/react';
 import styled from 'styled-components'
 import SVG from 'react-inlinesvg'
 
@@ -11,7 +10,6 @@ import {LogoutButton} from "../../Atoms/LogoutButton/LogoutButton";
 import trafburg from './images/menu-icon-trafburg.svg'
 import trafburgIcon from './images/menu-icon-trafburgMob.svg'
 
-import {sidebarAtom} from '../../../store/Sidebar';
 import {menuLinks} from "./data";
 
 import './sidebar.scss'
@@ -37,7 +35,7 @@ const SidebarContentMenu = styled.div`
 
 
 export const Sidebar = ({sidebarIsOpened, setSidebarIsOpened}) => {
-    const [sidebarData] = useAtom(sidebarAtom);
+
     return (
         <SidebarContent sidebarIsOpened={sidebarIsOpened} className={`sidebar${sidebarIsOpened ? " open" : ""}`}>
             <div className='sidebar__header'>
