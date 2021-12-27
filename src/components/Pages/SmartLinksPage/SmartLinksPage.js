@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useQueries, } from 'react-query';
 
 import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
 import { SmartLinksCard } from '../../Molecules/SmartLinksCard/SmartLinksCard';
@@ -20,9 +20,26 @@ import './smartLinksPage.scss';
 export const SmartLinksPage = () => {
     const [drawerData, drawerActions] = useAtom(drawerAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
+
     const smartLinksQuery = useQuery(['smartlinks'], async () => {
         return request('smartlink').then((res) => res.data);
     })
+
+    const smartlinkFiltersQueryList = useQueries([
+        { queryKey: ['smartlinkFilters', 'offers'], queryFn: () => {
+            return request('/offers/get-offers-filter').then(res => res.data);
+        } },
+        { queryKey: ['smartlinkFilters', 'format'], queryFn: () => {
+            return request('/smartlink/formats').then(res => res.data);
+        } },
+    ]);
+
+    const filtersData = [
+        smartlinkFiltersQueryList[0].data || [],
+        [],
+        smartlinkFiltersQueryList[1].data || []
+    ];
+
     return (
         <div className='smartLinksPage'>
             <PageTemplate
@@ -49,7 +66,7 @@ export const SmartLinksPage = () => {
                                     <>
                                     <div className='smartLinksPage__header'>
                                         <div className='smartLinksPage__filters'>
-                                            <Filter filters={filters}/>
+                                            <Filter filters={filters} data={filtersData} />
                                         </div>
                                         <div className='smartLinksPage__create'>
                                             <button onClick={

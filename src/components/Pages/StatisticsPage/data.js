@@ -1,8 +1,48 @@
 import {images} from "./images";
-import React from "react";
+
+import { dropdownTypes } from '../../../constants/dropdown';
+
+export const filters = [{
+    title: 'Date',
+    mobileTitle: 'Select date',
+    type: dropdownTypes.DATE,
+    width: '204px',
+}, {
+    title: 'Format',
+    mobileTitle: 'Select format',
+    type: dropdownTypes.SELECT, 
+    matchPropName: 'label',
+    width: '154px',
+    renderItem: (item) => item.label,
+}, {
+    title: 'Country',
+    mobileTitle: 'Select countries',
+    type: dropdownTypes.MULTISELECT,
+    matchPropName: 'name',
+    width: '154px',
+    renderItem: (item) => item.name,
+}, {
+    title: 'Smartlink',
+    mobileTitle: 'Select smartlink',
+    type: dropdownTypes.SELECT,
+    width: '154px',
+    renderItem: (item) => item.title,
+}, {
+    title: 'Offers',
+    mobileTitle: 'Select offers',
+    type: dropdownTypes.MULTISELECT,
+    matchPropName: 'title',
+    width: '154px',
+    renderItem: (item) => (
+        <div style={{display: 'flex', alignItems: 'center', }}>
+            <img src={item.image} />
+            <span style={{marginLeft: '10px'}}>{item.title}</span>
+        </div>
+    ),
+}, ];
+
 
 export const table = {
-
     tableConfig: [{
         columnId: 'date',
         columnName: 'Date',

@@ -86,7 +86,7 @@ export const table = {
         columnWidth: '116px',
 
         renderRowItem: (item) => {
-            return (
+            return item ? (
                 <div
                     style={{
                         padding: '5px 10px',
@@ -97,7 +97,7 @@ export const table = {
                 >
                     {item.currency} {item.value}
                 </div>
-            )
+            ) : null
         }
     }, ],
 

@@ -1,0 +1,20 @@
+.multiSelectOption {
+    padding: 7.5px 0;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    &__checkbox {
+        margin-top: 4px;
+    }
+
+    &__text {
+        margin-left: 11px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 20px;
+        color: #FFFFFF;
+    }
+}

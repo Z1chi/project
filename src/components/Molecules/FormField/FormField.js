@@ -6,11 +6,10 @@ import './formField.scss';
 
 const renderField = ({type, generateField}) => (props) => {
     const Component = fieldComponentsList[type];
-    console.log({type, Component});
     return Component ? <Component {...props} /> : generateField();
 }
 
-export const FormField = ({ title, info, type, placeholder, options, canCopy, generateField, }) => {
+export const FormField = ({ title, mobileTitle, info, type, placeholder, options, renderItem, canCopy, generateField, }) => {
     return (
         <div className='formField'>
             <div className='formField__header'>
@@ -32,7 +31,7 @@ export const FormField = ({ title, info, type, placeholder, options, canCopy, ge
                 renderField(
                     { type, generateField }
                 )(
-                    { title, info, type, placeholder, canCopy, options, mobileConfig: { title: placeholder }}
+                    { title, info, type, placeholder, canCopy, options, renderItem, mobileConfig: { title: mobileTitle }}
                 )
             }
             </div>

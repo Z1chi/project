@@ -8,7 +8,7 @@ import { images } from './images';
 
 import './filterMobile.scss';
 
-export const FilterMobile = ({ filters, onSave, }) => {
+export const FilterMobile = ({ filters, data, onSave, }) => {
 
     const [isOpened, setIsOpened] = useState(false);
 
@@ -36,10 +36,10 @@ export const FilterMobile = ({ filters, onSave, }) => {
                 </div>
                 <div className='filterMobile__fields'>
                 {
-                    filters.map( field => {
+                    filters.map( (field, index) => {
                         return (
                             <div className='filterMobile__fieldsItem'>
-                                <FormField title={field.title} type={field.type} placeholder={field.placeholder} />
+                                <FormField {...field} options={data[index]} />
                             </div>
                         )
                     })

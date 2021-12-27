@@ -14,42 +14,28 @@ const renderLink = (link) => {
 export const filters = [{
     title: 'Offers',
     mobileTitle: 'Select offer',
-    type: dropdownTypes.SELECT,
-    items: {
-        options: [
-            'All',
-            'FIRST',
-            'SECOND',
-        ],
-        selectedIndex: 0,
-    },
+    type: dropdownTypes.MULTISELECT,
+    matchPropName: 'title',
     width: '204px',
+    renderItem: (item) => (
+        <div style={{display: 'flex', alignItems: 'center', }}>
+            <img src={item.image} />
+            <span style={{marginLeft: '10px'}}>{item.title}</span>
+        </div>
+    ),
 }, {
     title: 'Date',
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
-    items: {
-        options: [
-            'All',
-            'FIRST',
-            'SECOND',
-        ],
-        selectedIndex: 0,
-    },
+
     width: '154px',
 }, {
     title: 'Format',
     mobileTitle: 'Select format',
     type: dropdownTypes.SELECT,
-    items: {
-        options: [
-            'All',
-            'FIRST',
-            'SECOND',
-        ],
-        selectedIndex: 0,
-    },
+    matchPropName: 'label',
     width: '163px',
+    renderItem: (item) => item.label,
 }, ];
 
 export const table = {

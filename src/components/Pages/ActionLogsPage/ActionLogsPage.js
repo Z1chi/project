@@ -53,16 +53,12 @@ export const ActionLogsPage = () => {
                             </div>
                             <div className='actionLogsPage__table'>
                                 { actionLogsFiltersQueryList.length > 0 && actionLogsFiltersQueryList.every(query => query.data) && <div className='actionLogsPage__tableFilter'>
-                                    <Filter filters={filters.map((filter, index) => {
-                                        return {
-                                            ...filter,
-                                            options: actionLogsFiltersQueryList[index] ? actionLogsFiltersQueryList[index].data : []
-                                        }
-                                    })}
-                                    mobileFilterConfig={{
-                                        fields: [], 
-                                        onSave: () => {console.log('saved')},
-                                    }}
+                                    <Filter filters={filters}
+                                        data={actionLogsFiltersQueryList.every(filter => filter.data) ? actionLogsFiltersQueryList.map(filter => filter.data): []}
+                                        mobileFilterConfig={{
+                                            fields: [], 
+                                            onSave: () => {console.log('saved')},
+                                        }}
                                     />
                                 </div>}
                                 <div className='actionLogsPage__tableData'>

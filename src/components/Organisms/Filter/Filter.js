@@ -9,7 +9,7 @@ import { images } from './images';
 
 import './filter.scss';
 
-export const Filter = ({ filters, }) => {
+export const Filter = ({ filters, data, }) => {
 
     const {width, height, ref} = useResizeDetector();
     const isMobile = width <= 768;
@@ -19,15 +19,15 @@ export const Filter = ({ filters, }) => {
         {
             isMobile
             ? (
-                <FilterMobile filters={filters} />
+                <FilterMobile filters={filters} data={data} />
             )
             : (
                 <>
                 {
-                    filters.map( ({ width, ...item}, key) => {
+                    filters.map( ({ width, ...item}, index) => {
                         return (
-                            <div key={key} className='filter__item' style={{ width }}>
-                                <FilterItem {...item} />
+                            <div key={`filter__item(${index})`} className='filter__item' style={{ width }}>
+                                <FilterItem {...item} items={data[index]} />
                             </div>
                         )
                     })
