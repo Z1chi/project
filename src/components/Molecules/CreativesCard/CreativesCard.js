@@ -1,14 +1,15 @@
 import React from 'react';
 
 import SVG from 'react-inlinesvg';
+import config from '../../../configApi'
 
 import './creativesCard.scss';
 
-export const CreativesCard = ({ onClick, modalData, logo, category, moreButton, downloadButton, }) => {
+export const CreativesCard = ({ onClick, modalData, preview_src, category, moreButton, downloadButton, }) => {
     return (
         <div className='creativesCard' onClick={() => onClick({ creativesData: modalData })}>
             <div className='creativesCard__logo'>
-                <img src={logo} alt='' />
+                <img src={`${config.root}${preview_src}`} alt='' />
             </div>
             <div className='creativesCard__footer'>
                 <div className='creativesCard__category'>
@@ -23,4 +24,4 @@ export const CreativesCard = ({ onClick, modalData, logo, category, moreButton, 
             </div>
         </div>
     )
-}
+};

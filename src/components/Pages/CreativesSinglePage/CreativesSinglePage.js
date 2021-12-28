@@ -28,13 +28,12 @@ export const CreativesSinglePage = () => {
 
     const creativesCategoriesQuery = useQuery(['creatives-categories',], () => {
         return request(`creative/get-categories-filters?project_id=${id}`).then( res => res.data);
-    })
+    });
 
     const creativesItemQuery = useQuery(['creatives-item',creativesData.filterIds,], () => {
         return request(`creative/get-assets?project_id=${id}${creativesData.filterIds.length>0?`&category=${creativesData.filterIds.join(',')}`:''}`).then( res => res.data);
-    })
-    
-    console.log('1',creativesItemQuery)
+    });
+
 
     return (
         <div className='creativesSinglePage'>

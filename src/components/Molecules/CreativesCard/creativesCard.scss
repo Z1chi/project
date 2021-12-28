@@ -5,6 +5,12 @@
 
     &__logo {
         height: 270px;
+        overflow: hidden;
+        object-fit: contain;
+        & > * {
+            width: auto;
+            height: 270px;
+        }
     }
 
     &__footer {

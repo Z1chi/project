@@ -1,26 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import {Link} from 'react-router-dom';
+
+import config from '../../../configApi'
 
 import './creativesOffer.scss';
 
-export const CreativesOffer = ({ id, logo, title, link, description, }) => {
+export const CreativesOffer = ({id, image, title, url, small_description,}) => {
     return (
         <div className='creativesOffer'>
             <div className='creativesOffer__logo'>
-                <img src={logo} alt='' />
+                <img src={`${config.root}${image}`} alt=''/>
             </div>
             <div className='creativesOffer__info'>
                 <div className='creativesOffer__title'>
                     {title}
                 </div>
-                <div className='creativesOffer__link'>
-                    <Link to={link.to}>{link.text}</Link>
-                </div>
+
+                <a className='creativesOffer__link' href={url} target='blank'>{url}</a>
+
                 <div className='creativesOffer__description'>
-                    {description}
+                    {small_description}
                 </div>
                 <div className='creativesOffer__more'>
-                    <Link to={`/creatives/${id}`} >See creatives</Link>
+                    <Link to={`/creatives/${id}`}>See creatives</Link>
                 </div>
             </div>
         </div>

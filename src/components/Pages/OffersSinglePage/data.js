@@ -259,7 +259,7 @@ export const rowsConfig = [
                             key={key}
                             isSelected={true}
                             title={item.name}
-                            styles={{width: width < 511 ? '100%' : 'calc(50% - 10px)', margin: '10px 0'}}/>
+                            styles={{width: width < 511 ? '100%' : 'calc(50% - 10px)', margin: '10px 8px'}}/>
                     )}
                 </div>
             </>
