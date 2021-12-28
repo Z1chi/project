@@ -1,20 +1,28 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import AutoSizer from 'react-virtualized-auto-sizer';
+import { useAtom } from '@reatom/react';
 
 import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
 import { InfoCard } from '../../Molecules/InfoCard/InfoCard';
 import { WithdrawCard } from '../../Molecules/WithdrawCard/WithdrawCard';
 import { Filter } from '../../Organisms/Filter/Filter';
 import { Table } from '../../Organisms/Table/Table';
+import { Drawer } from '../../Organisms/Drawer/Drawer';
+import { Button } from '../../Atoms/Button/Button';
 
 import request from '../../../api/request';
 
-import { statistics, filters, table } from './data';
+import { statistics, filters, table, drawers, modalWithdraw } from './data';
+import { drawerAtom } from '../../../store/Drawer';
+import { modalAtom } from '../../../store/Modal';
 
 import './withdrawPage.scss';
+import { useEffect } from 'react/cjs/react.development';
 
 export const WithdrawPage = () => {
+
+    const [drawerData, drawerActions] = useAtom(drawerAtom)
+    const [modalData, modalActions] = useAtom(modalAtom);
 
     const withdrawQuery = useQuery(['withdraw-table'], () => {
         return request('withdraw/get-withdraws').then(res => res.data);
@@ -29,6 +37,8 @@ export const WithdrawPage = () => {
         [], 
         statusFilterQuery.data || [],
     ]
+
+    
 
     return (
         <div className='withdrawPage'>
@@ -49,7 +59,19 @@ export const WithdrawPage = () => {
                                 }
                                 </div>
                                 <div className='withdrawPage__withdraw'>
-                                    <button>Withdraw</button>
+                                    <Button onClick={()=>{
+                                        drawerActions.open(drawers.withdraw({
+                                            onClick: () => {
+                                                modalActions.open(
+                                                    modalWithdraw({
+                                                        onSubmit: () => {},
+                                                    })
+                                                )
+                                            }
+                                        }))
+                                    }}>
+                                        Withdraw
+                                    </Button>
                                 </div>
                             </div>
                             <div className='withdrawPage__filters'>
@@ -77,6 +99,7 @@ export const WithdrawPage = () => {
                     )
                 }}
             />
+            {drawerData && drawerData.isOpened && <Drawer {...drawerData} onClose={drawerActions.close} data={{}} />}
         </div>
     )
 }
