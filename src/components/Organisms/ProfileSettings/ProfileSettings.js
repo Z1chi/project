@@ -8,26 +8,27 @@ import './ProfileSettings.scss'
 const setting = [
     {
         title: 'Profile',
-        description: 'Important account details'
+        description: 'Important account details',
+        link : '/settings'
     },
-    {
-        title: 'Affiliate program',
-        description: 'Invite your friends and earn rewards'
-    },
-    {
-        title: 'Dark Mode',
-        description: 'Switch dark/light mode'
-    },
+    // {
+    //     title: 'Affiliate program',
+    //     description: 'Invite your friends and earn rewards'
+    // },
+    // {
+    //     title: 'Dark Mode',
+    //     description: 'Switch dark/light mode'
+    // },
 ];
 
-export const ProfileSettings = () => {
+export const ProfileSettings = ({email}) => {
 
     return (
         <div className='profileSettings'>
-            <p className='profileSettings__email'>exampleemail@gmail.com</p>
+            <p className='profileSettings__email'>{email}</p>
             {
                 setting.map((info, key) =>
-                    <ProfileSettingsItem key={key} info={info}/>)
+                    <ProfileSettingsItem key={`profileSettingsItem${key}`} info={info}/>)
             }
             <LogoutButton/>
         </div>

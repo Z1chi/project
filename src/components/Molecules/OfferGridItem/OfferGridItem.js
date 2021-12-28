@@ -4,7 +4,7 @@ import SVG from 'react-inlinesvg';
 import './offerGridItem.scss';
 import {Link} from "react-router-dom";
 
-export const OfferGridItem = ({id, icon, title, renderContent, data, width, kek}) => {
+export const OfferGridItem = ({id, icon, title, renderContent, data, width, offerQuery}) => {
 
     const isSlider = width < 511 && id === 'advertismentExamples';
     return (
@@ -19,7 +19,7 @@ export const OfferGridItem = ({id, icon, title, renderContent, data, width, kek}
                 </div>
             </div>
             <div className='offerGridItem__content'>
-                {renderContent({data, width})}
+                {renderContent({data, width, ...offerQuery})}
             </div>
         </div>
     )

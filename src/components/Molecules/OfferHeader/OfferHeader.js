@@ -6,10 +6,12 @@ import i from "../ManagerSidebarCard/images/i.jpeg";
 
 import {OfferTags} from "../../Atoms/OfferTags/OfferTags";
 
+import config from '../../../configApi'
+
 import './offerHeader.scss';
 
 
-export const OfferHeader = () => {
+export const OfferHeader = ({title, link, small_description, image, id}) => {
 
     const {width, height, ref} = useResizeDetector();
     const widthHeaderText = width < 768;
@@ -17,27 +19,23 @@ export const OfferHeader = () => {
     return (
         <div ref={ref} className={`offerHeader${widthHeaderText ? ' offerHeader--column' : ""}`}>
             <div className='offerHeader__logo'>
-                <img src={i} alt=""/>
+                <img src={config.root + image} alt=""/>
             </div>
 
             <div className='offerHeader__info'>
                 <div className='offerHeader__title'>
-                    1x Games
+                    {title}
                 </div>
                 <div className='offerHeader__tags'>
                     <OfferTags styled tags={['Finance', 'Popular Now', 'Editors Pick']}/>
                 </div>
                 <div className='offerHeader__link'>
-                    <a href='www.1xgames.com'> www.1xgames.com</a>
+                    <a href={link}>{link}</a>
                 </div>
                 <div className='offerHeader__description'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    {small_description}
                 </div>
-                <Link to='/' className='offerHeader__connect'>
+                <Link to={`/creatives/${id}`} className='offerHeader__connect'>
                     <p>Connect</p>
 
                 </Link>

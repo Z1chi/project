@@ -29,6 +29,82 @@
     width: 100%;
     font-size: 13px;
     margin-top: 22px;
+
+    .table {
+      &__data {
+        background-color: #262A37;
+
+        .table__head {
+          .tableHead {
+            background-color: #262A37;
+
+            &__item {
+              &:not(:first-child) {
+                .tableHeadItem {
+                  padding: 10px 25px;
+                }
+              }
+
+              .tableHeadItem {
+                justify-content: flex-start;
+              }
+
+            }
+          }
+        }
+
+        .table__rowList {
+          .table__row {
+            .tableRow {
+              background-color: #2D313D;
+              border-radius: 4px;
+
+              &__cell {
+                .tableCell {
+                  background-color: #2D313D;
+                  justify-content: flex-start;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+
+                  & > * {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: inherit;
+                  }
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .offerStatisticCard {
+      max-width: 50%;
+      width: 100%;
+
+      .infoCard {
+        background-color: transparent;
+        padding: 22px 30px 22px 0;
+      }
+
+      &--isMobile {
+        max-width: unset;
+
+        .infoCard {
+          height: unset;
+          flex-direction: column;
+          padding: 10px 16px;
+
+          &__text {
+            align-items: center;
+            margin: 15px 0 0 0;
+          }
+        }
+      }
+
+    }
   }
 
   &--slider {
@@ -60,7 +136,6 @@
           }
 
         }
-
 
       }
 

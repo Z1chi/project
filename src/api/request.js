@@ -1,17 +1,16 @@
 import axios from 'axios';
 import config from '../configApi';
-import {getToken,urlHasParams} from '../helpers/lib';
+import {getToken, urlHasParams} from '../helpers/lib';
 
 const instance = axios.create({
     baseURL: config.apiUrl,
     validateStatus(status) {
-        return status >= 200 && status < 300 && status !== 206;
+        return status;
     },
 });
 
 export default function request(url, {method = 'get', params, data, headers} = {}) {
-    console.log('request', data)
-    const fullHeaders = {...headers, ...getToken(),  };
+    const fullHeaders = {...headers, ...getToken()};
     let urWithParams = urlHasParams(url);
 
     return instance
@@ -20,21 +19,14 @@ export default function request(url, {method = 'get', params, data, headers} = {
             method,
             params,
             data,
-            headers: {...fullHeaders, },
+            headers: {...fullHeaders},
         })
-        .then(response => new Promise(resolve => resolve(response.data)));
-    // .then(
-    //   response => new Promise(resolve => resolve(response.data)),
-    //   error => {
-    //     console.log(`RequestError. API returned: ${error}.`);
-    //     return new Promise(resolve =>
-    //       resolve({
-    //         error: true,
-    //         message: error,
-    //       })
-    //     );
-    //   }
-    // );
+        .then(response => new Promise(resolve => {
+
+            response.data.redirect || response.status === 401 ? window.location.href = "/" : "";
+            return resolve(response)
+        }))
+        .then(response => new Promise(resolve => resolve(response.data)))
 }
 
 function RequestError(code, msg, data) {
