@@ -1,24 +1,30 @@
 .Calendar {
     background-color: #131826;
-    padding-right: 1.6rem;
+
+    .-blank {
+        background-color: transparent;
+    }
+
+    .-selectedStart, .-selectedEnd {
+        background-color: #219FE5 !important;
+    }
+
+    .-selectedBetween {
+        color: #219FE6;
+    }
 
     * {
         font-family: 'Lexend';
     }
 
     &__header {
-        padding-right: 0;
         * {
-            color: #fff !important;
+            color: #fff;
         }
     }
 
     &__monthText, &__yearText {
-        background: rgba(255, 255, 255, 0.1) !important;
-    }
-
-    &__weekDays {
-        padding-right: 0;
+        background: rgba(255, 255, 255, 0.1);
     }
 
     &__monthArrowWrapper {
@@ -34,18 +40,10 @@
     }
 
     &__day {
-        background-color: rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba(255, 255, 255, 0.1);
         border-radius: 6px !important;
-        color: #fff !important;
-        margin: .15rem !important;
-        min-width: 14.2857142857%;
-        max-width: 14.2857142857%;
-        height: 44px;
+        color: #fff;
         
-    
-        &.-selected {
-            background-color: #219FE5 !important;
-        }
     
         &.blank {
             background-color: transparent !important;

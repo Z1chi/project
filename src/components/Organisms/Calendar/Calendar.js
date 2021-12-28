@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import { Calendar as CalendarComponent } from 'react-modern-calendar-datepicker';
+// import { Calendar as CalendarComponent } from 'react-modern-calendar-datepicker';
+import DatePicker from '../../Molecules/DatePicker/DatePicker';
 
 import './calendar.scss';
 import { calendarLocale } from './data';
 
 export const Calendar = () => {
-    const [selectedDay, setSelectedDay] = useState();
+    const [selectedDayRange, setSelectedDayRange] = useState({
+        from: null,
+        to: null
+    });
     return (
         <div className='calendar'>
             {/* <div className='calendar__aside'>
@@ -31,10 +35,9 @@ export const Calendar = () => {
                 <div className='calendar__dayOfWeekList'></div>
                 <div className='calendar__dateList'></div>
             </div> */}
-            <CalendarComponent
-                value={selectedDay}
-                onChange={setSelectedDay}
-                colorPrimary="#219FE5"
+            <DatePicker
+                value={selectedDayRange}
+                onChange={setSelectedDayRange}
                 locale={calendarLocale}
             />
         </div>
