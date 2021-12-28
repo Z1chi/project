@@ -3,9 +3,9 @@ import { Checkbox } from '../Checkbox/Checkbox';
 
 import './multiSelectOption.scss';
 
-export const MultiSelectOption = ({ option, renderOption=option=>option }) => {
+export const MultiSelectOption = ({ option, onChange, renderOption=option=>option }) => {
     return (
-        <div className='multiSelectOption'>
+        <div className='multiSelectOption' onClick={()=>onChange(option)}>
             <div className='multiSelectOption__checkbox'>
                 <Checkbox />
             </div>

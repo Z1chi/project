@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Input } from '../../Atoms/Input/Input';
 import { Select } from '../../Molecules/Select/Select';
@@ -9,7 +9,8 @@ import { images } from './images';
 
 import './selectInput.scss'
 
-export const SelectInput = ({ placeholder, options=[], renderItem, SelectComponent = Select, mobileConfig }) => {
+export const SelectInput = ({ value, placeholder, options=[], renderItem, matchPropName, onChange, SelectComponent = Select, mobileConfig }) => {
+
     return (
         <div className='selectInput'>
             <Dropdown 
@@ -17,7 +18,7 @@ export const SelectInput = ({ placeholder, options=[], renderItem, SelectCompone
                     () => {
                         return (
                             <div className='selectInput__input'>
-                                <Input placeholder={placeholder} isNotChangeable />
+                                <Input placeholder={placeholder} isNotChangeable value={(value && matchPropName) ? value[matchPropName] : value} />
                                 <SVG src={images.arrowIcon} />
                             </div>
                         )
@@ -27,7 +28,11 @@ export const SelectInput = ({ placeholder, options=[], renderItem, SelectCompone
                     ({ setIsOpened }) => {
                         return (
                             <div className='selectInput__select'>
-                                <SelectComponent options={options} renderItem={renderItem} mobileConfig={{...mobileConfig, onClose: ()=>setIsOpened(false)}} />
+                                <SelectComponent options={options} renderItem={renderItem} 
+                                value={value}
+                                onChange={onChange}
+                                mobileConfig={{...mobileConfig, onClose: ()=>setIsOpened(false)}} 
+                            />
                             </div>
                         )
                     }

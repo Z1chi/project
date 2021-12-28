@@ -10,6 +10,7 @@ const instance = axios.create({
 });
 
 export default function request(url, {method = 'get', params, data, headers} = {}) {
+    console.log('request', data)
     const fullHeaders = {...headers, ...getToken(),  };
     let urWithParams = urlHasParams(url);
 

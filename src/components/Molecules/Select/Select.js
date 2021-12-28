@@ -5,7 +5,8 @@ import { images } from './images';
 
 import './select.scss';
 
-export const Select = ({ options, renderItem=option=>option, mobileConfig }) => {
+export const Select = ({ options, onChange, renderItem=option=>option, mobileConfig }) => {
+    
     const [indexSelected, setIndexSelected] = useState(null)
 
     return (
@@ -23,7 +24,7 @@ export const Select = ({ options, renderItem=option=>option, mobileConfig }) => 
                 options.map( (option, index) => {
                     return (
                         <div className={`select__optionsItem${index === indexSelected?' select__optionsItem--selected':''}`} 
-                            onClick={()=>{setIndexSelected(index)}}
+                            onClick={()=>{onChange(option);setIndexSelected(index)}}
                         >
                             {renderItem(option)}
                         </div>
