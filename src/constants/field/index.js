@@ -6,7 +6,7 @@ import { SelectInput } from '../../components/Molecules/SelectInput/SelectInput'
 import { dropdownTypes } from '../dropdown';
 
 export const fieldComponentsList = {
-    [dropdownTypes.INPUT]: Input,
+    [dropdownTypes.INPUT]: (props) => <Input {...props} />,
     [dropdownTypes.SELECT]: (props) => <SelectInput {...props} />,
     [dropdownTypes.MULTISELECT]: (props) => <SelectInput {...props} SelectComponent={MultiSelect} />,
     [dropdownTypes.DATE]: (props) => <SelectInput {...props} SelectComponent={Calendar} />,

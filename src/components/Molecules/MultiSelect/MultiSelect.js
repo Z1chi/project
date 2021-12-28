@@ -15,8 +15,6 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig }
         }
     }));
 
-    console.log('1', options[0], matchPropName)
-
     const searchRegexp = new RegExp(searchValue, 'g');
 
     return (

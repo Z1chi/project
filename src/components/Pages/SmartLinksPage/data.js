@@ -41,21 +41,23 @@ export const filters = [{
 export const table = {
 
     getTableConfig: (props) => ([{
-        columnId: 'name',
+        columnId: 'title',
         columnName: 'Name',
         columnWidth: '100px',
     }, {
-        columnId: 'created',
+        columnId: 'created_at',
         columnName: 'Created',
         columnWidth: '100px',
     }, {
-        columnId: 'offer',
+        columnId: 'project',
         columnName: 'Offer',
         columnWidth: '99px',
+        renderRowItem: (item) => item.title,
     }, {
         columnId: 'format',
         columnName: 'Format',
         columnWidth: '99px',
+        renderRowItem: (item) => item.label,
     }, {
         columnId: 'url',
         columnName: 'URL',
@@ -65,7 +67,7 @@ export const table = {
             return renderLink(item);
         },
     }, {
-        columnId: 'leadIFrame',
+        columnId: 'iframe_lead',
         columnName: 'Lead iFrame',
         columnWidth: '120px',
 
@@ -88,7 +90,7 @@ export const table = {
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onEditOpen({ id })}>
+                <div onClick={() => props.onEditOpen({ itemId:id })}>
                     <SVG src={images.editIcon} />
                 </div>
             )
@@ -100,7 +102,7 @@ export const table = {
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onDeleteOpen({ id })}>
+                <div onClick={() => props.onDeleteOpen({ itemId:id })}>
                     <SVG src={images.deleteIcon} />
                 </div>
             )
@@ -152,27 +154,39 @@ export const drawers = {
         subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.', 
         fieldRows: [
             [{
+                id: 'project_id',
                 title: 'Select Offer', 
                 placeholder: 'Select Offer...',
-                fieldType: dropdownTypes.SELECT,
+                matchPropName: 'title',
+                type: dropdownTypes.SELECT,
+                renderItem: (item) => (
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <img src={item.image} />
+                        <span style={{marginLeft: '10px'}}>{item.title}</span>
+                    </div>
+                ),
             }],
             
             [{
+                id: 'title',
                 title: 'Name', 
                 placeholder: 'Type name...',
-                fieldType: dropdownTypes.INPUT,
+                type: dropdownTypes.INPUT,
             }],
             
             [{
+                id: 'format',
                 title: 'Format', 
                 placeholder: 'Select format...',
-                fieldType: dropdownTypes.SELECT,
+                matchPropName: 'label',
+                type: dropdownTypes.SELECT,
+                renderItem: (item) => item.label,
             }],
 
             [{
                 title: 'Lead IFrame', 
                 placeholder: '',
-                fieldType: dropdownTypes.INPUT,
+                type: dropdownTypes.INPUT,
                 styles: {
                     color: '#219FE5',
                     textDecoration: 'underline',
@@ -183,7 +197,7 @@ export const drawers = {
             [{
                 title: 'Conversion IFrame', 
                 placeholder: '',
-                fieldType: dropdownTypes.INPUT,
+                type: dropdownTypes.INPUT,
                 styles: {
                     color: '#219FE5',
                     textDecoration: 'underline',
@@ -192,14 +206,18 @@ export const drawers = {
             }],
 
             [{
-                generateField: () => {
+                generateField: ({ stateData }) => {
                     return (
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
                             background: '#3F3F3F',
                         }} 
-                            onClick={props.onCreate}
+                            onClick={()=>props.onCreate({
+                                project_id: stateData.project_id.id,
+                                title: stateData.title,
+                                format: stateData.format.id
+                            })}
                         >
                             Create
                         </Button>
@@ -210,7 +228,7 @@ export const drawers = {
             [{
                 title: 'Generated URL', 
                 placeholder: '',
-                fieldType: dropdownTypes.INPUT,
+                type: dropdownTypes.INPUT,
                 styles: {
                     color: '#219FE5',
                     textDecoration: 'underline',
@@ -226,25 +244,67 @@ export const drawers = {
         subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.', 
         fieldRows: [
             [{
+                id: 'created_at',
                 title: 'Created', 
                 placeholder: 'Select date...',
-                fieldType: dropdownTypes.SELECT,
+                type: dropdownTypes.DATE,
             }, {
+                id: 'project',
                 title: 'Offer', 
                 placeholder: 'Select offer...',
-                fieldType: dropdownTypes.SELECT,
+                matchPropName: 'title',
+                type: dropdownTypes.SELECT,
+                renderItem: (item) => (
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <img src={item.image} />
+                        <span style={{marginLeft: '10px'}}>{item.title}</span>
+                    </div>
+                ),
             }],
             
-            
             [{
+                id: 'title',
                 title: 'Name', 
-                fieldType: dropdownTypes.INPUT,
+                type: dropdownTypes.INPUT,
             }],
 
             [{
+                id: 'format',
+                title: 'Format',
+                matchPropName: 'label',
+                type: dropdownTypes.SELECT,
+                renderItem: (item) => item.label
+            }],
+
+            [{
+                id: 'iframe_lead',
+                title: 'Lead IFrame', 
+                placeholder: '',
+                type: dropdownTypes.INPUT,
+                styles: {
+                    color: '#219FE5',
+                    textDecoration: 'underline',
+                },
+                info: true,
+            }],
+
+            [{
+                id: 'iframe_conversion',
+                title: 'Conversion IFrame', 
+                placeholder: '',
+                type: dropdownTypes.INPUT,
+                styles: {
+                    color: '#219FE5',
+                    textDecoration: 'underline',
+                },
+                info: true,
+            }],
+
+            [{
+                id: 'url',
                 title: 'Generated URL', 
                 placeholder: '',
-                fieldType: dropdownTypes.INPUT,
+                type: dropdownTypes.INPUT,
                 styles: {
                     color: '#219FE5',
                     textDecoration: 'underline',
@@ -254,14 +314,14 @@ export const drawers = {
             }],
 
             [{
-                generateField: () => {
+                generateField: (data) => {
                     return (
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
                             background: '#3F3F3F',
                         }}
-                            onClick={props.onEdit}
+                            onClick={() => props.onEdit(data)}
                         >
                             Apply changes
                         </Button>
@@ -270,14 +330,14 @@ export const drawers = {
             }],
 
             [{
-                generateField: () => {
+                generateField: ({ itemId }) => {
                     return (
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
                             background: '#343844',
                         }} 
-                            onClick={props.onDelete}
+                            onClick={() => props.onDelete({ itemId })}
                         >
                             Delete offer
                         </Button>
@@ -288,17 +348,17 @@ export const drawers = {
     }),
 };
 
-export const modalDelete = ({ onSubmit, onClose }) => ({
+export const modalDelete = ({ onSubmit, }) => ({
     icon: images.deleteIcon,
     title: 'Delete Smartlink', 
     subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', 
-    renderSubmitSection: () => {
+    renderSubmitSection: ({ onClose }) => {
         return (
             <div>
-                <Button>
+                <Button onClick={() => { onSubmit(); onClose(); }}>
                     Primary CTA
                 </Button>
-                <Button styles={{backgroundColor: '#1F2431'}}>
+                <Button styles={{backgroundColor: '#1F2431'}} onClick={onClose}>
                     Secondary CTA
                 </Button>
             </div>
