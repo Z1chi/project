@@ -12,7 +12,7 @@ export const TableRow = ({ tableConfig, row }) => {
                 return (
                     <div key={key} className='tableRow__cell'>
                         <TableCell 
-                            itemId={row.id}
+                            rowId={row.id}
                             item={row[columnId]} 
                             columnWidth={columnWidth}
                             renderRowItem={renderRowItem}

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAtom } from '@reatom/react';
 
 import {Backdrop} from '../../Atoms/Backdrop/Backdrop';
 import {FormField} from '../../Molecules/FormField/FormField';
@@ -6,9 +7,17 @@ import {FormField} from '../../Molecules/FormField/FormField';
 import SVG from 'react-inlinesvg';
 import {images} from './images';
 
+import { drawerAtom } from '../../../store/Drawer';
+
 import './drawer.scss';
 
-export const Drawer = ({onClose, logo, title, subtitle, fieldRows, renderFooter}) => {
+export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => {
+    const [drawerData, drawerActions] = useAtom(drawerAtom);
+
+    useEffect( () => {
+        
+    },[drawerData])
+
     return (
         <>
         <Backdrop onClose={onClose}/>
@@ -36,7 +45,15 @@ export const Drawer = ({onClose, logo, title, subtitle, fieldRows, renderFooter}
                                 row.map(field => {
                                     return (
                                         <div className='drawer__formField'>
-                                            <FormField {...field} />
+                                            <FormField {...field}
+                                                stateData={drawerData.fieldValues}
+                                                options={field.id ? data[field.id] : []}
+                                                value={(field.id && drawerData.fieldValues) ? drawerData.fieldValues[field.id] : ''}
+                                                onChange={field.id ? (value) => drawerActions.setFieldValue({
+                                                    fieldId: field.id,
+                                                    fieldValue: value,
+                                                }) : ()=>{} } 
+                                            />
                                         </div>
                                     )
                                 })

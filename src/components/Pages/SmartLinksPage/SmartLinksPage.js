@@ -18,12 +18,15 @@ import { modalAtom } from '../../../store/Modal';
 import './smartLinksPage.scss';
 
 export const SmartLinksPage = () => {
+    const [crudActionIndex, setCrudActionIndex] = useState(0);
     const [drawerData, drawerActions] = useAtom(drawerAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const smartLinksQuery = useQuery(['smartlinks'], async () => {
+    const smartLinksQuery = useQuery(['smartlinks', crudActionIndex], async () => {
         return request('smartlink').then((res) => res.data);
     })
+
+    console.log('render');
 
     const smartlinkFiltersQueryList = useQueries([
         { queryKey: ['smartlinkFilters', 'offers'], queryFn: () => {
@@ -55,7 +58,13 @@ export const SmartLinksPage = () => {
                                             onClick: () => {
                                                 drawerActions.open(drawers.create({
                                                     onCreate: () => {
-                                                        request('smartlink/create', drawerData.fields).then((res) => res.data);
+                                                        request('smartlink/create', {
+                                                            method: 'POST',
+                                                            data: drawerData.fieldValues,
+                                                        }).then((res) => {
+                                                            console.log('res create', res.data);
+                                                            return res.data;
+                                                        });
                                                     }
                                                 }))
                                             }
@@ -71,8 +80,15 @@ export const SmartLinksPage = () => {
                                         <div className='smartLinksPage__create'>
                                             <button onClick={
                                                 () => drawerActions.open(drawers.create({
-                                                    onCreate: () => {
-                                                        request('smartlink/create', drawerData.fields).then((res) => res.data);
+                                                    onCreate: (data) => {
+                                                        request('smartlink/create', {
+                                                            method: 'post',
+                                                            data,
+                                                        }).then((res) => {
+                                                            drawerActions.close();
+                                                            setCrudActionIndex(()=>crudActionIndex+1)
+                                                            return res.data;
+                                                        });
                                                     }
                                                 }))
                                             }>Create Smartlink</button>
@@ -91,21 +107,47 @@ export const SmartLinksPage = () => {
                                         </div>
                                         : <div className='smartLinksPage__table'>
                                             <Table {...table} tableConfig={table.getTableConfig({
-                                                onEditOpen: ({ id }) => drawerActions.open(drawers.edit({
-                                                    onEdit: () => {
-                                                        request('smartlink/edit', { id, ...drawerData.fields}).then((res) => res.data);
-                                                    },
-                                                    onDelete: () => {
-                                                        modalActions.open(
-                                                            modalDelete({
-                                                                onSubmit: () => {},
-                                                            })
-                                                        )
-                                                    }
-                                                })),
-                                                onDeleteOpen: ({ id }) => modalActions.open(
+                                                onEditOpen: ({ itemId }) => {
+                                                    drawerActions.open(drawers.edit({
+                                                        onEdit: (data) => {
+                                                            request(`smartlink/update/${itemId}`, { 
+                                                                    method: 'patch', 
+                                                                    data: {
+                                                                        title: data.stateData.title,
+                                                                        project_id: data.stateData.project.id,
+                                                                        format: data.stateData.format.id
+                                                                    }, }).then((res) => {
+                                                                drawerActions.close();
+                                                                setCrudActionIndex(()=>crudActionIndex+1)
+                                                                return res.data
+                                                            });
+                                                        },
+                                                        onDelete: (data) => {
+                                                            modalActions.open(
+                                                                modalDelete({
+                                                                    onSubmit: () => {
+                                                                        request(`smartlink/delete/${itemId}`, { method: 'delete', }).then((res) => {
+                                                                            drawerActions.close();
+                                                                            setCrudActionIndex(()=>crudActionIndex+1)
+                                                                            return res.data
+                                                                        });
+                                                                    },
+                                                                })
+                                                            )
+                                                        }
+                                                    }))
+                                                    const smartlinkItem = smartLinksQuery.data.table.find( item => item.id === itemId);
+                                                    drawerActions.setFieldValues(smartlinkItem)
+                                                },
+                                                onDeleteOpen: (data) => modalActions.open(
                                                     modalDelete({
-                                                        onSubmit: () => {},
+                                                        onSubmit: () => {
+                                                            request(`smartlink/delete/${data.itemId}`, { method: 'delete', }).then((res) => {
+                                                                drawerActions.close();
+                                                                setCrudActionIndex(()=>crudActionIndex+1)
+                                                                return res.data
+                                                            });
+                                                        },
                                                     })
                                                 ),
                                             })} data={smartLinksQuery.data ? smartLinksQuery.data.table : []} />
@@ -119,7 +161,10 @@ export const SmartLinksPage = () => {
                     )
                 }}
             />
-            {drawerData && drawerData.isOpened && <Drawer {...drawerData} onClose={drawerActions.close} />}
+            {drawerData && drawerData.isOpened && <Drawer {...drawerData} onClose={drawerActions.close} data={{
+                'project_id': smartlinkFiltersQueryList[0].data || [],
+                'format': smartlinkFiltersQueryList[1].data || [],
+            }} />}
         </div>
     )
 }
