@@ -5,7 +5,7 @@ import './menu.scss'
 
 export const Menu = ({links, sidebarIsOpened}) => {
     const {pathname} = useLocation();
-    const [activePageLink, setActivePageLink] = useState('/'+pathname.match(/(\w+)/)[0]);
+    const [activePageLink, setActivePageLink] = useState('/' + pathname.match(/(\w+)/)[0]);
 
     return (
         <div className='menu'>
@@ -14,7 +14,6 @@ export const Menu = ({links, sidebarIsOpened}) => {
                     return (
                         <div key={key} className='menu__item'>
                             <MenuItem
-
                                 sidebarIsOpened={sidebarIsOpened}
                                 link={link}
                                 onClick={() => setActivePageLink(link.to)}
@@ -24,7 +23,6 @@ export const Menu = ({links, sidebarIsOpened}) => {
                     )
                 })
             }
-
         </div>
     )
 };

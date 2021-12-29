@@ -8,21 +8,24 @@ import config from '../../../configApi'
 
 import './creativesModalTemplate.scss';
 
-export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, onDownload}) => {
+import {icons} from "./images";
+
+export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, onDownload, preview_src}) => {
+
     const sliderImages = images.map(imageItem => {
         return {
             ...imageItem,
-            source: `${config.root}${imageItem.source}`,
+            source: `${imageItem.source}`,
         };
     });
 
     return (
         <div className='creativesModalTemplate'>
             <div className='creativesModalTemplate__close' onClick={onClose}>
-                <SVG src={images.closeIcon}/>
+                <SVG src={icons.closeIcon}/>
             </div>
             <div className='creativesModalTemplate__image'>
-                <img src={sliderImages[0].source} alt='modalImage'/>
+                <img src={`${config.root}${preview_src}`} alt='modalImage'/>
             </div>
             <div className='creativesModalTemplate__slider'>
                 <Slider items={sliderImages.map(image => image.source)}/>
@@ -48,4 +51,4 @@ export const CreativesModalTemplate = ({onClose, images, description, file_size,
             </div>
         </div>
     )
-}
+};

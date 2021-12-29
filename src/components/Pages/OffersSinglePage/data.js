@@ -163,7 +163,7 @@ export const rowsConfig = [
         title: 'Statistic',
         renderContent: ({statistic, width}) => {
 
-            const isMobile = width < 511
+            const isMobile = width < 511;
             statistics = [
                 {
                     icon: images.created_at,
@@ -259,7 +259,7 @@ export const rowsConfig = [
                             key={key}
                             isSelected={true}
                             title={item.name}
-                            styles={{width: width < 511 ? '100%' : 'calc(50% - 10px)', margin: '10px 8px'}}/>
+                            styles={{width: width < 511 ? '100%' : 'calc(50% - 10px)', margin: '10px 5px'}}/>
                     )}
                 </div>
             </>

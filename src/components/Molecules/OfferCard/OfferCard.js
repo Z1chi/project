@@ -3,12 +3,12 @@ import {Link} from 'react-router-dom';
 
 import {OfferPaymentParam} from '../../Atoms/OfferPaymentParam/OfferPaymentParam';
 
-import images from '../../Molecules/ManagerSidebarCard/images/i.jpeg'
+import config from '../../../configApi'
 
 import './offerCard.scss';
 
 
-export const OfferCard = ({image, isMobile, singlePageId = 1, title, link, url, tags, project_affiliate, small_description, offerConfig}) => {
+export const OfferCard = ({image, isMobile, singlePageId = 1, title, url, project_affiliate, small_description, offerConfig}) => {
 
     const paymentParamsArray = Object.entries(project_affiliate);
 
@@ -16,7 +16,7 @@ export const OfferCard = ({image, isMobile, singlePageId = 1, title, link, url, 
         <div className={`offerCard${isMobile ? " offerCard--isMobile" : ""}`}>
             <div className='offerCard__preview'>
                 <div className='offerCard__logo'>
-                    <img src={images} alt=''/>
+                    <img src={`${config.root}${image}`} alt=''/>
                 </div>
                 <Link to={`/offers/${singlePageId}`} className='offerCard__more'>
                     More info
@@ -45,7 +45,8 @@ export const OfferCard = ({image, isMobile, singlePageId = 1, title, link, url, 
 
                         paymentParamsArray && paymentParamsArray.map((item, key) => {
                             return (
-                                <div className='offerCard__paymentParamsItem' key={`offerCard__paymentParamsItem${key}`}>
+                                <div className='offerCard__paymentParamsItem'
+                                     key={`offerCard__paymentParamsItem${key}`}>
                                     {
                                         (offerConfig[item[0]] && offerConfig[item[0]].renderValue)
                                             ? offerConfig[item[0]].renderValue({value: item, isMobile})
