@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useAtom } from '@reatom/react';
 
@@ -26,12 +26,12 @@ export const WithdrawPage = () => {
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const withdrawQuery = useQuery(['withdraw-table'], () => {
-        return request('withdraw/get-withdraws').then(res => res.data);
+    const withdrawQuery = useQuery(['withdraw-table', crudActionIndex], () => {
+        return request('withdraw/get-withdraws', { method: 'post', data: { filters: filterData.fields }}).then(res => res.data);
     })
 
-    const statusFilterQuery = useQuery(['withdraw-statuses', crudActionIndex], () => {
-        return request('withdraw/get-statuses', { method: 'post', data: { filters: filterData.fields }}).then(res => res.data);
+    const statusFilterQuery = useQuery(['withdraw-statuses'], () => {
+        return request('withdraw/get-statuses').then(res => res.data);
     })
 
     const filtersData = [

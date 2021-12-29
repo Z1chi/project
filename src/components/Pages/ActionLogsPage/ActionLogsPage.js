@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAtom } from '@reatom/react';
 import { useQueries, useQuery } from 'react-query';
 
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
@@ -7,6 +8,7 @@ import {Filter} from '../../Organisms/Filter/Filter';
 import {Table} from '../../Organisms/Table/Table';
 
 import {actionLogsStatisticsConfig, filters, table} from './data';
+import { filterAtom } from '../../../store/Filter';
 
 import request from '../../../api/request';
 
@@ -37,6 +39,13 @@ export const ActionLogsPage = () => {
         } },
     ]);
 
+    const filtersData = [
+        [],
+        ...actionLogsFiltersQueryList.map( filterQuery => {
+            return filterQuery.data || [];
+        })
+    ]
+
     return (
         <div className='actionLogsPage'>
             <PageTemplate
@@ -57,7 +66,7 @@ export const ActionLogsPage = () => {
                             <div className='actionLogsPage__table'>
                                 { actionLogsFiltersQueryList.length > 0 && actionLogsFiltersQueryList.every(query => query.data) && <div className='actionLogsPage__tableFilter'>
                                     <Filter filters={filters}
-                                        data={actionLogsFiltersQueryList.every(filter => filter.data) ? actionLogsFiltersQueryList.map(filter => filter.data): []}
+                                        data={filtersData}
                                         mobileFilterConfig={{
                                             fields: [], 
                                             onSave: () => {console.log('saved')},
