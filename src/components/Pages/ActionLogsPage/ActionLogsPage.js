@@ -14,12 +14,15 @@ import './actionLogsPage.scss';
 
 export const ActionLogsPage = () => {
 
+    const [filterData, filterActions] = useAtom(filterAtom);
+    const [crudActionIndex, setCrudActionIndex] = useState(0);
+
     const actionLogsStatisticsQuery = useQuery(['action-logs/statistics'], () => {
         return request('/action-log/total').then(res => res.data);
     })
 
-    const actionLogsTableQuery = useQuery(['action-logs/table'], () => {
-        return request('/action-log/get-list').then(res => res.data);
+    const actionLogsTableQuery = useQuery(['action-logs/table', crudActionIndex], () => {
+        return request('/action-log/get-list', { method: 'post', data: { filters: filterData.fields }  }).then(res => res.data);
     })
 
     const actionLogsFiltersQueryList = useQueries([
@@ -59,6 +62,11 @@ export const ActionLogsPage = () => {
                                             fields: [], 
                                             onSave: () => {console.log('saved')},
                                         }}
+                                        onSave={
+                                            ()=>{
+                                                setCrudActionIndex(crudActionIndex+1); 
+                                            }
+                                        }
                                     />
                                 </div>}
                                 <div className='actionLogsPage__tableData'>

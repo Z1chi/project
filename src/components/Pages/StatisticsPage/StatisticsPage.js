@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAtom } from '@reatom/react';
 import {useQueries, useQuery} from "react-query";
 import request from "../../../api/request";
 
@@ -7,13 +8,17 @@ import { Filter } from '../../Organisms/Filter/Filter';
 import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
 
 import { filters, table } from './data';
+import { filterAtom } from '../../../store/Filter';
 
 import './statisticsPage.scss';
 
 export const StatisticsPage = () => {
 
-    const statisticsQuery = useQuery('statistics', () => {
-        return request('/statistic/get-statistic').then(res => res.data)
+    const [filterData, filterActions] = useAtom(filterAtom);
+    const [crudActionIndex, setCrudActionIndex] = useState(0);
+
+    const statisticsQuery = useQuery(['statistics', crudActionIndex], () => {
+        return request('/statistic/get-statistic', { method: 'post', data: { filters: filterData.fields }  }).then(res => res.data)
     });
 
     const statisticsFiltersQueryList = useQueries([
@@ -45,7 +50,11 @@ export const StatisticsPage = () => {
                     return (
                         <div className='statisticsPage__content'>
                             <div className='statisticsPage__filters'>
-                                <Filter filters={filters} data={filtersData} />
+                                <Filter filters={filters} data={filtersData} onSave={
+                                    ()=>{
+                                        setCrudActionIndex(crudActionIndex+1); 
+                                    }
+                                } />
                             </div>
                             <div className='statisticsPage__table'>
                                 <Table

@@ -21,6 +21,8 @@ import { useEffect } from 'react/cjs/react.development';
 
 export const WithdrawPage = () => {
 
+    const [crudActionIndex, setCrudActionIndex] = useState(0);
+
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
@@ -28,17 +30,15 @@ export const WithdrawPage = () => {
         return request('withdraw/get-withdraws').then(res => res.data);
     })
 
-    const statusFilterQuery = useQuery(['withdraw-statuses'], () => {
-        return request('withdraw/get-statuses').then(res => res.data);
+    const statusFilterQuery = useQuery(['withdraw-statuses', crudActionIndex], () => {
+        return request('withdraw/get-statuses', { method: 'post', data: { filters: filterData.fields }}).then(res => res.data);
     })
 
     const filtersData = [
         [], 
         [], 
         statusFilterQuery.data || [],
-    ]
-
-    
+    ]  
 
     return (
         <div className='withdrawPage'>
@@ -75,7 +75,14 @@ export const WithdrawPage = () => {
                                 </div>
                             </div>
                             <div className='withdrawPage__filters'>
-                                <Filter filters={filters} data={filtersData} />
+                                <Filter filters={filters} 
+                                    data={filtersData} 
+                                    onSave={
+                                        ()=>{
+                                            setCrudActionIndex(crudActionIndex+1); 
+                                        }
+                                    }
+                                />
                             </div>
                             {   
                                 (withdrawQuery.data && withdrawQuery.data.table) &&

@@ -6,11 +6,11 @@ import { images } from './images'
 
 import './multiSelect.scss';
 
-export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig }) => {
+export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, onChange, }) => {
     const [searchValue, setSearchValue] = useState('');
     const [optionsSelectable, setOptionsSelectable] = useState(options.map( option => {
         return {
-            item: option,
+            ...option,
             isSelected: false,
         }
     }));
@@ -38,13 +38,26 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig }
             <div className='multiSelect__options'>
             {
                 
-                options.filter(option => (matchPropName && option[matchPropName]) 
+                optionsSelectable.filter(option => (matchPropName && option[matchPropName]) 
                     ? option[matchPropName].match(searchRegexp)
                     : option.match(searchRegexp)
                 ).map((option, index) => {
                     return (
                         <div className='multiSelect__optionsItem'>
-                            <MultiSelectOption option={option} renderOption={renderItem} />
+                            <MultiSelectOption 
+                                option={option}
+                                renderOption={renderItem}
+                                onChange={()=>{
+                                    const selectResult = optionsSelectable.map((optionsSelectableItem, innerIndex) => {
+                                        return index===innerIndex ? {
+                                            ...optionsSelectableItem,
+                                            isSelected: !optionsSelectableItem.isSelected,
+                                        } : optionsSelectableItem
+                                    })
+                                    setOptionsSelectable(selectResult);
+                                    onChange(selectResult.filter(item=>!!item.isSelected))
+                                }}
+                            />
                         </div>
                     )
                 })

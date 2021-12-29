@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-// import { Calendar as CalendarComponent } from 'react-modern-calendar-datepicker';
 import DatePicker from '../../Molecules/DatePicker/DatePicker';
 
 import './calendar.scss';
 import { calendarLocale } from './data';
 
-export const Calendar = () => {
+export const Calendar = ({ onChange, }) => {
     const [selectedDayRange, setSelectedDayRange] = useState({
         from: null,
         to: null
@@ -37,7 +36,7 @@ export const Calendar = () => {
             </div> */}
             <DatePicker
                 value={selectedDayRange}
-                onChange={setSelectedDayRange}
+                onChange={(e)=>{setSelectedDayRange(e);onChange(e)}}
                 locale={calendarLocale}
             />
         </div>

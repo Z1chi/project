@@ -13,6 +13,8 @@ export default function request(url, {method = 'get', params, data, headers} = {
     const fullHeaders = {...headers, ...getToken()};
     let urWithParams = urlHasParams(url);
 
+    console.log('req data',data)
+
     return instance
         .request({
             url: urWithParams,

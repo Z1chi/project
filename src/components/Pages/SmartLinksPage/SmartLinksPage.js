@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useAtom } from '@reatom/react';
 import { useQuery, useQueries, } from 'react-query';
 
 import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
@@ -11,7 +12,7 @@ import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import request from '../../../api/request';
 import {filters, table, drawers, modalDelete} from './data';
 
-import { useAtom } from '@reatom/react';
+import { filterAtom } from '../../../store/Filter';
 import { drawerAtom } from '../../../store/Drawer';
 import { modalAtom } from '../../../store/Modal';
 
@@ -20,10 +21,11 @@ import './smartLinksPage.scss';
 export const SmartLinksPage = () => {
     const [crudActionIndex, setCrudActionIndex] = useState(0);
     const [drawerData, drawerActions] = useAtom(drawerAtom);
+    const [filterData, filterActions] = useAtom(filterAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
 
     const smartLinksQuery = useQuery(['smartlinks', crudActionIndex], async () => {
-        return request('smartlink').then((res) => res.data);
+        return request('smartlink', { method: 'post', data: { filters: filterData.fields }}).then((res) => res.data);
     })
 
     console.log('render');
@@ -75,7 +77,14 @@ export const SmartLinksPage = () => {
                                     <>
                                     <div className='smartLinksPage__header'>
                                         <div className='smartLinksPage__filters'>
-                                            <Filter filters={filters} data={filtersData} />
+                                            <Filter filters={filters} 
+                                                data={filtersData} 
+                                                onSave={
+                                                    ()=>{
+                                                        setCrudActionIndex(crudActionIndex+1); 
+                                                    }
+                                                } 
+                                            />
                                         </div>
                                         <div className='smartLinksPage__create'>
                                             <button onClick={
