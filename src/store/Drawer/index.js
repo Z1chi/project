@@ -28,14 +28,14 @@ export const drawerAtom = createAtom(
             }
         })
         onAction('setFieldValues', (payload) => {
-            console.log('234', payload)
+
             return state = {
                 ...state,
                 fieldValues: payload
             }
         })
         onAction('setFieldValue', (payload) => {
-            console.log('set', payload)
+
             return state = {
                 ...state,
                 fieldValues: {

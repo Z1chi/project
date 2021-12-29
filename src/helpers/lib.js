@@ -58,7 +58,6 @@ export const objToArray = obj => {
         if (array[key] == null) {
             array[key] = {};
         }
-        console.log(obj[key]);
         array[key] = obj[key];
     });
     return array;
