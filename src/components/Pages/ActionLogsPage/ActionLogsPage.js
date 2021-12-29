@@ -1,5 +1,6 @@
-import React from 'react';
-import {useQueries, useQuery} from 'react-query';
+import React, { useState } from 'react';
+import { useAtom } from '@reatom/react';
+import { useQueries, useQuery } from 'react-query';
 
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import {FlowCard} from '../../Molecules/FlowCard/FlowCard';
@@ -7,6 +8,7 @@ import {Filter} from '../../Organisms/Filter/Filter';
 import {Table} from '../../Organisms/Table/Table';
 
 import {actionLogsStatisticsConfig, filters, table} from './data';
+import { filterAtom } from '../../../store/Filter';
 
 import request from '../../../api/request';
 
@@ -14,13 +16,16 @@ import './actionLogsPage.scss';
 
 export const ActionLogsPage = () => {
 
+    const [filterData, filterActions] = useAtom(filterAtom);
+    const [crudActionIndex, setCrudActionIndex] = useState(0);
+
     const actionLogsStatisticsQuery = useQuery(['action-logs/statistics'], () => {
         return request('/action-log/total').then(res => res.data);
     });
 
-    const actionLogsTableQuery = useQuery(['action-logs/table'], () => {
-        return request('/action-log/get-list').then(res => res.data);
-    });
+    const actionLogsTableQuery = useQuery(['action-logs/table', crudActionIndex], () => {
+        return request('/action-log/get-list', { method: 'post', data: { filters: filterData.fields }  }).then(res => res.data);
+    })
 
     const actionLogsFiltersQueryList = useQueries([
         {
@@ -39,6 +44,13 @@ export const ActionLogsPage = () => {
             }
         },
     ]);
+
+    const filtersData = [
+        [],
+        ...actionLogsFiltersQueryList.map( filterQuery => {
+            return filterQuery.data || [];
+        })
+    ]
 
     return (
         <div className='actionLogsPage'>
@@ -64,14 +76,16 @@ export const ActionLogsPage = () => {
                                 actionLogsFiltersQueryList.every(query => query.data) &&
                                 <div className='actionLogsPage__tableFilter'>
                                     <Filter filters={filters}
-                                            data={actionLogsFiltersQueryList.every(filter => filter.data) ?
-                                                actionLogsFiltersQueryList.map(filter => filter.data) : []}
-                                            mobileFilterConfig={{
-                                                fields: [],
-                                                onSave: () => {
-                                                    console.log('saved')
-                                                },
-                                            }}
+                                        data={filtersData}
+                                        mobileFilterConfig={{
+                                            fields: [],
+                                            onSave: () => {console.log('saved')},
+                                        }}
+                                        onSave={
+                                            ()=>{
+                                                setCrudActionIndex(crudActionIndex+1);
+                                            }
+                                        }
                                     />
                                 </div>}
                                 <div className='actionLogsPage__tableData'>

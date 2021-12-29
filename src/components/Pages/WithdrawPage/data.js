@@ -18,21 +18,25 @@ export const statistics = [{
 }];
 
 export const filters = [{
+    id: 'date',
     title: 'Request date',
     mobileTitle: 'Select request date',
     type: dropdownTypes.DATE,
     width: '204px',
 }, {
+    id: 'pay_date',
     title: 'Pay date',
     mobileTitle: 'Select pay date',
     type: dropdownTypes.DATE,
     width: '154px',
 }, {
+    id: 'status',
     title: 'Status',
     mobileTitle: 'Select status',
     type: dropdownTypes.SELECT,
     width: '154px',
     renderItem: ({ id, label }) => label,
+    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
 }, ];
 
 export const table = {

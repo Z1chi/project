@@ -3,11 +3,13 @@ import {images} from "./images";
 import { dropdownTypes } from '../../../constants/dropdown';
 
 export const filters = [{
+    id: 'date',
     title: 'Date',
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
     width: '204px',
 }, {
+    id: 'format',
     title: 'Format',
     mobileTitle: 'Select format',
     type: dropdownTypes.SELECT, 
@@ -15,6 +17,7 @@ export const filters = [{
     width: '154px',
     renderItem: (item) => item.label,
 }, {
+    id: 'country',
     title: 'Country',
     mobileTitle: 'Select countries',
     type: dropdownTypes.MULTISELECT,
@@ -22,12 +25,15 @@ export const filters = [{
     width: '154px',
     renderItem: (item) => item.name,
 }, {
+    id: 'smartlink',
     title: 'Smartlink',
     mobileTitle: 'Select smartlink',
     type: dropdownTypes.SELECT,
     width: '154px',
     renderItem: (item) => item.title,
+    onSelectFormatter: (item)=>item.id,
 }, {
+    id: 'offer',
     title: 'Offers',
     mobileTitle: 'Select offers',
     type: dropdownTypes.MULTISELECT,
@@ -39,6 +45,7 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
+    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
 }, ];
 
 

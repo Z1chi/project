@@ -17,6 +17,7 @@ export const actionLogsStatisticsConfig = [
 ];
 
 export const filters = [{
+    id: 'date',
     title: 'Date',
     type: dropdownTypes.DATE,
     mobileTitle: 'Select date',
@@ -26,32 +27,37 @@ export const filters = [{
     },
     width: '169px',
 }, {
+    id: 'offer',
     title: 'Offers',
     mobileTitle: 'Select offers',
     type: dropdownTypes.MULTISELECT,
-    items: {
-        options: [],
-        selectedIndex: 0,
-    },
+    matchPropName: 'title',
     width: '169px',
+    renderItem: (item) => (
+        <div style={{display: 'flex', alignItems: 'center', }}>
+            <img src={item.image} />
+            <span style={{marginLeft: '10px'}}>{item.title}</span>
+        </div>
+    ),
+    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
 }, {
+    id: 'smartlink',
     title: 'Smartlink',
     mobileTitle: 'Select smartlink',
     type: dropdownTypes.SELECT,
-    items: {
-        options: [],
-        selectedIndex: 0,
-    },
+    matchPropName: 'title',
     width: '169px',
+    renderItem: (item) => item.title,
+    onSelectFormatter: (item) => item.id,
 }, {
+    title: 'action',
     title: 'Action',
     mobileTitle: 'Select actions',
     type: dropdownTypes.MULTISELECT,
-    items: {
-        options: [],
-        selectedIndex: 0,
-    },
+    matchPropName: 'label',
     width: '169px',
+    renderItem: (item) => item.label,
+    onSelectFormatter: (item) => item.id,
 }, ];
 
 export const table = {

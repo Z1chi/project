@@ -1,13 +1,13 @@
 import React from 'react';
+import { useAtom } from '@reatom/react';
 
 import { Dropdown } from '../Dropdown/Dropdown';
-import { Select } from '../Select/Select';
-import { MultiSelect } from '../MultiSelect/MultiSelect';
-
-import { filterComponentsList } from '../../../constants/filter';
 
 import SVG from 'react-inlinesvg';
 import { images } from './images';
+
+import { filterComponentsList } from '../../../constants/filter';
+import { filterAtom } from '../../../store/Filter';
 
 import './filterItem.scss';
 
@@ -16,7 +16,8 @@ const renderFilterContent = (type) => (props) => {
     return Component ? <Component {...props} /> : null;
 }
 
-export const FilterItem = ({ title, matchPropName, mobileTitle, items=[], renderItem, onSelect, type, }) => {
+export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormatter=(item)=>item, type, }) => {
+    const [filterData, filterActions] = useAtom(filterAtom);
     return (
         <div className='filterItem'>
             <div className='filterItem__info'>
@@ -46,6 +47,10 @@ export const FilterItem = ({ title, matchPropName, mobileTitle, items=[], render
                                     options: items, 
                                     renderItem,
                                     matchPropName,
+                                    onChange: (value)=>{ filterActions.setFieldValue({
+                                        fieldId: id,
+                                        fieldValue: onSelectFormatter(value),
+                                    })},
                                     mobileConfig: { 
                                         title: mobileTitle,
                                         onClose: () => setIsOpened(false)

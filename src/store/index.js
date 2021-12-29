@@ -2,6 +2,7 @@ import { createStore } from '@reatom/core';
 
 import { alertAtom } from './Alert';
 import { drawerAtom } from './Drawer';
+import { filterAtom } from './Filter';
 import { modalAtom } from './Modal';
 import { sidebarAtom } from './Sidebar';
 
@@ -11,6 +12,7 @@ import { profileSettingsAtom } from './ProfileSettings';
 export const store = createStore({
     alertData: alertAtom,
     drawerData: drawerAtom,
+    filterData: filterAtom,
     modalData: modalAtom,
     sidebarData: sidebarAtom,
 

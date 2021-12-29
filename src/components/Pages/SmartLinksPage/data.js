@@ -12,6 +12,7 @@ const renderLink = (link) => {
 }
 
 export const filters = [{
+    id: 'offers',
     title: 'Offers',
     mobileTitle: 'Select offer',
     type: dropdownTypes.MULTISELECT,
@@ -23,19 +24,23 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
+    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
 }, {
+    id: 'date',
     title: 'Date',
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
 
     width: '154px',
 }, {
+    id: 'format',
     title: 'Format',
     mobileTitle: 'Select format',
     type: dropdownTypes.SELECT,
     matchPropName: 'label',
     width: '163px',
     renderItem: (item) => item.label,
+    onSelectFormatter: (item)=>item.id,
 }, ];
 
 export const table = {
