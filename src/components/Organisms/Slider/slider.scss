@@ -1,0 +1,12 @@
+.slider {
+  max-height: 100px;
+
+  .aItem {
+    padding: 0;
+    max-height: 100px;
+
+    .aItem__background {
+      border-radius: 0 !important;
+    }
+  }
+}

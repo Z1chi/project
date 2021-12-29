@@ -21,22 +21,28 @@ export const ActionLogsPage = () => {
 
     const actionLogsStatisticsQuery = useQuery(['action-logs/statistics'], () => {
         return request('/action-log/total').then(res => res.data);
-    })
+    });
 
     const actionLogsTableQuery = useQuery(['action-logs/table', crudActionIndex], () => {
         return request('/action-log/get-list', { method: 'post', data: { filters: filterData.fields }  }).then(res => res.data);
     })
 
     const actionLogsFiltersQueryList = useQueries([
-        { queryKey: ['actionLogFilters', 'offers'], queryFn: () => {
-            return request('/offers/get-offers-filter').then(res => res.data);
-        } },
-        { queryKey: ['actionLogFilters', 'smartlink'], queryFn: () => {
-            return request('/smartlink/get-smartlinks-filter').then(res => res.data);
-        } },
-        { queryKey: ['actionLogFilters', 'action'], queryFn: () => {
-            return request('/action-log/get-actions-filter').then(res => res.data);
-        } },
+        {
+            queryKey: ['actionLogFilters', 'offers'], queryFn: () => {
+                return request('/offers/get-offers-filter').then(res => res.data);
+            }
+        },
+        {
+            queryKey: ['actionLogFilters', 'smartlink'], queryFn: () => {
+                return request('/smartlink/get-smartlinks-filter').then(res => res.data);
+            }
+        },
+        {
+            queryKey: ['actionLogFilters', 'action'], queryFn: () => {
+                return request('/action-log/get-actions-filter').then(res => res.data);
+            }
+        },
     ]);
 
     const filtersData = [
@@ -54,33 +60,38 @@ export const ActionLogsPage = () => {
                         <div className='actionLogsPage__content'>
                             <div className='actionLogsPage__statistics'>
                                 {
-                                    actionLogsStatisticsQuery.data && actionLogsStatisticsConfig.map((configItem, key) => {
+                                    actionLogsStatisticsQuery.data &&
+                                    actionLogsStatisticsConfig.map((configItem, key) => {
                                         return (
                                             <div key={key} className='actionLogsPage__statisticsItem'>
-                                                <FlowCard {...actionLogsStatisticsQuery.data[configItem.id]} icon={configItem.icon} />
+                                                <FlowCard {...actionLogsStatisticsQuery.data[configItem.id]}
+                                                          icon={configItem.icon}/>
                                             </div>
                                         )
                                     })
                                 }
                             </div>
                             <div className='actionLogsPage__table'>
-                                { actionLogsFiltersQueryList.length > 0 && actionLogsFiltersQueryList.every(query => query.data) && <div className='actionLogsPage__tableFilter'>
+                                {actionLogsFiltersQueryList.length > 0 &&
+                                actionLogsFiltersQueryList.every(query => query.data) &&
+                                <div className='actionLogsPage__tableFilter'>
                                     <Filter filters={filters}
                                         data={filtersData}
                                         mobileFilterConfig={{
-                                            fields: [], 
+                                            fields: [],
                                             onSave: () => {console.log('saved')},
                                         }}
                                         onSave={
                                             ()=>{
-                                                setCrudActionIndex(crudActionIndex+1); 
+                                                setCrudActionIndex(crudActionIndex+1);
                                             }
                                         }
                                     />
                                 </div>}
                                 <div className='actionLogsPage__tableData'>
                                     {
-                                        actionLogsTableQuery.data && <Table {...table} data={actionLogsTableQuery.data} />
+                                        actionLogsTableQuery.data &&
+                                        <Table {...table} data={actionLogsTableQuery.data}/>
                                     }
                                 </div>
                             </div>
@@ -90,4 +101,4 @@ export const ActionLogsPage = () => {
             />
         </div>
     )
-}
+};

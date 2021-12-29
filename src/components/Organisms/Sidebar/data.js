@@ -33,7 +33,7 @@ export const menuLinks = [{
     },
     {
         icon: actionLogs,
-        to: '/action-logs',
+        to: '/actionLogs',
         text: 'Action logs'
     },
     // {

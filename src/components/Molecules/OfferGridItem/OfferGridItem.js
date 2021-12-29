@@ -15,7 +15,7 @@ export const OfferGridItem = ({id, icon, title, renderContent, data, width, offe
                 </div>
                 <div className='offerGridItem__titleText'>
                     <p>{title}</p>
-                    {isSlider && <Link className='offerGridItem__titleLink' to="/">Show all</Link>}
+                    {isSlider && <Link className='offerGridItem__titleLink' to={`/creatives/${offerQuery?.id}`}>Show all</Link>}
                 </div>
             </div>
             <div className='offerGridItem__content'>

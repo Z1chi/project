@@ -20,9 +20,8 @@ export const TrafficSourceList = ({sources, width}) => {
         <div className='trafficSourceList'>
             <div className={`trafficSourceList__showList${width < 511 ? ' trafficSourceList__showList--isMobile' : ''}`}>
                 {sortSourceArray && sortSourceArray.map(({title, statusId}, key) =>
-                    <div className='trafficSourceList__item'>
+                    <div className='trafficSourceList__item'  key={`trafficSourceList__item${key}`}>
                         <SelectionItem
-                            key={`selectionItem${key}`}
                             title={title}
                             isSelected={statusId === 10}/>
                     </div>

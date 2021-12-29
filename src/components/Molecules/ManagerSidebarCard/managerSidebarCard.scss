@@ -2,9 +2,9 @@
   transition: width ease 0.3s;
   background: #131826;
   box-shadow: -3px 0px 10px rgba(0, 99, 255, 0.31), 3px 0px 10px rgba(33, 159, 230, 0.28);
-  border: 1px solid transparent;
-  border-image: linear-gradient(263.11deg, #41BBFF 1.44%, #0F4BE6 44.12%, #21C2E6 99.63%);
-  border-image-slice: 1;
+  border: 1px solid #41BBFF;
+  //border-image: linear-gradient(263.11deg, #41BBFF 1.44%, #0F4BE6 44.12%, #21C2E6 99.63%);
+  //border-image-slice: 1;
   border-radius: 13px;
   overflow: hidden;
 

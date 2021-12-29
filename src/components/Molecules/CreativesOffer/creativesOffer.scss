@@ -1,7 +1,7 @@
 .creativesOffer {
     height: 380px;
     width: 262px;
-
+    transition: .3s all ease;
     background: #131826;
 
     display: flex;
@@ -17,10 +17,14 @@
         width: 100%;
         height: 168px;
         background-color: #104165;
-
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
+        & > * {
+            height: auto;
+            width: 100%;
+        }
     }
 
     &__info {
@@ -47,7 +51,8 @@
         font-weight: normal;
         font-size: 13px;
         line-height: 18px;
-
+        display: block;
+        text-decoration: none;
         color: #219FE6;
     }
 
@@ -58,7 +63,8 @@
         font-weight: normal;
         font-size: 13px;
         line-height: 18px;
-
+        max-height: 54px;
+        overflow: hidden;
         color: #898A98;
     }
 
@@ -69,7 +75,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
+        transition: .3s all ease;
         border: 1px solid #219FE6;
         box-sizing: border-box;
         border-radius: 4px;
@@ -80,7 +86,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            
+            transition: .3s all ease;
             font-style: normal;
             font-weight: 600;
             font-size: 13px;
@@ -92,10 +98,11 @@
 
     &:hover {
         box-shadow: 0 0 56px rgba(39, 107, 146, 0.5);
-
+        transition: .3s all ease;
         .creativesOffer {
             &__more {
-                button {
+                a {
+                    transition: .3s all ease;
                     color: #FFFFFF;
                     background-color: #219FE5;
                 }
