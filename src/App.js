@@ -28,7 +28,7 @@ import './fonts/fonts.scss';
 const queryClient = new QueryClient();
 
 export default function App() {
-    const auth = setToken();
+    setToken();
     return (
         <QueryClientProvider client={queryClient}>
             <div className="app">
@@ -43,7 +43,7 @@ export default function App() {
                                 <Route exact path='/creatives' component={CreativesPage}/>
                                 <Route exact path='/creatives/:id' component={CreativesSinglePage}/>
                                 <Route exact path='/statistics' component={StatisticsPage}/>
-                                <Route exact path='/action-logs' component={ActionLogsPage}/>
+                                <Route exact path='/actionLogs' component={ActionLogsPage}/>
                                 {/*<Route exact path='/leads' component={LeadsPage}/>*/}
                                 {/*<Route exact path='/affiliate-program' component={AffiliatePage}/>*/}
                                 <Route exact path='/smartlinks' component={SmartLinksPage}/>
