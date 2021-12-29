@@ -40,6 +40,7 @@ export const filters = [{
     matchPropName: 'label',
     width: '163px',
     renderItem: (item) => item.label,
+    onSelectFormatter: (item)=>item.id,
 }, ];
 
 export const table = {
