@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useResizeDetector} from "react-resize-detector";
 import {Link} from "react-router-dom";
 
-import i from "../ManagerSidebarCard/images/i.jpeg";
-
 import {OfferTags} from "../../Atoms/OfferTags/OfferTags";
 
-import config from '../../../configApi'
 
 import './offerHeader.scss';
 
@@ -19,7 +16,7 @@ export const OfferHeader = ({title, link, small_description, image, id}) => {
     return (
         <div ref={ref} className={`offerHeader${widthHeaderText ? ' offerHeader--column' : ""}`}>
             <div className='offerHeader__logo'>
-                <img src={config.root + image} alt=""/>
+                <img src={process.env.MEDIA_URL + image} alt=""/>
             </div>
 
             <div className='offerHeader__info'>

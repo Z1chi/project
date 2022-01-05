@@ -1,7 +1,6 @@
 import React from 'react';
 
 import SVG from 'react-inlinesvg';
-import config from '../../../configApi'
 
 import './creativesCard.scss';
 
@@ -12,7 +11,7 @@ export const CreativesCard = ({onClick, modalData, preview_src, category, moreBu
         <div className={`creativesCard${isMobile ? ' creativesCard--isMobile' : ''}`}>
             <div className='creativesCard__logo'
                  onClick={() => onClick({creativesData: modalData})}>
-                <img src={`${config.root}${preview_src}`} alt=''/>
+                <img src={`${process.env.MEDIA_URL}${preview_src}`} alt=''/>
             </div>
             <div className='creativesCard__footer'>
                 <p className='creativesCard__category'>

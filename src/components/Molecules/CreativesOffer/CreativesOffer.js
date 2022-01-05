@@ -2,15 +2,13 @@ import React from 'react';
 
 import {Link} from 'react-router-dom';
 
-import config from '../../../configApi'
-
 import './creativesOffer.scss';
 
 export const CreativesOffer = ({id, image, title, url, small_description,}) => {
     return (
         <div className='creativesOffer'>
             <div className='creativesOffer__logo'>
-                <img src={`${config.root}${image}`} alt=''/>
+                <img src={process.env.MEDIA_URL + image} alt=''/>
             </div>
             <div className='creativesOffer__info'>
                 <div className='creativesOffer__title'>
