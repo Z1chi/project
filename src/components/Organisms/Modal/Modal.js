@@ -10,7 +10,7 @@ import closeIcon from './images/close.svg'
 
 import './modal.scss'
 
-export const Modal = ({icon, title, subtitle, content, renderContent = content => content, renderSubmitSection, onClose}) => {
+export const Modal = ({icon, title, subtitle, content, renderContent = content => content, renderSubmitSection, onClose,}) => {
 
     const [modalData, modalActions] = useAtom(modalAtom);
 
@@ -38,7 +38,7 @@ export const Modal = ({icon, title, subtitle, content, renderContent = content =
                     {renderContent({content})}
                 </div>}
                 <div className='modal__submit'>
-                    {renderSubmitSection({onClose: closeModal})}
+                    {renderSubmitSection({onClose: closeModal, onError: content.onError, formValidator: content.formValidator, data: content.data})}
                 </div>
             </div>
         </div>

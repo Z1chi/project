@@ -22,7 +22,7 @@ export const Alert = ({ type, message }) => {
                 <SVG src={getAlertIcon({ type })} />
             </div>
             <div className='alert__message'>
-                
+                {message}
             </div>
         </div>
     )

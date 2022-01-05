@@ -12,15 +12,19 @@ import {Modal} from "../../Organisms/Modal/Modal";
 import {modalAtom} from "../../../store/Modal";
 
 import './settingsItem.scss';
+import {alertAtom} from "../../../store/Alert";
 
 
 export const SettingsItem = ({title, description, placeholder, isNotChangeable, type, value, hasConfirmField, confirmOldValue, validator, id, formValidator, mapRequestData, apiId, isMobile}) => {
 
     const [modalData, modalActions] = useAtom(modalAtom);
+    const [alertData, alertActions] = useAtom(alertAtom);
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
     const [modalOpen, setModalOpen] = useState(false);
+
+    const onFormError = (payload) => alertActions.open(payload);
 
     return (
         <div className={`settingsItem${isMobile ? ' settingsItem--isMobile' : ''}`}>
@@ -32,12 +36,12 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                 {modalOpen &&
                 <Modal
                     title={title}
-                    content={{value, hasConfirmField, confirmOldValue, validator, id, placeholder, type}}
+                    content={{value, hasConfirmField, confirmOldValue, validator, formValidator, id, placeholder, type, data: profileSettingsData, onError: onFormError}}
                     renderContent={({content}) => (<EditFieldForm
                             placeholder={content.placeholder}
                             type={content.type}
                             id={content.id}
-                            // validator={content.validator}
+                            validator={content.validator}
                             onChangeFieldValue={(fieldType) => (item) => profileSettingsActions.setField({
                                 fieldId: content.id,
                                 fieldType,
@@ -48,14 +52,22 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                             confirmOldValue={content.confirmOldValue}
                         />
                     )}
-                    renderSubmitSection={({onClose}) => (<Button
+                    renderSubmitSection={({onClose, onError, formValidator, data}) => (<Button
                         onClick={() => {
-                            const validFields =
-                                // formValidator ? formValidator(profileSettingsData.fields[id]) :
-                                profileSettingsData.fields[id];
-                            const data = (mapRequestData(validFields));
+                            const fieldsAreValid =
+                                formValidator ? formValidator(data.fields[id]) : data.fields[id];
+                            const requestData = fieldsAreValid ? (mapRequestData(data.fields[id])) : null;
 
-                            return request(`/profile/update-${apiId}`, {method: 'patch', data}).then((res) => onClose())
+                            // if(!requestData) {
+                            //     return;
+                            // }
+
+                            return request(`/profile/update-${apiId}`, {method: 'patch', data: requestData}).then((res) => {
+                                return res.exception ? onError({
+                                    message: 'Error text',
+                                    type: 'ALERT/ERROR',
+                                }) : onClose()
+                            })
                         }}
 
                         containerStyles={{width: "100%"}}

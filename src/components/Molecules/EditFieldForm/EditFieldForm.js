@@ -19,9 +19,10 @@ export const EditFieldForm = ({value, hasConfirmField, confirmOldValue = false, 
                     validator={validator}
                     type={type}
                     name={id}
-                    onChangeValue={onChangeFieldValue(profileSettingsFieldTypeList.current)}
+                    onChange={onChangeFieldValue(profileSettingsFieldTypeList.current)}
                     placeholder={value || placeholder}
                     isNotChangeable={!confirmOldValue}/>
+
             </div>
 
             <div className='editFieldForm__input'>
@@ -31,7 +32,7 @@ export const EditFieldForm = ({value, hasConfirmField, confirmOldValue = false, 
                     type={type}
                     placeholder={placeholder}
                     name={id}
-                    onChangeValue={onChangeFieldValue(profileSettingsFieldTypeList.new)}
+                    onChange={onChangeFieldValue(profileSettingsFieldTypeList.new)}
                 />
             </div>
 
@@ -43,7 +44,7 @@ export const EditFieldForm = ({value, hasConfirmField, confirmOldValue = false, 
                     placeholder={value || placeholder}
                     type={type}
                     name={id}
-                    onChangeValue={onChangeFieldValue(profileSettingsFieldTypeList.repeatNew)}
+                    onChange={onChangeFieldValue(profileSettingsFieldTypeList.repeatNew)}
                 />
             </div>}
 

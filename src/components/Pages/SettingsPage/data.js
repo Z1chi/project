@@ -1,13 +1,14 @@
 import React from "react";
 
-import {passwordFormValidator, passwordValidator} from "../../../validators/password";
+import {passwordValidator} from "../../../validators/field/password";
+import {passwordFormValidator} from "../../../validators/form/password";
+import {nameFormValidator} from "../../../validators/form/name";
 
 export const profileSettingsFieldTypeList = {
     current: "PROFILE_SETTINGS_FIELD_TYPE/current",
     new: "PROFILE_SETTINGS_FIELD_TYPE/new",
     repeatNew: "PROFILE_SETTINGS_FIELD_TYPE/repeatNew",
 };
-
 
 export const profileSettingsConfig = [
     {
@@ -20,9 +21,8 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             name: field[profileSettingsFieldTypeList.new],
-
-        })
-
+        }),
+        formValidator: nameFormValidator,
     },
     {
         id: 'wallet_address',
@@ -34,8 +34,8 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             walletAddress: field[profileSettingsFieldTypeList.new],
-
-        })
+        }),
+        formValidator: ()=>true,
     },
     {
         id: 'password',
@@ -49,12 +49,11 @@ export const profileSettingsConfig = [
         hasConfirmField: true,
         confirmOldValue: true,
         validator: passwordValidator,
-        formValidator: passwordFormValidator,
         mapRequestData: (field) => ({
             oldPassword: field[profileSettingsFieldTypeList.current],
             newPassword: field[profileSettingsFieldTypeList.new],
-
-        })
+        }),
+        formValidator: passwordFormValidator,
     },
     {
         id: 'telegram',
@@ -66,8 +65,8 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             telegram: field[profileSettingsFieldTypeList.new],
-
-        })
+        }),
+        formValidator: ()=>true,
     },
     {
         id: 'email',
@@ -79,8 +78,8 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             email: field[profileSettingsFieldTypeList.new],
-
-        })
+        }),
+        formValidator: ()=>true,
 
     },
 ];
