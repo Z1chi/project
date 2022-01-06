@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 import SVG from 'react-inlinesvg';
-import { images } from './images';
+import {images} from './images';
 
 import './input.scss';
 
 
-export const Input = ({ type = 'text', value, placeholder, isNotChangeable = false, onChange = () => {}, canCopy, name, validator=()=>true}) => {
+export const Input = ({
+                          type = 'text', value, placeholder, isNotChangeable = false, onChange = () => {
+    }, canCopy, name, validator = () => true
+                      }) => {
 
     const [inputValue, setInputValue] = useState('');
 
-    useEffect( ()=>{
+    useEffect(() => {
         setInputValue(value)
     }, [value])
 
@@ -20,10 +23,11 @@ export const Input = ({ type = 'text', value, placeholder, isNotChangeable = fal
                 name={name}
                 className='customInput__input'
                 type={type}
-                value={inputValue}
-                placeholder={placeholder}
+                value={isNotChangeable ? undefined : inputValue}
+                placeholder={(isNotChangeable && inputValue) ? inputValue : placeholder}
                 onChange={e => setInputValue(e.target.value)}
-                onBlur={()=>validator(inputValue) ? onChange(inputValue) : ()=>{}}
+                onBlur={() => validator(inputValue) ? onChange(inputValue) : () => {
+                }}
                 disabled={isNotChangeable}/>
 
             {
