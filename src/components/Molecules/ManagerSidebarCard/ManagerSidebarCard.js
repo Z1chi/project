@@ -5,6 +5,11 @@ import telegram from './images/telegram.svg'
 import styled from 'styled-components'
 import {Avatar} from "../../Atoms/Avatar/Avatar";
 import SVG from 'react-inlinesvg'
+import {useAtom} from "@reatom/react";
+import {profileSettingsAtom} from "../../../store/ProfileSettings";
+
+import config from "../../../configApi";
+
 
 const ManagerSidebarCardWrapper = styled.div`
  margin: ${({sidebarIsOpened}) => sidebarIsOpened ? '24' : '10'}px;
@@ -31,7 +36,12 @@ const ManagerSidebarCardInfo = styled.div`
    height: ${({sidebarIsOpened}) => sidebarIsOpened ? '51px' : '89px'};
 `;
 
-export const ManagerSidebarCard = ({sidebarIsOpened, managerAvatar, managerLink, telegramLink}) => {
+export const ManagerSidebarCard = ({sidebarIsOpened}) => {
+
+    const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
+
+    const supportData = profileSettingsData.fields.support;
+
     return (
         <ManagerSidebarCardWrapper
             sidebarIsOpened={sidebarIsOpened}
@@ -44,19 +54,19 @@ export const ManagerSidebarCard = ({sidebarIsOpened, managerAvatar, managerLink,
                 className='managerSidebarCard__info'>
                 <ManagerSidebarCardLinkManager
                     sidebarIsOpened={sidebarIsOpened}
-                    href='/'
+                    href={supportData ? supportData.link : '/'}
                     target='_blank'
                     className='managerSidebarCard__infoItem'>
                     <Avatar
-                        imageSrc={i}
+                        imageSrc={supportData ? config.root + supportData.img : i}
                         size={'36px'}
                     />
                     {sidebarIsOpened &&
-                    <p>Pavel Durov</p>}
+                    <p>{supportData ? supportData.name : ""}</p>}
                 </ManagerSidebarCardLinkManager>
                 <ManagerSidebarCardLinkTelegram
                     sidebarIsOpened={sidebarIsOpened}
-                    href='/'
+                    href={supportData ? supportData.link : '/'}
                     target='_blank'
                     className='managerSidebarCard__infoItem'
                 >

@@ -50,7 +50,7 @@ export const filters = [{
     renderItem: (item) => item.title,
     onSelectFormatter: (item) => item.id,
 }, {
-    title: 'action',
+    id: 'action',
     title: 'Action',
     mobileTitle: 'Select actions',
     type: dropdownTypes.MULTISELECT,
