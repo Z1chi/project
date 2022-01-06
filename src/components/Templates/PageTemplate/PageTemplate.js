@@ -14,6 +14,9 @@ import {alertAtom} from '../../../store/Alert';
 
 
 import './pageTemplate.scss'
+import {useQuery} from "react-query";
+import request from "../../../api/request";
+import {profileSettingsAtom} from "../../../store/ProfileSettings";
 
 
 export const PageTemplate = ({renderPage}) => {
@@ -22,6 +25,17 @@ export const PageTemplate = ({renderPage}) => {
     const [alertData] = useAtom(alertAtom);
     const [modalData] = useAtom(modalAtom);
     const [sidebarData, sidebarActions] = useAtom(sidebarAtom);
+
+
+    const profileQuery = useQuery('profile', () => {
+        return request('/profile/get-data').then(res => res.data)
+    });
+
+    const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
+
+    useEffect(() => {
+        profileQuery.data && profileSettingsActions.setInitialFields(profileQuery.data);
+    }, [profileQuery.data]);
 
     useEffect(() => {
         (window.innerWidth < 710 && window.innerWidth > 479) ? sidebarActions.close() : '';

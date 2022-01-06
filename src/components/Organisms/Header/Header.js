@@ -1,5 +1,5 @@
 import React from 'react';
-import {useQuery} from "react-query";
+import {useAtom} from "@reatom/react";
 
 import {Avatar} from "../../Atoms/Avatar/Avatar";
 import {Dropdown} from "../../Molecules/Dropdown/Dropdown";
@@ -9,16 +9,21 @@ import i from '../../Molecules/ManagerSidebarCard/images/i.jpeg'
 import icon from './images/headerIcon.svg'
 import SVG from 'react-inlinesvg'
 
-import request from "../../../api/request";
-
 import './header.scss'
+
+import {profileSettingsAtom} from "../../../store/ProfileSettings";
+
+import {profileSettingsFieldTypeList} from "../../Pages/SettingsPage/data";
+
+import config from "../../../configApi";
 
 
 export const Header = () => {
 
-    const profileQuery = useQuery('profileDropdown', () => {
-        return request('/profile/get-data').then(res => res.data)
-    });
+    const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
+
+    const supportData = profileSettingsData.fields;
+
 
     return (
         <div className='header'>
@@ -30,13 +35,18 @@ export const Header = () => {
                             return (
                                 <div className='header__profileSettingsSwitcher'
                                      onClick={() => isOpened === true ? setIsOpened(false) : setIsOpened(true)}>
-                                    <Avatar imageSrc={i} size={"36px"}/>
+                                    <Avatar
+                                        imageSrc={supportData.img &&
+                                        supportData.img[profileSettingsFieldTypeList.current].length > 1 ?
+                                            config.root + supportData.img[profileSettingsFieldTypeList.current] : i}
+                                        size={"36px"}/>
                                     <div className='header__info'>
-                                        <p className='header__infoName'>{profileQuery?.data?.name}</p>
+                                        <p className='header__infoName'>{supportData.name &&
+                                        supportData.name[profileSettingsFieldTypeList.current]}</p>
                                         <p className='header__infoId'>id: 123456</p>
                                     </div>
                                     <div className='header__dropdownArrow'>
-                                        <SVG src={profileQuery?.data?.img ? profileQuery?.data?.img : icon}/>
+                                        <SVG src={icon}/>
                                     </div>
                                 </div>
                             )
@@ -46,7 +56,9 @@ export const Header = () => {
                         () => {
                             return (
                                 <div className='header__profileSettingsContent'>
-                                    <ProfileSettings {...profileQuery.data}/>
+                                    <ProfileSettings
+                                        email={supportData.email ?
+                                            supportData.email[profileSettingsFieldTypeList.current] : ''}/>
                                 </div>
                             )
                         }
