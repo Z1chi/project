@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useAtom} from '@reatom/react';
 import {useResizeDetector} from 'react-resize-detector';
 
@@ -20,7 +20,7 @@ import {profileSettingsAtom} from "../../../store/ProfileSettings";
 
 
 export const PageTemplate = ({renderPage}) => {
-    const {width, height, ref} = useResizeDetector();
+    const {width, ref} = useResizeDetector();
 
     const [alertData, alertActions] = useAtom(alertAtom);
     const [modalData] = useAtom(modalAtom);
@@ -31,6 +31,10 @@ export const PageTemplate = ({renderPage}) => {
     });
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
+
+    useEffect(() => {
+        window.innerWidth < 480 ? sidebarActions.close() : ''
+    }, []);
 
     useEffect(() => {
         profileQuery.data && profileSettingsActions.setInitialFields(profileQuery.data);

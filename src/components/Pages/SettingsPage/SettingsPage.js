@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import {useQuery} from "react-query";
+import React from 'react';
 import {useAtom} from "@reatom/react";
 import SVG from 'react-inlinesvg';
 
@@ -9,8 +8,6 @@ import {SettingsItem} from "../../Molecules/SettingsItem/SettingsItem";
 
 import i from '../../Molecules/ManagerSidebarCard/images/i.jpeg';
 import avatarUpdateIcon from './images/avatarUpdateIcon.svg'
-
-import request from "../../../api/request";
 
 import {profileSettingsConfig, profileSettingsFieldTypeList} from './data'
 import {profileSettingsAtom} from "../../../store/ProfileSettings";
@@ -24,7 +21,7 @@ export const SettingsPage = () => {
     return (
         <div className='settingsPage'>
             <PageTemplate
-                renderPage={({height, width}) => {
+                renderPage={({width}) => {
                     return (
                         <div
                             className={`settingsPage__content${width < 480 ? ' settingsPage__content--isMobile' : ''}`}>

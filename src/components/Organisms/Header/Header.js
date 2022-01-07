@@ -1,5 +1,6 @@
 import React from 'react';
 import {useAtom} from "@reatom/react";
+import SVG from 'react-inlinesvg'
 
 import {Avatar} from "../../Atoms/Avatar/Avatar";
 import {Dropdown} from "../../Molecules/Dropdown/Dropdown";
@@ -7,7 +8,6 @@ import {ProfileSettings} from "../ProfileSettings/ProfileSettings";
 
 import i from '../../Molecules/ManagerSidebarCard/images/i.jpeg'
 import icon from './images/headerIcon.svg'
-import SVG from 'react-inlinesvg'
 
 import './header.scss'
 
@@ -15,7 +15,6 @@ import {profileSettingsAtom} from "../../../store/ProfileSettings";
 
 import {profileSettingsFieldTypeList} from "../../Pages/SettingsPage/data";
 
-import config from "../../../configApi";
 
 
 export const Header = () => {
@@ -38,7 +37,7 @@ export const Header = () => {
                                     <Avatar
                                         imageSrc={supportData.img &&
                                         supportData.img[profileSettingsFieldTypeList.current].length > 1 ?
-                                            config.root + supportData.img[profileSettingsFieldTypeList.current] : i}
+                                            process.env.MEDIA_URL + supportData.img[profileSettingsFieldTypeList.current] : i}
                                         size={"36px"}/>
                                     <div className='header__info'>
                                         <p className='header__infoName'>{supportData.name &&

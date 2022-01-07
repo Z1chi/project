@@ -1,14 +1,16 @@
 import React from 'react';
-import './managerSidebarCard.scss';
+import {useAtom} from "@reatom/react";
+import styled from 'styled-components'
+import SVG from 'react-inlinesvg'
+
 import i from './images/i.jpeg'
 import telegram from './images/telegram.svg'
-import styled from 'styled-components'
+
 import {Avatar} from "../../Atoms/Avatar/Avatar";
-import SVG from 'react-inlinesvg'
-import {useAtom} from "@reatom/react";
+
 import {profileSettingsAtom} from "../../../store/ProfileSettings";
 
-import config from "../../../configApi";
+import './managerSidebarCard.scss';
 
 
 const ManagerSidebarCardWrapper = styled.div`
@@ -58,7 +60,7 @@ export const ManagerSidebarCard = ({sidebarIsOpened}) => {
                     target='_blank'
                     className='managerSidebarCard__infoItem'>
                     <Avatar
-                        imageSrc={supportData ? config.root + supportData.img : i}
+                        imageSrc={supportData ? process.env.MEDIA_URL + supportData.img : i}
                         size={'36px'}
                     />
                     {sidebarIsOpened &&

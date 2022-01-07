@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import './avatar.scss'
 
+
 const StyledAvatar = styled.div`
       width: ${({size}) => size};
       height: ${({size}) => size};
