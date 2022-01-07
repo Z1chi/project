@@ -22,10 +22,9 @@ import {profileSettingsAtom} from "../../../store/ProfileSettings";
 export const PageTemplate = ({renderPage}) => {
     const {width, height, ref} = useResizeDetector();
 
-    const [alertData] = useAtom(alertAtom);
+    const [alertData, alertActions] = useAtom(alertAtom);
     const [modalData] = useAtom(modalAtom);
     const [sidebarData, sidebarActions] = useAtom(sidebarAtom);
-
 
     const profileQuery = useQuery('profile', () => {
         return request('/profile/get-data').then(res => res.data)

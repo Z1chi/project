@@ -27,7 +27,7 @@ export const WithdrawPage = () => {
     const [modalData, modalActions] = useAtom(modalAtom);
 
     const withdrawQuery = useQuery(['withdraw-table', crudActionIndex], () => {
-        return request('withdraw/get-withdraws', { method: 'post', data: { filters: filterData.fields }}).then(res => res.data);
+        return request('withdraw/get-withdraws', { method: 'post', data: filtersData ? { filters: filtersData.fields } : {} }).then(res => res.data);
     })
 
     const statusFilterQuery = useQuery(['withdraw-statuses'], () => {
