@@ -8,15 +8,12 @@ import {Input} from "../../Atoms/Input/Input";
 import {EditFieldForm} from "../EditFieldForm/EditFieldForm";
 import {Modal} from "../../Organisms/Modal/Modal";
 
-import {modalAtom} from "../../../store/Modal";
-
-import './settingsItem.scss';
 import {alertAtom} from "../../../store/Alert";
 
+import './settingsItem.scss';
 
 export const SettingsItem = ({title, description, placeholder, isNotChangeable, type, value, hasConfirmField, confirmOldValue, validator, id, formValidator, mapRequestData, apiId, isMobile}) => {
 
-    const [modalData, modalActions] = useAtom(modalAtom);
     const [alertData, alertActions] = useAtom(alertAtom);
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);

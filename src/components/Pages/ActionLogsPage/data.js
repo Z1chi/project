@@ -35,7 +35,7 @@ export const filters = [{
     width: '169px',
     renderItem: (item) => (
         <div style={{display: 'flex', alignItems: 'center', }}>
-            <img src={item.image} />
+            <img src={item.image}  alt=''/>
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
