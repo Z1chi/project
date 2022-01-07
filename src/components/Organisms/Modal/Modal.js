@@ -10,22 +10,22 @@ import closeIcon from './images/close.svg'
 
 import './modal.scss'
 
-export const Modal = ({icon, title, subtitle, content, renderContent = content => content, renderSubmitSection, onClose,}) => {
+export const Modal = ({icon, title, subtitle, children, onClose}) => {
 
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const closeModal = onClose ? onClose : modalActions.close;
+    const onCloseHandler = onClose || modalActions.close;
 
     return (
         <div className='modal'>
             <div className='modal__backdrop'>
-                <Backdrop onClose={closeModal}/>
+                <Backdrop onClose={onCloseHandler}/>
             </div>
             <div className='modal__window'>
                 {icon && <div className='modal__icon'>
                     <SVG src={icon}/>
                 </div>}
-                <div className='modal__close' onClick={closeModal}>
+                <div className='modal__close' onClick={onCloseHandler}>
                     <SVG src={closeIcon}/>
                 </div>
                 <div className='modal__title'>
@@ -34,11 +34,8 @@ export const Modal = ({icon, title, subtitle, content, renderContent = content =
                 {subtitle && <div className='modal__subtitle'>
                     {subtitle}
                 </div>}
-                {content && <div className='modal__content'>
-                    {renderContent({content})}
-                </div>}
-                <div className='modal__submit'>
-                    {renderSubmitSection({onClose: closeModal, onError: content.onError, formValidator: content.formValidator, data: content.data})}
+                <div className='modal__content'>
+                    {children}
                 </div>
             </div>
         </div>

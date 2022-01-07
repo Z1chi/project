@@ -1,9 +1,5 @@
 import React from "react";
 
-import {passwordValidator} from "../../../validators/field/password";
-import {passwordFormValidator} from "../../../validators/form/password";
-import {nameFormValidator} from "../../../validators/form/name";
-
 export const profileSettingsFieldTypeList = {
     current: "PROFILE_SETTINGS_FIELD_TYPE/current",
     new: "PROFILE_SETTINGS_FIELD_TYPE/new",
@@ -22,7 +18,17 @@ export const profileSettingsConfig = [
         mapRequestData: (field) => ({
             name: field[profileSettingsFieldTypeList.new],
         }),
-        formValidator: nameFormValidator,
+        formValidator: (values) => {
+            const errors = {};
+            if(!values[profileSettingsFieldTypeList.new]) {
+                return;
+            }
+            const [firstName, lastName] = values[profileSettingsFieldTypeList.new].split(' ');
+              if (!firstName || !lastName) {
+                errors[profileSettingsFieldTypeList.new] = "Enter firstname and lastname";
+              }
+            return errors;
+        },
     },
     {
         id: 'wallet_address',
@@ -48,12 +54,26 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         hasConfirmField: true,
         confirmOldValue: true,
-        validator: passwordValidator,
         mapRequestData: (field) => ({
             oldPassword: field[profileSettingsFieldTypeList.current],
             newPassword: field[profileSettingsFieldTypeList.new],
         }),
-        formValidator: passwordFormValidator,
+        formValidator: (values) => {
+            const errors = {};
+
+                if (!values[profileSettingsFieldTypeList.new]) {
+                    errors[profileSettingsFieldTypeList.new] = 'Enter new password'
+                }
+
+                if (!values[profileSettingsFieldTypeList.repeatNew]) {
+                    errors[profileSettingsFieldTypeList.repeatNew] = 'Confirm new password'
+                }
+
+                if (values[profileSettingsFieldTypeList.new] !== values[profileSettingsFieldTypeList.repeatNew]) {
+                    errors[profileSettingsFieldTypeList.repeatNew] = 'Passwords do not match'
+                }
+            return errors;
+        },
     },
     {
         id: 'telegram',

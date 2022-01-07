@@ -27,8 +27,6 @@ export const PageTemplate = ({renderPage}) => {
         (window.innerWidth < 710 && window.innerWidth > 479) ? sidebarActions.close() : '';
     }, [window.innerWidth]);
 
-    console.log('render alert', alertData)
-
     return (
         <div className={`pageTemplate${sidebarData.isOpened ? ' pageTemplate--compressed' : ''}`}>
             <div className="pageTemplate__sidebar">

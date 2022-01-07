@@ -1,53 +1,94 @@
 import React from 'react';
+import { Form, Field } from "react-final-form";
 
 import {Input} from "../../Atoms/Input/Input";
+import {Button} from "../../Atoms/Button/Button";
 
 import {profileSettingsFieldTypeList} from '../../Pages/SettingsPage/data'
 
 import './editFieldForm.scss';
 
-export const EditFieldForm = ({value, hasConfirmField, confirmOldValue = false, onChangeFieldValue, validator, id, placeholder, type = 'text'}) => {
-
-
+export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue = false, onChangeFieldValue, validator, id, placeholder, type = 'text', formValidator}) => {
 
     return (
         <div className='editFieldForm'>
-
-            <div className='editFieldForm__input'>
-                <label>Current</label>
-                <Input
-                    validator={validator}
-                    type={type}
-                    name={id}
-                    onChange={onChangeFieldValue(profileSettingsFieldTypeList.current)}
-                    placeholder={value || placeholder}
-                    isNotChangeable={!confirmOldValue}/>
-
-            </div>
-
-            <div className='editFieldForm__input'>
-                <label>New</label>
-                <Input
-                    validator={validator}
-                    type={type}
-                    placeholder={placeholder}
-                    name={id}
-                    onChange={onChangeFieldValue(profileSettingsFieldTypeList.new)}
-                />
-            </div>
+        <Form
+        onSubmit={onSubmit}
+        initialValues={{}}
+        validate={(values) => {
+            console.log('v', values);
+            const res = formValidator(values);
+            console.log('res', res);
+            return res;
+        }}
+        render={({ handleSubmit, form, submitting, pristine, values }) => (
+          <form onSubmit={handleSubmit}>
+            <Field name={profileSettingsFieldTypeList.current}>
+                {({ input, meta }) => (
+                    <div className='editFieldForm__input'>
+                        <label>Current</label>
+                            <Input
+                                type={type}
+                                name={id}
+                                onChange={onChangeFieldValue(profileSettingsFieldTypeList.current)}
+                                placeholder={value || placeholder}
+                                isNotChangeable={!confirmOldValue}
+                                hasError={meta.error && meta.touched}
+                                error={meta.error}
+                                fieldData={input}
+                            />
+                        <span>{meta.error}</span>
+                    </div>
+                )}
+            </Field>
+            <Field name={profileSettingsFieldTypeList.new}>
+                {({ input, meta }) => (
+                    <div className='editFieldForm__input'>
+                        <label>New</label>
+                            <Input
+                                validator={validator}
+                                type={type}
+                                placeholder={placeholder}
+                                name={id}
+                                onChange={onChangeFieldValue(profileSettingsFieldTypeList.new)}
+                                hasError={meta.error && meta.touched}
+                                error={meta.error}
+                                fieldData={input}
+                            />
+                    </div>
+                )}
+            </Field>
 
             {hasConfirmField &&
-            <div className='editFieldForm__input'>
-                <label>Repeat New</label>
-                <Input
-                    validator={validator}
-                    placeholder={value || placeholder}
-                    type={type}
-                    name={id}
-                    onChange={onChangeFieldValue(profileSettingsFieldTypeList.repeatNew)}
-                />
-            </div>}
-
-        </div>
+                <Field name={profileSettingsFieldTypeList.repeatNew}>
+                    {({ input, meta }) => (
+                    <div className='editFieldForm__input'>
+                            <label>Repeat new </label>
+                            <Input
+                                validator={validator}
+                                placeholder={value || placeholder}
+                                type={type}
+                                name={id}
+                                onChange={onChangeFieldValue(profileSettingsFieldTypeList.repeatNew)}
+                                hasError={meta.error && meta.touched}
+                                error={meta.error}
+                                fieldData={input}
+                            />
+                        </div>
+                    )}
+                </Field>
+            }
+            <div className='editFieldForm__submit'>
+              <Button type="submit" disabled={submitting}                         
+                containerStyles={{width: "100%"}}
+                styles={{width: "100%", cursor: "pointer"}}>
+                Submit
+              </Button>
+            </div>
+          </form>
+        )}
+      />
+    </div>
+        
     )
 };

@@ -1,8 +1,12 @@
 .customInput {
   width: 100%;
-  display: flex;
-  align-items: center;
-  background: #2D313D;
+  position: relative;
+
+  &__field {
+    display: flex;
+    align-items: center;
+    background: #2D313D;
+  }
 
   &__input {
     width: 100%;
@@ -29,5 +33,33 @@
 
   &__copy {
     margin: 0 10px;
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    min-width: 100px;
+    position: absolute;
+    background-color: #870322;
+    font-size: 11px;
+    text-transform: uppercase;
+    border-radius: 10px;
+    padding: 5px 10px;
+    top: -15px;
+    right: 20px;
+    z-index: 3;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 30px;
+      left: 12px;
+      width: 0; 
+      height: 0; 
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      
+      border-top: 13px solid #870322;
+    }
   }
 }

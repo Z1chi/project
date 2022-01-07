@@ -29,7 +29,6 @@ export const SettingsPage = () => {
         profileQuery.data && profileSettingsActions.setInitialFields(profileQuery.data);
     }, [profileQuery.data]);
 
-
     return (
         <div className='settingsPage'>
             <PageTemplate
