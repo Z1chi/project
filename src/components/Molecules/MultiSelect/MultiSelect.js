@@ -53,7 +53,7 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
                                             ...optionsSelectableItem,
                                             isSelected: !optionsSelectableItem.isSelected,
                                         } : optionsSelectableItem
-                                    })
+                                    });
                                     setOptionsSelectable(selectResult);
                                     onChange(selectResult.filter(item=>!!item.isSelected))
                                 }}
@@ -73,4 +73,4 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
             </div>
         </div>
     )
-}
+};

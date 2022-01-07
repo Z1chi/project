@@ -26,9 +26,10 @@ export const profileSettingsAtom = createAtom(
         onAction('setInitialFields', (payload) => {
             let currentFields = {};
             for(let prop in payload) {
-                currentFields[prop] = {
-                    [profileSettingsFieldTypeList.current]: payload[prop]
-                }
+
+                currentFields[prop] =
+                    prop === 'support' ? payload[prop]:
+                        {[profileSettingsFieldTypeList.current]: payload[prop]}
             }
             return state = {
                 fields: currentFields,

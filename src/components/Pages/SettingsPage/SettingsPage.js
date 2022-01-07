@@ -12,16 +12,13 @@ import avatarUpdateIcon from './images/avatarUpdateIcon.svg'
 
 import request from "../../../api/request";
 
-import {profileSettingsConfig} from './data'
+import {profileSettingsConfig, profileSettingsFieldTypeList} from './data'
 import {profileSettingsAtom} from "../../../store/ProfileSettings";
 
 import './settingsPage.scss';
 
 export const SettingsPage = () => {
 
-    const profileQuery = useQuery('profile', () => {
-        return request('/profile/get-data').then(res => res.data)
-    });
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
@@ -44,8 +41,10 @@ export const SettingsPage = () => {
                                 </div>
                             </div>
                             {
-                                profileQuery.data && profileSettingsConfig.map((settingsField, key) => {
-                                        const inputValue = profileQuery.data[settingsField.id];
+                                profileSettingsConfig.map((settingsField, key) => {
+                                        const inputValue = profileSettingsData.fields[settingsField.id] &&
+                                            profileSettingsData
+                                                .fields[settingsField.id][profileSettingsFieldTypeList.current];
                                         return (
                                             <div className='settingsPage__contentItem'
                                                  key={`settingsPage__contentItem${key}`}>
