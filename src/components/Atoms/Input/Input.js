@@ -25,11 +25,11 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
                     {...fieldData}
                     onChange={e => {
                         setInputValue(e.target.value);
-                        fieldData.onChange(e)
+                        fieldData.onChange && fieldData.onChange(e)
                     }}
                     onBlur={(e)=>{
                         onChange(inputValue)
-                        fieldData.onBlur(e)
+                        fieldData.onBlur && fieldData.onBlur(e)
                     }}
                 />
                 {
