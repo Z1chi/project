@@ -49,9 +49,7 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                         hasConfirmField={hasConfirmField}
                         confirmOldValue={confirmOldValue}
                         onSubmit={ () => {
-                            const fieldsAreValid = formValidator ? formValidator(profileSettingsData.fields[id]) : profileSettingsData.fields[id];
-                            const requestData = fieldsAreValid ? (mapRequestData(profileSettingsData.fields[id])) : null;
-
+                            const requestData = (mapRequestData(profileSettingsData.fields[id]));
                             return request(`/profile/update-${apiId}`, {method: 'patch', data: requestData}).then((res) => {
                                 return res.exception ? onFormError({
                                     message: 'Error text',

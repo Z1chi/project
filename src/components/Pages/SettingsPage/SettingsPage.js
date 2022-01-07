@@ -19,12 +19,7 @@ import './settingsPage.scss';
 
 export const SettingsPage = () => {
 
-
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
-
-    useEffect(() => {
-        profileQuery.data && profileSettingsActions.setInitialFields(profileQuery.data);
-    }, [profileQuery.data]);
 
     return (
         <div className='settingsPage'>

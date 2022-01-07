@@ -13,8 +13,6 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
         setInputValue(value)
     }, [value])
 
-    console.log('fD', fieldData)
-
     return (
         <div className='customInput'>
             <div className='customInput__field'>
@@ -23,12 +21,16 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
                     type={type}
                     value={inputValue}
                     placeholder={placeholder}
-                    onChange={e => setInputValue(e.target.value)}
-                    onBlur={()=>{
-                        onChange(inputValue)
-                    }}
                     disabled={isNotChangeable}
                     {...fieldData}
+                    onChange={e => {
+                        setInputValue(e.target.value);
+                        fieldData.onChange(e)
+                    }}
+                    onBlur={(e)=>{
+                        onChange(inputValue)
+                        fieldData.onBlur(e)
+                    }}
                 />
                 {
                     canCopy && <div className='customInput__copy'>

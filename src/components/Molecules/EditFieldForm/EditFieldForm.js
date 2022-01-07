@@ -16,9 +16,7 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
         onSubmit={onSubmit}
         initialValues={{}}
         validate={(values) => {
-            console.log('v', values);
             const res = formValidator(values);
-            console.log('res', res);
             return res;
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
