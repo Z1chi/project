@@ -12,7 +12,6 @@ export const profileSettingsAtom = createAtom(
     },
     ({onAction}, state = {fields: {}}) => {
         onAction('setField', (payload) => {
-            console.log('p', payload)
             return state = {
                 ...state,
                 fields: {
