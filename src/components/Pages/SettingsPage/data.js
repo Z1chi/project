@@ -1,13 +1,10 @@
 import React from "react";
 
-import {passwordFormValidator, passwordValidator} from "../../../validators/password";
-
 export const profileSettingsFieldTypeList = {
     current: "PROFILE_SETTINGS_FIELD_TYPE/current",
     new: "PROFILE_SETTINGS_FIELD_TYPE/new",
     repeatNew: "PROFILE_SETTINGS_FIELD_TYPE/repeatNew",
 };
-
 
 export const profileSettingsConfig = [
     {
@@ -20,9 +17,18 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             name: field[profileSettingsFieldTypeList.new],
-
-        })
-
+        }),
+        formValidator: (values) => {
+            const errors = {};
+            if(!values[profileSettingsFieldTypeList.new]) {
+                return;
+            }
+            const [firstName, lastName] = values[profileSettingsFieldTypeList.new].split(' ');
+              if (!firstName || !lastName) {
+                errors[profileSettingsFieldTypeList.new] = "Enter firstname and lastname";
+              }
+            return errors;
+        },
     },
     {
         id: 'wallet_address',
@@ -34,8 +40,8 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             walletAddress: field[profileSettingsFieldTypeList.new],
-
-        })
+        }),
+        formValidator: ()=>true,
     },
     {
         id: 'password',
@@ -48,13 +54,26 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         hasConfirmField: true,
         confirmOldValue: true,
-        validator: passwordValidator,
-        formValidator: passwordFormValidator,
         mapRequestData: (field) => ({
             oldPassword: field[profileSettingsFieldTypeList.current],
             newPassword: field[profileSettingsFieldTypeList.new],
+        }),
+        formValidator: (values) => {
+            const errors = {};
 
-        })
+                if (!values[profileSettingsFieldTypeList.new]) {
+                    errors[profileSettingsFieldTypeList.new] = 'Enter new password'
+                }
+
+                if (!values[profileSettingsFieldTypeList.repeatNew]) {
+                    errors[profileSettingsFieldTypeList.repeatNew] = 'Confirm new password'
+                }
+
+                if (values[profileSettingsFieldTypeList.new] !== values[profileSettingsFieldTypeList.repeatNew]) {
+                    errors[profileSettingsFieldTypeList.repeatNew] = 'Passwords do not match'
+                }
+            return errors;
+        },
     },
     {
         id: 'telegram',
@@ -66,8 +85,8 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             telegram: field[profileSettingsFieldTypeList.new],
-
-        })
+        }),
+        formValidator: ()=>true,
     },
     {
         id: 'email',
@@ -79,8 +98,8 @@ export const profileSettingsConfig = [
         isNotChangeable: true,
         mapRequestData: (field) => ({
             email: field[profileSettingsFieldTypeList.new],
-
-        })
+        }),
+        formValidator: ()=>true,
 
     },
 ];

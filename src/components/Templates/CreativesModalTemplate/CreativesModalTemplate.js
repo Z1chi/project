@@ -25,7 +25,7 @@ export const CreativesModalTemplate = ({onClose, images, description, file_size,
                 <SVG src={icons.closeIcon}/>
             </div>
             <div className='creativesModalTemplate__image'>
-                <img src={`${config.root}${preview_src}`} alt='modalImage'/>
+                <img src={process.env.MEDIA_URL + preview_src} alt='modalImage'/>
             </div>
             <div className='creativesModalTemplate__slider'>
                 <Slider items={sliderImages.map(image => image.source)}/>

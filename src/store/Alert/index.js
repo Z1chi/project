@@ -5,7 +5,7 @@ export const alertAtom = createAtom(
         open: (value) => value, 
         close: (value) => value,
     },
-    ({ onAction }, state = { isOpened: true }) => {
+    ({ onAction }, state = { isOpened: false }) => {
         onAction('open', (payload) => ( 
             state = {
                 ...state, 

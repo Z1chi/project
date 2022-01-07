@@ -6,21 +6,24 @@ import request from "../../../api/request";
 
 import {Input} from "../../Atoms/Input/Input";
 import {EditFieldForm} from "../EditFieldForm/EditFieldForm";
-import {Button} from "../../Atoms/Button/Button";
 import {Modal} from "../../Organisms/Modal/Modal";
 
 import {modalAtom} from "../../../store/Modal";
 
 import './settingsItem.scss';
+import {alertAtom} from "../../../store/Alert";
 
 
 export const SettingsItem = ({title, description, placeholder, isNotChangeable, type, value, hasConfirmField, confirmOldValue, validator, id, formValidator, mapRequestData, apiId, isMobile}) => {
 
     const [modalData, modalActions] = useAtom(modalAtom);
+    const [alertData, alertActions] = useAtom(alertAtom);
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
     const [modalOpen, setModalOpen] = useState(false);
+
+    const onFormError = (payload) => alertActions.open(payload);
 
     return (
         <div className={`settingsItem${isMobile ? ' settingsItem--isMobile' : ''}`}>
@@ -30,41 +33,32 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                 <Input value={value} type={type} placeholder={placeholder} isNotChangeable={isNotChangeable}/>
                 <span onClick={() => setModalOpen(true)}>Change</span>
                 {modalOpen &&
-                <Modal
-                    title={title}
-                    content={{value, hasConfirmField, confirmOldValue, validator, id, placeholder, type}}
-                    renderContent={({content}) => (<EditFieldForm
-                            placeholder={content.placeholder}
-                            type={content.type}
-                            id={content.id}
-                            // validator={content.validator}
-                            onChangeFieldValue={(fieldType) => (item) => profileSettingsActions.setField({
-                                fieldId: content.id,
-                                fieldType,
-                                fieldValue: item
-                            })}
-                            value={content.value}
-                            hasConfirmField={content.hasConfirmField}
-                            confirmOldValue={content.confirmOldValue}
-                        />
-                    )}
-                    renderSubmitSection={({onClose}) => (<Button
-                        onClick={() => {
-                            const validFields =
-                                // formValidator ? formValidator(profileSettingsData.fields[id]) :
-                                profileSettingsData.fields[id];
-                            const data = (mapRequestData(validFields));
-
-                            return request(`/profile/update-${apiId}`, {method: 'patch', data}).then((res) => onClose())
+                <Modal title={title} onClose={()=>setModalOpen(false)}>
+                    <EditFieldForm
+                        placeholder={placeholder}
+                        type={type}
+                        id={id}
+                        validator={validator}
+                        formValidator={formValidator}
+                        onChangeFieldValue={(fieldType) => (item) => profileSettingsActions.setField({
+                            fieldId: id,
+                            fieldType,
+                            fieldValue: item
+                        })}
+                        value={value}
+                        hasConfirmField={hasConfirmField}
+                        confirmOldValue={confirmOldValue}
+                        onSubmit={ () => {
+                            const requestData = (mapRequestData(profileSettingsData.fields[id]));
+                            return request(`/profile/update-${apiId}`, {method: 'patch', data: requestData}).then((res) => {
+                                return res.exception ? onFormError({
+                                    message: 'Error text',
+                                    type: 'ALERT/ERROR',
+                                }) : ()=>setModalOpen(false)
+                            })
                         }}
-
-                        containerStyles={{width: "100%"}}
-                        styles={{width: "100%", cursor: "pointer"}}>
-
-                        Change
-
-                    </Button>)}
-                    onClose={() => setModalOpen(false)}/>
+                    />
+                </Modal>
                 }
             </div>
         </div>

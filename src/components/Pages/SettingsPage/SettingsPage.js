@@ -19,9 +19,7 @@ import './settingsPage.scss';
 
 export const SettingsPage = () => {
 
-
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
-
 
     return (
         <div className='settingsPage'>

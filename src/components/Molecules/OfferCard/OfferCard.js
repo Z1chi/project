@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 import {OfferPaymentParam} from '../../Atoms/OfferPaymentParam/OfferPaymentParam';
 
-import config from '../../../configApi'
 
 import './offerCard.scss';
 
@@ -16,7 +15,7 @@ export const OfferCard = ({image, isMobile, singlePageId = 1, title, url, projec
         <div className={`offerCard${isMobile ? " offerCard--isMobile" : ""}`}>
             <div className='offerCard__preview'>
                 <div className='offerCard__logo'>
-                    <img src={`${config.root}${image}`} alt=''/>
+                    <img src={`${process.env.MEDIA_URL}${image}`} alt=''/>
                 </div>
                 <Link to={`/offers/${singlePageId}`} className='offerCard__more'>
                     More info

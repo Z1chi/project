@@ -11,8 +11,9 @@ export const profileSettingsAtom = createAtom(
 
     },
     ({onAction}, state = {fields: {}}) => {
-        onAction('setField', (payload) => (
-            state = {
+        onAction('setField', (payload) => {
+            console.log('p', payload)
+            return state = {
                 ...state,
                 fields: {
                     ...state.fields,
@@ -22,7 +23,7 @@ export const profileSettingsAtom = createAtom(
                     }
                 }
             }
-        ));
+        });
         onAction('setInitialFields', (payload) => {
             let currentFields = {};
             for(let prop in payload) {
