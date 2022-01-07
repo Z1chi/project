@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAtom } from '@reatom/react';
 
 import SVG from 'react-inlinesvg';
 import { images } from './images';
+
+import { alertAtom } from '../../../store/Alert';
 
 import './alert.scss';
 
@@ -16,6 +19,15 @@ const getAlertIcon = ({ type }) => {
 }
 
 export const Alert = ({ type, message }) => {
+
+    const [alertData, alertActions] = useAtom(alertAtom);
+
+    useEffect( () => {
+        setTimeout( () => {
+            alertActions.close();
+        }, 3000)
+    }, [])
+
     return (
         <div className='alert'>
             <div className='alert__icon'>

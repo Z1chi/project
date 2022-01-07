@@ -20,8 +20,6 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const onFormError = (payload) => alertActions.open(payload);
-
     return (
         <div className={`settingsItem${isMobile ? ' settingsItem--isMobile' : ''}`}>
             <h5>{title}</h5>
@@ -48,10 +46,18 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                         onSubmit={ () => {
                             const requestData = (mapRequestData(profileSettingsData.fields[id]));
                             return request(`/profile/update-${apiId}`, {method: 'patch', data: requestData}).then((res) => {
-                                return res.exception ? onFormError({
-                                    message: 'Error text',
-                                    type: 'ALERT/ERROR',
-                                }) : ()=>setModalOpen(false)
+                                if(res.exception) {
+                                    alertActions.open({
+                                        message: 'Error text',
+                                        type: 'ALERT/ERROR',
+                                    })
+                                } else {
+                                    setModalOpen(false)
+                                    alertActions.open({
+                                        message: 'Success text',
+                                        type: 'ALERT/SUCCESS',
+                                    })
+                                }
                             })
                         }}
                     />
