@@ -1,6 +1,8 @@
 import {images} from "./images";
 
 import { dropdownTypes } from '../../../constants/dropdown';
+import { idArrayFormator } from "../../../helpers/idArrayFormator";
+import { dateFormator } from "../../../helpers/dateFormator";
 
 export const filters = [{
     id: 'date',
@@ -8,6 +10,7 @@ export const filters = [{
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
     width: '204px',
+    onSelectFormator: date => dateFormator(date),
 }, {
     id: 'format',
     title: 'Format',
@@ -31,7 +34,7 @@ export const filters = [{
     type: dropdownTypes.SELECT,
     width: '154px',
     renderItem: (item) => item.title,
-    onSelectFormatter: (item)=>item.id,
+    onSelectFormator: (item)=>item.id,
 }, {
     id: 'offer',
     title: 'Offers',
@@ -45,7 +48,7 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
-    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
+    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, ];
 
 

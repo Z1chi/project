@@ -10,6 +10,7 @@ import {Table} from '../../Organisms/Table/Table';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 
 import request from '../../../api/request';
+import { convertToQueryString } from '../../../helpers/convertToQueryString';
 import {filters, table, drawers, modalDelete} from './data';
 
 import {filterAtom} from '../../../store/Filter';
@@ -25,7 +26,7 @@ export const SmartLinksPage = () => {
     const [modalData, modalActions] = useAtom(modalAtom);
 
     const smartLinksQuery = useQuery(['smartlinks', crudActionIndex], async () => {
-        return request('smartlink', {method: 'post', data: {filters: filterData.fields}}).then((res) => res.data);
+        return request(`smartlink?${convertToQueryString(filterData.fields)}`).then((res) => res.data);
     });
 
 

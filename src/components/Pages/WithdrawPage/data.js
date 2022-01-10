@@ -36,7 +36,7 @@ export const filters = [{
     type: dropdownTypes.SELECT,
     width: '154px',
     renderItem: ({ id, label }) => label,
-    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
+    onSelectFormator: (itemArray)=>itemArray.map(item => item.id),
 }, ];
 
 export const table = {

@@ -1,0 +1,1 @@
+export const idArrayFormator = (itemArray)=>itemArray.map(item => item.id).join(',')
