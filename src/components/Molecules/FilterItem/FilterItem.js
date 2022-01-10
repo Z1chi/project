@@ -16,7 +16,7 @@ const renderFilterContent = (type) => (props) => {
     return Component ? <Component {...props} /> : null;
 }
 
-export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormatter=(item)=>item, type, }) => {
+export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormator=(item)=>item, type, }) => {
     const [filterData, filterActions] = useAtom(filterAtom);
     return (
         <div className='filterItem'>
@@ -49,7 +49,7 @@ export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], re
                                     matchPropName,
                                     onChange: (value)=>{ filterActions.setFieldValue({
                                         fieldId: id,
-                                        fieldValue: onSelectFormatter(value),
+                                        fieldValue: onSelectFormator(value),
                                     })},
                                     mobileConfig: { 
                                         title: mobileTitle,

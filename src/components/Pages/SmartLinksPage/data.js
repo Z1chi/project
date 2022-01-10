@@ -1,5 +1,7 @@
 import SVG from 'react-inlinesvg';
 import { dropdownTypes } from '../../../constants/dropdown';
+import { dateFormator } from '../../../helpers/dateFormator';
+import { idArrayFormator } from '../../../helpers/idArrayFormator';
 import { Button } from '../../Atoms/Button/Button';
 import { images } from './images';
 
@@ -24,14 +26,14 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
-    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
+    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, {
     id: 'date',
     title: 'Date',
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
-
     width: '154px',
+    onSelectFormator: dateFormator,
 }, {
     id: 'format',
     title: 'Format',
@@ -40,7 +42,7 @@ export const filters = [{
     matchPropName: 'label',
     width: '163px',
     renderItem: (item) => item.label,
-    onSelectFormatter: (item)=>item.id,
+    onSelectFormator: (item)=>item.id,
 }, ];
 
 export const table = {

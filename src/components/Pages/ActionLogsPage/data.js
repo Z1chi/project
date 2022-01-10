@@ -1,5 +1,7 @@
 import { images } from './images';
 import { dropdownTypes } from '../../../constants/dropdown';
+import { idArrayFormator } from '../../../helpers/idArrayFormator';
+import { dateFormator } from '../../../helpers/dateFormator';
 
 export const actionLogsStatisticsConfig = [
     {
@@ -21,11 +23,8 @@ export const filters = [{
     title: 'Date',
     type: dropdownTypes.DATE,
     mobileTitle: 'Select date',
-    items: {
-        options: [],
-        selectedIndex: 0,
-    },
     width: '169px',
+    onSelectFormator: date => dateFormator(date),
 }, {
     id: 'offer',
     title: 'Offers',
@@ -39,7 +38,7 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
-    onSelectFormatter: (itemArray)=>itemArray.map(item => item.id),
+    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, {
     id: 'smartlink',
     title: 'Smartlink',
@@ -48,7 +47,7 @@ export const filters = [{
     matchPropName: 'title',
     width: '169px',
     renderItem: (item) => item.title,
-    onSelectFormatter: (item) => item.id,
+    onSelectFormator: (item) => item.id,
 }, {
     id: 'action',
     title: 'Action',
@@ -57,7 +56,7 @@ export const filters = [{
     matchPropName: 'label',
     width: '169px',
     renderItem: (item) => item.label,
-    onSelectFormatter: (item) => item.id,
+    onSelectFormator: (item) => item.id,
 }, ];
 
 export const table = {
