@@ -4,7 +4,7 @@ import SVG from 'react-inlinesvg';
 
 import './creativesCard.scss';
 
-export const CreativesCard = ({onClick, modalData, preview_src, category, moreButton, downloadButton, width}) => {
+export const CreativesCard = ({onClick, modalData, preview_src, category, moreButton, downloadButton, width, file}) => {
     const isMobile = width < 600;
 
     return (
@@ -21,9 +21,9 @@ export const CreativesCard = ({onClick, modalData, preview_src, category, moreBu
                     <div className='creativesCard__more' onClick={moreButton.onClick}>
                         <SVG src={moreButton.icon}/>
                     </div>
-                    <div className='creativesCard__download' onClick={downloadButton.onClick}>
+                    <a className='creativesCard__download' href='#' download={process.env.MEDIA_URL + file} onClick={downloadButton.onClick}>
                         <SVG src={downloadButton.icon}/>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

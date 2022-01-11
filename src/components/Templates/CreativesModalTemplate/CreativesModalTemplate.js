@@ -4,13 +4,12 @@ import {Slider} from '../../Organisms/Slider/Slider';
 import {SelectionItem} from '../../Atoms/SelectionItem/SelectionItem';
 
 import SVG from 'react-inlinesvg';
-import config from '../../../configApi'
 
 import './creativesModalTemplate.scss';
 
 import {icons} from "./images";
 
-export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, onDownload, preview_src}) => {
+export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, onDownload, preview_src, file}) => {
 
     const sliderImages = images.map(imageItem => {
         return {
@@ -44,9 +43,9 @@ export const CreativesModalTemplate = ({onClose, images, description, file_size,
                     </div>
                 </div>
                 <div className='creativesModalTemplate__download'>
-                    <button onClick={onDownload}>
+                    <a href="#" download={process.env.MEDIA_URL + file}>
                         Download now
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

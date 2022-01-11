@@ -12,7 +12,6 @@ import {sidebarAtom} from '../../../store/Sidebar';
 import {modalAtom} from '../../../store/Modal';
 import {alertAtom} from '../../../store/Alert';
 
-
 import './pageTemplate.scss'
 import {useQuery} from "react-query";
 import request from "../../../api/request";

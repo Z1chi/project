@@ -64,43 +64,45 @@ export const CreativesSinglePage = () => {
                             {
                                 creativesItemQuery.data &&
                                 creativesItemQuery.data.table &&
-                                creativesItemQuery.data.table.map((item, key) =>
+                                creativesItemQuery.data.table.map((item, key) => {
+                                        return (
+                                            <div
+                                                className={`creativesSinglePage__cardListItem${width < 600 ? ' creativesSinglePage__cardListItem--isMobile' : ''}`}
+                                                key={`creativesSinglePage__cardListItem${key}`}>
 
-                                    <div
-                                        className={`creativesSinglePage__cardListItem${width < 600 ? ' creativesSinglePage__cardListItem--isMobile' : ''}`}
-                                        key={`creativesSinglePage__cardListItem${key}`}>
+                                                <CreativesCard
 
-                                        <CreativesCard
-                                            {...item}
-                                            width={width}
-                                            modalData={creativesModalData}
-                                            moreButton={{
-                                                icon: linkIcon,
-                                                onClick: () =>
-                                                    request(`creative/get-asset?project_asset_id=${item.id}`)
-                                                        .then(res => {
-                                                            setCreativesModal({
-                                                                isOpened: true,
-                                                                ...res.data
+                                                    {...item}
+                                                    width={width}
+                                                    modalData={creativesModalData}
+                                                    moreButton={{
+                                                        icon: linkIcon,
+                                                        onClick: () =>
+                                                            request(`creative/get-asset?project_asset_id=${item.id}`)
+                                                                .then(res => {
+                                                                    setCreativesModal({
+                                                                        isOpened: true,
+                                                                        ...res.data
+                                                                    })
+                                                                }),
+                                                    }}
+                                                    downloadButton={{
+                                                        icon: downloadIcon,
+                                                        onClick: () => {
+                                                        },
+                                                    }}
+                                                    onClick={() =>
+                                                        request(`creative/get-asset?project_asset_id=${item.id}`)
+                                                            .then(res => {
+                                                                setCreativesModal({
+                                                                    isOpened: true,
+                                                                    ...res.data
+                                                                })
                                                             })
-                                                        }),
-                                            }}
-                                            downloadButton={{
-                                                icon: downloadIcon,
-                                                onClick: () => {
-                                                },
-                                            }}
-                                            onClick={() =>
-                                                request(`creative/get-asset?project_asset_id=${item.id}`)
-                                                    .then(res => {
-                                                        setCreativesModal({
-                                                            isOpened: true,
-                                                            ...res.data
-                                                        })
-                                                    })
-                                            }
-                                        />
-                                    </div>
+                                                    }
+                                                />
+                                            </div>)
+                                    }
                                 )
                             }
                         </div>
@@ -110,8 +112,10 @@ export const CreativesSinglePage = () => {
                                     <Backdrop onClose={() =>
                                         setCreativesModal(null)
                                     }/>
-                                    <CreativesModalTemplate {...creativesModal} onClose={() =>
-                                        setCreativesModal(null)}/>
+                                    <CreativesModalTemplate
+                                        {...creativesModal}
+                                        onClose={() => setCreativesModal(null)}
+                                    />
                                 </div>
                             )
                         }
