@@ -1,57 +1,51 @@
 import { images } from "./images"
 
 export const statistics = [{
+    id: 'total_balance',
     icon: images.balanceIcon, 
     title: 'Total Balance',
-    currentMonth: {
-        amount: 3,
-        currency: '₿',
-        precision: 8,
-    }, 
-    lastMonth: {
-        amount: 2,
-        currency: '₿',
-        precision: 8,
-    },
-    renderValue: (value) => {
-        return `${value.currency} ${value.amount.toFixed(value.precision)}`
+    renderSubtitle: (value) => {
+        return `₿ ${value.toFixed(8)}`
     },
     backgroundColor: '#FF7800',
 }, {
+    id: 'total_income',
     icon: images.incomeIcon, 
     title: 'Income', 
-    currentMonth: {
-        amount: 3,
-        currency: '₿',
-        precision: 8,
-    }, 
-    lastMonth: {
-        amount: 2,
-        currency: '₿',
-        precision: 8,
-    },
-    renderValue: (value) => {
-        return `${value.currency} ${value.amount.toFixed(value.precision)}`
+    renderSubtitle: (value) => {
+        return `₿ ${value.toFixed(8)}`
     },
     backgroundColor: '#16FFAC',
 }, {
-    icon: images.balanceIcon, 
-    title: 'Total Balance',
-    currentMonth: {
-        amount: 3,
-        currency: '₿',
-        precision: 8,
-    }, 
-    lastMonth: {
-        amount: 4,
-        currency: '₿',
-        precision: 8,
-    },
-    renderValue: (value) => {
-        return `${value.currency} ${value.amount.toFixed(value.precision)}`
+    id: 'total_turnover',
+    icon: images.turnoverIcon, 
+    title: 'Total Turnover',
+    renderSubtitle: (value) => {
+        return `₿ ${value.toFixed(8)}`
     },
     backgroundColor: '#0063FF',
 }, ];
+
+export const getGraphicsConfig = (data) => {
+    return {
+        dates: data.map( item => item.date ),
+        bars: [
+            {
+                style: {
+                    stroke: '#16FFAC', 
+                    fill: '#16FFAC',
+                },
+                data: data.map( item => item.income),
+            }, {
+                style: {
+                    stroke: '#0063FF', 
+                    fill: '#0063FF',
+                },
+                data: data.map( item => item.turnover),
+            }
+        ]
+    }
+}
 
 export const table = {
 
