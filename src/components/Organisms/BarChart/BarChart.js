@@ -30,9 +30,13 @@ import './barChart.scss';
     steps: [-3,3]
 };
 
-const maxValue = Math.max.apply(null, [...greenData, ...blueData].map(item => item.y));
 
-export const BarChart = () => {
+export const BarChart = ({ data }) => {
+    
+    const maxValue = Math.max.apply(null, data.bars.map( item => item.data).flat());
+
+    console.log('maxValue', maxValue)
+
     return (
         <div className='barChart'>
             <AutoSizer>
@@ -49,8 +53,20 @@ export const BarChart = () => {
                             text: {stroke: 'none', fill: '#898A98',}
                         }} />
         
-                        <VerticalBarSeries barWidth={.25} data={greenData} marginLeft={margin.default+margin.steps[0]} style={{stroke: '#16FFAC', fill: '#16FFAC' }} />
-                        <VerticalBarSeries barWidth={.25} data={blueData} marginLeft={margin.default+margin.steps[1]} style={{stroke: '#0063FF', fill: '#0063FF'}} />
+                        {
+                            data.bars.map( (bar, index) => {
+                                const barData = bar.data.map( (item, index) => {
+                                    return {
+                                        x: data.dates[index],
+                                        y: Number(item),
+                                    }
+                                } );
+                                console.log('r', barData)
+                                return (
+                                    <VerticalBarSeries barWidth={.25} data={barData} marginLeft={margin.default+margin.steps[index]} style={data.style} />
+                                )
+                            })
+                        }
                     </XYPlot>
                 )
             }}
