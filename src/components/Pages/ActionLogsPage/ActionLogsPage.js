@@ -13,6 +13,7 @@ import { filterAtom } from '../../../store/Filter';
 import request from '../../../api/request';
 
 import './actionLogsPage.scss';
+import { convertToQueryString } from '../../../helpers/convertToQueryString';
 
 export const ActionLogsPage = () => {
 
@@ -24,7 +25,7 @@ export const ActionLogsPage = () => {
     });
 
     const actionLogsTableQuery = useQuery(['action-logs/table', crudActionIndex], () => {
-        return request('/action-log/get-list', { method: 'post', data: { filters: filterData.fields }  }).then(res => res.data);
+        return request(`/action-log/get-list?${convertToQueryString(filterData.fields)}`).then(res => res.data);
     })
 
     const actionLogsFiltersQueryList = useQueries([
