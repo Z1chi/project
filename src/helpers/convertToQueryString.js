@@ -5,6 +5,10 @@ const getPropQueryParam = (property, isProp) => {
 export const convertToQueryString = (object, currentBreadcrum = '', isProp=false, ) => {
     let queryString = '';
 
+    if(!object || Object.keys(object).length===0) {
+        return '';
+    }
+
     for (let property in object) {
         let potentialObject = object[property];
         
