@@ -61,15 +61,28 @@ export const WithdrawPage = () => {
                                 </div>
                                 <div className='withdrawPage__withdraw'>
                                     <Button onClick={()=>{
-                                        drawerActions.open(drawers.withdraw({
-                                            onClick: () => {
-                                                modalActions.open(
-                                                    modalWithdraw({
-                                                        onSubmit: () => {},
-                                                    })
-                                                )
-                                            }
-                                        }))
+                                        request('/withdraw/get-address-info').then(res => {
+                                            drawerActions.open(drawers.withdraw({
+                                                available: res.data.balance,
+                                                minWithdraw: res.data.minWithdraw,
+                                                walletAddress: res.data.walletAddress,
+                                                onClick: (data) => {
+                                                    console.log('d',data)
+                                                    if(data.amount < res.data.minWithdraw) {
+                                                        return;
+                                                    }
+                                                    modalActions.open(
+                                                        modalWithdraw({
+                                                            data,
+                                                            onClose: modalActions.close,
+                                                            onSubmit: (data) => {
+                                                                request('/withdraw/create', { method: 'post', data }).then(res => console.log(res.data))
+                                                            },
+                                                        })
+                                                    )
+                                                }
+                                            }))
+                                        })
                                     }}>
                                         Withdraw
                                     </Button>

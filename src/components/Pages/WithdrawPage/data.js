@@ -119,24 +119,24 @@ export const drawers = {
         subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.', 
         fieldRows: [
             [{
-                id: 'address',
+                id: 'walletAddress',
                 title: 'Bitcoin address:', 
-                placeholder: '1abskea124oilk2nc0cjsak2048qasalfio3',
+                placeholder: props.walletAddress,
                 type: dropdownTypes.INPUT,
             }],
 
             [{
                 id: 'amount',
                 title: 'Amount:',
-                generateField: ({ stateData }) => {
+                generateField: ({ onChange }) => {
                     return (
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            <Input placeholder='0.000000000' />
+                            <Input placeholder='0.000000000' onChange={onChange} />
                             <span style={{ 
-                                backgroundColor: '#2D313D', color: 'rgba(255, 255, 255, 0.4)', height: '40px',
-                                display:'flex', justifyContent: 'center', alignItems: 'center', padding: '10px', fontSize:'13px',
+                                backgroundColor: '#2D313D', color: 'rgba(255, 255, 255, 0.4)', height: '40px', minWidth: '100px',
+                                display:'flex', justifyContent: 'center', alignItems: 'center', padding: '10px', fontSize:'13px', 
                             }}>
-                                Available {stateData.available}
+                                Available: {props.available}
                             </span>
                         </div>
                     )    
@@ -151,7 +151,7 @@ export const drawers = {
                             height: '42px',
                             background: '#3F3F3F',
                         }} 
-                            onClick={props.onClick}
+                            onClick={() => props.onClick(stateData)}
                         >
                             Withdraw
                         </Button>
@@ -162,38 +162,30 @@ export const drawers = {
     }),
 };
 
-export const modalWithdraw = ({ onSubmit, }) => ({
+export const modalWithdraw = ({ onClose, onSubmit, data }) => ({
     icon: images.withdrawIcon,
     title: 'Withdraw', 
     subtitle: 'You’re about to withdraw you money. Please, check the address and amount below.', 
-    content: {
-        address: '1abskea124oilk2nc0cjsak2048qasalfio3',
-        amount: '1.123456789'
-    },
-    renderContent: ({ content }) => {
-        return (
-            <div style={{ marginTop: '20px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', padding: '15px 10px', rowGap: '15px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', fontSize: '13px', marginBottom: '15px' }}>
-                    <span>Address:</span>
-                    <span>{content.address}</span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', fontSize: '13px', }}>
-                    <span>Amount:</span>
-                    <span>{content.amount}</span>
-                </div>
+    children: (
+        <>
+        <div style={{ marginTop: '20px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', padding: '15px 10px', rowGap: '15px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', fontSize: '13px', marginBottom: '15px' }}>
+                <span>Address:</span>
+                <span>{data.walletAddress}</span>
             </div>
-        )
-    },
-    renderSubmitSection: ({ onClose }) => {
-        return (
-            <div>
-                <Button onClick={() => { onSubmit(); onClose(); }}>
-                    Confirm
-                </Button>
-                <Button styles={{backgroundColor: '#1F2431'}} onClick={onClose}>
-                    Cancel
-                </Button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', fontSize: '13px', }}>
+                <span>Amount:</span>
+                <span>{data.amount}</span>
             </div>
-        )
-    },
+        </div>
+        <div>
+            <Button onClick={() => { onSubmit(data); onClose(); }} containerStyles={{ width: '100%', marginTop: '30px' }}>
+                Confirm
+            </Button>
+            <Button styles={{backgroundColor: '#1F2431'}} onClick={onClose} containerStyles={{ width: '100%', marginTop: '20px', marginBottom:'20px' }}>
+                Cancel
+            </Button>
+        </div>
+        </>
+    )
 });

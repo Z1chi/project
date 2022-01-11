@@ -13,7 +13,7 @@ import './drawer.scss';
 
 export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => {
     const [drawerData, drawerActions] = useAtom(drawerAtom);
-
+    
     useEffect( () => {
         
     },[drawerData])
