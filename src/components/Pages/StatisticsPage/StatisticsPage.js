@@ -18,7 +18,7 @@ export const StatisticsPage = () => {
     const [crudActionIndex, setCrudActionIndex] = useState(0);
 
     const statisticsQuery = useQuery(['statistics', crudActionIndex], () => {
-        return request('/statistic/get-statistic', { method: 'post', data: { filters: filterData.fields }  }).then(res => res.data)
+        return request(`/statistic/get-statistic?${convertToQueryString(filterData.fields)}`).then(res => res.data)
     });
 
     const statisticsFiltersQueryList = useQueries([
