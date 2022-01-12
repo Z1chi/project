@@ -27,8 +27,6 @@ export const CreativesSinglePage = () => {
     const [creativesData, creativesActions] = useAtom(creativesAtom)
     const {id} = useParams();
 
-    console.log(filtersIdSelected);
-
     const creativesCategoriesQuery = useQuery(['creatives-categories',], () => {
         return request(`creative/get-categories-filters?project_id=${id}${filtersIdSelected.length>0?`&category=${filtersIdSelected.join(',')}`:''}`).then(res => res.data);
     });

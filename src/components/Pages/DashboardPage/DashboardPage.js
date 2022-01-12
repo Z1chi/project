@@ -22,6 +22,10 @@ export const DashboardPage = () => {
         return request(`dashboard/get-graphics`).then((res) => res.data);
     });
 
+    const dashboardTableQuery = useQuery(['dashboard-table'], async () => {
+        return request(`/action-log/get-list`).then((res) => res.data);
+    });
+
     return (
         <div className='dashboardPage'>
             <PageTemplate 
@@ -53,19 +57,22 @@ export const DashboardPage = () => {
                                     <BarChart data={getGraphicsConfig(dashboardQuery.data.graphics)} />
                                 </div> }
                             </div>
-                            <AutoSizer>
-                                {({height, width}) => {
-                                    return (
-                                        <div className='dashboardPage__table' style={{ height, width }}>
-                                        {
-                                            width > 480
-                                            ? <Table {...table} />
-                                            : <History historyList={table.data} />
+                            { dashboardTableQuery.data && 
+                            // <AutoSizer>
+                            //     {({height, width}) => {
+                            //         return (
+                                        <div className='dashboardPage__table' >
+                                         {
+                                            // width > 480
+                                            // ? 
+                                            <Table {...table} data={dashboardTableQuery.data.table} />
+                                            // : <History historyList={dashboardTableQuery.data.table} />
                                         }
                                         </div>
-                                    )
-                            }}
-                            </AutoSizer>
+                            //         )
+                            // }}
+                            // </AutoSizer>
+                            }
                            
                         </div>
                     )

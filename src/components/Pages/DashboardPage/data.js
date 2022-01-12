@@ -1,3 +1,4 @@
+import { dateFormator } from "../../../helpers/lib";
 import { images } from "./images"
 
 export const statistics = [{
@@ -50,49 +51,39 @@ export const getGraphicsConfig = (data) => {
 export const table = {
 
     tableConfig: [{
-        columnId: 'date',
+        columnId: 'created_at',
         columnName: 'Date',
         columnWidth: '170px',
+
+        renderRowItem: (item) => dateFormator(item),
     }, {
-        columnId: 'source',
-        columnName: 'Source',
+        columnId: 'user_id',
+        columnName: 'User id',
         columnWidth: '130px',
+    }, {
+        columnId: 'action',
+        columnName: 'Action',
+        columnWidth: '90px',
     }, {
         columnId: 'deposit',
         columnName: 'Deposit',
-        columnWidth: '127px',
-
-        renderRowItem: (item) => {
-            return (
-                <div>
-                    {item.amount}{item.currency.symbol}
-                </div>
-            )
-        }
-    }, {
-        columnId: 'project',
-        columnName: 'Project',
         columnWidth: '130px',
     }, {
-        columnId: 'model',
-        columnName: 'Model',
-        columnWidth: '170px',
-
-        renderRowItem: (item) => {
-            return (
-                <div>
-                    {item.currency?item.currency.symbol:''}{item.value}{item.isPercent?'%':''}
-                </div>
-            )
-        }
+        columnId: 'geo',
+        columnName: 'GEO',
+        columnWidth: '116px',
     }, {
-        columnId: 'income',
-        columnName: 'Income',
+        columnId: 'smartlink',
+        columnName: 'Smart Link',
+        columnWidth: '116px',
+    }, {
+        columnId: 'payout',
+        columnName: 'Payout',
         columnWidth: '116px',
 
         renderRowItem: (item) => {
             return (
-                <div
+                 <div
                     style={{
                         padding: '5px 10px',
                         backgroundColor: 'rgba(22, 255, 172, 0.26)',
@@ -100,83 +91,9 @@ export const table = {
                         borderRadius: '4px',
                     }}
                 >
-                    {item.currency.symbol} {item.value}
+                    {item} $
                 </div>
             )
-        }
-    }, ],
-
-    data: [{
-        date: 'Mar 13, 2021 08:05 AM',
-        source: 'Cryptonews',
-        deposit: {
-            amount: 4500,
-            currency: {
-                id: 0,
-                symbol: '$',
-            },
-        },
-        project: 'Shamining',
-        model: {
-            type: 'Revshare',
-            value: 40,
-            isPercent: true,
-        },
-        income: {
-            amount: 1800,
-            currency: {
-                id: 0,
-                symbol: '$',
-            },
-            precision: 0,
-        }
-    }, {
-        date: 'Mar 13, 2021 08:05 AM',
-        source: 'Cryptonews',
-        deposit: {
-            amount: 4500,
-            currency: {
-                id: 0,
-                symbol: '$',
-            },
-        },
-        project: 'Shamining',
-        model: {
-            type: 'Revshare',
-            value: 40,
-            isPercent: true,
-        },
-        income: {
-            amount: 1800,
-            currency: {
-                id: 0,
-                symbol: '$',
-            },
-            precision: 0,
-        }
-    }, {
-        date: 'Mar 13, 2021 08:05 AM',
-        source: 'Cryptonews',
-        deposit: {
-            amount: 4500,
-            currency: {
-                id: 0,
-                symbol: '$',
-            },
-        },
-        project: 'Shamining',
-        model: {
-            type: 'Revshare',
-            value: 40,
-            isPercent: true,
-        },
-        income: {
-            amount: 1800,
-            currency: {
-                id: 0,
-                symbol: '$',
-            },
-            precision: 0,
         }
     }, ],
 

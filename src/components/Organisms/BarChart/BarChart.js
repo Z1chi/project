@@ -35,8 +35,6 @@ export const BarChart = ({ data }) => {
     
     const maxValue = Math.max.apply(null, data.bars.map( item => item.data).flat());
 
-    console.log('maxValue', maxValue)
-
     return (
         <div className='barChart'>
             <AutoSizer>
@@ -61,7 +59,6 @@ export const BarChart = ({ data }) => {
                                         y: Number(item),
                                     }
                                 } );
-                                console.log('r', barData)
                                 return (
                                     <VerticalBarSeries barWidth={.25} data={barData} marginLeft={margin.default+margin.steps[index]} style={data.style} />
                                 )

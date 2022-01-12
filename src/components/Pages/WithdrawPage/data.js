@@ -6,6 +6,7 @@ import { withdrawStatusList, } from './constants/status';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { Input } from '../../Atoms/Input/Input';
 import { Button } from '../../Atoms/Button/Button';
+import { dateFormator } from '../../../helpers/lib';
 
 export const statistics = [{
     icon: images.balanceIcon,
@@ -42,9 +43,11 @@ export const filters = [{
 export const table = {
 
     tableConfig: [{
-        columnId: 'requestDate',
+        columnId: 'created_at',
         columnName: 'Request Date',
-        columnWidth: '170px',
+        columnWidth: '190px',
+
+        renderRowItem: (item) => dateFormator(item),
     }, {
         columnId: 'paid_at',
         columnName: 'Pay Date',

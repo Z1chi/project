@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useAtom } from '@reatom/react';
 
@@ -9,16 +9,16 @@ import { Filter } from '../../Organisms/Filter/Filter';
 import { Table } from '../../Organisms/Table/Table';
 import { Drawer } from '../../Organisms/Drawer/Drawer';
 import { Button } from '../../Atoms/Button/Button';
+import { drawerAtom } from '../../../store/Drawer';
+import { modalAtom } from '../../../store/Modal';
 
 import request from '../../../api/request';
 
 import { statistics, filters, table, drawers, modalWithdraw } from './data';
-import { drawerAtom } from '../../../store/Drawer';
-import { modalAtom } from '../../../store/Modal';
+
+import { convertToQueryString } from '../../../helpers/convertToQueryString';
 
 import './withdrawPage.scss';
-import { useEffect } from 'react/cjs/react.development';
-import { convertToQueryString } from '../../../helpers/convertToQueryString';
 
 export const WithdrawPage = () => {
 
@@ -28,6 +28,9 @@ export const WithdrawPage = () => {
     const [modalData, modalActions] = useAtom(modalAtom);
 
     const withdrawQuery = useQuery(['withdraw-table', crudActionIndex], () => {
+        if(!filtersData || !filtersData.fields || filtersData.fields.every(item=>!item)) {
+            return request(`withdraw/get-withdraws`).then(res => res.data);
+        }
         return request(`withdraw/get-withdraws?${convertToQueryString(filtersData.fields)}`,).then(res => res.data);
     })
 
@@ -39,7 +42,9 @@ export const WithdrawPage = () => {
         [], 
         [], 
         statusFilterQuery.data || [],
-    ]  
+    ];
+
+    console.log('d', withdrawQuery.data)
 
     return (
         <div className='withdrawPage'>
@@ -67,7 +72,6 @@ export const WithdrawPage = () => {
                                                 minWithdraw: res.data.minWithdraw,
                                                 walletAddress: res.data.walletAddress,
                                                 onClick: (data) => {
-                                                    console.log('d',data)
                                                     if(data.amount < res.data.minWithdraw) {
                                                         return;
                                                     }

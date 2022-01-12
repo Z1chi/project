@@ -1,7 +1,7 @@
 import { images } from './images';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { idArrayFormator } from '../../../helpers/idArrayFormator';
-import { dateFormator } from '../../../helpers/dateFormator';
+import { dateFormator } from '../../../helpers/lib';
 
 export const actionLogsStatisticsConfig = [
     {
@@ -62,13 +62,15 @@ export const filters = [{
 export const table = {
 
     tableConfig: [{
-        columnId: 'date',
+        columnId: 'created_at',
         columnName: 'Date',
-        columnWidth: '170px',
+        columnWidth: '190px',
+
+        renderRowItem: (item) => dateFormator(item),
     }, {
-        columnId: 'userId',
+        columnId: 'user_id',
         columnName: 'User id',
-        columnWidth: '130px',
+        columnWidth: '110px',
     }, {
         columnId: 'action',
         columnName: 'Action',
@@ -76,23 +78,23 @@ export const table = {
     }, {
         columnId: 'deposit',
         columnName: 'Deposit',
-        columnWidth: '130px',
+        columnWidth: '110px',
     }, {
         columnId: 'geo',
         columnName: 'GEO',
-        columnWidth: '116px',
+        columnWidth: '110px',
     }, {
-        columnId: 'smartLink',
+        columnId: 'smartlink',
         columnName: 'Smart Link',
-        columnWidth: '116px',
+        columnWidth: '140px',
     }, {
         columnId: 'payout',
         columnName: 'Payout',
-        columnWidth: '116px',
+        columnWidth: '110px',
 
         renderRowItem: (item) => {
-            return item ? (
-                <div
+            return (
+                 <div
                     style={{
                         padding: '5px 10px',
                         backgroundColor: 'rgba(22, 255, 172, 0.26)',
@@ -100,47 +102,9 @@ export const table = {
                         borderRadius: '4px',
                     }}
                 >
-                    {item.currency} {item.value}
+                    {item} $
                 </div>
-            ) : null
-        }
-    }, ],
-
-    data: [{
-        date: 'Mar 13, 2021 08:05 AM',
-        userId: '#1234567890123',
-        action: 'Click',
-        deposit: 'Lorem ipsum',
-        geo: 'Unknown',
-        smartLink: 'Test',
-        payout: {
-            value: 1800,
-            currency: '$',
-            precision: 0,
-        }
-    }, {
-        date: 'Mar 13, 2021 08:05 AM',
-        userId: '#1234567890123',
-        action: 'Click',
-        deposit: 'Lorem ipsum',
-        geo: 'Unknown',
-        smartLink: 'Test',
-        payout: {
-            value: 1800,
-            currency: '$',
-            precision: 0,
-        }
-    }, {
-        date: 'Mar 13, 2021 08:05 AM',
-        userId: '#1234567890123',
-        action: 'Click',
-        deposit: 'Lorem ipsum',
-        geo: 'Unknown',
-        smartLink: 'Test',
-        payout: {
-            value: 1800,
-            currency: '$',
-            precision: 0,
+            )
         }
     }, ],
 

@@ -9,6 +9,7 @@ import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
 
 import { filters, table } from './data';
 import { filterAtom } from '../../../store/Filter';
+import { convertToQueryString } from '../../../helpers/convertToQueryString';
 
 import './statisticsPage.scss';
 

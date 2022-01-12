@@ -92,7 +92,7 @@ export const ActionLogsPage = () => {
                                 <div className='actionLogsPage__tableData'>
                                     {
                                         actionLogsTableQuery.data &&
-                                        <Table {...table} data={actionLogsTableQuery.data}/>
+                                        <Table {...table} data={actionLogsTableQuery.data.table}/>
                                     }
                                 </div>
                             </div>
