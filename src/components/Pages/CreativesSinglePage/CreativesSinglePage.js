@@ -22,18 +22,20 @@ import './creativesSinglePage.scss';
 
 export const CreativesSinglePage = () => {
 
+    const [filtersIdSelected, setFiltersIdSelected] = useState([])
     const [creativesModal, setCreativesModal] = useState(null);
     const [creativesData, creativesActions] = useAtom(creativesAtom)
     const {id} = useParams();
 
+    console.log(filtersIdSelected);
+
     const creativesCategoriesQuery = useQuery(['creatives-categories',], () => {
-        return request(`creative/get-categories-filters?project_id=${id}`).then(res => res.data);
+        return request(`creative/get-categories-filters?project_id=${id}${filtersIdSelected.length>0?`&category=${filtersIdSelected.join(',')}`:''}`).then(res => res.data);
     });
 
     const creativesItemQuery = useQuery(['creatives-item', creativesData.filterIds,], () => {
         return request(`creative/get-assets?project_id=${id}${creativesData.filterIds.length > 0 ? `&category=${creativesData.filterIds.join(',')}` : ''}`).then(res => res.data);
     });
-
 
     return (
         <div className='creativesSinglePage'>
@@ -54,7 +56,9 @@ export const CreativesSinglePage = () => {
                                             <CreativesCategory
                                                 {...item}
                                                 name={name}
-                                                countLimit={creativesCategories.countLimit}/>
+                                                countLimit={creativesCategories.countLimit}
+                                                isSelected={creativesData.filterIds.some(filterId => filterId === item.category_id)}
+                                            />
                                         </div>
                                     )
                             }
