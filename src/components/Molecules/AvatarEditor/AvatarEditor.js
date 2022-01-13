@@ -1,16 +1,22 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {useAtom} from "@reatom/react";
 
 import ReactCrop from 'react-image-crop';
 import request from '../../../api/request';
 
+import {alertAtom} from "../../../store/Alert";
+
 import 'react-image-crop/src/ReactCrop.scss';
+import './avatarEditor.scss'
 
 
-export const AvatarEditor = () => {
+
+
+export const AvatarEditor = ({onClose}) => {
+
+    const [alertData, alertActions] = useAtom(alertAtom);
 
     const [upImg, setUpImg] = useState();
-    const imgRef = useRef(null);
-    const previewCanvasRef = useRef(null);
     const [crop, setCrop] = useState({
         height: 150,
         unit: "px",
@@ -20,6 +26,10 @@ export const AvatarEditor = () => {
         aspect: 1
     });
     const [completedCrop, setCompletedCrop] = useState(null);
+
+    const imgRef = useRef(null);
+    const previewCanvasRef = useRef(null);
+
 
     async function generateDownload(canvas, crop) {
 
@@ -35,8 +45,21 @@ export const AvatarEditor = () => {
                 formData.append("img", file);
                 formData.append("_method", "PATCH");
                 request('profile/update-img', {
-                    method: 'POST', data :formData, headers: {
+                    method: 'POST', data: formData, headers: {
                         'Content-Type': 'multipart/form-data'
+                    }
+                }).then((res) => {
+                    if (res.exception) {
+                        alertActions.open({
+                            message: 'Error text',
+                            type: 'ALERT/ERROR',
+                        })
+                    } else {
+                        onClose(false)
+                        alertActions.open({
+                            message: 'Avatar updated',
+                            type: 'ALERT/SUCCESS',
+                        })
                     }
                 })
             },
@@ -95,17 +118,18 @@ export const AvatarEditor = () => {
     return (
         <div className='avatarEditor'>
 
-            <div>
+            <div className='avatarEditor__file'>
                 <input type="file" accept="image/*" onChange={onSelectFile}/>
             </div>
             <ReactCrop
+
                 src={upImg}
                 onImageLoaded={onLoad}
                 crop={crop}
                 onChange={(c) => setCrop(c)}
                 onComplete={(c) => setCompletedCrop(c)}
             />
-            <div>
+            <div className='avatarEditor__preview'>
                 <canvas
                     ref={previewCanvasRef}
                     style={{
@@ -116,13 +140,14 @@ export const AvatarEditor = () => {
             </div>
 
             <button
+                className='avatarEditor__updateButton'
                 type="button"
                 disabled={!completedCrop?.width || !completedCrop?.height}
                 onClick={() =>
                     generateDownload(previewCanvasRef.current, completedCrop)
                 }
             >
-                Download cropped image
+                Update avatar
             </button>
         </div>
 
