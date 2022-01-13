@@ -154,6 +154,7 @@ export const SmartLinksPage = () => {
                                                         },
                                                         onDeleteOpen: (data) => modalActions.open(
                                                             modalDelete({
+                                                                onClose: modalActions.close,
                                                                 onSubmit: () => {
                                                                     request(`smartlink/delete/${data.itemId}`, {method: 'delete',}).then((res) => {
                                                                         drawerActions.close();

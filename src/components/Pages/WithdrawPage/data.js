@@ -6,7 +6,7 @@ import { withdrawStatusList, } from './constants/status';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { Input } from '../../Atoms/Input/Input';
 import { Button } from '../../Atoms/Button/Button';
-import { dateFormator } from '../../../helpers/lib';
+import { dateStringFormator } from '../../../helpers/lib';
 
 export const statistics = [{
     icon: images.balanceIcon,
@@ -47,7 +47,7 @@ export const table = {
         columnName: 'Request Date',
         columnWidth: '190px',
 
-        renderRowItem: (item) => dateFormator(item),
+        renderRowItem: (item) => dateStringFormator(item),
     }, {
         columnId: 'paid_at',
         columnName: 'Pay Date',

@@ -17,7 +17,7 @@ import {images} from "./images/index";
 
 import {offerTypeNameList} from "../OffersPage/data";
 
-import {dateFormator, localeString} from "../../../helpers/lib";
+import {dateStringFormator, localeString} from "../../../helpers/lib";
 
 export const descriptionData = {
     benefits: ["Преимущества кратко:",
@@ -168,7 +168,7 @@ export const rowsConfig = [
                 {
                     icon: images.created_at,
                     title: 'Creation date:',
-                    value: dateFormator(statistic.created_at),
+                    value: dateStringFormator(statistic.created_at),
                 },
                 {
                     icon: images.avg_deposit,
