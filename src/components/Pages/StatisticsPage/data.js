@@ -19,6 +19,7 @@ export const filters = [{
     matchPropName: 'label',
     width: '154px',
     renderItem: (item) => item.label,
+    onSelectFormator: (item)=>item.id,
 }, {
     id: 'country',
     title: 'Country',
@@ -27,6 +28,7 @@ export const filters = [{
     matchPropName: 'name',
     width: '154px',
     renderItem: (item) => item.name,
+    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, {
     id: 'smartlink',
     title: 'Smartlink',

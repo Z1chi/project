@@ -8,25 +8,25 @@ import './dropdown.scss'
 export const Dropdown = ({renderSwitcher, renderContent}) => {
     const [isOpened, setIsOpened] = useState(false);
     return (
+        <ClickAwayListener onClickAway={isOpened ? () => {
+            setIsOpened(false)
+        } : () => {}}>
         <div className='dropdown'>
-            <div className='dropdown__switcher' onClick={() => setIsOpened(true)}>
+            <div className='dropdown__switcher' onClick={() => {
+                setIsOpened(true)
+            }}>
                 {
                     renderSwitcher({isOpened, setIsOpened})
                 }
             </div>
-            {
-                isOpened && (
-                    <ClickAwayListener onClickAway={() => {
-                        setIsOpened(false)
-                    }}>
-                        <div className='dropdown__content'>
-                            {
-                                renderContent({isOpened, setIsOpened})
-                            }
-                        </div>
-                    </ClickAwayListener>
-                )
+            {    
+                <div className='dropdown__content' style={{ display: isOpened ? 'block' : 'none' }}>
+                    {
+                        renderContent({isOpened, setIsOpened})
+                    }
+                </div>
             }
         </div>
+        </ClickAwayListener>
     )
 };
