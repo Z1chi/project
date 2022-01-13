@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MultiSelectOption } from '../../Atoms/MultiSelectOption/MultiSelectOption';
 
 import SVG from 'react-inlinesvg';
@@ -8,12 +8,16 @@ import './multiSelect.scss';
 
 export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, onChange, }) => {
     const [searchValue, setSearchValue] = useState('');
-    const [optionsSelectable, setOptionsSelectable] = useState(options.map( option => {
-        return {
-            ...option,
-            isSelected: false,
-        }
-    }));
+    const [optionsSelectable, setOptionsSelectable] = useState(options)
+    
+    useEffect( () => {
+        options && options.length > 0 && setOptionsSelectable(options.map( option => {
+            return {
+                ...option,
+                isSelected: false,
+            }
+        }))
+    }, [options])
 
     const searchRegexp = new RegExp(searchValue, 'g');
 
