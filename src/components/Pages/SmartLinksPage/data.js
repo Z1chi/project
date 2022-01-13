@@ -1,6 +1,7 @@
 import SVG from 'react-inlinesvg';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { dateFormator } from '../../../helpers/dateFormator';
+import { dateStringFormator } from '../../../helpers/lib';
 import { idArrayFormator } from '../../../helpers/idArrayFormator';
 import { Button } from '../../Atoms/Button/Button';
 import { images } from './images';
@@ -50,11 +51,12 @@ export const table = {
     getTableConfig: (props) => ([{
         columnId: 'title',
         columnName: 'Name',
-        columnWidth: '100px',
+        columnWidth: '190px',
     }, {
         columnId: 'created_at',
         columnName: 'Created',
-        columnWidth: '100px',
+        columnWidth: '190px',
+        renderRowItem: (item) => dateStringFormator(item)
     }, {
         columnId: 'project',
         columnName: 'Offer',
@@ -68,7 +70,7 @@ export const table = {
     }, {
         columnId: 'url',
         columnName: 'URL',
-        columnWidth: '120px',
+        columnWidth: '170px',
 
         renderRowItem: (item) => {
             return renderLink(item);
@@ -76,7 +78,7 @@ export const table = {
     }, {
         columnId: 'iframe_lead',
         columnName: 'Lead iFrame',
-        columnWidth: '120px',
+        columnWidth: '170px',
 
         renderRowItem: (item) => {
             return renderLink(item);
@@ -84,7 +86,7 @@ export const table = {
     }, {
         columnId: 'conversionIFrame',
         columnName: 'Conversion iFrame',
-        columnWidth: '120px',        
+        columnWidth: '170px',        
 
         renderRowItem: (item) => {
             return renderLink(item);
@@ -355,20 +357,18 @@ export const drawers = {
     }),
 };
 
-export const modalDelete = ({ onSubmit, }) => ({
+export const modalDelete = ({ onSubmit, onClose, }) => ({
     icon: images.deleteIcon,
     title: 'Delete Smartlink', 
     subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', 
-    renderSubmitSection: ({ onClose }) => {
-        return (
-            <div>
-                <Button onClick={() => { onSubmit(); onClose(); }}>
-                    Primary CTA
-                </Button>
-                <Button styles={{backgroundColor: '#1F2431'}} onClick={onClose}>
-                    Secondary CTA
-                </Button>
-            </div>
-        )
-    },
+    children: (
+        <div>
+            <Button onClick={() => { onSubmit(); onClose(); }} styles={{ marginTop: '30px', }}>
+                Primary CTA
+            </Button>
+            <Button onClick={onClose} styles={{ marginTop: '20px', background: 'transparent' }}>
+                Secondary CTA
+            </Button>
+        </div>
+    ),
 })

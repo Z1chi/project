@@ -1,4 +1,4 @@
-import { dateFormator } from "../../../helpers/lib";
+import { dateStringFormator } from "../../../helpers/lib";
 import { images } from "./images"
 
 export const statistics = [{
@@ -55,7 +55,7 @@ export const table = {
         columnName: 'Date',
         columnWidth: '170px',
 
-        renderRowItem: (item) => dateFormator(item),
+        renderRowItem: (item) => dateStringFormator(item),
     }, {
         columnId: 'user_id',
         columnName: 'User id',

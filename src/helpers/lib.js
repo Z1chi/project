@@ -66,7 +66,7 @@ export const objToArray = obj => {
 export const localeString = ({value = 0, currencySymbol = 'USD', locales = 'ja-JP'}) =>
     (value).toLocaleString(locales, {style: 'currency', currency: currencySymbol});
 
-export const dateFormator = (dateTimeString) => {
+export const dateStringFormator = (dateTimeString) => {
     const monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const [date, time] = dateTimeString.split('T');

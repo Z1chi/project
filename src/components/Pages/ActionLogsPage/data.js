@@ -1,7 +1,7 @@
 import { images } from './images';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { idArrayFormator } from '../../../helpers/idArrayFormator';
-import { dateFormator } from '../../../helpers/lib';
+import { dateStringFormator } from '../../../helpers/lib';
 
 export const actionLogsStatisticsConfig = [
     {
@@ -24,7 +24,7 @@ export const filters = [{
     type: dropdownTypes.DATE,
     mobileTitle: 'Select date',
     width: '169px',
-    onSelectFormator: date => dateFormator(date),
+    onSelectFormator: date => dateStringFormator(date),
 }, {
     id: 'offer',
     title: 'Offers',
@@ -66,7 +66,7 @@ export const table = {
         columnName: 'Date',
         columnWidth: '190px',
 
-        renderRowItem: (item) => dateFormator(item),
+        renderRowItem: (item) => dateStringFormator(item),
     }, {
         columnId: 'user_id',
         columnName: 'User id',
