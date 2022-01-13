@@ -68,7 +68,7 @@ export const SettingsPage = () => {
             <Modal onClose={() => setModalAvatar(false)}>
                 {
                     profileSettingsData.fields.img &&
-                    <AvatarEditor/>
+                    <AvatarEditor onClose={setModalAvatar}/>
                 }
             </Modal>}
         </div>
