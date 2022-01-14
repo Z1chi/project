@@ -1,11 +1,13 @@
 .filterMobile {
     width: 100%;
-    padding: 10px 0;
     
     &__dropdown {
+        width: 100%;
+        padding: 10px 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: #131826;
     }
 
     &__text {
@@ -23,17 +25,20 @@
 
     &__arrow {
         margin-top: 4px;
-    }
-
-    &__arrow {
         align-self: flex-end;
     }
 
     &__header {
+        width: 100%;
+        margin-top: 20px;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    &__fields {
+        background-color: #262A37;
     }
 
     &__reset {
