@@ -19,28 +19,28 @@ import {offerTypeNameList} from "../OffersPage/data";
 
 import {dateStringFormator, localeString} from "../../../helpers/lib";
 
-export const descriptionData = {
-    benefits: ["Преимущества кратко:",
-        "Кешбэк до 30% у партнеров: LevelOne, AliExpress, re:Store, Reebok, Adidas, Ostin, Pandora, Подружка, GeekBrains, Улыбка Радуги, О'КЕЙ доставка, МТС и другие.",
-        "Умный кешбэк до 10% рублями в категории максимальных трат, и 1% - на все остальные покупки До 5% милями на все покупки и до 11% милями за покупки на «Газпромбанк - Travel»",
-        "Один раз в месяц вы можете сменить программу лояльности и копить мили вместо кешбэка и наоборот. Накопленные баллы при этом не сгорают.",
-    ],
-    service: ["Обслуживание – от 0 ₽",
-        "Бесплатное снятие наличных в любых банкоматах мира",
-        "Моментальные переводы без комиссии в другие банки",
-        "До 6% на остаток по накопительному счету",
-        "Выпуск до 4 дополнительных карт бесплатно",
-        "Технология PayPass, бесконтактная технология Apple Pay, Google Pay, Samsung Pay",
-    ],
-    superiority: [
-        "2 160 платежных систем",
-        "47 языков на веб-сайте",
-        "12 000+ партнеров по всему миру",
-        "Высокие коэффициенты",
-        "Регулярные акции и бонусы",
-        "1 000 000+ ставок ежедневно"
-    ],
-};
+// export const descriptionData = {
+//     benefits: ["Преимущества кратко:",
+//         "Кешбэк до 30% у партнеров: LevelOne, AliExpress, re:Store, Reebok, Adidas, Ostin, Pandora, Подружка, GeekBrains, Улыбка Радуги, О'КЕЙ доставка, МТС и другие.",
+//         "Умный кешбэк до 10% рублями в категории максимальных трат, и 1% - на все остальные покупки До 5% милями на все покупки и до 11% милями за покупки на «Газпромбанк - Travel»",
+//         "Один раз в месяц вы можете сменить программу лояльности и копить мили вместо кешбэка и наоборот. Накопленные баллы при этом не сгорают.",
+//     ],
+//     service: ["Обслуживание – от 0 ₽",
+//         "Бесплатное снятие наличных в любых банкоматах мира",
+//         "Моментальные переводы без комиссии в другие банки",
+//         "До 6% на остаток по накопительному счету",
+//         "Выпуск до 4 дополнительных карт бесплатно",
+//         "Технология PayPass, бесконтактная технология Apple Pay, Google Pay, Samsung Pay",
+//     ],
+//     superiority: [
+//         "2 160 платежных систем",
+//         "47 языков на веб-сайте",
+//         "12 000+ партнеров по всему миру",
+//         "Высокие коэффициенты",
+//         "Регулярные акции и бонусы",
+//         "1 000 000+ ставок ежедневно"
+//     ],
+// };
 
 
 export const rowsConfig = [
@@ -319,45 +319,8 @@ export const description = {
     icon: images.descriptionIcon,
     title: 'Description',
     renderContent: ({data}) => {
-        return (
-
-            <div>
-                <ul style={{
-                    listStyle: 'none',
-                    padding: 0,
-
-                }}>
-                    {data.benefits.map((item, key) => {
-                        return (
-                            <li key={`benefits${key}`}>{item}</li>
-                        )
-                    })}
-                </ul>
-                <ul style={{
-                    listStyle: 'none',
-                    padding: 0,
-                    marginBottom: '15px',
-                }}>
-                    {data.service.map((item, key) => {
-                        return (
-                            <li key={`service${key}`}>{item}</li>
-                        )
-                    })}
-                </ul>
-                <ul
-                    style={{
-                        paddingLeft: '15px',
-                        listStyleImage: `url(${images.superiorityListItem})`,
-                    }}>
-                    {data.superiority.map((item, key) => {
-                        return (
-                            <li style={{marginBottom: '5px'}} key={`superiority${key}`}>
-                                {item}
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>
+        return (              
+            <div dangerouslySetInnerHTML={{__html: data}} />
         )
     }
 };
