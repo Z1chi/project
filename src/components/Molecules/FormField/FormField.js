@@ -6,7 +6,6 @@ import './formField.scss';
 
 const renderField = ({type, generateField}) => (props) => {
     const Component = fieldComponentsList[type];
-    console.log('p', props)
     return Component ? <Component {...props} /> : generateField(props);
 }
 
