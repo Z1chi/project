@@ -29,7 +29,7 @@ export const DashboardPage = () => {
     return (
         <div className='dashboardPage'>
             <PageTemplate 
-                renderPage={()=>{
+                renderPage={({ width })=>{
                     return (
                         <div className='dashboardPage__content'>
                             <div className='dashboardPage__balance'>
@@ -47,7 +47,7 @@ export const DashboardPage = () => {
                                         return (
                                             <div key={key} className='dashboardPage__statisticsItem'>
                                                 {/* <FlowCard {...item} /> */}
-                                                <InfoCard {...item} value={dashboardQuery.data[item.id]} />
+                                                <InfoCard {...item} value={dashboardQuery.data[item.id]} isMobile={width<768} />
                                             </div>
                                         )
                                     })

@@ -9,7 +9,7 @@ import { images } from './images';
 
 import './selectInput.scss'
 
-export const SelectInput = ({ value, placeholder, options=[], renderItem, matchPropName, onChange, SelectComponent = Select, mobileConfig }) => {
+export const SelectInput = ({ value, placeholder, options=[], matchPropName, renderItem, onChange, SelectComponent = Select, mobileConfig }) => {
 
     return (
         <div className='selectInput'>
@@ -29,6 +29,7 @@ export const SelectInput = ({ value, placeholder, options=[], renderItem, matchP
                         return (
                             <div className='selectInput__select'>
                                 <SelectComponent options={options} renderItem={renderItem} 
+                                matchPropName={matchPropName}
                                 value={value}
                                 onChange={onChange}
                                 mobileConfig={{...mobileConfig, onClose: ()=>setIsOpened(false)}} 

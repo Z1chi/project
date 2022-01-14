@@ -22,12 +22,11 @@ export const OffersSinglePage = (props) => {
         })
     });
 
-
     return (
         <div className='offersSinglePage'>
             <PageTemplate
                 renderPage={() => {
-                    return (
+                    return offerQuery.data && (
                         <>
                             <OfferHeader
                                 {...offerQuery.data}
@@ -35,7 +34,7 @@ export const OffersSinglePage = (props) => {
                             <OfferGrid
                                 offerQuery={offerQuery.data}
                                 description={description}
-                                descriptionData={descriptionData}
+                                // descriptionData={descriptionData}
                                 rows={rowsConfig}/>
                         </>
                     )

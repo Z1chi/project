@@ -21,13 +21,14 @@ export const Filter = ({ filters, data, onSave, }) => {
     const isMobile = width <= 768;
 
     return (
-        <div className='filter' ref={ref}>
-        {
-            isMobile
+        isMobile
             ? (
                 <FilterMobile filters={filters} data={data} />
             )
-            : (
+            :
+        <div className='filter' ref={ref}>
+        {
+             (
                 <>
                 {
                     filters.map( ({ width, ...item}, index) => {
