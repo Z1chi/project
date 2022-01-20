@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import InfiniteScroll from "react-infinite-scroll-component";
 
 import {TableHead} from '../../Molecules/TableHead/TableHead';
 import {TableRow} from '../../Molecules/TableRow/TableRow';
