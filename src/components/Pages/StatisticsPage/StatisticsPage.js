@@ -16,10 +16,17 @@ import './statisticsPage.scss';
 export const StatisticsPage = () => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
-    const [crudActionIndex, setCrudActionIndex] = useState(0);
+    const [pageIndex, setPageIndex] = useState(1);
+    const [tableData, setTableData] = useState({ table: [], last_page: null});
 
-    const statisticsQuery = useQuery(['statistics', crudActionIndex], () => {
-        return request(`/statistic/get-statistic?${convertToQueryString(filterData.fields)}`).then(res => res.data)
+    const statisticsQuery = useQuery(['statistics', pageIndex], () => {
+        return request(`/statistic/get-statistic?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { return res && setTableData({
+            ...res.data,
+            table: [
+                ...tableData.table,
+                ...res.data.table,
+            ]
+        })})
     });
 
     const statisticsFiltersQueryList = useQueries([
@@ -43,7 +50,6 @@ export const StatisticsPage = () => {
             return filterQuery.data || [];
         })
     ]
-
     return (
         <div className='statisticsPage'>
             <PageTemplate
@@ -53,14 +59,18 @@ export const StatisticsPage = () => {
                             <div className='statisticsPage__filters'>
                                 <Filter filters={filters} data={filtersData} onSave={
                                     ()=>{
-                                        setCrudActionIndex(crudActionIndex+1); 
+                                        setPageIndex(pageIndex); 
                                     }
                                 } />
                             </div>
                             <div className='statisticsPage__table'>
                                 <Table
+                                    hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
+                                    fetchMore={()=>{
+                                        setPageIndex(pageIndex+1)
+                                    }}
                                     {...table}
-                                    data={statisticsQuery?.data?.table}
+                                    data={tableData.table}
                                     emptyTable={table.emptyTable}
                                 />
                             </div>

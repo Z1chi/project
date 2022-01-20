@@ -45,8 +45,9 @@ export const BarChart = ({ data }) => {
                         <HorizontalGridLines  />
         
                         <XAxis style={{
-                            text: {stroke: 'none', fill: '#898A98',}
-                        }} />
+                            text: {stroke: 'none', fill: '#898A98',},
+                            ticks: {fontSize: 10}
+                        }}/>
                         <YAxis style={{
                             text: {stroke: 'none', fill: '#898A98',}
                         }} />
@@ -55,7 +56,7 @@ export const BarChart = ({ data }) => {
                             data.bars.map( (bar, index) => {
                                 const barData = bar.data.map( (item, index) => {
                                     return {
-                                        x: data.dates[index],
+                                        x: data.dates[index].split(' ')[0],
                                         y: Number(item),
                                     }
                                 } );

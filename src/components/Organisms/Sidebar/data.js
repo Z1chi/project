@@ -50,11 +50,11 @@ export const menuLinks = [{
         to: '/smartlinks',
         text: 'Smart links'
     },
-    {
-        icon: postback,
-        to: '/postback',
-        text: 'Postback'
-    },
+    // {
+    //     icon: postback,
+    //     to: '/postback',
+    //     text: 'Postback'
+    // },
     {
         icon: withdraws,
         to: '/withdraws',

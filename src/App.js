@@ -47,7 +47,7 @@ export default function App() {
                                 {/*<Route exact path='/leads' component={LeadsPage}/>*/}
                                 {/*<Route exact path='/affiliate-program' component={AffiliatePage}/>*/}
                                 <Route exact path='/smartlinks' component={SmartLinksPage}/>
-                                <Route exact path='/postback' component={PostbackPage}/>
+                                {/* <Route exact path='/postback' component={PostbackPage}/> */}
                                 <Route exact path='/withdraws' component={WithdrawPage}/>
                                 <Route exact path='/faq' component={FAQPage}/>
                                 <Route exact path='/settings' component={SettingsPage}/>

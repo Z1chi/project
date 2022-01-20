@@ -27,5 +27,5 @@ export const convertToQueryString = (object, currentBreadcrum = '', isProp=false
         }
     }
     
-    return queryString;
+    return queryString.replace('/\&=$/', '');
 };

@@ -17,4 +17,12 @@
         line-height: 20px;
         color: #FFFFFF;
     }
+
+    img {
+        height: 24px !important;
+        width: 24px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

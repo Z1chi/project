@@ -4,6 +4,9 @@
 
   width: 262px;
   height: 183px;
+  right: 30px;
+  position: absolute;
+  z-index: 10000;
 
   &__email {
     color: #FFF;
