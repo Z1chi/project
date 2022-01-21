@@ -18,14 +18,21 @@ import { convertToQueryString } from '../../../helpers/convertToQueryString';
 export const ActionLogsPage = () => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
-    const [crudActionIndex, setCrudActionIndex] = useState(0);
+    const [pageIndex, setPageIndex] = useState(1);
+    const [tableData, setTableData] = useState({ table: [], last_page: null});
 
     const actionLogsStatisticsQuery = useQuery(['action-logs/statistics'], () => {
         return request('/action-log/total').then(res => res.data);
     });
 
-    const actionLogsTableQuery = useQuery(['action-logs/table', crudActionIndex], () => {
-        return request(`/action-log/get-list?${convertToQueryString(filterData.fields)}`).then(res => res.data);
+    const actionLogsTableQuery = useQuery(['action-logs/table', pageIndex], () => {
+        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { return res && setTableData({
+            ...res.data,
+            table: [
+                ...tableData.table,
+                ...res.data.table,
+            ]
+        })})
     })
 
     const actionLogsFiltersQueryList = useQueries([
@@ -84,7 +91,7 @@ export const ActionLogsPage = () => {
                                         }}
                                         onSave={
                                             ()=>{
-                                                setCrudActionIndex(crudActionIndex+1);
+                                                setPageIndex(pageIndex);
                                             }
                                         }
                                     />
@@ -92,7 +99,13 @@ export const ActionLogsPage = () => {
                                 <div className='actionLogsPage__tableData'>
                                     {
                                         actionLogsTableQuery.data &&
-                                        <Table {...table} data={actionLogsTableQuery.data.table}/>
+                                        <Table {...table} 
+                                            hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
+                                            fetchMore={()=>{
+                                                setPageIndex(pageIndex+1)
+                                            }}
+                                            data={actionLogsTableQuery.data.table}
+                                        />
                                     }
                                 </div>
                             </div>

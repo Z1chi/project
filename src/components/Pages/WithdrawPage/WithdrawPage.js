@@ -11,6 +11,7 @@ import { Drawer } from '../../Organisms/Drawer/Drawer';
 import { Button } from '../../Atoms/Button/Button';
 import { drawerAtom } from '../../../store/Drawer';
 import { modalAtom } from '../../../store/Modal';
+import { alertAtom } from "../../../store/Alert";
 
 import request from '../../../api/request';
 
@@ -22,16 +23,25 @@ import './withdrawPage.scss';
 
 export const WithdrawPage = () => {
 
-    const [crudActionIndex, setCrudActionIndex] = useState(0);
+    const [pageIndex, setPageIndex] = useState(0);
+    const [tableData, setTableData] = useState({ table: [], last_page: null});
+
+    const [alertData, alertActions] = useAtom(alertAtom);
 
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const withdrawQuery = useQuery(['withdraw-table', crudActionIndex], () => {
+    const withdrawQuery = useQuery(['withdraw-table', pageIndex], () => {
         if(!filtersData || !filtersData.fields || filtersData.fields.every(item=>!item)) {
             return request(`withdraw/get-withdraws`).then(res => res.data);
         }
-        return request(`withdraw/get-withdraws?${convertToQueryString(filtersData.fields)}`,).then(res => res.data);
+        return request(`withdraw/get-withdraws?${convertToQueryString(filtersData.fields)}`,).then(res => { return res && setTableData({
+            ...res.data,
+            table: [
+                ...tableData.table,
+                ...res.data.table,
+            ]
+        })})
     })
 
     const statusFilterQuery = useQuery(['withdraw-statuses'], () => {
@@ -72,15 +82,31 @@ export const WithdrawPage = () => {
                                                 minWithdraw: res.data.minWithdraw,
                                                 walletAddress: res.data.walletAddress,
                                                 onClick: (data) => {
-                                                    if(data.amount < res.data.minWithdraw) {
+                                                    const amount = Number(data.amount);
+                                                    if(amount > res.data.balance) {
+                                                        alertActions.open({
+                                                            message: 'Insufficient funds',
+                                                            type: 'ALERT/ERROR',
+                                                        })
+                                                        return;
+                                                    } else if(amount < res.data.minWithdraw) {
+                                                        alertActions.open({
+                                                            message: `Min withdraw is at least ${res.data.minWithdraw}`,
+                                                            type: 'ALERT/ERROR',
+                                                        })
                                                         return;
                                                     }
                                                     modalActions.open(
                                                         modalWithdraw({
                                                             data,
                                                             onClose: modalActions.close,
-                                                            onSubmit: (data) => {
-                                                                request('/withdraw/create', { method: 'post', data }).then(res => console.log(res.data))
+                                                            onSubmit: (queryData) => {
+                                                                
+                                                                request('/withdraw/create', { method: 'post', queryData }).then((res) => {
+                                                                    drawerActions.close();
+                                                                    setPageIndex(pageIndex)
+                                                                    return res.data;
+                                                                })
                                                             },
                                                         })
                                                     )
@@ -97,7 +123,7 @@ export const WithdrawPage = () => {
                                     data={filtersData} 
                                     onSave={
                                         ()=>{
-                                            setCrudActionIndex(crudActionIndex+1); 
+                                            setPageIndex(pageIndex)
                                         }
                                     }
                                 />
@@ -106,7 +132,13 @@ export const WithdrawPage = () => {
                                 (withdrawQuery.data && withdrawQuery.data.table) &&
                                 ( width > 480
                                 ? <div className='withdrawPage__table'>
-                                    <Table {...table} data={withdrawQuery.data.table} />
+                                    <Table {...table} 
+                                        hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
+                                        fetchMore={()=>{
+                                            setPageIndex(pageIndex+1)
+                                        }}
+                                        data={withdrawQuery.data.table} 
+                                    />
                                 </div>
                                 : <div>
                                     {

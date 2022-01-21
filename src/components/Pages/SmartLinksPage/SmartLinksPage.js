@@ -20,13 +20,20 @@ import {modalAtom} from '../../../store/Modal';
 import './smartLinksPage.scss';
 
 export const SmartLinksPage = () => {
-    const [crudActionIndex, setCrudActionIndex] = useState(0);
+    const [tableData, setTableData] = useState({ table: [], last_page: null});
+    const [pageIndex, setPageIndex] = useState(0);
     const [drawerData, drawerActions] = useAtom(drawerAtom);
     const [filterData, filterActions] = useAtom(filterAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const smartLinksQuery = useQuery(['smartlinks', crudActionIndex], async () => {
-        return request(`smartlink?${convertToQueryString(filterData.fields)}`).then((res) => res.data);
+    const smartLinksQuery = useQuery(['smartlinks', pageIndex], async () => {
+        return request(`smartlink?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`).then(res => { return res && setTableData({
+            ...res.data,
+            table: [
+                ...tableData.table,
+                ...res.data.table,
+            ]
+        })})
     });
 
 
@@ -59,19 +66,23 @@ export const SmartLinksPage = () => {
                                 smartLinksQuery.data && smartLinksQuery.data.table && smartLinksQuery.data.table.length === 0
                                     ? (
                                         <TableEmpty {...table.emptyTable}
-                                                    button={{
-                                                        ...table.emptyTable.button,
-                                                        onClick: () => {
-                                                            drawerActions.open(drawers.create({
-                                                                onCreate: () => {
-                                                                    request('smartlink/create', {
-                                                                        method: 'POST',
-                                                                        data: drawerData.fieldValues,
-                                                                    }).then((res) => res.data);
-                                                                }
-                                                            }))
+                                            button={{
+                                                ...table.emptyTable.button,
+                                                onClick: () => {
+                                                    drawerActions.open(drawers.create({
+                                                        onCreate: (data) => {
+                                                            request('smartlink/create', {
+                                                                method: 'POST',
+                                                                data,
+                                                            }).then((res) => {
+                                                                drawerActions.close();
+                                                                setPageIndex(pageIndex)
+                                                                return res.data;
+                                                            });
                                                         }
-                                                    }}
+                                                    }))
+                                                }
+                                            }}
                                         />
                                     )
                                     : smartLinksQuery.data && (
@@ -82,7 +93,7 @@ export const SmartLinksPage = () => {
                                                         data={filtersData}
                                                         onSave={
                                                             () => {
-                                                                setCrudActionIndex(crudActionIndex + 1);
+                                                                setPageIndex(pageIndex)
                                                             }
                                                         }
                                                 />
@@ -96,7 +107,7 @@ export const SmartLinksPage = () => {
                                                                 data,
                                                             }).then((res) => {
                                                                 drawerActions.close();
-                                                                setCrudActionIndex(() => crudActionIndex + 1)
+                                                                setPageIndex(pageIndex)
                                                                 return res.data;
                                                             });
                                                         }
@@ -111,14 +122,21 @@ export const SmartLinksPage = () => {
                                                     {
                                                         smartLinksQuery.data && smartLinksQuery.data.table && smartLinksQuery.data.table.map(item => {
                                                             return (
-                                                                <SmartLinksCard config={table.getTableConfig()}
-                                                                                data={item}/>
+                                                                <SmartLinksCard 
+                                                                    config={table.getTableConfig()}
+                                                                    data={item}
+                                                                />
                                                             )
                                                         })
                                                     }
                                                 </div>
                                                 : <div className='smartLinksPage__table'>
-                                                    <Table {...table} tableConfig={table.getTableConfig({
+                                                    <Table {...table} 
+                                                    hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
+                                                    fetchMore={()=>{
+                                                        setPageIndex(pageIndex+1)
+                                                    }}
+                                                    tableConfig={table.getTableConfig({
                                                         onEditOpen: ({itemId}) => {
                                                             drawerActions.open(drawers.edit({
                                                                 onEdit: (data) => {
@@ -131,7 +149,7 @@ export const SmartLinksPage = () => {
                                                                         },
                                                                     }).then((res) => {
                                                                         drawerActions.close();
-                                                                        setCrudActionIndex(() => crudActionIndex + 1)
+                                                                        setPageIndex(pageIndex)
                                                                         return res.data
                                                                     });
                                                                 },
@@ -141,7 +159,7 @@ export const SmartLinksPage = () => {
                                                                             onSubmit: () => {
                                                                                 request(`smartlink/delete/${itemId}`, {method: 'delete',}).then((res) => {
                                                                                     drawerActions.close();
-                                                                                    setCrudActionIndex(() => crudActionIndex + 1)
+                                                                                    setPageIndex(pageIndex)
                                                                                     return res.data
                                                                                 });
                                                                             },
@@ -158,7 +176,7 @@ export const SmartLinksPage = () => {
                                                                 onSubmit: () => {
                                                                     request(`smartlink/delete/${data.itemId}`, {method: 'delete',}).then((res) => {
                                                                         drawerActions.close();
-                                                                        setCrudActionIndex(() => crudActionIndex + 1)
+                                                                        setPageIndex(pageIndex)
                                                                         return res.data
                                                                     });
                                                                 },
