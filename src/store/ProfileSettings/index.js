@@ -5,10 +5,8 @@ import {profileSettingsFieldTypeList} from "../../components/Pages/SettingsPage/
 
 export const profileSettingsAtom = createAtom(
     {
-
         setField: (value) => value,
         setInitialFields: (value) => value,
-
     },
     ({onAction}, state = {fields: {}}) => {
         onAction('setField', (payload) => {

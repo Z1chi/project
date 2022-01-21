@@ -56,5 +56,13 @@
                 background-color: #1F2431;
             }
         }
+
+        img {
+            height: 24px !important;
+            width: 24px !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     } 
 }

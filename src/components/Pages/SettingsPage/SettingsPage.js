@@ -31,7 +31,7 @@ export const SettingsPage = () => {
             const currencyFound = res.data.find( currency => currency.id === profileSettingsData.fields.currency_id[profileSettingsFieldTypeList.current])
             setInitialCurrency(currencyFound)
         });
-    }, [profileSettingsData])
+    }, [profileSettingsData,])
 
     const profileSettingsConfig =  currencyData.currencies ? getProfileSettingsConfig({
         currencySelected: currencyData.currencySelected,
@@ -79,6 +79,9 @@ export const SettingsPage = () => {
                                             <div className='settingsPage__contentItem'
                                                  key={`settingsPage__contentItem${key}`}>
                                                 <SettingsItem
+                                                    onSubmitHandler={() => request('/profile/get-data').then( res => {
+                                                        profileSettingsActions.setInitialFields(res.data)
+                                                    })}
                                                     isMobile={width < 480}
                                                     {...settingsField}
                                                     value={inputValue || ""}
