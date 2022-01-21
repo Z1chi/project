@@ -1,15 +1,19 @@
 import React from "react";
 
+import { FormField } from "../../Molecules/FormField/FormField";
+
+import { dropdownTypes } from '../../../constants/dropdown';
+
 export const profileSettingsFieldTypeList = {
     current: "PROFILE_SETTINGS_FIELD_TYPE/current",
     new: "PROFILE_SETTINGS_FIELD_TYPE/new",
     repeatNew: "PROFILE_SETTINGS_FIELD_TYPE/repeatNew",
 };
 
-export const profileSettingsConfig = [
+export const getProfileSettingsConfig = (configOptions) => [
     {
         id: 'name',
-        apiId: 'name',
+        apiId: 'update-name',
         title: 'Full name',
         type: 'text',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
@@ -32,7 +36,7 @@ export const profileSettingsConfig = [
     },
     {
         id: 'wallet_address',
-        apiId: 'wallet',
+        apiId: 'update-wallet',
         title: 'Wallet Address',
         type: 'text',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
@@ -45,7 +49,7 @@ export const profileSettingsConfig = [
     },
     {
         id: 'password',
-        apiId: 'password',
+        apiId: 'update-password',
         title: 'Password',
         type: 'password',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
@@ -77,7 +81,7 @@ export const profileSettingsConfig = [
     },
     {
         id: 'telegram',
-        apiId: 'telegram',
+        apiId: 'update-telegram',
         title: 'Telegram',
         type: 'text',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
@@ -90,7 +94,7 @@ export const profileSettingsConfig = [
     },
     {
         id: 'email',
-        apiId: 'email',
+        apiId: 'update-email',
         title: 'Email',
         type: 'text',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
@@ -100,6 +104,33 @@ export const profileSettingsConfig = [
             email: field[profileSettingsFieldTypeList.new],
         }),
         formValidator: ()=>true,
-
+    },
+    {
+        id: 'currency_id',
+        apiId: 'change-currency',
+        title: 'Currency',
+        type: 'text',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+        isNotChangeable: true,
+        renderCurrentValueFieldValue: () => {
+            return configOptions.initialCurrency?.name;
+        },
+        mapRequestData: (field) => {
+            return {
+                currency_id: field ? field[profileSettingsFieldTypeList.new].id : '',
+            }
+        },
+        formValidator: ()=>true,
+        renderNewValueField: () => {
+            return configOptions.currencyList ? (
+                <FormField
+                    value={configOptions.currencySelected ? configOptions.currencySelected.name : ''}
+                    type={dropdownTypes.SELECT}
+                    onChange={(option) => configOptions.changeCurrency(option)}
+                    options={configOptions.currencyList}
+                    renderItem={(option) => option.name}
+                />
+            ) : null
+        }
     },
 ];

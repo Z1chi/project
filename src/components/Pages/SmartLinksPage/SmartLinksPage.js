@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAtom} from '@reatom/react';
 import {useQuery, useQueries,} from 'react-query';
 
@@ -21,19 +21,27 @@ import './smartLinksPage.scss';
 
 export const SmartLinksPage = () => {
     const [tableData, setTableData] = useState({ table: [], last_page: null});
-    const [pageIndex, setPageIndex] = useState(0);
+    const [pageIndex, setPageIndex] = useState(1);
+    const [operationIndex, setOperationIndex] = useState(0);
     const [drawerData, drawerActions] = useAtom(drawerAtom);
     const [filterData, filterActions] = useAtom(filterAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const smartLinksQuery = useQuery(['smartlinks', pageIndex], async () => {
-        return request(`smartlink?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`).then(res => { return res && setTableData({
-            ...res.data,
-            table: [
-                ...tableData.table,
-                ...res.data.table,
-            ]
-        })})
+    const smartLinksQuery = useQuery(['smartlinks', pageIndex, operationIndex], async () => {
+        return request(`smartlink?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`).then(res => { 
+
+            if(res) {
+                setTableData({
+                    ...res.data,
+                    table: [
+                        ...tableData.table,
+                        ...res.data.table,
+                    ]
+                })
+            }
+
+            return res.data
+        })
     });
 
 
@@ -76,7 +84,7 @@ export const SmartLinksPage = () => {
                                                                 data,
                                                             }).then((res) => {
                                                                 drawerActions.close();
-                                                                setPageIndex(pageIndex)
+                                                                setOperationIndex(operationIndex+1)
                                                                 return res.data;
                                                             });
                                                         }
@@ -93,7 +101,7 @@ export const SmartLinksPage = () => {
                                                         data={filtersData}
                                                         onSave={
                                                             () => {
-                                                                setPageIndex(pageIndex)
+                                                                setOperationIndex(operationIndex+1)
                                                             }
                                                         }
                                                 />
@@ -107,7 +115,7 @@ export const SmartLinksPage = () => {
                                                                 data,
                                                             }).then((res) => {
                                                                 drawerActions.close();
-                                                                setPageIndex(pageIndex)
+                                                                setOperationIndex(operationIndex+1)
                                                                 return res.data;
                                                             });
                                                         }
@@ -149,7 +157,7 @@ export const SmartLinksPage = () => {
                                                                         },
                                                                     }).then((res) => {
                                                                         drawerActions.close();
-                                                                        setPageIndex(pageIndex)
+                                                                        setOperationIndex(operationIndex+1)
                                                                         return res.data
                                                                     });
                                                                 },
@@ -159,7 +167,7 @@ export const SmartLinksPage = () => {
                                                                             onSubmit: () => {
                                                                                 request(`smartlink/delete/${itemId}`, {method: 'delete',}).then((res) => {
                                                                                     drawerActions.close();
-                                                                                    setPageIndex(pageIndex)
+                                                                                    setOperationIndex(operationIndex+1)
                                                                                     return res.data
                                                                                 });
                                                                             },
@@ -176,7 +184,7 @@ export const SmartLinksPage = () => {
                                                                 onSubmit: () => {
                                                                     request(`smartlink/delete/${data.itemId}`, {method: 'delete',}).then((res) => {
                                                                         drawerActions.close();
-                                                                        setPageIndex(pageIndex)
+                                                                        setOperationIndex(operationIndex+1)
                                                                         return res.data
                                                                     });
                                                                 },

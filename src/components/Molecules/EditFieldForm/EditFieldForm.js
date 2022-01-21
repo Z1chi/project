@@ -8,8 +8,8 @@ import {profileSettingsFieldTypeList} from '../../Pages/SettingsPage/data'
 
 import './editFieldForm.scss';
 
-export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue = false, onChangeFieldValue, validator, id, placeholder, type = 'text', formValidator}) => {
-
+export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue = false, onChangeFieldValue, validator, id, placeholder, type = 'text', formValidator, renderNewValueField, }) => {
+console.log('c', renderNewValueField)
     return (
         <div className='editFieldForm'>
         <Form
@@ -43,16 +43,21 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
                 {({ input, meta }) => (
                     <div className='editFieldForm__input'>
                         <label>New</label>
-                            <Input
-                                validator={validator}
-                                type={type}
-                                placeholder={placeholder}
-                                name={id}
-                                onChange={onChangeFieldValue(profileSettingsFieldTypeList.new)}
-                                hasError={meta.error && meta.touched}
-                                error={meta.error}
-                                fieldData={input}
-                            />
+                            {
+                                renderNewValueField
+                                ? renderNewValueField()
+                                : <Input
+                                    validator={validator}
+                                    type={type}
+                                    placeholder={placeholder}
+                                    name={id}
+                                    onChange={onChangeFieldValue(profileSettingsFieldTypeList.new)}
+                                    hasError={meta.error && meta.touched}
+                                    error={meta.error}
+                                    fieldData={input}
+                                />
+                            }
+                            
                     </div>
                 )}
             </Field>

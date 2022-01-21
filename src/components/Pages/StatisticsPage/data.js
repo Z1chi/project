@@ -3,6 +3,7 @@ import {images} from "./images";
 import { dropdownTypes } from '../../../constants/dropdown';
 import { idArrayFormator } from "../../../helpers/idArrayFormator";
 import { dateFormator } from "../../../helpers/dateFormator";
+import { currencyFormator } from '../../../helpers/currencyFormator';
 
 export const filters = [{
     id: 'date',
@@ -73,6 +74,8 @@ export const table = {
         columnName: 'EPC',
         columnWidth: '100px',
         isGroupEnd: true,
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'registrations',
         columnName: 'Reg',
@@ -87,6 +90,8 @@ export const table = {
         columnName: 'EPR',
         columnWidth: '100px',
         isGroupEnd: true,
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'deposits',
         columnName: 'DEP',
@@ -105,31 +110,45 @@ export const table = {
         columnName: 'SUM',
         columnWidth: '100px',
         isGroupEnd: true,
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'profit_cpa',
         columnName: 'CPA',
         columnWidth: '100px',
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'profit_revshare',
         columnName: 'REVSHARE',
         columnWidth: '100px',
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'profit_sum',
         columnName: 'SUM',
         columnWidth: '100px',
         isGroupEnd: true,
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'cpa_pending',
         columnName: 'Pending',
         columnWidth: '100px',
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'cpa_declined',
         columnName: 'Declined',
         columnWidth: '100px',
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'cpa_accepted',
         columnName: 'Accepted',
         columnWidth: '100px',
+
+        renderRowItem: (item) => currencyFormator(item),
     },
 
 

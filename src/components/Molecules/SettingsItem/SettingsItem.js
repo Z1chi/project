@@ -12,14 +12,14 @@ import {alertAtom} from "../../../store/Alert";
 
 import './settingsItem.scss';
 
-export const SettingsItem = ({title, description, placeholder, isNotChangeable, type, value, hasConfirmField, confirmOldValue, validator, id, formValidator, mapRequestData, apiId, isMobile}) => {
+export const SettingsItem = ({title, description, placeholder, isNotChangeable, type, value, hasConfirmField, confirmOldValue, validator, id, formValidator, renderNewValueField, mapRequestData, apiId, isMobile}) => {
 
     const [alertData, alertActions] = useAtom(alertAtom);
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
     const [modalOpen, setModalOpen] = useState(false);
-
+    
     return (
         <div className={`settingsItem${isMobile ? ' settingsItem--isMobile' : ''}`}>
             <h5>{title}</h5>
@@ -43,9 +43,10 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                         value={value}
                         hasConfirmField={hasConfirmField}
                         confirmOldValue={confirmOldValue}
+                        renderNewValueField={renderNewValueField}
                         onSubmit={ () => {
                             const requestData = (mapRequestData(profileSettingsData.fields[id]));
-                            return request(`/profile/update-${apiId}`, {method: 'patch', data: requestData}).then((res) => {
+                            return request(`/profile/${apiId}`, {method: 'patch', data: requestData}).then((res) => {
                                 if(res.exception) {
                                     alertActions.open({
                                         message: 'Error text',

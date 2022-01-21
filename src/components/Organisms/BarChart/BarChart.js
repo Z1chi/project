@@ -25,10 +25,15 @@ import './barChart.scss';
   //   y: Math.max(greenData[idx].y, blueData[idx].y)
   // }));
 
-  const margin = {
-    default: 40,
-    steps: [-3,3]
-};
+    const margin = {
+        default: 40,
+        steps: [-3,3]
+    };
+
+    const colors = [
+        '#16FFAC',
+        '#0063FF',
+    ];
 
 
 export const BarChart = ({ data }) => {
@@ -44,24 +49,25 @@ export const BarChart = ({ data }) => {
                         <VerticalGridLines />
                         <HorizontalGridLines  />
         
-                        <XAxis style={{
+                        <XAxis tickLabelAngle={-30} style={{
                             text: {stroke: 'none', fill: '#898A98',},
-                            ticks: {fontSize: 10}
+                            ticks: {fontSize: 10},
                         }}/>
                         <YAxis style={{
                             text: {stroke: 'none', fill: '#898A98',}
                         }} />
         
                         {
-                            data.bars.map( (bar, index) => {
-                                const barData = bar.data.map( (item, index) => {
+                            data.bars.map( (bar, barIndex) => {
+                                const relevantData = [...bar.data].slice(-10);
+                                const barData = relevantData.map( (item, index) => {
                                     return {
                                         x: data.dates[index].split(' ')[0],
                                         y: Number(item),
                                     }
                                 } );
                                 return (
-                                    <VerticalBarSeries barWidth={.25} data={barData} marginLeft={margin.default+margin.steps[index]} style={data.style} />
+                                    <VerticalBarSeries color={colors[barIndex]} barWidth={.25} data={barData} marginLeft={margin.default+margin.steps[barIndex]} style={data.style} />
                                 )
                             })
                         }
