@@ -2,6 +2,7 @@ import emptyTableIcon from './images/emptyTable.svg'
 
 import { images } from './images';
 
+import { dateFormator } from '../../../helpers/dateFormator';
 import { withdrawStatusList, } from './constants/status';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { Input } from '../../Atoms/Input/Input';
@@ -24,12 +25,14 @@ export const filters = [{
     mobileTitle: 'Select request date',
     type: dropdownTypes.DATE,
     width: '204px',
+    onSelectFormator: dateFormator,
 }, {
     id: 'pay_date',
     title: 'Pay date',
     mobileTitle: 'Select pay date',
     type: dropdownTypes.DATE,
     width: '154px',
+    onSelectFormator: dateFormator,
 }, {
     id: 'status',
     title: 'Status',

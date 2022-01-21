@@ -10,14 +10,14 @@ export const FAQItem = ({ short_question, full_question, answer }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className={`FAQItem${isExpanded? ' FAQItem--expanded':''}`}>
-            <div className='FAQItem__header'>
+        <div className={`FAQItem${isExpanded? ' FAQItem--expanded':''}`} onClick={()=>{
+            isExpanded ? setIsExpanded(false) : setIsExpanded(true)
+        }}>
+            <div className='FAQItem__header' >
                 <div className='FAQItem__question'>
                     {isExpanded ? full_question : short_question}
                 </div>
-                <div className='FAQItem__expander' onClick={()=>{
-                    isExpanded ? setIsExpanded(false) : setIsExpanded(true)
-                }}>
+                <div className='FAQItem__expander'>
                     <SVG src={isExpanded ? images.expanderMinus : images.expanderPlus} />
                 </div>
             </div>

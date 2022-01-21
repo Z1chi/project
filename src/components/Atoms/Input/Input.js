@@ -33,7 +33,9 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
                     }}
                 />
                 {
-                    canCopy && <div className='customInput__copy'>
+                    canCopy && <div className='customInput__copy' onClick={()=>{
+                        navigator.clipboard.writeText(inputValue)
+                    }}>
                         <SVG src={images.copyIcon}/>
                     </div>
                 }

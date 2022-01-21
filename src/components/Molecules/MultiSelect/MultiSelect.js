@@ -68,11 +68,21 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
             }
             </div>
             <div className='multiSelect__selectors'>
-                <div className='multiSelect__reset'>
+                <div className='multiSelect__reset' onClick={()=>setOptionsSelectable(optionsSelectable.map(item => {
+                        return {
+                            ...item,
+                            isSelected: false
+                        }
+                    }))}>
                     <SVG src={images.resetIcon} />
                 </div>
                 <div className='multiSelect__selectAll'>
-                    <button>Select all</button>
+                    <button onClick={()=>setOptionsSelectable(optionsSelectable.map(item => {
+                        return {
+                            ...item,
+                            isSelected: true
+                        }
+                    }))}>Select all</button>
                 </div>
             </div>
         </div>

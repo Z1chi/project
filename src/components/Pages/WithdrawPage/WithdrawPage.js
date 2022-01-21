@@ -12,6 +12,7 @@ import { Button } from '../../Atoms/Button/Button';
 import { drawerAtom } from '../../../store/Drawer';
 import { modalAtom } from '../../../store/Modal';
 import { alertAtom } from "../../../store/Alert";
+import { filterAtom } from '../../../store/Filter';
 
 import request from '../../../api/request';
 
@@ -28,15 +29,14 @@ export const WithdrawPage = () => {
     const [tableData, setTableData] = useState({ table: [], last_page: null});
 
     const [alertData, alertActions] = useAtom(alertAtom);
+    const [filterData, filterActions] = useAtom(filterAtom);
 
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
     const withdrawQuery = useQuery(['withdraw-table', pageIndex, operationIndex], () => {
-        if(!filtersData || !filtersData.fields || filtersData.fields.every(item=>!item)) {
-            return request(`withdraw/get-withdraws`).then(res => res.data);
-        }
-        return request(`withdraw/get-withdraws?${convertToQueryString(filtersData.fields)}`,).then(res => { 
+        
+        return request(`withdraw/get-withdraws?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`,).then(res => { 
 
             if(res) {
                 setTableData({
@@ -61,8 +61,6 @@ export const WithdrawPage = () => {
         [], 
         statusFilterQuery.data || [],
     ];
-
-    console.log('d', withdrawQuery.data)
 
     return (
         <div className='withdrawPage'>
