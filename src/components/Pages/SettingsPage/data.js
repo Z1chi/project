@@ -27,10 +27,9 @@ export const getProfileSettingsConfig = (configOptions) => [
             if(!values[profileSettingsFieldTypeList.new]) {
                 return;
             }
-            const [firstName, lastName] = values[profileSettingsFieldTypeList.new].split(' ');
-              if (!firstName || !lastName) {
-                errors[profileSettingsFieldTypeList.new] = "Enter firstname and lastname";
-              }
+            if(!values[profileSettingsFieldTypeList.new].match(new RegExp(/^[a-z0-9]+$/i))) {
+                errors[profileSettingsFieldTypeList.new] = 'Only letters and numbers allowed'
+            }
             return errors;
         },
     },

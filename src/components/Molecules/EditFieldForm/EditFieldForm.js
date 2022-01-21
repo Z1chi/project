@@ -9,7 +9,7 @@ import {profileSettingsFieldTypeList} from '../../Pages/SettingsPage/data'
 import './editFieldForm.scss';
 
 export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue = false, onChangeFieldValue, validator, id, placeholder, type = 'text', formValidator, renderNewValueField, }) => {
-console.log('c', renderNewValueField)
+
     return (
         <div className='editFieldForm'>
         <Form
