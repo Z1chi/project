@@ -1,6 +1,7 @@
 import { createStore } from '@reatom/core';
 
 import { alertAtom } from './Alert';
+import { currenciesAtom } from './Currencies';
 import { drawerAtom } from './Drawer';
 import { filterAtom } from './Filter';
 import { modalAtom } from './Modal';
@@ -11,6 +12,7 @@ import { profileSettingsAtom } from './ProfileSettings';
 
 export const store = createStore({
     alertData: alertAtom,
+    currencyData: currenciesAtom,
     drawerData: drawerAtom,
     filterData: filterAtom,
     modalData: modalAtom,

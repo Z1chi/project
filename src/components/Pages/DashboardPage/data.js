@@ -1,4 +1,5 @@
 import { dateStringFormator } from "../../../helpers/lib";
+import { currencyFormator } from "../../../helpers/currencyFormator";
 import { images } from "./images"
 
 export const statistics = [{
@@ -6,7 +7,7 @@ export const statistics = [{
     icon: images.balanceIcon, 
     title: 'Total Balance',
     renderSubtitle: (value) => {
-        return `₿ ${value.toFixed(8)}`
+        return currencyFormator(value)
     },
     backgroundColor: '#FF7800',
 }, {
@@ -14,7 +15,7 @@ export const statistics = [{
     icon: images.incomeIcon, 
     title: 'Income', 
     renderSubtitle: (value) => {
-        return `₿ ${value.toFixed(8)}`
+        return currencyFormator(value)
     },
     backgroundColor: '#16FFAC',
 }, {
@@ -22,7 +23,7 @@ export const statistics = [{
     icon: images.turnoverIcon, 
     title: 'Total Turnover',
     renderSubtitle: (value) => {
-        return `₿ ${value.toFixed(8)}`
+        return currencyFormator(value)
     },
     backgroundColor: '#0063FF',
 }, ];
@@ -68,6 +69,8 @@ export const table = {
         columnId: 'deposit',
         columnName: 'Deposit',
         columnWidth: '130px',
+        
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'geo',
         columnName: 'GEO',
@@ -91,7 +94,7 @@ export const table = {
                         borderRadius: '4px',
                     }}
                 >
-                    {item} $
+                    {item.amount} {item.symbol}
                 </div>
             )
         }

@@ -18,6 +18,7 @@ import { convertToQueryString } from '../../../helpers/convertToQueryString';
 export const ActionLogsPage = () => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
+    const [operationIndex, setOperationIndex] = useState(0);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
 
@@ -25,14 +26,21 @@ export const ActionLogsPage = () => {
         return request('/action-log/total').then(res => res.data);
     });
 
-    const actionLogsTableQuery = useQuery(['action-logs/table', pageIndex], () => {
-        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { return res && setTableData({
-            ...res.data,
-            table: [
-                ...tableData.table,
-                ...res.data.table,
-            ]
-        })})
+    const actionLogsTableQuery = useQuery(['action-logs/table', pageIndex, operationIndex], () => {
+        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { 
+
+            if(res) {
+                setTableData({
+                    ...res.data,
+                    table: [
+                        ...tableData.table,
+                        ...res.data.table,
+                    ]
+                })
+            }
+
+            return res.data
+        })
     })
 
     const actionLogsFiltersQueryList = useQueries([
@@ -91,7 +99,7 @@ export const ActionLogsPage = () => {
                                         }}
                                         onSave={
                                             ()=>{
-                                                setPageIndex(pageIndex);
+                                                setOperationIndex(operationIndex+1)
                                             }
                                         }
                                     />

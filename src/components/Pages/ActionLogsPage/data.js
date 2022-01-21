@@ -2,6 +2,7 @@ import { images } from './images';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { idArrayFormator } from '../../../helpers/idArrayFormator';
 import { dateStringFormator } from '../../../helpers/lib';
+import { currencyFormator } from '../../../helpers/currencyFormator';
 
 export const actionLogsStatisticsConfig = [
     {
@@ -79,6 +80,8 @@ export const table = {
         columnId: 'deposit',
         columnName: 'Deposit',
         columnWidth: '110px',
+
+        renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'geo',
         columnName: 'GEO',
@@ -102,7 +105,7 @@ export const table = {
                         borderRadius: '4px',
                     }}
                 >
-                    {item} $
+                    {item.amount} {item.symbol}
                 </div>
             )
         }

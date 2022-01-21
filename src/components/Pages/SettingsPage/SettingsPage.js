@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAtom} from "@reatom/react";
 import SVG from 'react-inlinesvg';
 
@@ -11,15 +11,41 @@ import {AvatarEditor} from "../../Molecules/AvatarEditor/AvatarEditor";
 import i from '../../Molecules/ManagerSidebarCard/images/i.jpeg';
 import avatarUpdateIcon from './images/avatarUpdateIcon.svg'
 
-import {profileSettingsConfig, profileSettingsFieldTypeList} from './data'
-import {profileSettingsAtom} from "../../../store/ProfileSettings";
+import { getProfileSettingsConfig, profileSettingsFieldTypeList} from './data'
+import { profileSettingsAtom } from "../../../store/ProfileSettings";
+import { currenciesAtom } from '../../../store/Currencies';
 
 import './settingsPage.scss';
+import request from '../../../api/request';
 
 export const SettingsPage = () => {
 
+    const [initialCurrency, setInitialCurrency] = useState(null);
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
+    const [currencyData, currencyActions] = useAtom(currenciesAtom);
     const [modalAvatar, setModalAvatar] = useState(false);
+    
+    useEffect( ()=>{
+        Object.keys(profileSettingsData.fields).length > 0 && request('/currency/get-currencies/').then(res => {
+            currencyActions.setCurrencyList(res.data);
+            const currencyFound = res.data.find( currency => currency.id === profileSettingsData.fields.currency_id[profileSettingsFieldTypeList.current])
+            setInitialCurrency(currencyFound)
+        });
+    }, [profileSettingsData])
+
+    const profileSettingsConfig =  currencyData.currencies ? getProfileSettingsConfig({
+        currencySelected: currencyData.currencySelected,
+        currencyList: currencyData.currencies,
+        changeCurrency: (currencyObject) => {
+            currencyActions.setCurrencySelected(currencyObject);
+            profileSettingsActions.setField({
+                fieldId: 'currency_id',
+                fieldType: profileSettingsFieldTypeList.new,
+                fieldValue: currencyObject,
+            })
+        },
+        initialCurrency,
+    }) : [];
 
     return (
         <div className='settingsPage'>
@@ -44,9 +70,11 @@ export const SettingsPage = () => {
                             </div>
                             {
                                 profileSettingsConfig.map((settingsField, key) => {
-                                        const inputValue = profileSettingsData.fields[settingsField.id] &&
-                                            profileSettingsData
-                                                .fields[settingsField.id][profileSettingsFieldTypeList.current];
+                                        const inputValue = settingsField.renderCurrentValueFieldValue 
+                                            ? settingsField.renderCurrentValueFieldValue()
+                                            : profileSettingsData.fields[settingsField.id] &&
+                                                profileSettingsData
+                                                    .fields[settingsField.id][profileSettingsFieldTypeList.current];
                                         return (
                                             <div className='settingsPage__contentItem'
                                                  key={`settingsPage__contentItem${key}`}>

@@ -16,17 +16,25 @@ import './statisticsPage.scss';
 export const StatisticsPage = () => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
+    const [operationIndex, setOperationIndex] = useState(0);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
 
-    const statisticsQuery = useQuery(['statistics', pageIndex], () => {
-        return request(`/statistic/get-statistic?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { return res && setTableData({
-            ...res.data,
-            table: [
-                ...tableData.table,
-                ...res.data.table,
-            ]
-        })})
+    const statisticsQuery = useQuery(['statistics', pageIndex, operationIndex], () => {
+        return request(`/statistic/get-statistic?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { 
+
+            if(res) {
+                setTableData({
+                    ...res.data,
+                    table: [
+                        ...tableData.table,
+                        ...res.data.table,
+                    ]
+                })
+            }
+
+            return res.data
+        })
     });
 
     const statisticsFiltersQueryList = useQueries([
@@ -59,7 +67,7 @@ export const StatisticsPage = () => {
                             <div className='statisticsPage__filters'>
                                 <Filter filters={filters} data={filtersData} onSave={
                                     ()=>{
-                                        setPageIndex(pageIndex); 
+                                        setOperationIndex(operationIndex+1)
                                     }
                                 } />
                             </div>

@@ -23,6 +23,7 @@ import './withdrawPage.scss';
 
 export const WithdrawPage = () => {
 
+    const [operationIndex, setOperationIndex] = useState(0);
     const [pageIndex, setPageIndex] = useState(0);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
 
@@ -31,17 +32,24 @@ export const WithdrawPage = () => {
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const withdrawQuery = useQuery(['withdraw-table', pageIndex], () => {
+    const withdrawQuery = useQuery(['withdraw-table', pageIndex, operationIndex], () => {
         if(!filtersData || !filtersData.fields || filtersData.fields.every(item=>!item)) {
             return request(`withdraw/get-withdraws`).then(res => res.data);
         }
-        return request(`withdraw/get-withdraws?${convertToQueryString(filtersData.fields)}`,).then(res => { return res && setTableData({
-            ...res.data,
-            table: [
-                ...tableData.table,
-                ...res.data.table,
-            ]
-        })})
+        return request(`withdraw/get-withdraws?${convertToQueryString(filtersData.fields)}`,).then(res => { 
+
+            if(res) {
+                setTableData({
+                    ...res.data,
+                    table: [
+                        ...tableData.table,
+                        ...res.data.table,
+                    ]
+                })
+            }
+
+            return res.data
+        })
     })
 
     const statusFilterQuery = useQuery(['withdraw-statuses'], () => {
@@ -104,7 +112,7 @@ export const WithdrawPage = () => {
                                                                 
                                                                 request('/withdraw/create', { method: 'post', queryData }).then((res) => {
                                                                     drawerActions.close();
-                                                                    setPageIndex(pageIndex)
+                                                                    setOperationIndex(operationIndex+1)
                                                                     return res.data;
                                                                 })
                                                             },
@@ -123,7 +131,7 @@ export const WithdrawPage = () => {
                                     data={filtersData} 
                                     onSave={
                                         ()=>{
-                                            setPageIndex(pageIndex)
+                                            setOperationIndex(operationIndex+1)
                                         }
                                     }
                                 />
