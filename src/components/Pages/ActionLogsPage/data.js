@@ -57,7 +57,7 @@ export const filters = [{
     matchPropName: 'label',
     width: '169px',
     renderItem: (item) => item.label,
-    onSelectFormator: (item) => item.id,
+    onSelectFormator: (item) => idArrayFormator(item),
 }, ];
 
 export const table = {

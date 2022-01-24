@@ -27,6 +27,10 @@ export const SmartLinksPage = () => {
     const [filterData, filterActions] = useAtom(filterAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
 
+    useEffect( ()=>{
+        filterActions.reset();
+    }, [])
+    
     const smartLinksQuery = useQuery(['smartlinks', pageIndex, operationIndex], async () => {
         return request(`smartlink?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`).then(res => { 
 

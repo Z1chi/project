@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAtom } from '@reatom/react';
 import { useQueries, useQuery } from 'react-query';
 
@@ -21,6 +21,10 @@ export const ActionLogsPage = () => {
     const [operationIndex, setOperationIndex] = useState(0);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
+
+    useEffect( ()=>{
+        filterActions.reset();
+    }, [])
 
     const actionLogsStatisticsQuery = useQuery(['action-logs/statistics'], () => {
         return request('/action-log/total').then(res => res.data);
@@ -93,10 +97,6 @@ export const ActionLogsPage = () => {
                                 <div className='actionLogsPage__tableFilter'>
                                     <Filter filters={filters}
                                         data={filtersData}
-                                        mobileFilterConfig={{
-                                            fields: [],
-                                            onSave: () => {console.log('saved')},
-                                        }}
                                         onSave={
                                             ()=>{
                                                 setOperationIndex(operationIndex+1)

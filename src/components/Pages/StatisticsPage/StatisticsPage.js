@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAtom } from '@reatom/react';
 import {useQueries, useQuery} from "react-query";
 import request from "../../../api/request";
@@ -19,6 +19,10 @@ export const StatisticsPage = () => {
     const [operationIndex, setOperationIndex] = useState(0);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
+
+    useEffect( ()=>{
+        filterActions.reset();
+    }, [])
 
     const statisticsQuery = useQuery(['statistics', pageIndex, operationIndex], () => {
         return request(`/statistic/get-statistic?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { 

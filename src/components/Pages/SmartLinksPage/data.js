@@ -216,17 +216,29 @@ export const drawers = {
 
             [{
                 generateField: ({ stateData }) => {
-                    return (
-                        <Button styles={{
+                    const button = {};
+                    if(!(stateData.project_id && stateData.project_id.id && stateData.title && stateData.format && stateData.format.id )) {
+                        button.styles = {
                             padding: '10px 15px',
                             height: '42px',
                             background: '#3F3F3F',
-                        }} 
-                            onClick={()=>props.onCreate({
-                                project_id: stateData.project_id.id,
-                                title: stateData.title,
-                                format: stateData.format.id
-                            })}
+                        }
+                        button.onClick = () => {};
+                    } else {
+                        button.styles = {
+                            padding: '10px 15px',
+                            height: '42px',
+                            background: '#219FE5',
+                        }
+                        button.onClick = ()=>props.onCreate({
+                            project_id: stateData.project_id.id,
+                            title: stateData.title,
+                            format: stateData.format.id
+                        })
+                    }
+                    return (
+                        <Button styles={button.styles} 
+                            onClick={button.onClick}
                         >
                             Create
                         </Button>

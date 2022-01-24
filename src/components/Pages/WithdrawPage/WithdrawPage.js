@@ -34,6 +34,10 @@ export const WithdrawPage = () => {
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
+    useEffect( ()=>{
+        filterActions.reset();
+    }, [])
+
     const withdrawQuery = useQuery(['withdraw-table', pageIndex, operationIndex], () => {
         
         return request(`withdraw/get-withdraws?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`,).then(res => { 
