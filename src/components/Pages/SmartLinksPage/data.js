@@ -219,15 +219,11 @@ export const drawers = {
                     const button = {};
                     if(!(stateData.project_id && stateData.project_id.id && stateData.title && stateData.format && stateData.format.id )) {
                         button.styles = {
-                            padding: '10px 15px',
-                            height: '42px',
                             background: '#3F3F3F',
                         }
                         button.onClick = () => {};
                     } else {
                         button.styles = {
-                            padding: '10px 15px',
-                            height: '42px',
                             background: '#219FE5',
                         }
                         button.onClick = ()=>props.onCreate({
@@ -237,7 +233,11 @@ export const drawers = {
                         })
                     }
                     return (
-                        <Button styles={button.styles} 
+                        <Button styles={{
+                            padding: '10px 15px',
+                            height: '42px',
+                            ...button.styles,
+                        }} 
                             onClick={button.onClick}
                         >
                             Create
@@ -340,7 +340,7 @@ export const drawers = {
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-                            background: '#3F3F3F',
+                            background: '#219FE5',
                         }}
                             onClick={() => props.onEdit(data)}
                         >
@@ -356,7 +356,7 @@ export const drawers = {
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-                            background: '#343844',
+                            background: '#219FE5',
                         }} 
                             onClick={() => props.onDelete({ itemId })}
                         >

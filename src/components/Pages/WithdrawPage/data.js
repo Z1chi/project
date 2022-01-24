@@ -40,7 +40,7 @@ export const filters = [{
     type: dropdownTypes.SELECT,
     width: '154px',
     renderItem: ({ id, label }) => label,
-    onSelectFormator: (itemArray)=>itemArray.map(item => item.id),
+    onSelectFormator: item => item.id,
 }, ];
 
 export const table = {
@@ -151,13 +151,25 @@ export const drawers = {
 
             [{
                 generateField: ({ stateData }) => {
+                    const button = {};
+                    if(!stateData.walletAddress || !stateData.amount) {
+                        button.styles = {
+                            background: '#3F3F3F',
+                        }
+                        button.onClick = () => {}
+                    } else {
+                        button.styles = {
+                            background: '#219FE5',
+                        },
+                        button.onClick = () => props.onClick(stateData)
+                    }
                     return (
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-                            background: '#3F3F3F',
+                            ...button.styles,
                         }} 
-                            onClick={() => props.onClick(stateData)}
+                            onClick={button.onClick}
                         >
                             Withdraw
                         </Button>
