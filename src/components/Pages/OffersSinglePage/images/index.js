@@ -17,7 +17,7 @@ import registrations_amount from './registrations_amount.svg'
 
 //далее после подключения бэка удалить
 import prostoImg from '../../../Molecules/ManagerSidebarCard/images/i.jpeg'
-import remove from './removeAfterDevelop.svg'
+
 
 export const images = {
     descriptionIcon,
@@ -38,6 +38,6 @@ export const images = {
     registrations_amount,
     //далее после подключения бэка удалить
     prostoImg,
-    remove,
+
 
 };
