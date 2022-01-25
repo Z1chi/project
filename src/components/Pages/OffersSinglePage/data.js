@@ -173,7 +173,7 @@ export const rowsConfig = [
                 {
                     icon: images.avg_deposit,
                     title: 'Avg. deposit:',
-                    value: localeString({value: statistic.avg_deposit}).slice(0, -3),
+                    value: localeString({value: statistic.avg_deposit.amount}).slice(0, -3),
                 },
                 {
                     icon: images.deposits,
@@ -183,7 +183,7 @@ export const rowsConfig = [
                 {
                     icon: images.avg_turnover,
                     title: 'Avg. turnover (30d)',
-                    value: localeString({value: statistic.avg_turnover}).slice(0, -3),
+                    value: localeString({value: statistic.avg_turnover.amount}).slice(0, -3),
                 },
                 {
                     icon: images.registrations_amount,

@@ -7,7 +7,7 @@ import {OfferPaymentParam} from '../../Atoms/OfferPaymentParam/OfferPaymentParam
 import './offerCard.scss';
 
 
-export const OfferCard = ({image, isMobile, singlePageId = 1, title, url, project_affiliate, small_description, offerConfig}) => {
+export const OfferCard = ({image, isMobile, id, title, url, project_affiliate, small_description, offerConfig}) => {
 
     const paymentParamsArray = Object.entries(project_affiliate);
 
@@ -17,7 +17,7 @@ export const OfferCard = ({image, isMobile, singlePageId = 1, title, url, projec
                 <div className='offerCard__logo'>
                     <img src={`${process.env.MEDIA_URL}${image}`} alt=''/>
                 </div>
-                <Link to={`/offers/${singlePageId}`} className='offerCard__more'>
+                <Link to={`/offers/${id}`} className='offerCard__more'>
                     More info
                 </Link>
             </div>
