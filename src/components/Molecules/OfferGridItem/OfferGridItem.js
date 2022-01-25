@@ -1,8 +1,9 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import SVG from 'react-inlinesvg';
 
 import './offerGridItem.scss';
-import {Link} from "react-router-dom";
+
 
 export const OfferGridItem = ({id, icon, title, renderContent, data, width, offerQuery}) => {
 
