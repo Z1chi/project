@@ -11,7 +11,7 @@ import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 
 import request from '../../../api/request';
 import { convertToQueryString } from '../../../helpers/convertToQueryString';
-import {filters, table, drawers, modalDelete} from './data';
+import {filters, filterFormators, table, drawers, modalDelete} from './data';
 
 import {filterAtom} from '../../../store/Filter';
 import {drawerAtom} from '../../../store/Drawer';
@@ -23,20 +23,31 @@ export const SmartLinksPage = () => {
     const [tableData, setTableData] = useState({ table: [], last_page: null});
     const [pageIndex, setPageIndex] = useState(1);
     const [operationIndex, setOperationIndex] = useState(0);
+    const [pushTableData, setPushTableData] = useState(false);
     const [drawerData, drawerActions] = useAtom(drawerAtom);
     const [filterData, filterActions] = useAtom(filterAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
 
+    useEffect( ()=>{
+        filterActions.reset();
+    }, [])
+    
     const smartLinksQuery = useQuery(['smartlinks', pageIndex, operationIndex], async () => {
-        return request(`smartlink?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`).then(res => { 
-
+        const filterQueryData = {};
+        for(filterFieldId in filterData.fields) {
+            const filterFieldValue =  filterFormators[filterFieldId](filterData.fields[filterFieldId]);
+            if(filterFieldValue) {
+                filterQueryData[filterFieldId] = filterFieldValue
+            }
+        }
+        return request(`smartlink?${convertToQueryString({ page: pageIndex, ...filterQueryData })}`).then(res => { 
             if(res) {
                 setTableData({
                     ...res.data,
-                    table: [
+                    table: pushTableData ? [
                         ...tableData.table,
                         ...res.data.table,
-                    ]
+                    ] : res.data.table
                 })
             }
 
@@ -71,7 +82,7 @@ export const SmartLinksPage = () => {
                     return (
                         <div className='smartLinksPage__content'>
                             {
-                                smartLinksQuery.data && smartLinksQuery.data.table && smartLinksQuery.data.table.length === 0
+                                smartLinksQuery.data && smartLinksQuery.data.table && (filterData.fields.length === 0 && smartLinksQuery.data.table.length === 0)
                                     ? (
                                         <TableEmpty {...table.emptyTable}
                                             button={{

@@ -116,18 +116,19 @@ export const getProfileSettingsConfig = (configOptions) => [
         },
         mapRequestData: (field) => {
             return {
-                currency_id: field ? field[profileSettingsFieldTypeList.new].id : '',
+                currency_id: field ? field[profileSettingsFieldTypeList.new] : '',
             }
         },
         formValidator: ()=>true,
         renderNewValueField: () => {
             return configOptions.currencyList ? (
                 <FormField
-                    value={configOptions.currencySelected ? configOptions.currencySelected.name : ''}
+                    fieldValue={configOptions.currencyList}
                     type={dropdownTypes.SELECT}
-                    onChange={(option) => configOptions.changeCurrency(option)}
+                    onChange={(options) => configOptions.changeCurrency(options)}
                     options={configOptions.currencyList}
                     renderItem={(option) => option.name}
+                    matchPropName='name'
                 />
             ) : null
         }

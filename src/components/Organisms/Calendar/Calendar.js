@@ -6,7 +6,7 @@ import DatePicker from '../../Molecules/DatePicker/DatePicker';
 import './calendar.scss';
 import { calendarLocale } from './data';
 
-export const Calendar = ({ onChange, }) => {
+export const Calendar = ({ onChange, dateSource }) => {
     const [selectedDayRange, setSelectedDayRange] = useState({
         from: null,
         to: null
@@ -35,7 +35,7 @@ export const Calendar = ({ onChange, }) => {
                 <div className='calendar__dateList'></div>
             </div> */}
             <DatePicker
-                value={selectedDayRange}
+                value={dateSource || selectedDayRange}
                 onChange={(e)=>{setSelectedDayRange(e);onChange(e)}}
                 locale={calendarLocale}
             />

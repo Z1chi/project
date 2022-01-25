@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SVG from 'react-inlinesvg';
 import { images } from './images';
@@ -7,7 +7,16 @@ import './select.scss';
 
 export const Select = ({ options, onChange, renderItem=option=>option, mobileConfig }) => {
     
-    const [indexSelected, setIndexSelected] = useState(null)
+    const [optionsSelectable, setOptionsSelectable] = useState(options)
+
+    useEffect( () => {
+        options && options.length > 0 && setOptionsSelectable(options.map( option => {
+            return {
+                isSelected: false,
+                ...option,
+            }
+        }))
+    }, [options,])
 
     return (
         <div className='select'>
@@ -21,10 +30,22 @@ export const Select = ({ options, onChange, renderItem=option=>option, mobileCon
             </div>
             <div className='select__options'>
             {
-                options.map( (option, index) => {
+                optionsSelectable.map( (option, index) => {
                     return (
-                        <div className={`select__optionsItem${index === indexSelected?' select__optionsItem--selected':''}`} 
-                            onClick={()=>{onChange(option);setIndexSelected(index)}}
+                        <div className={`select__optionsItem${option.isSelected?' select__optionsItem--selected':''}`} 
+                            onClick={()=>{
+                                const selectResult = optionsSelectable.map((optionsSelectableItem, innerIndex) => {
+                                    return index===innerIndex ? {
+                                        ...optionsSelectableItem,
+                                        isSelected: !optionsSelectableItem.isSelected,
+                                    } : {
+                                        ...optionsSelectableItem,
+                                        isSelected: false,
+                                    }
+                                });
+                                setOptionsSelectable(selectResult);
+                                onChange(selectResult)
+                            }}
                         >
                             {renderItem(option)}
                         </div>

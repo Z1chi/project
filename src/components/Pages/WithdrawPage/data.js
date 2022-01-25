@@ -25,14 +25,12 @@ export const filters = [{
     mobileTitle: 'Select request date',
     type: dropdownTypes.DATE,
     width: '204px',
-    onSelectFormator: dateFormator,
 }, {
     id: 'pay_date',
     title: 'Pay date',
     mobileTitle: 'Select pay date',
     type: dropdownTypes.DATE,
     width: '154px',
-    onSelectFormator: dateFormator,
 }, {
     id: 'status',
     title: 'Status',
@@ -40,8 +38,13 @@ export const filters = [{
     type: dropdownTypes.SELECT,
     width: '154px',
     renderItem: ({ id, label }) => label,
-    onSelectFormator: (itemArray)=>itemArray.map(item => item.id),
 }, ];
+
+export const filterFormators = {
+    date: date => dateFormator(date),
+    pay_date: date => dateFormator(date),
+    status: itemArray => idArrayFormator(itemArray),
+}
 
 export const table = {
 
@@ -112,7 +115,7 @@ export const table = {
         text: 'Withdraws will appear here once you’ll lorem ipsum dolomir loret galor. ',
         button: {
             text: 'Explore offers',
-            onClick: ()=>{}
+            link: '/offers',
         }
     }
 };
@@ -151,13 +154,25 @@ export const drawers = {
 
             [{
                 generateField: ({ stateData }) => {
+                    const button = {};
+                    if(!stateData.walletAddress || !stateData.amount) {
+                        button.styles = {
+                            background: '#3F3F3F',
+                        }
+                        button.onClick = () => {}
+                    } else {
+                        button.styles = {
+                            background: '#219FE5',
+                        },
+                        button.onClick = () => props.onClick(stateData)
+                    }
                     return (
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-                            background: '#3F3F3F',
+                            ...button.styles,
                         }} 
-                            onClick={() => props.onClick(stateData)}
+                            onClick={button.onClick}
                         >
                             Withdraw
                         </Button>

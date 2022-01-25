@@ -48,7 +48,7 @@ export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => 
                                             <FormField {...field}
                                                 stateData={drawerData.fieldValues}
                                                 options={field.id ? data[field.id] : []}
-                                                value={(field.id && drawerData.fieldValues) ? drawerData.fieldValues[field.id] : ''}
+                                                fieldValue={(field.id && drawerData.fieldValues) ? drawerData.fieldValues[field.id] : ''}
                                                 onChange={field.id ? (value) => drawerActions.setFieldValue({
                                                     fieldId: field.id,
                                                     fieldValue: value,

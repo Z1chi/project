@@ -16,7 +16,7 @@ import { filterAtom } from '../../../store/Filter';
 
 import request from '../../../api/request';
 
-import { statistics, filters, table, drawers, modalWithdraw } from './data';
+import { statistics, filters, filterFormators, table, drawers, modalWithdraw } from './data';
 
 import { convertToQueryString } from '../../../helpers/convertToQueryString';
 
@@ -25,6 +25,7 @@ import './withdrawPage.scss';
 export const WithdrawPage = () => {
 
     const [operationIndex, setOperationIndex] = useState(0);
+    const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(0);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
 
@@ -34,17 +35,26 @@ export const WithdrawPage = () => {
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    const withdrawQuery = useQuery(['withdraw-table', pageIndex, operationIndex], () => {
-        
-        return request(`withdraw/get-withdraws?${convertToQueryString({ page: pageIndex, ...filterData.fields })}`,).then(res => { 
+    useEffect( ()=>{
+        filterActions.reset();
+    }, [])
 
+    const withdrawQuery = useQuery(['withdraw-table', pageIndex, operationIndex], () => {
+        const filterQueryData = {};
+        for(filterFieldId in filterData.fields) {
+            const filterFieldValue =  filterFormators[filterFieldId](filterData.fields[filterFieldId]);
+            if(filterFieldValue) {
+                filterQueryData[filterFieldId] = filterFieldValue
+            }
+        }
+        return request(`withdraw/get-withdraws?${convertToQueryString({ page: pageIndex, ...filterQueryData})}`,).then(res => { 
             if(res) {
                 setTableData({
                     ...res.data,
-                    table: [
+                    table: pushTableData ? [
                         ...tableData.table,
                         ...res.data.table,
-                    ]
+                    ] : res.data.table
                 })
             }
 

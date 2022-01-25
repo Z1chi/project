@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAtom } from '@reatom/react';
 
 import { Dropdown } from '../Dropdown/Dropdown';
@@ -18,50 +18,55 @@ const renderFilterContent = (type) => (props) => {
 
 export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormator=(item)=>item, type, }) => {
     const [filterData, filterActions] = useAtom(filterAtom);
+
     return (
         <div className='filterItem'>
-            <div className='filterItem__info'>
-                <div className='filterItem__title'>
-                    {title}
-                </div>
-                { items && items.options && <div className='filterItem__selected'>
-                    {
-                        items.options[items.selectedIndex]
-                    }
-                </div> }
-            </div>
-            <div className='filterItem__dropdown'>
-                <Dropdown
-                    renderSwitcher={ ()=>{
-                        return (
-                            <div className='filterItem__dropdownArrow'>
-                                <SVG src={images.sortIcon} />
+            <Dropdown
+                renderSwitcher={ ()=>{
+                    return (
+                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div className='filterItem__info'>
+                            <div className='filterItem__title'>
+                                {title}
                             </div>
-                        )
-                    }}
-                    renderContent={ ({ setIsOpened })=>{
-                        return (
-                            <div className='filterItem__dropdownContent'>
-                            {
-                                renderFilterContent(type)({
-                                    options: items, 
-                                    renderItem,
-                                    matchPropName,
-                                    onChange: (value)=>{ filterActions.setFieldValue({
-                                        fieldId: id,
-                                        fieldValue: onSelectFormator(value),
-                                    })},
-                                    mobileConfig: { 
-                                        title: mobileTitle,
-                                        onClose: () => setIsOpened(false)
-                                    }
-                                })
-                            }
-                            </div>
-                        )
-                    }}
-                />
-            </div>
+                            { items && items.options && <div className='filterItem__selected'>
+                                {
+                                    items.options[items.selectedIndex]
+                                }
+                            </div> }
+                        </div>
+                        <div className='filterItem__dropdownArrow'>
+                            <SVG src={images.sortIcon} />
+                        </div>
+                        </div>
+                    )
+                }}
+                renderContent={ ({ setIsOpened })=>{
+                    return (
+                        <div className='filterItem__dropdownContent'>
+                        {
+                            renderFilterContent(type)({
+                                options: filterData.fields[id] || items, 
+                                dateSource: filterData.fields[id] || {
+                                    from: null,
+                                    to: null,
+                                },
+                                renderItem,
+                                matchPropName,
+                                onChange: (value)=>{ filterActions.setFieldValue({
+                                    fieldId: id,
+                                    fieldValue: value
+                                })},
+                                mobileConfig: { 
+                                    title: mobileTitle,
+                                    onClose: () => setIsOpened(false)
+                                }
+                            })
+                        }
+                        </div>
+                    )
+                }}
+            />
         </div>
     )
 }
