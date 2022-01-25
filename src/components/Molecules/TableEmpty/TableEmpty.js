@@ -10,7 +10,7 @@ export const TableEmpty = ({ icon, text, button, link }) => {
     return (
         <div className='tableEmpty'>
             <div className='tableEmpty__icon'>
-                <SVG src={icon} />
+                <SVG src={icon}/>
             </div>
             <div className='tableEmpty__text'>
                 <p>{text}</p>
@@ -25,4 +25,4 @@ export const TableEmpty = ({ icon, text, button, link }) => {
             </div>
         </div>
     )
-}
+};

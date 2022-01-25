@@ -51,7 +51,7 @@ export default function App() {
                                 <Route exact path='/withdraws' component={WithdrawPage}/>
                                 <Route exact path='/faq' component={FAQPage}/>
                                 <Route exact path='/settings' component={SettingsPage}/>
-                                <Route exact path='?' component={SettingsPage}/>
+                                <Route exact path='*' component={LeadsPage}/>
                             </Switch>
 
 
