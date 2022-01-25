@@ -36,13 +36,14 @@ export const SettingsPage = () => {
     const profileSettingsConfig =  currencyData.currencies ? getProfileSettingsConfig({
         currencySelected: currencyData.currencySelected,
         currencyList: currencyData.currencies,
-        changeCurrency: (currencyObject) => {
-            currencyActions.setCurrencySelected(currencyObject);
+        changeCurrency: (currencyList) => {
+            currencyActions.setCurrencyList(currencyList);
             profileSettingsActions.setField({
                 fieldId: 'currency_id',
                 fieldType: profileSettingsFieldTypeList.new,
-                fieldValue: currencyObject,
+                fieldValue: currencyList.find(item => !!item.isSelected).id,
             })
+            console.log('p', profileSettingsData, currencyList)
         },
         initialCurrency,
     }) : [];

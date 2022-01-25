@@ -7,7 +7,7 @@ import {FlowCard} from '../../Molecules/FlowCard/FlowCard';
 import {Filter} from '../../Organisms/Filter/Filter';
 import {Table} from '../../Organisms/Table/Table';
 
-import {actionLogsStatisticsConfig, filters, table} from './data';
+import {actionLogsStatisticsConfig, filters, filterFormators, table} from './data';
 import { filterAtom } from '../../../store/Filter';
 
 import request from '../../../api/request';
@@ -19,6 +19,7 @@ export const ActionLogsPage = () => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
     const [operationIndex, setOperationIndex] = useState(0);
+    const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
 
@@ -26,20 +27,27 @@ export const ActionLogsPage = () => {
         filterActions.reset();
     }, [])
 
-    const actionLogsStatisticsQuery = useQuery(['action-logs/statistics'], () => {
+    const actionLogsStatisticsQuery = useQuery(['action-logs/statistics',], () => {
         return request('/action-log/total').then(res => res.data);
     });
 
     const actionLogsTableQuery = useQuery(['action-logs/table', pageIndex, operationIndex], () => {
-        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { 
-
+        const filterQueryData = {};
+        for(filterFieldId in filterData.fields) {
+            const filterFieldValue =  filterFormators[filterFieldId](filterData.fields[filterFieldId]);
+            if(filterFieldValue) {
+                filterQueryData[filterFieldId] = filterFieldValue
+            }
+        }
+        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterQueryData})}`).then(res => { 
+            
             if(res) {
                 setTableData({
                     ...res.data,
-                    table: [
+                    table: pushTableData ? [
                         ...tableData.table,
                         ...res.data.table,
-                    ]
+                    ] : res.data.table
                 })
             }
 
@@ -92,27 +100,26 @@ export const ActionLogsPage = () => {
                                 }
                             </div>
                             <div className='actionLogsPage__table'>
-                                {actionLogsFiltersQueryList.length > 0 &&
-                                actionLogsFiltersQueryList.every(query => query.data) &&
                                 <div className='actionLogsPage__tableFilter'>
-                                    <Filter filters={filters}
-                                        data={filtersData}
-                                        onSave={
-                                            ()=>{
-                                                setOperationIndex(operationIndex+1)
-                                            }
+                                     <Filter filters={filters} data={filtersData} onSave={
+                                        ()=>{
+                                            setPageIndex(1)
+                                            setOperationIndex(operationIndex+1)
+                                            setPushTableData(false)
                                         }
-                                    />
-                                </div>}
+                                    } />
+                                </div>
                                 <div className='actionLogsPage__tableData'>
                                     {
-                                        actionLogsTableQuery.data &&
-                                        <Table {...table} 
+                                        <Table 
                                             hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
                                             fetchMore={()=>{
                                                 setPageIndex(pageIndex+1)
+                                                setPushTableData(true)
                                             }}
-                                            data={actionLogsTableQuery.data.table}
+                                            {...table}
+                                            data={tableData.table}
+                                            emptyTable={table.emptyTable}
                                         />
                                     }
                                 </div>

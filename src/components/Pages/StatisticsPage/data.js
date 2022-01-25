@@ -11,7 +11,6 @@ export const filters = [{
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
     width: '204px',
-    onSelectFormator: date => dateFormator(date),
 }, {
     id: 'format',
     title: 'Format',
@@ -20,7 +19,6 @@ export const filters = [{
     matchPropName: 'label',
     width: '154px',
     renderItem: (item) => item.label,
-    onSelectFormator: (item)=>item.id,
 }, {
     id: 'country',
     title: 'Country',
@@ -29,7 +27,6 @@ export const filters = [{
     matchPropName: 'name',
     width: '154px',
     renderItem: (item) => item.name,
-    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, {
     id: 'smartlink',
     title: 'Smartlink',
@@ -37,7 +34,6 @@ export const filters = [{
     type: dropdownTypes.SELECT,
     width: '154px',
     renderItem: (item) => item.title,
-    onSelectFormator: (item)=>item.id,
 }, {
     id: 'offer',
     title: 'Offers',
@@ -51,9 +47,15 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
-    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, ];
 
+export const filterFormators = {
+    date: date => dateFormator(date),
+    format: itemArray => idArrayFormator(itemArray),
+    country: itemArray => idArrayFormator(itemArray),
+    smartlink: itemArray => idArrayFormator(itemArray),
+    offer: itemArray => idArrayFormator(itemArray),
+}
 
 export const table = {
     tableConfig: [{
@@ -197,8 +199,7 @@ export const table = {
         text: 'Your statistics will appear here once you’ll lorem ipsum dolomir loret galor.',
         button: {
             text: 'Explore offers',
-            onClick: () => {
-            }
+            link: '/offers',
         }
     }
 };

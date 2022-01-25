@@ -5,17 +5,11 @@ export const currenciesAtom = createAtom(
         setCurrencyList: (value) => value,
         setCurrencySelected: (value) => value,
     },
-    ({ onAction }, state = { currencies: [], currencySelected: {} }) => {
+    ({ onAction }, state = { currencies: [] }) => {
         onAction('setCurrencyList', (payload) => { 
             return state = {
                 ...state,
                 currencies: payload,
-            }
-        })
-        onAction('setCurrencySelected', (payload) => { 
-            return state = {
-                ...state,
-                currencySelected: payload,
             }
         })
 

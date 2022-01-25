@@ -20,6 +20,7 @@ export const Filter = ({ filters, data, onSave, }) => {
     const {width, height, ref} = useResizeDetector();
     const isMobile = width <= 768;
 
+
     return (
         isMobile
             ? (
@@ -46,7 +47,7 @@ export const Filter = ({ filters, data, onSave, }) => {
                                 Save changes
                             </Button>
                         </div>
-                        <div className='filter__reset' onClick={filterActions.reset}>
+                        <div className='filter__reset' onClick={() => { filterActions.reset(); onSave(); }}>
                             <div className='filter__resetIcon'>
                                 <SVG src={images.resetIcon} />
                             </div>

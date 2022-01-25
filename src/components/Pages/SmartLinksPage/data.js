@@ -27,14 +27,12 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
-    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, {
     id: 'date',
     title: 'Date',
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
     width: '154px',
-    onSelectFormator: dateFormator,
 }, {
     id: 'format',
     title: 'Format',
@@ -43,8 +41,13 @@ export const filters = [{
     matchPropName: 'label',
     width: '163px',
     renderItem: (item) => item.label,
-    onSelectFormator: (item)=>item.id,
 }, ];
+
+export const filterFormators = {
+    offers: itemArray => idArrayFormator(itemArray),
+    date: date => dateFormator(date),
+    format: itemArray => idArrayFormator(itemArray),
+}
 
 export const table = {
 
@@ -156,6 +159,10 @@ export const table = {
     }
 }
 
+const isNewSmartlinkValid = ({ project_id, title, format, }) => {
+    return project_id && project_id.some(item => !!item.isSelected) && title && format && format.some(item => !!item.isSelected);
+}
+
 export const drawers = {
     create: (props) => ({
         logo: images.createLinkIcon, 
@@ -217,7 +224,7 @@ export const drawers = {
             [{
                 generateField: ({ stateData }) => {
                     const button = {};
-                    if(!(stateData.project_id && stateData.project_id.id && stateData.title && stateData.format && stateData.format.id )) {
+                    if(!isNewSmartlinkValid(stateData)) {
                         button.styles = {
                             background: '#3F3F3F',
                         }
@@ -227,9 +234,9 @@ export const drawers = {
                             background: '#219FE5',
                         }
                         button.onClick = ()=>props.onCreate({
-                            project_id: stateData.project_id.id,
+                            project_id: stateData.project_id.find(item => !!item.isSelected).id,
                             title: stateData.title,
-                            format: stateData.format.id
+                            format: stateData.format.find(item => !!item.isSelected).id,
                         })
                     }
                     return (

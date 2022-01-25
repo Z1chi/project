@@ -9,15 +9,15 @@ import './multiSelect.scss';
 export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, onChange, }) => {
     const [searchValue, setSearchValue] = useState('');
     const [optionsSelectable, setOptionsSelectable] = useState(options)
-    
+
     useEffect( () => {
         options && options.length > 0 && setOptionsSelectable(options.map( option => {
             return {
-                ...option,
                 isSelected: false,
+                ...option,
             }
         }))
-    }, [options])
+    }, [options,])
 
     const searchRegexp = new RegExp(searchValue, 'g');
 
@@ -59,7 +59,7 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
                                         } : optionsSelectableItem
                                     });
                                     setOptionsSelectable(selectResult);
-                                    onChange(selectResult.filter(item=>!!item.isSelected))
+                                    onChange(selectResult)
                                 }}
                             />
                         </div>
@@ -68,21 +68,29 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
             }
             </div>
             <div className='multiSelect__selectors'>
-                <div className='multiSelect__reset' onClick={()=>setOptionsSelectable(optionsSelectable.map(item => {
+                <div className='multiSelect__reset' onClick={()=>{
+                    const unselectedOptions = optionsSelectable.map(item => {
                         return {
                             ...item,
                             isSelected: false
                         }
-                    }))}>
+                    })
+                    setOptionsSelectable(unselectedOptions);
+                    onChange(unselectedOptions)
+                }}>
                     <SVG src={images.resetIcon} />
                 </div>
                 <div className='multiSelect__selectAll'>
-                    <button onClick={()=>setOptionsSelectable(optionsSelectable.map(item => {
-                        return {
-                            ...item,
-                            isSelected: true
-                        }
-                    }))}>Select all</button>
+                    <button onClick={()=>{
+                        const selectedOptions = optionsSelectable.map(item => {
+                            return {
+                                ...item,
+                                isSelected: true
+                            }
+                        })
+                        setOptionsSelectable(selectedOptions)
+                        onChange(selectedOptions)
+                    }}>Select all</button>
                 </div>
             </div>
         </div>

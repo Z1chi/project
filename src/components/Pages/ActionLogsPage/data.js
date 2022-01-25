@@ -2,6 +2,7 @@ import { images } from './images';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { idArrayFormator } from '../../../helpers/idArrayFormator';
 import { dateStringFormator } from '../../../helpers/lib';
+import { dateFormator } from '../../../helpers/dateFormator';
 import { currencyFormator } from '../../../helpers/currencyFormator';
 
 export const actionLogsStatisticsConfig = [
@@ -25,7 +26,7 @@ export const filters = [{
     type: dropdownTypes.DATE,
     mobileTitle: 'Select date',
     width: '169px',
-    onSelectFormator: date => dateStringFormator(date),
+    onSelectFormator: date => currencyFormator(date),
 }, {
     id: 'offer',
     title: 'Offers',
@@ -59,6 +60,13 @@ export const filters = [{
     renderItem: (item) => item.label,
     onSelectFormator: (item) => idArrayFormator(item),
 }, ];
+
+export const filterFormators = {
+    date: date => dateFormator(date),
+    offer: itemArray => idArrayFormator(itemArray),
+    smartlink: itemArray => idArrayFormator(itemArray),
+    action: itemArray => idArrayFormator(itemArray),
+};
 
 export const table = {
 
@@ -116,7 +124,7 @@ export const table = {
         text: 'Action logs will appear here once you’ll lorem ipsum dolomir loret galor. ',
         button: {
             text: 'Explore offers',
-            onClick: ()=>{}
+            link: '/offers',
         }
     }
 };

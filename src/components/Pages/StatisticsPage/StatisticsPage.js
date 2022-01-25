@@ -7,7 +7,7 @@ import { Table } from '../../Organisms/Table/Table';
 import { Filter } from '../../Organisms/Filter/Filter';
 import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
 
-import { filters, table } from './data';
+import { filters, filterFormators, table } from './data';
 import { filterAtom } from '../../../store/Filter';
 import { convertToQueryString } from '../../../helpers/convertToQueryString';
 
@@ -17,6 +17,7 @@ export const StatisticsPage = () => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
     const [operationIndex, setOperationIndex] = useState(0);
+    const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({ table: [], last_page: null});
 
@@ -24,16 +25,23 @@ export const StatisticsPage = () => {
         filterActions.reset();
     }, [])
 
-    const statisticsQuery = useQuery(['statistics', pageIndex, operationIndex], () => {
-        return request(`/statistic/get-statistic?${convertToQueryString({page: pageIndex, ...filterData.fields})}`).then(res => { 
+    const statisticsQuery = useQuery(['statistics', pageIndex, operationIndex, ], () => {
+        const filterQueryData = {};
+        for(filterFieldId in filterData.fields) {
+            const filterFieldValue =  filterFormators[filterFieldId](filterData.fields[filterFieldId]);
+            if(filterFieldValue) {
+                filterQueryData[filterFieldId] = filterFieldValue
+            }
+        }
+        return request(`/statistic/get-statistic?${convertToQueryString({page: pageIndex, ...filterQueryData})}`).then(res => { 
 
             if(res) {
                 setTableData({
                     ...res.data,
-                    table: [
+                    table: pushTableData ? [
                         ...tableData.table,
                         ...res.data.table,
-                    ]
+                    ] : res.data.table
                 })
             }
 
@@ -71,7 +79,9 @@ export const StatisticsPage = () => {
                             <div className='statisticsPage__filters'>
                                 <Filter filters={filters} data={filtersData} onSave={
                                     ()=>{
+                                        setPageIndex(1)
                                         setOperationIndex(operationIndex+1)
+                                        setPushTableData(false)
                                     }
                                 } />
                             </div>
@@ -80,6 +90,7 @@ export const StatisticsPage = () => {
                                     hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
                                     fetchMore={()=>{
                                         setPageIndex(pageIndex+1)
+                                        setPushTableData(true)
                                     }}
                                     {...table}
                                     data={tableData.table}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAtom } from '@reatom/react';
 
 import { Dropdown } from '../Dropdown/Dropdown';
@@ -18,6 +18,7 @@ const renderFilterContent = (type) => (props) => {
 
 export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormator=(item)=>item, type, }) => {
     const [filterData, filterActions] = useAtom(filterAtom);
+
     return (
         <div className='filterItem'>
             <Dropdown
@@ -45,12 +46,16 @@ export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], re
                         <div className='filterItem__dropdownContent'>
                         {
                             renderFilterContent(type)({
-                                options: items, 
+                                options: filterData.fields[id] || items, 
+                                dateSource: filterData.fields[id] || {
+                                    from: null,
+                                    to: null,
+                                },
                                 renderItem,
                                 matchPropName,
                                 onChange: (value)=>{ filterActions.setFieldValue({
                                     fieldId: id,
-                                    fieldValue: onSelectFormator(value),
+                                    fieldValue: value
                                 })},
                                 mobileConfig: { 
                                     title: mobileTitle,
