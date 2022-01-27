@@ -15,7 +15,7 @@ export const OffersSinglePage = (props) => {
     const history = useHistory();
     const offerQuery = useQuery('offer', () => {
 
-        return request(`/offers/get-offer/?id=${props.match.params.id}`).then(res => {
+        return request(`/offers/get-offer?id=${props.match.params.id}`).then(res => {
             if (res.exception)
                 history.push('/offers');
             return res.data
