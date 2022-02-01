@@ -23,7 +23,6 @@ export const Header = () => {
 
     const supportData = profileSettingsData.fields;
 
-
     return (
         <div className='header'>
 
@@ -32,8 +31,7 @@ export const Header = () => {
                     renderSwitcher={
                         ({setIsOpened, isOpened}) => {
                             return (
-                                <div className='header__profileSettingsSwitcher'
-                                     onClick={() => isOpened === true ? setIsOpened(false) : setIsOpened(true)}>
+                                <div className='header__profileSettingsSwitcher'>
                                     <Avatar
                                         imageSrc={supportData.img &&
                                         supportData.img[profileSettingsFieldTypeList.current].length > 1 ?

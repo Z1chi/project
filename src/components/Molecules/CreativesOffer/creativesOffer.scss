@@ -56,6 +56,10 @@
         display: block;
         text-decoration: none;
         color: #219FE6;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     &__description {
