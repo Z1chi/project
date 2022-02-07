@@ -6,6 +6,11 @@
 
     &--group {
         padding: 18px 27px;
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.2);
+        border-left: 1px solid #282D3A;
+        border-right: 1px solid #282D3A;
 
         .tableHeadItem__text {
             font-size: 15px;
@@ -20,6 +25,12 @@
             width: 14px;
             height: 14px;
             margin-left: 8px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 8px;
 
             &--highlighted {
                 background-color: #FFFFFF;

@@ -1,8 +1,6 @@
 import {createAtom} from '@reatom/core'
 import {profileSettingsFieldTypeList} from "../../components/Pages/SettingsPage/data";
 
-
-
 export const profileSettingsAtom = createAtom(
     {
         setField: (value) => value,
