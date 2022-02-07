@@ -1,13 +1,40 @@
 .tableHead {
-    display: flex;
-    background-color: #131826;
+  display: flex;
+  background-color: #131826;
+  position: relative;
 
-   &__groupItems {
-      display: flex;
-   }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #282D3A;
+  }
 
-   &__item {
-      height: 38px;
+  &__item {
+    height: 38px;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
       border-bottom: 1px solid #282D3A;
-   }
+    }
+  }
+
+  &__groupItems {
+    display: flex;
+  }
+
+  &__group {
+    border-right: 1px solid #282D3A;
+    &:last-child {
+      border-right: none;
+    }
+  }
+
 }

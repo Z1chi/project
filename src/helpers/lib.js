@@ -82,3 +82,47 @@ export const dateStringFormator = (dateTimeString) => {
     return `${monthArr.find((item, key) =>
         key + 1 === Number(month) ? item : '')} ${day}, ${year} ${timeFn()}`
 };
+
+
+export const dateFormator = (dateObject) => {
+    return {
+        from: `${dateObject.from.year}-${dateObject.from.month.toString().padStart(2, '0')}-${dateObject.from.day.toString().padStart(2, '0')} 00:00:00`,
+        to: `${dateObject.to.year}-${dateObject.to.month.toString().padStart(2, '0')}-${dateObject.to.day.toString().padStart(2, '0')} 23:59:59`
+    }
+};
+
+export const currencyFormator = (item) => `${item.symbol} ${item.amount}`;
+
+const getPropQueryParam = (property, isProp) => {
+    return isProp ? '[' + property + ']' : property
+};
+
+export const convertToQueryString = (object, currentBreadcrum = '', isProp = false,) => {
+    let queryString = '';
+
+    if (!object || Object.keys(object).length === 0) {
+        return '';
+    }
+
+    for (let property in object) {
+        let potentialObject = object[property];
+
+        if (typeof potentialObject === 'undefined') {
+            potentialObject = '';
+        } // set undefined values to an empty string
+
+        if (typeof potentialObject === 'object') {
+            queryString += convertToQueryString(potentialObject, currentBreadcrum + property, true,);
+        } else {
+            if (currentBreadcrum === '' && queryString === '') { // don't prepend an '&' if it's the first item in the query string
+                queryString += currentBreadcrum + getPropQueryParam(property, isProp) + '=' + potentialObject;
+            } else {
+                queryString += '&' + currentBreadcrum + getPropQueryParam(property, isProp) + '=' + potentialObject;
+            }
+        }
+    }
+
+    return queryString.replace('/\&=$/', '');
+};
+
+export const idArrayFormator = (itemArray)=>itemArray.filter(item => item.isSelected).map(item => item.id).join(',');

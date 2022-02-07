@@ -1,1 +1,0 @@
-export const currencyFormator = (item) => `${item.symbol} ${item.amount}`;

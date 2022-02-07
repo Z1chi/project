@@ -1,12 +1,22 @@
 .tableRow {
-    height: 60px;
-    width: 100%;
-    background-color: #131826;
-    display: flex;
-    box-sizing: border-box;
+  height: 60px;
+  width: 100%;
+  background-color: #131826;
+  display: flex;
+  box-sizing: border-box;
+  position: relative;
 
-    &__cell {
-        height: 100%;
-        border-bottom: 1px solid #282D3A
-    }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #282D3A;
+  }
+
+  &__cell {
+    height: 100%;
+    border-bottom: 1px solid #282D3A
+  }
 }

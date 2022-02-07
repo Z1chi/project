@@ -10,7 +10,7 @@ import {Table} from '../../Organisms/Table/Table';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 
 import request from '../../../api/request';
-import { convertToQueryString } from '../../../helpers/convertToQueryString';
+import { convertToQueryString } from '../../../helpers/lib';
 import {filters, filterFormators, table, drawers, modalDelete} from './data';
 
 import {filterAtom} from '../../../store/Filter';
@@ -30,11 +30,11 @@ export const SmartLinksPage = () => {
 
     useEffect( ()=>{
         filterActions.reset();
-    }, [])
+    }, []);
     
     const smartLinksQuery = useQuery(['smartlinks', pageIndex, operationIndex], async () => {
         const filterQueryData = {};
-        for(filterFieldId in filterData.fields) {
+        for(const filterFieldId in filterData.fields) {
             const filterFieldValue =  filterFormators[filterFieldId](filterData.fields[filterFieldId]);
             if(filterFieldValue) {
                 filterQueryData[filterFieldId] = filterFieldValue
@@ -95,7 +95,7 @@ export const SmartLinksPage = () => {
                                                                 data,
                                                             }).then((res) => {
                                                                 drawerActions.close();
-                                                                setOperationIndex(operationIndex+1)
+                                                                setOperationIndex(operationIndex+1);
                                                                 return res.data;
                                                             });
                                                         }
@@ -126,7 +126,7 @@ export const SmartLinksPage = () => {
                                                                 data,
                                                             }).then((res) => {
                                                                 drawerActions.close();
-                                                                setOperationIndex(operationIndex+1)
+                                                                setOperationIndex(operationIndex+1);
                                                                 return res.data;
                                                             });
                                                         }
@@ -168,7 +168,7 @@ export const SmartLinksPage = () => {
                                                                         },
                                                                     }).then((res) => {
                                                                         drawerActions.close();
-                                                                        setOperationIndex(operationIndex+1)
+                                                                        setOperationIndex(operationIndex+1);
                                                                         return res.data
                                                                     });
                                                                 },
@@ -178,14 +178,14 @@ export const SmartLinksPage = () => {
                                                                             onSubmit: () => {
                                                                                 request(`smartlink/delete/${itemId}`, {method: 'delete',}).then((res) => {
                                                                                     drawerActions.close();
-                                                                                    setOperationIndex(operationIndex+1)
+                                                                                    setOperationIndex(operationIndex+1);
                                                                                     return res.data
                                                                                 });
                                                                             },
                                                                         })
                                                                     )
                                                                 }
-                                                            }))
+                                                            }));
                                                             const smartlinkItem = smartLinksQuery.data.table.find(item => item.id === itemId);
                                                             drawerActions.setFieldValues(smartlinkItem)
                                                         },
@@ -195,7 +195,7 @@ export const SmartLinksPage = () => {
                                                                 onSubmit: () => {
                                                                     request(`smartlink/delete/${data.itemId}`, {method: 'delete',}).then((res) => {
                                                                         drawerActions.close();
-                                                                        setOperationIndex(operationIndex+1)
+                                                                        setOperationIndex(operationIndex+1);
                                                                         return res.data
                                                                     });
                                                                 },
@@ -218,4 +218,4 @@ export const SmartLinksPage = () => {
             }}/>}
         </div>
     )
-}
+};

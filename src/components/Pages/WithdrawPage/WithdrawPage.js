@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { useAtom } from '@reatom/react';
+import React, {useState, useEffect} from 'react';
+import {useQuery} from 'react-query';
+import {useAtom} from '@reatom/react';
 
-import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
-import { InfoCard } from '../../Molecules/InfoCard/InfoCard';
-import { WithdrawCard } from '../../Molecules/WithdrawCard/WithdrawCard';
-import { Filter } from '../../Organisms/Filter/Filter';
-import { Table } from '../../Organisms/Table/Table';
-import { Drawer } from '../../Organisms/Drawer/Drawer';
-import { Button } from '../../Atoms/Button/Button';
-import { drawerAtom } from '../../../store/Drawer';
-import { modalAtom } from '../../../store/Modal';
-import { alertAtom } from "../../../store/Alert";
-import { filterAtom } from '../../../store/Filter';
+import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
+import {InfoCard} from '../../Molecules/InfoCard/InfoCard';
+import {WithdrawCard} from '../../Molecules/WithdrawCard/WithdrawCard';
+import {Filter} from '../../Organisms/Filter/Filter';
+import {Table} from '../../Organisms/Table/Table';
+import {Drawer} from '../../Organisms/Drawer/Drawer';
+import {Button} from '../../Atoms/Button/Button';
+import {drawerAtom} from '../../../store/Drawer';
+import {modalAtom} from '../../../store/Modal';
+import {alertAtom} from "../../../store/Alert";
+import {filterAtom} from '../../../store/Filter';
 
 import request from '../../../api/request';
 
-import { statistics, filters, filterFormators, table, drawers, modalWithdraw } from './data';
+import {statistics, filters, filterFormators, table, drawers, modalWithdraw} from './data';
 
-import { convertToQueryString } from '../../../helpers/convertToQueryString';
+import {convertToQueryString} from '../../../helpers/lib';
 
 import './withdrawPage.scss';
 
@@ -27,7 +27,7 @@ export const WithdrawPage = () => {
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(0);
-    const [tableData, setTableData] = useState({ table: [], last_page: null});
+    const [tableData, setTableData] = useState({table: [], last_page: null});
 
     const [alertData, alertActions] = useAtom(alertAtom);
     const [filterData, filterActions] = useAtom(filterAtom);
@@ -35,20 +35,20 @@ export const WithdrawPage = () => {
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
 
-    useEffect( ()=>{
+    useEffect(() => {
         filterActions.reset();
-    }, [])
+    }, []);
 
     const withdrawQuery = useQuery(['withdraw-table', pageIndex, operationIndex], () => {
         const filterQueryData = {};
-        for(filterFieldId in filterData.fields) {
-            const filterFieldValue =  filterFormators[filterFieldId](filterData.fields[filterFieldId]);
-            if(filterFieldValue) {
+        for (const filterFieldId in filterData.fields) {
+            const filterFieldValue = filterFormators[filterFieldId](filterData.fields[filterFieldId]);
+            if (filterFieldValue) {
                 filterQueryData[filterFieldId] = filterFieldValue
             }
         }
-        return request(`withdraw/get-withdraws?${convertToQueryString({ page: pageIndex, ...filterQueryData})}`,).then(res => { 
-            if(res) {
+        return request(`withdraw/get-withdraws?${convertToQueryString({page: pageIndex, ...filterQueryData})}`,).then(res => {
+            if (res) {
                 setTableData({
                     ...res.data,
                     table: pushTableData ? [
@@ -60,38 +60,38 @@ export const WithdrawPage = () => {
 
             return res.data
         })
-    })
+    });
 
     const statusFilterQuery = useQuery(['withdraw-statuses'], () => {
         return request('withdraw/get-statuses').then(res => res.data);
-    })
+    });
 
     const filtersData = [
-        [], 
-        [], 
+        [],
+        [],
         statusFilterQuery.data || [],
     ];
 
     return (
         <div className='withdrawPage'>
-            <PageTemplate 
-                renderPage={({ width })=>{
+            <PageTemplate
+                renderPage={({width}) => {
                     return (
                         <div className='withdrawPage__content'>
                             <div className='withdrawPage__statistics'>
                                 <div className='withdrawPage__cards'>
-                                {
-                                    statistics.map( item => {
-                                        return (
-                                            <div className='withdrawPage__cardsItem'>
-                                                <InfoCard {...item} />
-                                            </div>
-                                        )
-                                    })
-                                }
+                                    {
+                                        statistics.map(item => {
+                                            return (
+                                                <div className='withdrawPage__cardsItem'>
+                                                    <InfoCard {...item} />
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
                                 <div className='withdrawPage__withdraw'>
-                                    <Button onClick={()=>{
+                                    <Button onClick={() => {
                                         request('/withdraw/get-address-info').then(res => {
                                             drawerActions.open(drawers.withdraw({
                                                 available: res.data.balance,
@@ -99,17 +99,17 @@ export const WithdrawPage = () => {
                                                 walletAddress: res.data.walletAddress,
                                                 onClick: (data) => {
                                                     const amount = Number(data.amount);
-                                                    if(amount > res.data.balance) {
+                                                    if (amount > res.data.balance) {
                                                         alertActions.open({
                                                             message: 'Insufficient funds',
                                                             type: 'ALERT/ERROR',
-                                                        })
+                                                        });
                                                         return;
-                                                    } else if(amount < res.data.minWithdraw) {
+                                                    } else if (amount < res.data.minWithdraw) {
                                                         alertActions.open({
                                                             message: `Min withdraw is at least ${res.data.minWithdraw}`,
                                                             type: 'ALERT/ERROR',
-                                                        })
+                                                        });
                                                         return;
                                                     }
                                                     modalActions.open(
@@ -117,10 +117,13 @@ export const WithdrawPage = () => {
                                                             data,
                                                             onClose: modalActions.close,
                                                             onSubmit: (queryData) => {
-                                                                
-                                                                request('/withdraw/create', { method: 'post', queryData }).then((res) => {
+
+                                                                request('/withdraw/create', {
+                                                                    method: 'post',
+                                                                    queryData
+                                                                }).then((res) => {
                                                                     drawerActions.close();
-                                                                    setOperationIndex(operationIndex+1)
+                                                                    setOperationIndex(operationIndex + 1);
                                                                     return res.data;
                                                                 })
                                                             },
@@ -135,44 +138,44 @@ export const WithdrawPage = () => {
                                 </div>
                             </div>
                             <div className='withdrawPage__filters'>
-                                <Filter filters={filters} 
-                                    data={filtersData} 
-                                    onSave={
-                                        ()=>{
-                                            setOperationIndex(operationIndex+1)
+                                <Filter filters={filters}
+                                        data={filtersData}
+                                        onSave={
+                                            () => {
+                                                setOperationIndex(operationIndex + 1)
+                                            }
                                         }
-                                    }
                                 />
                             </div>
-                            {   
+                            {
                                 (withdrawQuery.data && withdrawQuery.data.table) &&
-                                ( width > 480
-                                ? <div className='withdrawPage__table'>
-                                    <Table {...table} 
-                                        hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
-                                        fetchMore={()=>{
-                                            setPageIndex(pageIndex+1)
-                                        }}
-                                        data={withdrawQuery.data.table} 
-                                    />
-                                </div>
-                                : <div>
-                                    {
-                                        withdrawQuery.data.table.map( item => {
-                                            return (
-                                                <div className='withdrawPage__tableCard'  style={{width}}>
-                                                    <WithdrawCard fields={item} config={table.tableConfig} />
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div> )
-                            }                            
+                                (width > 480
+                                    ? <div className='withdrawPage__table'>
+                                        <Table {...table}
+                                               hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                               fetchMore={() => {
+                                                   setPageIndex(pageIndex + 1)
+                                               }}
+                                               data={withdrawQuery.data.table}
+                                        />
+                                    </div>
+                                    : <div>
+                                        {
+                                            withdrawQuery.data.table.map(item => {
+                                                return (
+                                                    <div className='withdrawPage__tableCard' style={{width}}>
+                                                        <WithdrawCard fields={item} config={table.tableConfig}/>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>)
+                            }
                         </div>
                     )
                 }}
             />
-            {drawerData && drawerData.isOpened && <Drawer {...drawerData} onClose={drawerActions.close} data={{}} />}
+            {drawerData && drawerData.isOpened && <Drawer {...drawerData} onClose={drawerActions.close} data={{}}/>}
         </div>
     )
-}
+};

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useAtom } from '@reatom/react';
-import { useQueries, useQuery } from 'react-query';
+import React, {useState, useEffect} from 'react';
+import {useAtom} from '@reatom/react';
+import {useQueries, useQuery} from 'react-query';
 
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import {FlowCard} from '../../Molecules/FlowCard/FlowCard';
@@ -8,12 +8,13 @@ import {Filter} from '../../Organisms/Filter/Filter';
 import {Table} from '../../Organisms/Table/Table';
 
 import {actionLogsStatisticsConfig, filters, filterFormators, table} from './data';
-import { filterAtom } from '../../../store/Filter';
+import {filterAtom} from '../../../store/Filter';
 
+import {convertToQueryString} from '../../../helpers/lib';
 import request from '../../../api/request';
 
 import './actionLogsPage.scss';
-import { convertToQueryString } from '../../../helpers/convertToQueryString';
+
 
 export const ActionLogsPage = () => {
 
@@ -21,11 +22,11 @@ export const ActionLogsPage = () => {
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
-    const [tableData, setTableData] = useState({ table: [], last_page: null});
+    const [tableData, setTableData] = useState({table: [], last_page: null});
 
-    useEffect( ()=>{
+    useEffect(() => {
         filterActions.reset();
-    }, [])
+    }, []);
 
     const actionLogsStatisticsQuery = useQuery(['action-logs/statistics',], () => {
         return request('/action-log/total').then(res => res.data);
@@ -33,15 +34,15 @@ export const ActionLogsPage = () => {
 
     const actionLogsTableQuery = useQuery(['action-logs/table', pageIndex, operationIndex], () => {
         const filterQueryData = {};
-        for(filterFieldId in filterData.fields) {
-            const filterFieldValue =  filterFormators[filterFieldId](filterData.fields[filterFieldId]);
-            if(filterFieldValue) {
+        for (const filterFieldId in filterData.fields) {
+            const filterFieldValue = filterFormators[filterFieldId](filterData.fields[filterFieldId]);
+            if (filterFieldValue) {
                 filterQueryData[filterFieldId] = filterFieldValue
             }
         }
-        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterQueryData})}`).then(res => { 
-            
-            if(res) {
+        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterQueryData})}`).then(res => {
+
+            if (res) {
                 setTableData({
                     ...res.data,
                     table: pushTableData ? [
@@ -53,7 +54,7 @@ export const ActionLogsPage = () => {
 
             return res.data
         })
-    })
+    });
 
     const actionLogsFiltersQueryList = useQueries([
         {
@@ -75,10 +76,10 @@ export const ActionLogsPage = () => {
 
     const filtersData = [
         [],
-        ...actionLogsFiltersQueryList.map( filterQuery => {
+        ...actionLogsFiltersQueryList.map(filterQuery => {
             return filterQuery.data || [];
         })
-    ]
+    ];
 
     return (
         <div className='actionLogsPage'>
@@ -101,20 +102,20 @@ export const ActionLogsPage = () => {
                             </div>
                             <div className='actionLogsPage__table'>
                                 <div className='actionLogsPage__tableFilter'>
-                                     <Filter filters={filters} data={filtersData} onSave={
-                                        ()=>{
-                                            setPageIndex(1)
-                                            setOperationIndex(operationIndex+1)
+                                    <Filter filters={filters} data={filtersData} onSave={
+                                        () => {
+                                            setPageIndex(1);
+                                            setOperationIndex(operationIndex + 1);
                                             setPushTableData(false)
                                         }
-                                    } />
+                                    }/>
                                 </div>
                                 <div className='actionLogsPage__tableData'>
                                     {
-                                        <Table 
-                                            hasMore={tableData.last_page===null || tableData.last_page > pageIndex}
-                                            fetchMore={()=>{
-                                                setPageIndex(pageIndex+1)
+                                        <Table
+                                            hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                            fetchMore={() => {
+                                                setPageIndex(pageIndex + 1);
                                                 setPushTableData(true)
                                             }}
                                             {...table}

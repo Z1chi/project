@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAtom } from '@reatom/react';
 
 import { Dropdown } from '../Dropdown/Dropdown';
@@ -14,9 +14,10 @@ import './filterItem.scss';
 const renderFilterContent = (type) => (props) => {
     const Component = filterComponentsList[type];
     return Component ? <Component {...props} /> : null;
-}
+};
 
 export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormator=(item)=>item, type, }) => {
+
     const [filterData, filterActions] = useAtom(filterAtom);
 
     return (
@@ -69,4 +70,4 @@ export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], re
             />
         </div>
     )
-}
+};
