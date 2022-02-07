@@ -1,9 +1,9 @@
 import { images } from './images';
 import { dropdownTypes } from '../../../constants/dropdown';
-import { idArrayFormator } from '../../../helpers/idArrayFormator';
-import { dateStringFormator } from '../../../helpers/lib';
-import { dateFormator } from '../../../helpers/dateFormator';
-import { currencyFormator } from '../../../helpers/currencyFormator';
+
+import { dateStringFormator, idArrayFormator, dateFormator, currencyFormator} from '../../../helpers/lib';
+
+
 
 export const actionLogsStatisticsConfig = [
     {

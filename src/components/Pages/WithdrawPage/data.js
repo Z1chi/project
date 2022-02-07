@@ -1,13 +1,13 @@
-import emptyTableIcon from './images/emptyTable.svg'
+import React from "react";
 
-import { images } from './images';
-
-import { dateFormator } from '../../../helpers/dateFormator';
-import { withdrawStatusList, } from './constants/status';
 import { dropdownTypes } from '../../../constants/dropdown';
 import { Input } from '../../Atoms/Input/Input';
 import { Button } from '../../Atoms/Button/Button';
-import { dateStringFormator } from '../../../helpers/lib';
+import { dateStringFormator, idArrayFormator, dateFormator } from '../../../helpers/lib';
+
+import { images } from './images';
+import emptyTableIcon from './images/emptyTable.svg'
+
 
 export const statistics = [{
     icon: images.balanceIcon,
@@ -37,31 +37,31 @@ export const filters = [{
     mobileTitle: 'Select status',
     type: dropdownTypes.SELECT,
     width: '154px',
-    renderItem: ({ id, label }) => label,
+    renderItem: ({ label }) => label,
 }, ];
 
 export const filterFormators = {
     date: date => dateFormator(date),
     pay_date: date => dateFormator(date),
     status: itemArray => idArrayFormator(itemArray),
-}
+};
 
 export const table = {
 
     tableConfig: [{
         columnId: 'created_at',
         columnName: 'Request Date',
-        columnWidth: '190px',
+        columnWidth: '210px',
 
         renderRowItem: (item) => dateStringFormator(item),
     }, {
         columnId: 'paid_at',
         columnName: 'Pay Date',
-        columnWidth: '159px',
+        columnWidth: '210px',
     }, {
         columnId: 'amount_btc',
         columnName: 'Amount',
-        columnWidth: '133px',
+        columnWidth: '163px',
 
         renderHeadItem: ({ rowItem, columnName }) => {
             return `${columnName} (${rowItem ? rowItem.currency.symbol : ''})`
@@ -158,12 +158,12 @@ export const drawers = {
                     if(!stateData.walletAddress || !stateData.amount) {
                         button.styles = {
                             background: '#3F3F3F',
-                        }
+                        };
                         button.onClick = () => {}
                     } else {
                         button.styles = {
                             background: '#219FE5',
-                        },
+                        };
                         button.onClick = () => props.onClick(stateData)
                     }
                     return (

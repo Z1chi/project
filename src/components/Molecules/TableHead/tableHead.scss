@@ -1,9 +1,27 @@
 .tableHead {
-    display: flex;
-    background-color: #131826;
+  display: flex;
+  background-color: #131826;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #282D3A;
+  }
 
-     &__item {
-         height: 38px;
-       border-bottom: 1px solid #282D3A;
-     }
+  &__item {
+    height: 38px;
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      border-bottom: 1px solid #282D3A;
+    }
+  }
+
 }

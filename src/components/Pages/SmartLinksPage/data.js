@@ -1,18 +1,18 @@
+import React from "react";
+
 import SVG from 'react-inlinesvg';
-import { dropdownTypes } from '../../../constants/dropdown';
-import { dateFormator } from '../../../helpers/dateFormator';
-import { dateStringFormator } from '../../../helpers/lib';
-import { idArrayFormator } from '../../../helpers/idArrayFormator';
-import { Button } from '../../Atoms/Button/Button';
-import { images } from './images';
+import {dropdownTypes} from '../../../constants/dropdown';
+import {dateStringFormator, idArrayFormator, dateFormator} from '../../../helpers/lib';
+import {Button} from '../../Atoms/Button/Button';
+import {images} from './images';
 
 const renderLink = (link) => {
     return (
-        <div style={{ color: '#219FE5', textDecoration: 'underline', }}>
+        <div style={{color: '#219FE5', textDecoration: 'underline',}}>
             {link}
         </div>
     )
-}
+};
 
 export const filters = [{
     id: 'offers',
@@ -22,8 +22,8 @@ export const filters = [{
     matchPropName: 'title',
     width: '204px',
     renderItem: (item) => (
-        <div style={{display: 'flex', alignItems: 'center', }}>
-            <img src={item.image} />
+        <div style={{display: 'flex', alignItems: 'center',}}>
+            <img src={item.image} alt="image"/>
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
@@ -41,13 +41,13 @@ export const filters = [{
     matchPropName: 'label',
     width: '163px',
     renderItem: (item) => item.label,
-}, ];
+},];
 
 export const filterFormators = {
     offers: itemArray => idArrayFormator(itemArray),
     date: date => dateFormator(date),
     format: itemArray => idArrayFormator(itemArray),
-}
+};
 
 export const table = {
 
@@ -89,7 +89,7 @@ export const table = {
     }, {
         columnId: 'conversionIFrame',
         columnName: 'Conversion iFrame',
-        columnWidth: '170px',        
+        columnWidth: '170px',
 
         renderRowItem: (item) => {
             return renderLink(item);
@@ -98,28 +98,28 @@ export const table = {
     }, {
         columnId: 'editItem',
         columnName: '',
-        columnWidth: '30px',
+        columnWidth: '50px',
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onEditOpen({ itemId:id })}>
-                    <SVG src={images.editIcon} />
+                <div onClick={() => props.onEditOpen({itemId: id})}>
+                    <SVG src={images.editIcon}/>
                 </div>
             )
         }
     }, {
         columnId: 'deleteItem',
         columnName: '',
-        columnWidth: '30px',
+        columnWidth: '50px',
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onDeleteOpen({ itemId:id })}>
-                    <SVG src={images.deleteIcon} />
+                <div onClick={() => props.onDeleteOpen({itemId: id})}>
+                    <SVG src={images.deleteIcon}/>
                 </div>
             )
         }
-    }, ]),
+    },]),
 
     data: [{
         id: 0,
@@ -148,7 +148,7 @@ export const table = {
         url: '....com/?aff=8wv6v9',
         leadIFrame: '....com/?aff=8wv6v9',
         conversionIFrame: '....com/?aff=8wv6v9',
-    }, ],
+    },],
 
     emptyTable: {
         icon: images.emptyTableIcon,
@@ -157,42 +157,42 @@ export const table = {
             text: 'Create Smartlink',
         }
     }
-}
+};
 
-const isNewSmartlinkValid = ({ project_id, title, format, }) => {
+const isNewSmartlinkValid = ({project_id, title, format,}) => {
     return project_id && project_id.some(item => !!item.isSelected) && title && format && format.some(item => !!item.isSelected);
-}
+};
 
 export const drawers = {
     create: (props) => ({
-        logo: images.createLinkIcon, 
-        title: 'Create smartlink', 
-        subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.', 
+        logo: images.createLinkIcon,
+        title: 'Create smartlink',
+        subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.',
         fieldRows: [
             [{
                 id: 'project_id',
-                title: 'Select Offer', 
+                title: 'Select Offer',
                 placeholder: 'Select Offer...',
                 matchPropName: 'title',
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => (
                     <div style={{display: 'flex', alignItems: 'center'}}>
-                        <img src={item.image} />
+                        <img src={item.image} alt='image'/>
                         <span style={{marginLeft: '10px'}}>{item.title}</span>
                     </div>
                 ),
             }],
-            
+
             [{
                 id: 'title',
-                title: 'Name', 
+                title: 'Name',
                 placeholder: 'Type name...',
                 type: dropdownTypes.INPUT,
             }],
-            
+
             [{
                 id: 'format',
-                title: 'Format', 
+                title: 'Format',
                 placeholder: 'Select format...',
                 matchPropName: 'label',
                 type: dropdownTypes.SELECT,
@@ -200,7 +200,7 @@ export const drawers = {
             }],
 
             [{
-                title: 'Lead IFrame', 
+                title: 'Lead IFrame',
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -211,7 +211,7 @@ export const drawers = {
             }],
 
             [{
-                title: 'Conversion IFrame', 
+                title: 'Conversion IFrame',
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -222,18 +222,19 @@ export const drawers = {
             }],
 
             [{
-                generateField: ({ stateData }) => {
+                generateField: ({stateData}) => {
                     const button = {};
-                    if(!isNewSmartlinkValid(stateData)) {
+                    if (!isNewSmartlinkValid(stateData)) {
                         button.styles = {
                             background: '#3F3F3F',
-                        }
-                        button.onClick = () => {};
+                        };
+                        button.onClick = () => {
+                        };
                     } else {
                         button.styles = {
                             background: '#219FE5',
-                        }
-                        button.onClick = ()=>props.onCreate({
+                        };
+                        button.onClick = () => props.onCreate({
                             project_id: stateData.project_id.find(item => !!item.isSelected).id,
                             title: stateData.title,
                             format: stateData.format.find(item => !!item.isSelected).id,
@@ -244,8 +245,8 @@ export const drawers = {
                             padding: '10px 15px',
                             height: '42px',
                             ...button.styles,
-                        }} 
-                            onClick={button.onClick}
+                        }}
+                                onClick={button.onClick}
                         >
                             Create
                         </Button>
@@ -254,7 +255,7 @@ export const drawers = {
             }],
 
             [{
-                title: 'Generated URL', 
+                title: 'Generated URL',
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -267,32 +268,32 @@ export const drawers = {
         ],
     }),
     edit: (props) => ({
-        logo: images.editLinkIconExample, 
-        title: 'Edit smartlink', 
-        subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.', 
+        logo: images.editLinkIconExample,
+        title: 'Edit smartlink',
+        subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.',
         fieldRows: [
             [{
                 id: 'created_at',
-                title: 'Created', 
+                title: 'Created',
                 placeholder: 'Select date...',
                 type: dropdownTypes.DATE,
             }, {
                 id: 'project',
-                title: 'Offer', 
+                title: 'Offer',
                 placeholder: 'Select offer...',
                 matchPropName: 'title',
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => (
                     <div style={{display: 'flex', alignItems: 'center'}}>
-                        <img src={item.image} />
+                        <img src={item.image} alt='image'/>
                         <span style={{marginLeft: '10px'}}>{item.title}</span>
                     </div>
                 ),
             }],
-            
+
             [{
                 id: 'title',
-                title: 'Name', 
+                title: 'Name',
                 type: dropdownTypes.INPUT,
             }],
 
@@ -306,7 +307,7 @@ export const drawers = {
 
             [{
                 id: 'iframe_lead',
-                title: 'Lead IFrame', 
+                title: 'Lead IFrame',
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -318,7 +319,7 @@ export const drawers = {
 
             [{
                 id: 'iframe_conversion',
-                title: 'Conversion IFrame', 
+                title: 'Conversion IFrame',
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -330,7 +331,7 @@ export const drawers = {
 
             [{
                 id: 'url',
-                title: 'Generated URL', 
+                title: 'Generated URL',
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -349,7 +350,7 @@ export const drawers = {
                             height: '42px',
                             background: '#219FE5',
                         }}
-                            onClick={() => props.onEdit(data)}
+                                onClick={() => props.onEdit(data)}
                         >
                             Apply changes
                         </Button>
@@ -358,14 +359,14 @@ export const drawers = {
             }],
 
             [{
-                generateField: ({ itemId }) => {
+                generateField: ({itemId}) => {
                     return (
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
                             background: '#219FE5',
-                        }} 
-                            onClick={() => props.onDelete({ itemId })}
+                        }}
+                                onClick={() => props.onDelete({itemId})}
                         >
                             Delete offer
                         </Button>
@@ -376,18 +377,21 @@ export const drawers = {
     }),
 };
 
-export const modalDelete = ({ onSubmit, onClose, }) => ({
+export const modalDelete = ({onSubmit, onClose,}) => ({
     icon: images.deleteIcon,
-    title: 'Delete Smartlink', 
-    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', 
+    title: 'Delete Smartlink',
+    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et',
     children: (
         <div>
-            <Button onClick={() => { onSubmit(); onClose(); }} styles={{ marginTop: '30px', }}>
+            <Button onClick={() => {
+                onSubmit();
+                onClose();
+            }} styles={{marginTop: '30px',}}>
                 Primary CTA
             </Button>
-            <Button onClick={onClose} styles={{ marginTop: '20px', background: 'transparent' }}>
+            <Button onClick={onClose} styles={{marginTop: '20px', background: 'transparent'}}>
                 Secondary CTA
             </Button>
         </div>
     ),
-})
+});

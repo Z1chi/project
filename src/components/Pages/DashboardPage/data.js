@@ -1,6 +1,8 @@
-import { dateStringFormator } from "../../../helpers/lib";
-import { currencyFormator } from "../../../helpers/currencyFormator";
+import React from "react";
+
+import { dateStringFormator,currencyFormator } from "../../../helpers/lib";
 import { images } from "./images"
+
 
 export const statistics = [{
     id: 'total_balance',
@@ -47,7 +49,7 @@ export const getGraphicsConfig = (data) => {
             }
         ]
     }
-}
+};
 
 export const table = {
 
@@ -108,4 +110,4 @@ export const table = {
             onClick: ()=>{}
         }
     }
-}
+};

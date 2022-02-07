@@ -1,9 +1,10 @@
+import React from "react";
 import {images} from "./images";
 
 import { dropdownTypes } from '../../../constants/dropdown';
-import { idArrayFormator } from "../../../helpers/idArrayFormator";
-import { dateFormator } from "../../../helpers/dateFormator";
-import { currencyFormator } from '../../../helpers/currencyFormator';
+import { idArrayFormator,dateFormator, currencyFormator } from "../../../helpers/lib";
+
+
 
 export const filters = [{
     id: 'date',
@@ -43,7 +44,7 @@ export const filters = [{
     width: '154px',
     renderItem: (item) => (
         <div style={{display: 'flex', alignItems: 'center', }}>
-            <img src={item.image} />
+            <img src={item.image}  alt='image'/>
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
@@ -55,7 +56,7 @@ export const filterFormators = {
     country: itemArray => idArrayFormator(itemArray),
     smartlink: itemArray => idArrayFormator(itemArray),
     offer: itemArray => idArrayFormator(itemArray),
-}
+};
 
 export const table = {
     tableConfig: [{
