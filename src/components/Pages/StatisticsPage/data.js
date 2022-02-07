@@ -59,72 +59,103 @@ export const filterFormators = {
 };
 
 export const table = {
+    groups: [{
+        id: 'Time',
+    }, {
+        id: 'Clicks',
+    }, {
+        id: 'Leads',
+    }, {
+        id: 'Deposits',
+        info: true,
+    }, {
+        id: 'Profit',
+        info: true,
+    }, {
+        id: 'Withdraw',
+        info: true,
+    }],
     tableConfig: [{
         columnId: 'date',
         columnName: 'Date',
         columnWidth: '150px',
         isGroupEnd: true,
+        groupId: 'Time',
     }, {
         columnId: 'clicks',
         columnName: 'Clicks',
         columnWidth: '100px',
+        groupId: 'Clicks',
     }, {
         columnId: 'unique_clicks',
         columnName: 'Unique Clicks',
         columnWidth: '100px',
+        groupId: 'Clicks',
     }, {
         columnId: 'epc',
         columnName: 'EPC',
         columnWidth: '100px',
         isGroupEnd: true,
+        groupId: 'Clicks',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'registrations',
         columnName: 'Reg',
         columnWidth: '100px',
+        groupId: 'Leads',
     }, {
         columnId: 'clicks_to_registration',
         columnName: 'CR',
         columnWidth: '100px',
+        groupId: 'Leads',
+
         renderRowItem: item => Number(item).toFixed(8)
     }, {
         columnId: 'epr',
         columnName: 'EPR',
         columnWidth: '100px',
         isGroupEnd: true,
+        groupId: 'Leads',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'deposits',
         columnName: 'DEP',
         columnWidth: '100px',
+        groupId: 'Deposits',
     }, {
         columnId: 'clicks_to_deposit',
         columnName: 'CR',
         columnWidth: '100px',
+        groupId: 'Deposits',
+
         renderRowItem: item => Number(item).toFixed(8)
     }, {
         columnId: 'registrations_to_deposit',
         columnName: 'CR',
         columnWidth: '100px',
+        groupId: 'Deposits',
     }, {
         columnId: 'sum_deposit',
         columnName: 'SUM',
         columnWidth: '100px',
         isGroupEnd: true,
+        groupId: 'Deposits',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'profit_cpa',
         columnName: 'CPA',
         columnWidth: '100px',
+        groupId: 'Profit',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'profit_revshare',
         columnName: 'REVSHARE',
         columnWidth: '100px',
+        groupId: 'Profit',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
@@ -132,24 +163,28 @@ export const table = {
         columnName: 'SUM',
         columnWidth: '100px',
         isGroupEnd: true,
+        groupId: 'Profit',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'cpa_pending',
         columnName: 'Pending',
         columnWidth: '100px',
+        groupId: 'Withdraw',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'cpa_declined',
         columnName: 'Declined',
         columnWidth: '100px',
+        groupId: 'Withdraw',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'cpa_accepted',
         columnName: 'Accepted',
         columnWidth: '100px',
+        groupId: 'Withdraw',
 
         renderRowItem: (item) => currencyFormator(item),
     },

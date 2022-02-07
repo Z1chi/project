@@ -9,7 +9,7 @@ export const TableHeadItem = ({ item, isGroup, info }) => {
                 {item.columnName}
             </div>
             {
-                item.info
+                info
                 && (
                     <div className={`tableHeadItem__info${info.notification? 'tableHeadItem__info--highlited':''}`}>
                         <p>{info.notification?'!':'i'}</p>

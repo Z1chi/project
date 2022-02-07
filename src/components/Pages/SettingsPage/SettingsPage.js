@@ -48,6 +48,7 @@ export const SettingsPage = () => {
         initialCurrency,
     }) : [];
 
+
     return (
         <div className='settingsPage'>
             <PageTemplate
