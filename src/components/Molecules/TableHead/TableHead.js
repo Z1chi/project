@@ -13,14 +13,14 @@ export const TableHead = ({ groups, tableConfig, info }) => {
                 return (
                     <div key={key} className='tableHead__group'>
                         <div className='tableHead__groupName'>
-                            <TableHeadItem item={groupItem} isGroup={true} />
+                            <TableHeadItem item={{columnName: groupItem.id}} info={groupItem.info} isGroup={true} />
                         </div>
                         <div className='tableHead__groupItems'>
                         {
                             tableConfig.filter(headItem => headItem.groupId === groupItem.id).map(headItem => {
                                 return (
                                     <div className='tableHead__item'>
-                                        <TableHeadItem item={headItem} info={info[headItem.columnId]} />
+                                        <TableHeadItem item={headItem} info={info && info[headItem.columnId]} />
                                     </div>
                                 )
                             })

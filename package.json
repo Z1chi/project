@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "babel": "^6.23.0",
+    "bitcoin-address-validation": "^2.2.1",
     "react": "^17.0.2",
     "react-click-away-listener": "^2.0.5",
     "react-custom-scroller": "^1.0.0",

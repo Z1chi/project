@@ -7,4 +7,12 @@
         overflow-y: auto;
         max-height: 50vh;
     }
+
+    &__head {
+        border-bottom: 1px solid #282D3A;
+    }
+
+    &__row {
+        border-bottom: 1px solid #282D3A;
+    }
 }

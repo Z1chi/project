@@ -1,4 +1,5 @@
 import React from "react";
+import { validate } from 'bitcoin-address-validation';
 
 import { FormField } from "../../Molecules/FormField/FormField";
 
@@ -27,7 +28,7 @@ export const getProfileSettingsConfig = (configOptions) => [
             if(!values[profileSettingsFieldTypeList.new]) {
                 return;
             }
-            if(!values[profileSettingsFieldTypeList.new].match(new RegExp(/^[a-z0-9]+$/i))) {
+            if(!values[profileSettingsFieldTypeList.new].match(new RegExp(/^[a-z0-9\s]+$/i))) {
                 errors[profileSettingsFieldTypeList.new] = 'Only letters and numbers allowed'
             }
             return errors;
@@ -44,7 +45,16 @@ export const getProfileSettingsConfig = (configOptions) => [
         mapRequestData: (field) => ({
             walletAddress: field[profileSettingsFieldTypeList.new],
         }),
-        formValidator: ()=>true,
+        formValidator: (values) => {
+            const errors = {};
+            if(!values[profileSettingsFieldTypeList.new]) {
+                return;
+            }
+            if(!validate(values[profileSettingsFieldTypeList.new])) {
+                errors[profileSettingsFieldTypeList.new] = 'Invalid bitcoin address'
+            }
+            return errors;
+        },
     },
     {
         id: 'password',

@@ -5,16 +5,17 @@ import ReactCrop from 'react-image-crop';
 import request from '../../../api/request';
 
 import {alertAtom} from "../../../store/Alert";
+import { profileSettingsAtom } from '../../../store/ProfileSettings';
+
+import { profileSettingsFieldTypeList } from '../../Pages/SettingsPage/data';
 
 import 'react-image-crop/src/ReactCrop.scss';
 import './avatarEditor.scss'
 
-
-
-
 export const AvatarEditor = ({onClose}) => {
 
     const [alertData, alertActions] = useAtom(alertAtom);
+    const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
     const [upImg, setUpImg] = useState();
     const [crop, setCrop] = useState({
@@ -59,6 +60,11 @@ export const AvatarEditor = ({onClose}) => {
                         alertActions.open({
                             message: 'Avatar updated',
                             type: 'ALERT/SUCCESS',
+                        })
+                        profileSettingsActions.setField({
+                            fieldId: 'img',
+                            fieldType: profileSettingsFieldTypeList.current,
+                            fieldValue: res.image,
                         })
                     }
                 })
@@ -143,8 +149,8 @@ export const AvatarEditor = ({onClose}) => {
                 className='avatarEditor__updateButton'
                 type="button"
                 disabled={!completedCrop?.width || !completedCrop?.height}
-                onClick={() =>
-                    generateDownload(previewCanvasRef.current, completedCrop)
+                onClick={() =>{
+                    generateDownload(previewCanvasRef.current, completedCrop)}
                 }
             >
                 Update avatar

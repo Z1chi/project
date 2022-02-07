@@ -21,7 +21,7 @@ export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, hasMore
                     return isScrolled ? fetchMore() : undefined
                 }}>
                     <div className='table__head'>
-                        <TableHead tableConfig={tableConfig}/>
+                        <TableHead tableConfig={tableConfig} groups={groups}/>
                     </div>
                     <div className='table__rowList'>
 
