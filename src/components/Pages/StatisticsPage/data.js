@@ -61,19 +61,25 @@ export const filterFormators = {
 export const table = {
     groups: [{
         id: 'Time',
+        width: '150px',
     }, {
         id: 'Clicks',
+        width: '300px',
     }, {
         id: 'Leads',
+        width: '300px',
     }, {
         id: 'Deposits',
         info: true,
+        width: '400px',
     }, {
         id: 'Profit',
         info: true,
+        width: '300px',
     }, {
         id: 'Withdraw',
         info: true,
+        width: '300px',
     }],
     tableConfig: [{
         columnId: 'date',

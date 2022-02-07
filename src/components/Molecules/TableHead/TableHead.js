@@ -11,7 +11,7 @@ export const TableHead = ({ groups, tableConfig, info }) => {
             groups
             ? groups.map( (groupItem, key) => {
                 return (
-                    <div key={key} className='tableHead__group'>
+                    <div key={key} className='tableHead__group' style={{width: groupItem.width}}>
                         <div className='tableHead__groupName'>
                             <TableHeadItem item={{columnName: groupItem.id}} info={groupItem.info} isGroup={true} />
                         </div>
