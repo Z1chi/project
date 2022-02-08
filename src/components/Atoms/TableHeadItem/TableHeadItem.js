@@ -4,7 +4,7 @@ import './tableHeadItem.scss';
 
 export const TableHeadItem = ({ item, isGroup, info }) => {
     return (
-        <div className={`tableHeadItem${isGroup?' tableHeadItem--group':''}`} style={{width: item.columnWidth}}>
+        <div className={`tableHeadItem${isGroup?' tableHeadItem--group':''}`} style={{minWidth: item.columnWidth, width: '100%'}}>
             <div className='tableHeadItem__text'>
                 {item.columnName}
             </div>
