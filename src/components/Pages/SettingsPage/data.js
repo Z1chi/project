@@ -17,7 +17,7 @@ export const getProfileSettingsConfig = (configOptions) => [
         apiId: 'update-name',
         title: 'Full name',
         type: 'text',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+        description: 'Your name or nickname',
         value: 'Pavel Martinov',
         isNotChangeable: true,
         mapRequestData: (field) => ({
@@ -26,7 +26,11 @@ export const getProfileSettingsConfig = (configOptions) => [
         formValidator: (values) => {
             const errors = {};
             if(!values[profileSettingsFieldTypeList.new]) {
-                return;
+                errors[profileSettingsFieldTypeList.new] = 'Enter fullname or nickname';
+                return errors;
+            }
+            if(values[profileSettingsFieldTypeList.new].length < 2) {
+                errors[profileSettingsFieldTypeList.new] = 'Name must be at least 2 symbols long'
             }
             if(!values[profileSettingsFieldTypeList.new].match(new RegExp(/^[a-z0-9\s]+$/i))) {
                 errors[profileSettingsFieldTypeList.new] = 'Only letters and numbers allowed'
@@ -39,7 +43,7 @@ export const getProfileSettingsConfig = (configOptions) => [
         apiId: 'update-wallet',
         title: 'Wallet Address',
         type: 'text',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+        description: 'Please enter your wallet address correctly. We cannot help if you entered the wrong wallet address.',
         value: 'BJ12039DKAMCKJA09123LASKLDS',
         isNotChangeable: true,
         mapRequestData: (field) => ({
@@ -61,7 +65,7 @@ export const getProfileSettingsConfig = (configOptions) => [
         apiId: 'update-password',
         title: 'Password',
         type: 'password',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+        description: 'Your password. Keep in mind we will never ask you for your password.',
         value: 'Password',
         placeholder: '**********',
         isNotChangeable: true,
@@ -93,7 +97,7 @@ export const getProfileSettingsConfig = (configOptions) => [
         apiId: 'update-telegram',
         title: 'Telegram',
         type: 'text',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+        description: 'The fastest way to reach our team whenever you have any questions. Use it to contact your personal manager.',
         value: '@ellay',
         isNotChangeable: true,
         mapRequestData: (field) => ({
@@ -106,7 +110,7 @@ export const getProfileSettingsConfig = (configOptions) => [
         apiId: 'update-email',
         title: 'Email',
         type: 'text',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+        description: 'Use it for authorization, sign-up confirmation, and receiving newsletters (including news, statistics, weekly top, etc.)',
         value: 'martinov.uxui@gmail.com',
         isNotChangeable: true,
         mapRequestData: (field) => ({

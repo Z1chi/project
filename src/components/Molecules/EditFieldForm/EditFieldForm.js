@@ -18,7 +18,7 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
         validate={(values) => {
             return formValidator(values);
         }}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        render={({ handleSubmit, form, submitting, pristine, values, valid }) => (
           <form onSubmit={handleSubmit}>
             <Field name={profileSettingsFieldTypeList.current}>
                 {({ input, meta }) => (
@@ -72,7 +72,7 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
                                 type={type}
                                 name={id}
                                 onChange={onChangeFieldValue(profileSettingsFieldTypeList.repeatNew)}
-                                hasError={meta.error && meta.touched}
+                                hasError={meta.error && meta.touched && meta.modified}
                                 error={meta.error}
                                 fieldData={input}
                             />
@@ -81,7 +81,7 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
                 </Field>
             }
             <div className='editFieldForm__submit'>
-              <Button type="submit" disabled={submitting}                         
+              <Button type="submit" disabled={submitting || !valid}
                 containerStyles={{width: "100%"}}
                 styles={{width: "100%", cursor: "pointer"}}>
                 Submit

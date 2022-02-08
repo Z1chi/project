@@ -380,17 +380,17 @@ export const drawers = {
 export const modalDelete = ({onSubmit, onClose,}) => ({
     icon: images.deleteIcon,
     title: 'Delete Smartlink',
-    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et',
+    subtitle: 'By deleting your SmartLink you also delete entire statistics logs. NOTE: the system no longer counts any clicks on this link. Take our advice: do not delete your SmartLink if you used it at least once.',
     children: (
         <div>
-            <Button onClick={() => {
+            <Button containerStyles={{width: '100%'}} styles={{marginTop: '30px',width: '100%', height: '50px'}} onClick={() => {
                 onSubmit();
                 onClose();
-            }} styles={{marginTop: '30px',}}>
-                Primary CTA
+            }}>
+                I am sure I want to delete this SmartLink and the entire history. I understand this operation cannot be undone.
             </Button>
-            <Button onClick={onClose} styles={{marginTop: '20px', background: 'transparent'}}>
-                Secondary CTA
+            <Button onClick={onClose} styles={{marginTop: '20px', background: 'transparent', width: '100%'}} containerStyles={{width: '100%'}} >
+            Go back and do not delete this SmartLink.
             </Button>
         </div>
     ),

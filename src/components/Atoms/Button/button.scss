@@ -20,11 +20,18 @@
     outline: none;
     border: none;
     transition: all ease 0.3s;
-      position: relative;
+    position: relative;
+
     &:hover {
       background: #0F8ACF;
       box-shadow: 0 0 33px #276B92;
     }
+
+      &:disabled {
+          background: #3F3F3F !important;
+          color: #ACACAC !important;
+          box-shadow: none !important;
+      }
 
     &:focus {
         box-shadow: 0 0 33px #276B92, inset 0 0 10px rgba(14, 89, 131, 0.43);
@@ -47,4 +54,4 @@
           }
       }
   }
-}
+  }

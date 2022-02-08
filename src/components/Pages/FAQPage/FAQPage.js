@@ -14,9 +14,9 @@ import './FAQPage.scss';
 
 export const FAQPage = () => {
 
-    const faqQuery = useQuery('faq', async () => {
-        return request('faq').then(res => res.data)
-    });
+    // const faqQuery = useQuery('faq', async () => {
+    //     return request('faq').then(res => res.data)
+    // })
 
     return (
         <div className='FAQPage'>
@@ -33,7 +33,7 @@ export const FAQPage = () => {
                                 </div>
                                 <div className='FAQPage__questionList'>
                                 {
-                                    faqQuery.data && faqQuery.data.map( (question, index) => {
+                                    FAQ.questions.map( (question, index) => {
                                         return (
                                             <div key={`FAQPage__questionListItem(${index})`} className='FAQPage__questionListItem'>
                                                 <FAQItem {...question} />
