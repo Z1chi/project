@@ -177,7 +177,7 @@ export const rowsConfig = [
                 },
                 {
                     icon: images.deposits,
-                    title: 'Deposit record: ',
+                    title: 'Deposit record:',
                     value: localeString({value: statistic.deposits}).slice(0, -3),
                 },
                 {

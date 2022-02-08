@@ -116,7 +116,7 @@ export const table = {
         columnWidth: '100px',
         groupId: 'Leads',
 
-        renderRowItem: item => Number(item).toFixed(8)
+        renderRowItem: item => `${Number(item).toFixed(2)} %`,
     }, {
         columnId: 'epr',
         columnName: 'EPR',
@@ -136,12 +136,14 @@ export const table = {
         columnWidth: '100px',
         groupId: 'Deposits',
 
-        renderRowItem: item => Number(item).toFixed(8)
+        renderRowItem: item => isNaN(Number(item)) ? item : `${Number(item).toFixed(2)} %`,
     }, {
         columnId: 'registrations_to_deposit',
         columnName: 'CR',
         columnWidth: '100px',
         groupId: 'Deposits',
+
+        renderRowItem: item => isNaN(Number(item)) ? item : `${Number(item).toFixed(2)} %`,
     }, {
         columnId: 'sum_deposit',
         columnName: 'SUM',

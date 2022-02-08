@@ -1,4 +1,5 @@
 .tableCell {
+    position: relative;
     width: 100%;
     font-style: normal;
     font-weight: normal;
@@ -8,8 +9,25 @@
     align-items: center;
     color: #FFFFFF;
     height: 100%;
-    padding: 10px 25px;
+    padding: 10px 5px;
+
     &--last {
         border-right: 1px solid #282D3A;
     }
+
+    &>p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        border-bottom: 1px solid #282D3A;
+      }
 }

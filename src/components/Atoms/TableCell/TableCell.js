@@ -4,9 +4,9 @@ import './tableCell.scss';
 
 export const TableCell = ({ rowId, item, columnWidth, renderRowItem = (item => item), isGroupEnd}) => {
     return (
-        <div className={`tableCell${isGroupEnd ? " tableCell--last" : ""}`} style={{ width: columnWidth }}>
+        <div className={`tableCell${isGroupEnd ? " tableCell--last" : ""}`} style={{ minWidth: columnWidth, width: '100%' }}>
         {
-            renderRowItem(item, rowId)
+            <p>{renderRowItem(item, rowId)}</p>
         }
         </div>
     )

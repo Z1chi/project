@@ -12,19 +12,20 @@
     border-bottom: 1px solid #282D3A;
   }
 
-  &__item {
-    height: 38px;
-    position: relative;
+  // &__item {
+  //   height: 38px;
+  //   position: relative;
+  //   flex: 1;
 
-    &:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      left: 0;
-      border-bottom: 1px solid #282D3A;
-    }
-  }
+  //   &:after {
+  //     content: '';
+  //     position: absolute;
+  //     width: 100%;
+  //     bottom: 0;
+  //     left: 0;
+  //     border-bottom: 1px solid #282D3A;
+  //   }
+  // }
 
   &__groupItems {
     display: flex;
