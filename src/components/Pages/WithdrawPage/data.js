@@ -37,6 +37,7 @@ export const filters = [{
     mobileTitle: 'Select status',
     type: dropdownTypes.SELECT,
     width: '154px',
+    matchPropName: 'label',
     renderItem: ({ label }) => label,
 }, ];
 

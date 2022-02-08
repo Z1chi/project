@@ -43,7 +43,6 @@ export const SettingsPage = () => {
                 fieldType: profileSettingsFieldTypeList.new,
                 fieldValue: currencyList.find(item => !!item.isSelected).id,
             })
-            console.log('p', profileSettingsData, currencyList)
         },
         initialCurrency,
     }) : [];

@@ -11,7 +11,7 @@ import {icons} from "./images";
 
 export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, onDownload, preview_src, file}) => {
 
-    const sliderImages = images.map(imageItem => {
+    const sliderImages = images && images.map(imageItem => {
         return {
             ...imageItem,
             source: `${imageItem.source}`,
@@ -26,9 +26,9 @@ export const CreativesModalTemplate = ({onClose, images, description, file_size,
             <div className='creativesModalTemplate__image'>
                 <img src={process.env.MEDIA_URL + preview_src} alt='modalImage'/>
             </div>
-            <div className='creativesModalTemplate__slider'>
+            { sliderImages && <div className='creativesModalTemplate__slider'>
                 <Slider items={sliderImages.map(image => image.source)}/>
-            </div>
+            </div> }
             <div className='creativesModalTemplate__about'>
                 <h3>About</h3>
                 <div className='creativesModalTemplate__description'>

@@ -17,7 +17,6 @@ import './managerContactCard.scss';
 export const ManagerContactCard = ({ manager }) => {
     const { width, height, ref } = useResizeDetector();
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
-    console.log('pData', profileSettingsData);
     
     return (
         <div ref={ref} className={getAdaptiveClassName({ className: 'managerContactCard', width, maxWidth: 320 })}>
