@@ -1,14 +1,23 @@
 .creativesCategory {
-    padding: 5px 10px;
-    background: #2F3440;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 25px;
-    color: #FFFFFF;
+  padding: 5px 10px;
+  background: #2F3440;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 25px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color ease 0.3s;
 
-    &--selected {
-        background: #FF1616;
-    }
+  &:hover {
+      background: rgba(255, 17, 17, 0.55);
+  }
+
+  &--selected {
+    background: #FF1616;
+      &:hover {
+          background: #FF1616;
+      }
+  }
 }

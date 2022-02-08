@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Field } from "react-final-form";
+import {Field, Form} from "react-final-form";
 
 import {Input} from "../../Atoms/Input/Input";
 import {Button} from "../../Atoms/Button/Button";
@@ -16,8 +16,7 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
         onSubmit={onSubmit}
         initialValues={{}}
         validate={(values) => {
-            const res = formValidator(values);
-            return res;
+            return formValidator(values);
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>

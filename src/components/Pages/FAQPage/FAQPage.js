@@ -16,7 +16,7 @@ export const FAQPage = () => {
 
     const faqQuery = useQuery('faq', async () => {
         return request('faq').then(res => res.data)
-    })
+    });
 
     return (
         <div className='FAQPage'>

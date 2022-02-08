@@ -10,7 +10,7 @@
 
     &__reset {
         padding: 19px 25px;
-
+        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -29,5 +29,8 @@
         &:first-child {
             margin-left: 10px;
         }
+    }
+    &__confirm {
+        cursor: pointer;
     }
 }

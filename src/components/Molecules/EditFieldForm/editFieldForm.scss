@@ -3,14 +3,15 @@
 
 
   &__input {
-     > * {
-       margin: 15px 0 ;
-     }
+    > * {
+      margin: 15px 0;
+    }
 
-  }
+}
 
-  &__submit {
-    margin-top: 40px;
-    margin-bottom: 42px;
-  }
+&__submit {
+  margin-top: 40px;
+  margin-bottom: 42px;
+}
+
 }
