@@ -25,7 +25,6 @@ const getSelectedValue = ({ type, options, matchPropName }) => {
     switch(type) {
         case dropdownTypes.SELECT: 
             const itemSelected = options.find(item => item.isSelected)
-            console.log('1', matchPropName)
             return itemSelected ? (matchPropName ? itemSelected[matchPropName] : itemSelected) : 'All'
 
         case dropdownTypes.MULTISELECT:
@@ -37,7 +36,6 @@ const getSelectedValue = ({ type, options, matchPropName }) => {
 export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormator=(item)=>item, type, }) => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
-    console.log('2',matchPropName)
     return (
         <div className='filterItem'>
             <Dropdown
