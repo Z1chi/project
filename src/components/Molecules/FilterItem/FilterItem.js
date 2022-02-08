@@ -9,6 +9,8 @@ import { images } from './images';
 import { filterComponentsList } from '../../../constants/filter';
 import { filterAtom } from '../../../store/Filter';
 
+import { dropdownTypes } from '../../../constants/dropdown';
+
 import './filterItem.scss';
 
 const renderFilterContent = (type) => (props) => {
@@ -16,10 +18,26 @@ const renderFilterContent = (type) => (props) => {
     return Component ? <Component {...props} /> : null;
 };
 
+const getSelectedValue = ({ type, options, matchPropName }) => {
+    if(!options) {
+        return 'All';
+    }
+    switch(type) {
+        case dropdownTypes.SELECT: 
+            const itemSelected = options.find(item => item.isSelected)
+            console.log('1', matchPropName)
+            return itemSelected ? (matchPropName ? itemSelected[matchPropName] : itemSelected) : 'All'
+
+        case dropdownTypes.MULTISELECT:
+            const items = options.filter(item => item.isSelected).length;
+            return (items > 0 && items !== options.length) ? `Multiple (${items})` : 'All';
+    }
+}
+
 export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], renderItem, onSelectFormator=(item)=>item, type, }) => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
-
+    console.log('2',matchPropName)
     return (
         <div className='filterItem'>
             <Dropdown
@@ -30,15 +48,15 @@ export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], re
                             <div className='filterItem__title'>
                                 {title}
                             </div>
-                            { items && items.options && <div className='filterItem__selected'>
-                                {
-                                    items.options[items.selectedIndex]
-                                }
-                            </div> }
+                            <div className='filterItem__selected'>
+                            {
+                               getSelectedValue({ type, options: filterData.fields[id], matchPropName })
+                            }
+                            </div>
                         </div>
-                        <div className='filterItem__dropdownArrow'>
-                            <SVG src={images.sortIcon} />
-                        </div>
+                            <div className='filterItem__dropdownArrow'>
+                                <SVG src={images.sortIcon} />
+                            </div>
                         </div>
                     )
                 }}

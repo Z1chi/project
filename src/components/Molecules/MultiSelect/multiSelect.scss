@@ -83,6 +83,12 @@
         height: 190px;
         overflow-y: auto;
         width: 100%;
+
+        &Item {
+            &:hover {
+                background-color: #252a35;
+            }
+        }
     }
 
     &__selectors {

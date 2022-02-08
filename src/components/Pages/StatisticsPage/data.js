@@ -33,6 +33,7 @@ export const filters = [{
     title: 'Smartlink',
     mobileTitle: 'Select smartlink',
     type: dropdownTypes.SELECT,
+    matchPropName: 'title',
     width: '154px',
     renderItem: (item) => item.title,
 }, {
