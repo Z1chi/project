@@ -51,13 +51,13 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                                 onSubmitHandler();
                                 if(res.exception) {
                                     alertActions.open({
-                                        message: 'Error occured',
+                                        message: 'An error occurred. Please try again later or contact support.',
                                         type: 'ALERT/ERROR',
                                     })
                                 } else {
                                     setModalOpen(false)
                                     alertActions.open({
-                                        message: 'Successfully changed',
+                                        message: 'Your settings are successfully updated.',
                                         type: 'ALERT/SUCCESS',
                                     });
                                 }
