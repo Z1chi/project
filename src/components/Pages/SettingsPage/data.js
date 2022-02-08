@@ -26,7 +26,11 @@ export const getProfileSettingsConfig = (configOptions) => [
         formValidator: (values) => {
             const errors = {};
             if(!values[profileSettingsFieldTypeList.new]) {
-                return;
+                errors[profileSettingsFieldTypeList.new] = 'Enter fullname or nickname';
+                return errors;
+            }
+            if(values[profileSettingsFieldTypeList.new].length < 2) {
+                errors[profileSettingsFieldTypeList.new] = 'Name must be at least 2 symbols long'
             }
             if(!values[profileSettingsFieldTypeList.new].match(new RegExp(/^[a-z0-9\s]+$/i))) {
                 errors[profileSettingsFieldTypeList.new] = 'Only letters and numbers allowed'
