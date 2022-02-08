@@ -41,7 +41,7 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
                 }
             </div>
             {
-                error && <div className='customInput__error'>
+                hasError && error && <div className='customInput__error'>
                     {error}
                 </div>
             }

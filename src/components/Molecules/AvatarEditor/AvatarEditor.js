@@ -64,7 +64,7 @@ export const AvatarEditor = ({onClose}) => {
                         profileSettingsActions.setField({
                             fieldId: 'img',
                             fieldType: profileSettingsFieldTypeList.current,
-                            fieldValue: res.image,
+                            fieldValue: res.data.url,
                         })
                     }
                 })
