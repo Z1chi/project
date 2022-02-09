@@ -117,7 +117,7 @@ export const table = {
         columnWidth: '100px',
         groupId: 'Leads',
 
-        renderRowItem: item => `${Number(item).toFixed(2)} %`,
+        renderRowItem: item => isNaN(Number(item)) ? item : `${Number(item).toFixed(2)} %`,
     }, {
         columnId: 'epr',
         columnName: 'EPR',
