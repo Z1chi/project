@@ -278,7 +278,9 @@ export const drawers = {
                 id: 'created_at',
                 title: 'Created',
                 placeholder: 'Select date...',
-                type: dropdownTypes.DATE,
+                type: dropdownTypes.INPUT,
+                isNotChangeable: true,
+                formatValue: dateStringFormator,
             }, {
                 id: 'project',
                 title: 'Offer',

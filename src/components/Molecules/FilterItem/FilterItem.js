@@ -70,10 +70,14 @@ export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], re
                                 },
                                 renderItem,
                                 matchPropName,
-                                onChange: (value)=>{ filterActions.setFieldValue({
-                                    fieldId: id,
-                                    fieldValue: value
-                                })},
+                                onChange: (value)=>{ 
+                                    filterActions.setFieldValue({
+                                        fieldId: id,
+                                        fieldValue: value
+                                    }); 
+                                    type===dropdownTypes.SELECT && setIsOpened(false);
+                                    type===dropdownTypes.DATE && value.to && value.from && setIsOpened(false);
+                                },
                                 mobileConfig: { 
                                     title: mobileTitle,
                                     onClose: () => setIsOpened(false)

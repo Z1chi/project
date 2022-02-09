@@ -149,7 +149,6 @@ export const SmartLinksPage = () => {
                                             onEditOpen: ({itemId}) => {
                                                 drawerActions.open(drawers.edit({
                                                     onEdit: (data) => {
-                                                        console.log('data',data)
                                                         request(`smartlink/update/${itemId}`, {
                                                             method: 'patch',
                                                             data: {
