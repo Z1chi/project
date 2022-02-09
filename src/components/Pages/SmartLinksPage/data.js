@@ -20,7 +20,7 @@ export const filters = [{
     mobileTitle: 'Select offer',
     type: dropdownTypes.MULTISELECT,
     matchPropName: 'title',
-    width: '204px',
+    maxWidth: '204px',
     renderItem: (item) => (
         <div style={{display: 'flex', alignItems: 'center',}}>
             <img src={item.image} alt="image"/>
@@ -32,14 +32,14 @@ export const filters = [{
     title: 'Date',
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
-    width: '154px',
+    maxWidth: '154px',
 }, {
     id: 'format',
     title: 'Format',
     mobileTitle: 'Select format',
     type: dropdownTypes.SELECT,
     matchPropName: 'label',
-    width: '163px',
+    maxWidth: '163px',
     renderItem: (item) => item.label,
 },];
 

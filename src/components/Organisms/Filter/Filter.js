@@ -1,7 +1,6 @@
 import React from 'react';
 import SVG from 'react-inlinesvg';
 import {useAtom} from '@reatom/react';
-import {useResizeDetector} from 'react-resize-detector';
 
 import {FilterItem} from '../../Molecules/FilterItem/FilterItem';
 import {FilterMobile} from '../FilterMobile/FilterMobile';
@@ -13,15 +12,12 @@ import {filterAtom} from '../../../store/Filter';
 
 import './filter.scss';
 
-export const Filter = ({filters, data, onSave,}) => {
+export const Filter = ({filters, data, onSave, isMobile}) => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
 
-    const {width, height, ref} = useResizeDetector();
-    const isMobile = width <= 768;
-
     return (
-        <div className='filter' ref={ref}>
+        <div className={`filter ${isMobile ? 'filter--Mobile' : ''}`}>
             {
                 isMobile
                     ? (
@@ -31,9 +27,9 @@ export const Filter = ({filters, data, onSave,}) => {
 
                     <>
                         {
-                            filters.map(({width, ...item}, index) => {
+                            filters.map(({maxWidth = '100%', ...item}, index) => {
                                 return (
-                                    <div key={`filter__item(${index})`} className='filter__item' style={{width}}>
+                                    <div key={`filter__item(${index})`} className='filter__item' style={{maxWidth}}>
                                         <FilterItem {...item} items={data[index]}/>
                                     </div>
                                 )

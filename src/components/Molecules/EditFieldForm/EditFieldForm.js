@@ -83,7 +83,7 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
             <div className='editFieldForm__submit'>
               <Button type="submit" disabled={submitting || !valid}
                 containerStyles={{width: "100%"}}
-                styles={{width: "100%", cursor: "pointer"}}>
+                styles={{width: "100%"}}>
                 Submit
               </Button>
             </div>

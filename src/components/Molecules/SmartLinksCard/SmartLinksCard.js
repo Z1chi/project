@@ -23,6 +23,7 @@ const renderFormatList = {
 
 export const SmartLinksCard = ({ config, data, }) => {
     const { id, created, offer, format, name, ...fields } = data;
+
     return (
         <div className='smartLinksCard'>
             <div className='smartLinksCard__header'>
@@ -39,7 +40,7 @@ export const SmartLinksCard = ({ config, data, }) => {
                         </div>
                     </div>
                     <div className='smartLinksCard__type'>
-                        {renderFormatList[format]()}
+                        {renderFormatList[format.label]()}
                     </div>
                 </div>
             </div>
