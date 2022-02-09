@@ -8,9 +8,9 @@ import {images} from './images';
 
 const renderLink = (link) => {
     return (
-        <div style={{color: '#219FE5', textDecoration: 'underline',}}>
+        <a href={link} target='_blank' style={{color: '#219FE5', textDecoration: 'underline',}}>
             {link}
-        </div>
+        </a>
     )
 };
 
@@ -102,7 +102,7 @@ export const table = {
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onEditOpen({itemId: id})}>
+                <div onClick={() => props.onEditOpen({itemId: id})} style={{ cursor: 'pointer' }}>
                     <SVG src={images.editIcon}/>
                 </div>
             )
@@ -114,7 +114,7 @@ export const table = {
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onDeleteOpen({itemId: id})}>
+                <div onClick={() => props.onDeleteOpen({itemId: id})} style={{ cursor: 'pointer' }}>
                     <SVG src={images.deleteIcon}/>
                 </div>
             )
@@ -159,8 +159,8 @@ export const table = {
     }
 };
 
-const isNewSmartlinkValid = ({project_id, title, format,}) => {
-    return project_id && project_id.some(item => !!item.isSelected) && title && format && format.some(item => !!item.isSelected);
+const isNewSmartlinkValid = ({project, title, format,}) => {
+    return project && project.some(item => !!item.isSelected) && title && format && format.some(item => !!item.isSelected);
 };
 
 export const drawers = {
@@ -170,7 +170,7 @@ export const drawers = {
         subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.',
         fieldRows: [
             [{
-                id: 'project_id',
+                id: 'project',
                 title: 'Select Offer',
                 placeholder: 'Select Offer...',
                 matchPropName: 'title',
@@ -235,7 +235,7 @@ export const drawers = {
                             background: '#219FE5',
                         };
                         button.onClick = () => props.onCreate({
-                            project_id: stateData.project_id.find(item => !!item.isSelected).id,
+                            project_id: stateData.project.find(item => !!item.isSelected).id,
                             title: stateData.title,
                             format: stateData.format.find(item => !!item.isSelected).id,
                         })
@@ -255,6 +255,7 @@ export const drawers = {
             }],
 
             [{
+                id: 'url',
                 title: 'Generated URL',
                 placeholder: '',
                 type: dropdownTypes.INPUT,
@@ -263,6 +264,7 @@ export const drawers = {
                     textDecoration: 'underline',
                 },
                 canCopy: true,
+                onCopy: props.onCopy,
                 info: true,
             }],
         ],
@@ -276,7 +278,9 @@ export const drawers = {
                 id: 'created_at',
                 title: 'Created',
                 placeholder: 'Select date...',
-                type: dropdownTypes.DATE,
+                type: dropdownTypes.INPUT,
+                isNotChangeable: true,
+                formatValue: dateStringFormator,
             }, {
                 id: 'project',
                 title: 'Offer',
@@ -302,7 +306,7 @@ export const drawers = {
                 title: 'Format',
                 matchPropName: 'label',
                 type: dropdownTypes.SELECT,
-                renderItem: (item) => item.label
+                renderItem: (item) => item.label,
             }],
 
             [{
@@ -339,6 +343,7 @@ export const drawers = {
                     textDecoration: 'underline',
                 },
                 canCopy: true,
+                onCopy: props.onCopy,
                 info: true,
             }],
 

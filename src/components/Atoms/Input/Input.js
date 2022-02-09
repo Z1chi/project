@@ -5,7 +5,7 @@ import { images } from './images';
 
 import './input.scss';
 
-export const Input = ({ type = 'text', value, hasError, error, placeholder, isNotChangeable = false, onChange = () => {}, canCopy, fieldData={},}) => {
+export const Input = ({ type = 'text', value, hasError, error, placeholder, isNotChangeable = false, onChange = () => {}, canCopy, onCopy, fieldData={},}) => {
 
     const [inputValue, setInputValue] = useState('');
 
@@ -35,6 +35,7 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
                 {
                     canCopy && <div className='customInput__copy' onClick={()=>{
                         navigator.clipboard.writeText(inputValue)
+                        onCopy();
                     }}>
                         <SVG src={images.copyIcon}/>
                     </div>

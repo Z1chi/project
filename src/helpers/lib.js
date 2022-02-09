@@ -67,6 +67,9 @@ export const localeString = ({value = 0, currencySymbol = 'USD', locales = 'ja-J
     (value).toLocaleString(locales, {style: 'currency', currency: currencySymbol});
 
 export const dateStringFormator = (dateTimeString) => {
+    if(!dateTimeString) {
+        return ''
+    }
     const monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const [date, time] = dateTimeString.split('T');
@@ -82,7 +85,6 @@ export const dateStringFormator = (dateTimeString) => {
     return `${monthArr.find((item, key) =>
         key + 1 === Number(month) ? item : '')} ${day}, ${year} ${timeFn()}`
 };
-
 
 export const dateFormator = (dateObject) => {
     return {
