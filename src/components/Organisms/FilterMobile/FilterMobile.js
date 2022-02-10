@@ -22,8 +22,7 @@ const getOnSelectFormators = ({type, matchPropName, options}) => {
             inputValue: () => {
                 const itemSelected = options.find(item => item.isSelected)
                 const res = itemSelected ? (matchPropName ? itemSelected[matchPropName] : itemSelected) : 'All';
-    
-                console.log('res',res);
+
                 return res;
             }
         }

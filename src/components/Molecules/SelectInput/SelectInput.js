@@ -10,7 +10,6 @@ import { images } from './images';
 import './selectInput.scss'
 
 export const SelectInput = ({ value, inputValue, placeholder, options=[], matchPropName, renderItem, onChange, onCloseCheck, SelectComponent = Select, mobileConfig }) => {
-    console.log('v',value, inputValue)
     return (
         <div className='selectInput'>
             <Dropdown 
