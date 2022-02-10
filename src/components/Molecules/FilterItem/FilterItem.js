@@ -23,7 +23,7 @@ const getSelectedValue = ({ type, options, matchPropName }) => {
         return 'All';
     }
     switch(type) {
-        case dropdownTypes.SELECT: 
+        case dropdownTypes.SELECT:
             const itemSelected = options.find(item => item.isSelected)
             return itemSelected ? (matchPropName ? itemSelected[matchPropName] : itemSelected) : 'All'
 

@@ -1,14 +1,25 @@
 .selectInput {
-    background: #2D313D;
-    padding-right: 9px;
+  background: #2D313D;
+  padding-right: 9px;
+  cursor: pointer;
 
-    &__input {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
+  &__input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+  }
 
-    &__select {
-        left: 0;
+  &__select {
+    left: 0;
+    cursor: pointer;
+  }
+
+  .customInput {
+    cursor: pointer;
+
+    &__input:disabled {
+      background: #2D313D;;
     }
+  }
 }

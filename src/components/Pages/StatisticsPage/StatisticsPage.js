@@ -12,6 +12,7 @@ import {filterAtom} from '../../../store/Filter';
 import {convertToQueryString} from '../../../helpers/lib';
 
 import './statisticsPage.scss';
+import {useResizeDetector} from "react-resize-detector";
 
 export const StatisticsPage = () => {
 
@@ -20,6 +21,7 @@ export const StatisticsPage = () => {
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({table: [], last_page: null});
+    const {width, ref} = useResizeDetector();
 
     useEffect(() => {
         filterActions.reset();
@@ -78,20 +80,24 @@ export const StatisticsPage = () => {
             return filterQuery.data || [];
         })
     ];
+    const isMobile = width < 780;
     return (
         <div className='statisticsPage'>
             <PageTemplate
                 renderPage={() => {
                     return (
                         <div className='statisticsPage__content'>
-                            <div className='statisticsPage__filters'>
-                                <Filter filters={filters} data={filtersData} onSave={
-                                    () => {
-                                        setPageIndex(1);
-                                        setOperationIndex(operationIndex + 1);
-                                        setPushTableData(false)
-                                    }
-                                }/>
+                            <div ref={ref} className='statisticsPage__filters'>
+                                <Filter filters={filters}
+                                        data={filtersData}
+                                        isMobile={isMobile}
+                                        onSave={
+                                            () => {
+                                                setPageIndex(1);
+                                                setOperationIndex(operationIndex + 1);
+                                                setPushTableData(false)
+                                            }
+                                        }/>
                             </div>
                             <div className='statisticsPage__table'>
                                 <Table

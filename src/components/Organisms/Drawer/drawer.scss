@@ -25,7 +25,7 @@
 
     input {
         outline: none !important;
-        border: none !important;
+        border: none ;
         font-weight: normal;
         font-size: 13px;
         line-height: 18px;
@@ -40,6 +40,7 @@
     
     &__close {
         display: flex;
+        cursor: pointer;
         justify-content: flex-end;
     }
 

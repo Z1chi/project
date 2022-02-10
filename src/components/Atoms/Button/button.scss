@@ -1,53 +1,61 @@
 .button {
+  display: flex;
+  justify-content: center;
+
+  button {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    padding: 10px 15px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background: #219FE6;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    color: #FFFFFF;
+    outline: none;
+    border: none;
+    transition: all ease 0.3s;
+    position: relative;
 
-    button {
-        position: relative;
-        cursor: pointer;
-        height: 37px;
-        width: 115px;
-        padding: 10px 15px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background: #219FE6;
-        border-radius: 4px;
-
-        font-style: normal;
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 18px;
-        color: #FFFFFF;
-
-        outline: none;
-        border: none;
-
-        &:disabled {
-            background: #3F3F3F !important;
-            color: #ACACAC !important;
-            box-shadow: none !important;
-        }
-
-        &:hover {
-            background: #0F8ACF;
-            box-shadow: 0px 0px 33px #276B92;
-        }
-
-        &:active {
-            &::before {
-                content: '';
-                position: absolute;
-                top: -3px;
-                right: -3px;
-                bottom: -3px;
-                left: -3px;
-
-                border: 1px solid #057ABC;
-                border-radius: 6px;
-            }
-        }
+    &:hover {
+      background: #0F8ACF;
+      box-shadow: 0 0 33px #276B92;
     }
+
+    &:disabled {
+      background: #3F3F3F;
+      color: #ACACAC;
+      box-shadow: none;
+      cursor: alias;
+
+    }
+
+    &:focus {
+      box-shadow: 0 0 33px #276B92, inset 0 0 10px rgba(14, 89, 131, 0.43);
+
+    }
+
+    &:active {
+      background-color: #0F8ACF;
+
+      &:before {
+        background: none;
+        border: 1px solid #0F8ACF;
+        content: "";
+        display: block;
+        border-radius: 6px;
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        pointer-events: none;
+      }
+    }
+  }
 }

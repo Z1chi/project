@@ -14,10 +14,16 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            .filter {
+                margin-bottom: 15px;
+                &--Mobile {
+                    margin-bottom: 0;
+                }
+            }
         }
 
         &Data {
-            margin-top: 16px;
+            //margin-top: 16px;
         }
     }
 }

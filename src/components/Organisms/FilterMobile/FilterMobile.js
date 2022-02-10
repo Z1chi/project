@@ -28,7 +28,7 @@ export const FilterMobile = ({filters, data, onSave,}) => {
                                     </div>
                                 </div>
                                 <div className='filterMobile__title'>
-                                    Filter
+                                    Filters
                                 </div>
                                 <div className='filterMobile__close' onClick={() => {
                                     setIsOpened(false)
@@ -69,7 +69,6 @@ export const FilterMobile = ({filters, data, onSave,}) => {
                     )
             }
 
-
         </div>
     )
-}
+};

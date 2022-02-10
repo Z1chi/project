@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Field } from "react-final-form";
+import {Field, Form} from "react-final-form";
 
 import {Input} from "../../Atoms/Input/Input";
 import {Button} from "../../Atoms/Button/Button";
@@ -13,11 +13,10 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
     return (
         <div className='editFieldForm'>
         <Form
-            onSubmit={onSubmit}
-            initialValues={{}}
-            validate={(values) => {
-                const res = formValidator(values);
-                return res;
+        onSubmit={onSubmit}
+        initialValues={{}}
+        validate={(values) => {
+            return formValidator(values);
         }}
         render={({ handleSubmit, form, submitting, pristine, values, valid }) => (
           <form onSubmit={handleSubmit}>
@@ -82,9 +81,9 @@ export const EditFieldForm = ({value, onSubmit, hasConfirmField, confirmOldValue
                 </Field>
             }
             <div className='editFieldForm__submit'>
-              <Button type="submit" disabled={submitting || !valid}                         
+              <Button type="submit" disabled={submitting || !valid}
                 containerStyles={{width: "100%"}}
-                styles={{width: "100%", cursor: "pointer"}}>
+                styles={{width: "100%"}}>
                 Submit
               </Button>
             </div>

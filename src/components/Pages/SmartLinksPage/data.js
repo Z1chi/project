@@ -20,7 +20,7 @@ export const filters = [{
     mobileTitle: 'Select offer',
     type: dropdownTypes.MULTISELECT,
     matchPropName: 'title',
-    width: '204px',
+    maxWidth: '204px',
     renderItem: (item) => (
         <div style={{display: 'flex', alignItems: 'center',}}>
             <img src={item.image} alt="image"/>
@@ -32,14 +32,14 @@ export const filters = [{
     title: 'Date',
     mobileTitle: 'Select date',
     type: dropdownTypes.DATE,
-    width: '154px',
+    maxWidth: '154px',
 }, {
     id: 'format',
     title: 'Format',
     mobileTitle: 'Select format',
     type: dropdownTypes.SELECT,
     matchPropName: 'label',
-    width: '163px',
+    maxWidth: '163px',
     renderItem: (item) => item.label,
 },];
 
@@ -102,7 +102,7 @@ export const table = {
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onEditOpen({itemId: id})} style={{ cursor: 'pointer' }}>
+                <div onClick={() => props.onEditOpen({itemId: id})} style={{cursor: 'pointer'}}>
                     <SVG src={images.editIcon}/>
                 </div>
             )
@@ -114,7 +114,7 @@ export const table = {
 
         renderRowItem: (_, id,) => {
             return (
-                <div onClick={() => props.onDeleteOpen({itemId: id})} style={{ cursor: 'pointer' }}>
+                <div onClick={() => props.onDeleteOpen({itemId: id})} style={{cursor: 'pointer'}}>
                     <SVG src={images.deleteIcon}/>
                 </div>
             )
@@ -225,15 +225,11 @@ export const drawers = {
                 generateField: ({stateData}) => {
                     const button = {};
                     if (!isNewSmartlinkValid(stateData)) {
-                        button.styles = {
-                            background: '#3F3F3F',
-                        };
+
                         button.onClick = () => {
                         };
                     } else {
-                        button.styles = {
-                            background: '#219FE5',
-                        };
+
                         button.onClick = () => props.onCreate({
                             project_id: stateData.project.find(item => !!item.isSelected).id,
                             title: stateData.title,
@@ -241,11 +237,8 @@ export const drawers = {
                         })
                     }
                     return (
-                        <Button styles={{
-                            padding: '10px 15px',
-                            height: '42px',
-                            ...button.styles,
-                        }}
+                        <Button
+                                disabled={!isNewSmartlinkValid(stateData)}
                                 onClick={button.onClick}
                         >
                             Create
@@ -388,14 +381,17 @@ export const modalDelete = ({onSubmit, onClose,}) => ({
     subtitle: 'By deleting your SmartLink you also delete entire statistics logs. NOTE: the system no longer counts any clicks on this link. Take our advice: do not delete your SmartLink if you used it at least once.',
     children: (
         <div>
-            <Button containerStyles={{width: '100%'}} styles={{marginTop: '30px',width: '100%', height: '50px'}} onClick={() => {
-                onSubmit();
-                onClose();
-            }}>
-                I am sure I want to delete this SmartLink and the entire history. I understand this operation cannot be undone.
+            <Button containerStyles={{width: '100%'}} styles={{marginTop: '30px', width: '100%', height: '50px'}}
+                    onClick={() => {
+                        onSubmit();
+                        onClose();
+                    }}>
+                I am sure I want to delete this SmartLink and the entire history. I understand this operation cannot be
+                undone.
             </Button>
-            <Button onClick={onClose} styles={{marginTop: '20px', background: 'transparent', width: '100%'}} containerStyles={{width: '100%'}} >
-            Go back and do not delete this SmartLink.
+            <Button onClick={onClose} styles={{marginTop: '20px', background: 'transparent', width: '100%'}}
+                    containerStyles={{width: '100%'}}>
+                Go back and do not delete this SmartLink.
             </Button>
         </div>
     ),

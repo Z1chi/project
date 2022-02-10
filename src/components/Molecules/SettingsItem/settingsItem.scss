@@ -19,6 +19,28 @@
     max-width: 355px;
     position: relative;
 
+    .customInput {
+      &__field {
+        & > input {
+          &:disabled {
+            background: #2D313D;
+          }
+        }
+      }
+    }
+
+    & > .modal {
+      .customInput {
+        &__field {
+          & > input {
+            &:disabled {
+              background: #3F3F3F;
+            }
+          }
+        }
+      }
+    }
+
     & > input {
       color: #898A98;
     }

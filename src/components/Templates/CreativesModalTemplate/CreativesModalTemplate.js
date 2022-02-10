@@ -8,7 +8,6 @@ import SVG from 'react-inlinesvg';
 import './creativesModalTemplate.scss';
 
 import {icons} from "./images";
-
 export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, onDownload, preview_src, file}) => {
 
     const sliderImages = images && images.map(imageItem => {
@@ -43,7 +42,7 @@ export const CreativesModalTemplate = ({onClose, images, description, file_size,
                     </div>
                 </div>
                 <div className='creativesModalTemplate__download'>
-                    <a href="#" download={process.env.MEDIA_URL + file}>
+                    <a href={process.env.MEDIA_URL + file} target='_blank' download={file} >
                         Download now
                     </a>
                 </div>

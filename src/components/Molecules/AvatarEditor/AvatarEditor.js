@@ -76,7 +76,7 @@ export const AvatarEditor = ({onClose}) => {
 
 
     const onSelectFile = (e) => {
-        if (e.target.files && e.target.files.length > 0) {
+        if (e.target.files && e.target.files?.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () => setUpImg(reader.result));
             reader.readAsDataURL(e.target.files[0]);
