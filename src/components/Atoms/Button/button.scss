@@ -4,8 +4,8 @@
 
   button {
     cursor: pointer;
-    height: 37px;
-    width: 115px;
+    height: 100%;
+    width: 100%;
     padding: 10px 15px;
     display: flex;
     justify-content: center;
@@ -25,10 +25,6 @@
     &:hover {
       background: #0F8ACF;
       box-shadow: 0 0 33px #276B92;
-    }
-
-    &:hover:disabled {
-      box-shadow: unset;
     }
 
     &:disabled {

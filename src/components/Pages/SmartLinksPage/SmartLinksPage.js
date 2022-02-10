@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {useAtom} from '@reatom/react';
 import {useQuery, useQueries,} from 'react-query';
 import {useResizeDetector} from "react-resize-detector";
+import SVG from "react-inlinesvg"
 
-import {TableEmpty} from '../../Molecules/TableEmpty/TableEmpty';
+
 import {SmartLinksCard} from '../../Molecules/SmartLinksCard/SmartLinksCard';
 import {Drawer} from '../../Organisms/Drawer/Drawer';
 import {Filter} from '../../Organisms/Filter/Filter'
 import {Table} from '../../Organisms/Table/Table';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
+import {Button} from "../../Atoms/Button/Button";
 
 import request from '../../../api/request';
 import {convertToQueryString} from '../../../helpers/lib';
@@ -17,7 +19,8 @@ import {filters, filterFormators, table, drawers, modalDelete} from './data';
 import {filterAtom} from '../../../store/Filter';
 import {drawerAtom} from '../../../store/Drawer';
 import {modalAtom} from '../../../store/Modal';
-import { alertAtom } from '../../../store/Alert';
+import {alertAtom} from '../../../store/Alert';
+import createSmartLink from '../../Organisms/Drawer/images/close.svg';
 
 import './smartLinksPage.scss';
 
@@ -31,7 +34,7 @@ export const SmartLinksPage = () => {
     const [filterData, filterActions] = useAtom(filterAtom);
     const [modalData, modalActions] = useAtom(modalAtom);
     const [alertData, alertActions] = useAtom(alertAtom);
-    const {width, height, ref} = useResizeDetector();
+    const {width, ref} = useResizeDetector();
 
     useEffect(() => {
         filterActions.reset();
@@ -79,15 +82,16 @@ export const SmartLinksPage = () => {
         [],
         smartlinkFiltersQueryList[1].data || []
     ];
-    const filterMobile = width <= 670;
+    const filterMobile = width <= 820;
     return (
         <div className='smartLinksPage'>
             <PageTemplate
                 renderPage={({width}) => {
                     return (
                         <div className='smartLinksPage__content'>
-                            <div className='smartLinksPage__header'>
-                                <div ref={ref} className='smartLinksPage__filters'>
+                            <div ref={ref} className={`smartLinksPage__header ${filterMobile ? "smartLinksPage__header--Mobile" : ""}`}>
+                                <div
+                                    className='smartLinksPage__filters'>
                                     <Filter filters={filters}
                                             data={filtersData}
                                             isMobile={filterMobile}
@@ -100,8 +104,9 @@ export const SmartLinksPage = () => {
                                             }
                                     />
                                 </div>
-                                <div className='smartLinksPage__create'>
-                                    <button onClick={
+                                <div
+                                    className={`smartLinksPage__create ${filterMobile ? "smartLinksPage__create--Mobile" : ""}`}>
+                                    <Button onClick={
                                         () => drawerActions.open(drawers.create({
                                             onCreate: (data) => {
                                                 request('smartlink/create', {
@@ -112,7 +117,7 @@ export const SmartLinksPage = () => {
                                                         fieldId: 'url',
                                                         fieldValue: res.data.url
                                                     });
-                                                    setOperationIndex(operationIndex+1);
+                                                    setOperationIndex(operationIndex + 1);
                                                     return res.data;
                                                 });
                                             },
@@ -124,8 +129,12 @@ export const SmartLinksPage = () => {
                                                 drawerActions.close();
                                             },
                                         }))
-                                    }>Create Smartlink
-                                    </button>
+                                    }>
+                                        {
+                                            filterMobile ? <SVG src={createSmartLink}/> : "Create Smartlink"
+
+                                        }
+                                    </Button>
                                 </div>
                             </div>
                             {
@@ -144,62 +153,62 @@ export const SmartLinksPage = () => {
                                     </div>
                                     : <div className='smartLinksPage__table'>
                                         <Table {...table}
-                                        hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                        fetchMore={()=>{
-                                            setPageIndex(pageIndex+1)
-                                            setPushTableData(true)
-                                        }}
-                                        tableConfig={table.getTableConfig({
-                                            onEditOpen: ({itemId}) => {
-                                                drawerActions.open(drawers.edit({
-                                                    onEdit: (data) => {
-                                                        request(`smartlink/update/${itemId}`, {
-                                                            method: 'patch',
-                                                            data: {
-                                                                title: data.stateData.title,
-                                                                project_id: data.stateData.project.id,
-                                                                format: data.stateData.format.find(item => item.isSelected).id
-                                                            },
-                                                        }).then((res) => {
-                                                            alertActions.open({
-                                                                type: 'ALERT/SUCCESS',
-                                                                message: 'Successfully updated',
-                                                            });
-                                                            drawerActions.close();
-                                                            setOperationIndex(operationIndex+1);
-                                                            return res.data
-                                                        });
-                                                    },
-                                                    onDelete: () => {
-                                                        modalActions.open(
-                                                            modalDelete({
-                                                                onSubmit: () => {
-                                                                    request(`smartlink/delete/${itemId}`, {method: 'delete',}).then((res) => {
-                                                                        drawerActions.close();
-                                                                        setOperationIndex(operationIndex+1);
-                                                                        return res.data
-                                                                    });
-                                                                },
-                                                            })
-                                                        )
-                                                    }
-                                                }));
-                                                const smartlinkItem = smartLinksQuery.data.table.find(item => item.id === itemId);
-                                                drawerActions.setFieldValues(smartlinkItem)
-                                            },
-                                            onDeleteOpen: (data) => modalActions.open(
-                                                modalDelete({
-                                                    onClose: modalActions.close,
-                                                    onSubmit: () => {
-                                                        request(`smartlink/delete/${data.itemId}`, {method: 'delete',}).then((res) => {
-                                                            drawerActions.close();
-                                                            setOperationIndex(operationIndex+1);
-                                                            return res.data
-                                                        });
-                                                    },
-                                                })
-                                            ),
-                                        })} data={tableData.table}/>
+                                               hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                               fetchMore={() => {
+                                                   setPageIndex(pageIndex + 1)
+                                                   setPushTableData(true)
+                                               }}
+                                               tableConfig={table.getTableConfig({
+                                                   onEditOpen: ({itemId}) => {
+                                                       drawerActions.open(drawers.edit({
+                                                           onEdit: (data) => {
+                                                               request(`smartlink/update/${itemId}`, {
+                                                                   method: 'patch',
+                                                                   data: {
+                                                                       title: data.stateData.title,
+                                                                       project_id: data.stateData.project.id,
+                                                                       format: data.stateData.format.find(item => item.isSelected).id
+                                                                   },
+                                                               }).then((res) => {
+                                                                   alertActions.open({
+                                                                       type: 'ALERT/SUCCESS',
+                                                                       message: 'Successfully updated',
+                                                                   });
+                                                                   drawerActions.close();
+                                                                   setOperationIndex(operationIndex + 1);
+                                                                   return res.data
+                                                               });
+                                                           },
+                                                           onDelete: () => {
+                                                               modalActions.open(
+                                                                   modalDelete({
+                                                                       onSubmit: () => {
+                                                                           request(`smartlink/delete/${itemId}`, {method: 'delete',}).then((res) => {
+                                                                               drawerActions.close();
+                                                                               setOperationIndex(operationIndex + 1);
+                                                                               return res.data
+                                                                           });
+                                                                       },
+                                                                   })
+                                                               )
+                                                           }
+                                                       }));
+                                                       const smartlinkItem = smartLinksQuery.data.table.find(item => item.id === itemId);
+                                                       drawerActions.setFieldValues(smartlinkItem)
+                                                   },
+                                                   onDeleteOpen: (data) => modalActions.open(
+                                                       modalDelete({
+                                                           onClose: modalActions.close,
+                                                           onSubmit: () => {
+                                                               request(`smartlink/delete/${data.itemId}`, {method: 'delete',}).then((res) => {
+                                                                   drawerActions.close();
+                                                                   setOperationIndex(operationIndex + 1);
+                                                                   return res.data
+                                                               });
+                                                           },
+                                                       })
+                                                   ),
+                                               })} data={tableData.table}/>
                                     </div>
                             }
                         </div>

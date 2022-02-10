@@ -1,84 +1,98 @@
 .filterMobile {
+  width: 100%;
+  background-color: #262A37;
+
+
+  .customInput__input:disabled {
+    background: #2D313D
+  }
+
+  &__fieldsItem {
     width: 100%;
-    
-    &__dropdown {
-        width: 100%;
-        padding: 10px 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #131826;
+  }
+
+  &__dropdown {
+    border-radius: 4px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #131826;
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    color: #FFFFFF;
+
+    span {
+      margin-left: 7px;
     }
+  }
 
-    &__text {
-        display: flex;
-        align-items: center;
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 18px;
-        color: #FFFFFF;
+  &__arrow {
+    margin-top: 4px;
+    align-self: flex-end;
+  }
 
-        span {
-            margin-left: 7px;
-        }
+  &__header {
+    width: 100%;
+    //margin-top: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__fields {
+    background-color: #262A37;
+  }
+
+  &__reset {
+    //position: absolute;
+    //top: 0;
+    //left: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 7px 15px;
+    cursor: pointer;
+    height: 30px;
+
+    border: 1px solid #219FE6;
+    border-radius: 4px;
+
+    &Text {
+      margin-left: 9px;
+      font-weight: 600;
+      font-size: 10px;
+      line-height: 16px;
+      color: #219FE6;
     }
+  }
 
-    &__arrow {
-        margin-top: 4px;
-        align-self: flex-end;
-    }
+  &__title {
+    width: 100%;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+  }
 
-    &__header {
-        width: 100%;
-        margin-top: 20px;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  &__close {
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
 
-    &__fields {
-        background-color: #262A37;
-    }
-
-    &__reset {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 7px 15px;
-
-        height: 30px;
-
-        border: 1px solid #219FE6;
-        border-radius: 4px;
-
-        &Text {
-            margin-left: 9px;
-            font-weight: 600;
-            font-size: 10px;
-            line-height: 16px;
-            color: #219FE6;
-        }
-    }
-
-    &__title {
-        width: 100%;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 25px;
-        text-align: center;
-        color: #FFFFFF;
-    }
-
-    &__close {
-        top: 0;
-        right: 0;
-    }
-
-    &__footer {
-        margin-top: 27px;
-    }
+  &__footer {
+    margin: 20px 0;
+  }
 }

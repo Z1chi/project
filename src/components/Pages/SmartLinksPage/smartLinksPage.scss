@@ -10,53 +10,72 @@
     margin-top: 16px;
     width: 100%;
 
-    @media (max-width: 1172px) {
-      flex-direction: column;
-
-      .smartLinksPage {
-        &__create {
-          margin-left: 0;
-          width: 100%;
-
-          button {
-            width: 100%;
-          }
-
-          &__filters {
-            margin-bottom: 15px;
-          }
-        }
-      }
+    &--Mobile {
+      align-items: flex-end;
     }
   }
 
   &__filters {
     width: 100%;
+
+    .filterMobile {
+      &__dropdown {
+        margin: 0;
+      }
+      &__fieldsItem{
+        width: calc(100% + 50px);
+      }
+      &__header {
+        width: calc(100% + 50px);
+      }
+      &__footer {
+        margin: 20px 0 0;
+        .button {
+          & > button {
+          padding: 13px 15px;
+          }
+        }
+      }
+    }
+
   }
 
   &__create {
+    transition: all ease 0.3s;
+    position: relative;
     margin-left: 14px;
-
-    width: 185px;
-    height: 42px;
+    width: 100%;
+    max-width: 185px;
     display: flex;
     justify-content: flex-end;
 
-    button {
-      padding: 10px;
-      background: #219FE6;
-      border-radius: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 22px;
-      text-align: center;
-      color: #FFFFFF;
-      border: none;
-      outline: none;
+    .button {
+      height: 100%;
+      white-space: nowrap;
+      width: 100%;
+
+      & > button {
+        padding: 12px 15px;
+      }
+    }
+
+    &--Mobile {
+      margin-left: 5px;
+      height: 100%;
+      max-width: 44px;
+
+      .button {
+        width: 100%;
+        height: unset;
+
+        & > button {
+          padding: 10px;
+
+          & > svg {
+            transform: rotate(45deg)
+          }
+        }
+      }
     }
   }
 

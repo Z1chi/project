@@ -1,6 +1,15 @@
 .statisticsPage {
   &__table {
-    margin-top: 16px;
+    //margin-top: 16px;
+  }
+
+  &__filters {
+    .filter {
+      margin-bottom: 15px;
+      &--Mobile {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 
@@ -8,6 +17,7 @@
   &Cell {
     justify-content: center;
   }
+
   &HeadItem {
     justify-content: center;
   }

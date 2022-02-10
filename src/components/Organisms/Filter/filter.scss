@@ -11,7 +11,15 @@
   &--Mobile {
     height: 100%;
     flex-direction: column;
+    .filterMobile {
+      height: 100%;
+      &__dropdown {
+        height: 100%;
+        padding: 5.5px 15px;
+      }
+    }
   }
+
 
   &__reset {
     padding: 19px 25px;

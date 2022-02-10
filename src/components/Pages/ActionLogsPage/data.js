@@ -25,7 +25,7 @@ export const filters = [{
     title: 'Date',
     type: dropdownTypes.DATE,
     mobileTitle: 'Select date',
-    width: '169px',
+    maxWidth: '169px',
     onSelectFormator: date => currencyFormator(date),
 }, {
     id: 'offer',
@@ -33,7 +33,7 @@ export const filters = [{
     mobileTitle: 'Select offers',
     type: dropdownTypes.MULTISELECT,
     matchPropName: 'title',
-    width: '169px',
+    maxWidth: '169px',
     renderItem: (item) => (
         <div style={{display: 'flex', alignItems: 'center', }}>
             <img src={item.image}  alt=''/>
@@ -47,7 +47,7 @@ export const filters = [{
     mobileTitle: 'Select smartlink',
     type: dropdownTypes.SELECT,
     matchPropName: 'title',
-    width: '169px',
+    maxWidth: '169px',
     renderItem: (item) => item.title,
     onSelectFormator: (item) => item.id,
 }, {
@@ -56,7 +56,7 @@ export const filters = [{
     mobileTitle: 'Select actions',
     type: dropdownTypes.MULTISELECT,
     matchPropName: 'label',
-    width: '169px',
+    maxWidth: '169px',
     renderItem: (item) => item.label,
     onSelectFormator: (item) => idArrayFormator(item),
 }, ];

@@ -21,6 +21,7 @@ import {statistics, filters, filterFormators, table, drawers, modalWithdraw} fro
 import {convertToQueryString} from '../../../helpers/lib';
 
 import './withdrawPage.scss';
+import {useResizeDetector} from "react-resize-detector";
 
 export const WithdrawPage = () => {
 
@@ -34,6 +35,8 @@ export const WithdrawPage = () => {
 
     const [drawerData, drawerActions] = useAtom(drawerAtom)
     const [modalData, modalActions] = useAtom(modalAtom);
+
+    const {width, ref} = useResizeDetector();
 
     useEffect(() => {
         filterActions.reset();
@@ -71,6 +74,7 @@ export const WithdrawPage = () => {
         [],
         statusFilterQuery.data || [],
     ];
+    const isMobile = width < 600;
 
     return (
         <div className='withdrawPage'>
@@ -137,8 +141,9 @@ export const WithdrawPage = () => {
                                     </Button>
                                 </div>
                             </div>
-                            <div className='withdrawPage__filters'>
+                            <div ref={ref} className='withdrawPage__filters'>
                                 <Filter filters={filters}
+                                        isMobile={isMobile}
                                         data={filtersData}
                                         onSave={
                                             () => {

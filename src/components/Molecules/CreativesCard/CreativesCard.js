@@ -21,7 +21,8 @@ export const CreativesCard = ({onClick, modalData, preview_src, category, moreBu
                     <div className='creativesCard__more' onClick={moreButton.onClick}>
                         <SVG src={moreButton.icon}/>
                     </div>
-                    <a className='creativesCard__download' href={process.env.MEDIA_URL + file} download={file} onClick={downloadButton.onClick}>
+                    <a className='creativesCard__download' href={process.env.MEDIA_URL + file} target='_blank'
+                       download={file} onClick={downloadButton.onClick}>
                         <SVG src={downloadButton.icon}/>
                     </a>
                 </div>

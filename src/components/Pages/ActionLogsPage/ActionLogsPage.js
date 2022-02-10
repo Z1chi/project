@@ -14,6 +14,7 @@ import {convertToQueryString} from '../../../helpers/lib';
 import request from '../../../api/request';
 
 import './actionLogsPage.scss';
+import {useResizeDetector} from "react-resize-detector";
 
 
 export const ActionLogsPage = () => {
@@ -23,7 +24,7 @@ export const ActionLogsPage = () => {
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState({table: [], last_page: null});
-
+    const {width, ref} = useResizeDetector();
     useEffect(() => {
         filterActions.reset();
     }, []);
@@ -80,7 +81,7 @@ export const ActionLogsPage = () => {
             return filterQuery.data || [];
         })
     ];
-
+    const isMobile = width < 660;
     return (
         <div className='actionLogsPage'>
             <PageTemplate
@@ -101,14 +102,17 @@ export const ActionLogsPage = () => {
                                 }
                             </div>
                             <div className='actionLogsPage__table'>
-                                <div className='actionLogsPage__tableFilter'>
-                                    <Filter filters={filters} data={filtersData} onSave={
-                                        () => {
-                                            setPageIndex(1);
-                                            setOperationIndex(operationIndex + 1);
-                                            setPushTableData(false)
-                                        }
-                                    }/>
+                                <div ref={ref} className='actionLogsPage__tableFilter'>
+                                    <Filter filters={filters}
+                                            data={filtersData}
+                                            isMobile={isMobile}
+                                            onSave={
+                                                () => {
+                                                    setPageIndex(1);
+                                                    setOperationIndex(operationIndex + 1);
+                                                    setPushTableData(false)
+                                                }
+                                            }/>
                                 </div>
                                 <div className='actionLogsPage__tableData'>
                                     {
