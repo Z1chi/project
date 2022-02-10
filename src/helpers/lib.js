@@ -2,6 +2,8 @@ import Cookies from 'universal-cookie';
 
 let CookiesInstance = null;
 
+const monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 export const setCookiesInstance = cookiesInstance => {
     CookiesInstance = cookiesInstance || new Cookies();
 };
@@ -70,7 +72,6 @@ export const dateStringFormator = (dateTimeString) => {
     if(!dateTimeString) {
         return ''
     }
-    const monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const [date, time] = dateTimeString.split('T');
     const [year, month, day] = date.split('-');
@@ -85,6 +86,13 @@ export const dateStringFormator = (dateTimeString) => {
     return `${monthArr.find((item, key) =>
         key + 1 === Number(month) ? item : '')} ${day}, ${year} ${timeFn()}`
 };
+
+export const dateObjToString = ({ from, to }) => {
+    const fromString = from ? `${monthArr[from.month]} ${from.day.toString().padStart(2, '0')}, ${from.year}` : '';
+    const toString = to ? ` - ${monthArr[to.month]} ${to.day.toString().padStart(2, '0')}, ${to.year}` : '';
+
+    return `${fromString} ${toString}`
+}
 
 export const dateFormator = (dateObject) => {
     return {

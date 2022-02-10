@@ -9,8 +9,8 @@ import { images } from './images';
 
 import './selectInput.scss'
 
-export const SelectInput = ({ value, placeholder, options=[], matchPropName, renderItem, onChange, SelectComponent = Select, mobileConfig }) => {
-
+export const SelectInput = ({ value, inputValue, placeholder, options=[], matchPropName, renderItem, onChange, onCloseCheck, SelectComponent = Select, mobileConfig }) => {
+    console.log('v',value, inputValue)
     return (
         <div className='selectInput'>
             <Dropdown 
@@ -18,7 +18,7 @@ export const SelectInput = ({ value, placeholder, options=[], matchPropName, ren
                     () => {
                         return (
                             <div className='selectInput__input'>
-                                <Input placeholder={placeholder} isNotChangeable value={(value && matchPropName) ? value[matchPropName] : value} />
+                                <Input placeholder={placeholder} isNotChangeable value={inputValue || ((value && matchPropName) ? value[matchPropName] : value)} />
                                 <SVG src={images.arrowIcon} />
                             </div>
                         )
@@ -31,7 +31,10 @@ export const SelectInput = ({ value, placeholder, options=[], matchPropName, ren
                                 <SelectComponent options={options} renderItem={renderItem} 
                                 matchPropName={matchPropName}
                                 value={value}
-                                onChange={onChange}
+                                onChange={(value) => {
+                                    onChange(value);
+                                    onCloseCheck && onCloseCheck(value) && setIsOpened(false)
+                                }}
                                 mobileConfig={{...mobileConfig, onClose: ()=>setIsOpened(false)}} 
                             />
                             </div>

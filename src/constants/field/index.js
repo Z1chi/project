@@ -14,7 +14,7 @@ export const fieldComponentsList = {
     [dropdownTypes.INPUT]: (props) => <Input {...props}  value={getInputValue(props)} />,
     [dropdownTypes.SELECT]: (props) => <SelectInput {...props} value={(props.fieldValue && props.fieldValue.find) ? props.fieldValue.find(item => {
         return !!item.isSelected
-    }) : props.fieldValue} onChange={(e)=>{props.onChange(e); props.onClose()}} />,
+    }) : props.fieldValue} onCloseCheck={()=>true} />,
     [dropdownTypes.MULTISELECT]: (props) => <SelectInput {...props} SelectComponent={MultiSelect} />,
-    [dropdownTypes.DATE]: (props) => <SelectInput {...props} SelectComponent={Calendar} />,
+    [dropdownTypes.DATE]: (props) => <SelectInput {...props} SelectComponent={Calendar} onCloseCheck={(value)=>value.to && value.from} />,
 };

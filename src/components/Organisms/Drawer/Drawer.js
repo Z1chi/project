@@ -22,8 +22,8 @@ export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => 
         <>
         <Backdrop onClose={onClose}/>
         <div className='drawer'>
-            <div className='drawer__close' onClick={onClose}>
-                <SVG src={images.closeIcon}/>
+            <div className='drawer__close'>
+                <SVG src={images.closeIcon} onClick={onClose} />
             </div>
             <div className='drawer__header'>
                 <div className='drawer__logo'>

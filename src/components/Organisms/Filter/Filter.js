@@ -21,7 +21,7 @@ export const Filter = ({filters, data, onSave, isMobile}) => {
             {
                 isMobile
                     ? (
-                        <FilterMobile filters={filters} data={data}/>
+                        <FilterMobile filters={filters} data={data} onSave={onSave} />
                     )
                     :
 

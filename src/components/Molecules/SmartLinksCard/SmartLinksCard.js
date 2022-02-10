@@ -40,7 +40,7 @@ export const SmartLinksCard = ({ config, data, }) => {
                         </div>
                     </div>
                     <div className='smartLinksCard__type'>
-                        {renderFormatList[format.label]()}
+                        {renderFormatList[format.label]}
                     </div>
                 </div>
             </div>

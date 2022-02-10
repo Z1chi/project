@@ -1,19 +1,60 @@
 import React, {useState} from 'react';
-import SVG from 'react-inlinesvg';
+import { useAtom } from '@reatom/react';
 
 import {Button} from '../../Atoms/Button/Button';
 import {FormField} from '../../Molecules/FormField/FormField';
 
+import SVG from 'react-inlinesvg';
 import {images} from './images';
 
+import { filterAtom } from '../../../store/Filter';
+import { idArrayFormator, dateObjToString } from '../../../helpers/lib';
+import { dropdownTypes } from '../../../constants/dropdown';
+
 import './filterMobile.scss';
+
+const getOnSelectFormators = ({type, matchPropName, options}) => {
+    switch(type) {
+        
+    case dropdownTypes.SELECT:
+        return {
+            value: value => value,
+            inputValue: () => {
+                const itemSelected = options.find(item => item.isSelected)
+                const res = itemSelected ? (matchPropName ? itemSelected[matchPropName] : itemSelected) : 'All';
+    
+                console.log('res',res);
+                return res;
+            }
+        }
+
+    case dropdownTypes.MULTISELECT:
+        return {
+            value: value => value,
+            inputValue: () => {
+                const items = options.filter(item => item.isSelected).length;
+                const res = (items > 0 && items !== options.length) ? `Multiple (${items})` : 'All';
+    
+                return res;
+            }
+        }
+            
+
+        case dropdownTypes.DATE:
+            return {
+                value: dateObjToString,
+                inputValue: dateObjToString,
+            };
+    }
+}
 
 export const FilterMobile = ({filters, data, onSave,}) => {
 
     const [isOpened, setIsOpened] = useState(false);
+    const [filterData, filterActions] = useAtom(filterAtom);
 
     return (
-        <div className='filterMobile'>
+        <div className={`filterMobile${isOpened?' filterMobile--opened':''}`}>
             {
                 isOpened
                     ? (
@@ -39,9 +80,20 @@ export const FilterMobile = ({filters, data, onSave,}) => {
                             <div className='filterMobile__fields'>
                                 {
                                     filters.map((field, index) => {
+                                        const onSelectFormators = getOnSelectFormators({ type: field.type, matchPropName: field.matchPropName, options: filterData.fields[field.id] })
                                         return (
                                             <div className='filterMobile__fieldsItem'>
-                                                <FormField {...field} options={data[index]}/>
+                                                <FormField {...field}
+                                                value={filterData.fields[field.id] ? onSelectFormators.value(filterData.fields[field.id]) : ''}
+                                                inputValue={filterData.fields[field.id] ? onSelectFormators.inputValue(filterData.fields[field.id]) : ''}
+                                                options={data[index]} 
+                                                    onChange={(value)=>{ 
+                                                        filterActions.setFieldValue({
+                                                            fieldId: field.id,
+                                                            fieldValue: value
+                                                        });
+                                                    }}
+                                                />
                                             </div>
                                         )
                                     })

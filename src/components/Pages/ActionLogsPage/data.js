@@ -3,8 +3,6 @@ import { dropdownTypes } from '../../../constants/dropdown';
 
 import { dateStringFormator, idArrayFormator, dateFormator, currencyFormator} from '../../../helpers/lib';
 
-
-
 export const actionLogsStatisticsConfig = [
     {
         id: 'totalClicks',
@@ -26,7 +24,6 @@ export const filters = [{
     type: dropdownTypes.DATE,
     mobileTitle: 'Select date',
     maxWidth: '169px',
-    onSelectFormator: date => currencyFormator(date),
 }, {
     id: 'offer',
     title: 'Offers',
@@ -40,7 +37,6 @@ export const filters = [{
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
-    onSelectFormator: itemArray => idArrayFormator(itemArray),
 }, {
     id: 'smartlink',
     title: 'Smartlink',
@@ -49,7 +45,6 @@ export const filters = [{
     matchPropName: 'title',
     maxWidth: '169px',
     renderItem: (item) => item.title,
-    onSelectFormator: (item) => item.id,
 }, {
     id: 'action',
     title: 'Action',
@@ -58,7 +53,6 @@ export const filters = [{
     matchPropName: 'label',
     maxWidth: '169px',
     renderItem: (item) => item.label,
-    onSelectFormator: (item) => idArrayFormator(item),
 }, ];
 
 export const filterFormators = {
