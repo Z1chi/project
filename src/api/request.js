@@ -5,6 +5,9 @@ import {getToken, urlHasParams} from '../helpers/lib';
 const instance = axios.create({
     baseURL: config.apiUrl,
     validateStatus(status) {
+        if (status === 401) {
+            window.location.href = process.env.MEDIA_URL;
+        }
         return status;
     },
 });
