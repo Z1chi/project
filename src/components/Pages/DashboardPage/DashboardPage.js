@@ -37,9 +37,6 @@ export const DashboardPage = () => {
                                     <div className='dashboardPage__title'>
                                         Balance Overview
                                     </div>
-                                    <div className='dashboardPage__calendar'>
-
-                                    </div>
                                 </div>
                                 {
                                     dashboardQuery.data && <div className='dashboardPage__statistics'>
@@ -71,7 +68,7 @@ export const DashboardPage = () => {
                                     {
                                         // width > 480
                                         // ?
-                                        <Table {...table} data={dashboardTableQuery.data.table}/>
+                                        dashboardTableQuery.data && <Table {...table} data={dashboardTableQuery.data.table}/>
                                         // : <History historyList={dashboardTableQuery.data.table} />
                                     }
                                 </div>
