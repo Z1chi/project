@@ -1,12 +1,12 @@
 import React from "react";
 
-import { dateStringFormator,currencyFormator } from "../../../helpers/lib";
-import { images } from "./images"
+import {dateStringFormator, currencyFormator} from "../../../helpers/lib";
+import {images} from "./images"
 
 
 export const statistics = [{
     id: 'total_balance',
-    icon: images.balanceIcon, 
+    icon: images.balanceIcon,
     title: 'Total Balance',
     renderSubtitle: (value) => {
         return currencyFormator(value)
@@ -14,38 +14,38 @@ export const statistics = [{
     backgroundColor: '#FF7800',
 }, {
     id: 'total_income',
-    icon: images.incomeIcon, 
-    title: 'Income', 
+    icon: images.incomeIcon,
+    title: 'Income',
     renderSubtitle: (value) => {
         return currencyFormator(value)
     },
     backgroundColor: '#16FFAC',
 }, {
     id: 'total_turnover',
-    icon: images.turnoverIcon, 
+    icon: images.turnoverIcon,
     title: 'Total Turnover',
     renderSubtitle: (value) => {
         return currencyFormator(value)
     },
     backgroundColor: '#0063FF',
-}, ];
+},];
 
 export const getGraphicsConfig = (data) => {
     return {
-        dates: data.map( item => item.date ),
+        dates: data.map(item => item.date),
         bars: [
             {
                 style: {
-                    stroke: '#16FFAC', 
+                    stroke: '#16FFAC',
                     fill: '#16FFAC',
                 },
-                data: data.map( item => item.income),
+                data: data.map(item => item.income),
             }, {
                 style: {
-                    stroke: '#0063FF', 
+                    stroke: '#0063FF',
                     fill: '#0063FF',
                 },
-                data: data.map( item => item.turnover),
+                data: data.map(item => item.turnover),
             }
         ]
     }
@@ -71,7 +71,7 @@ export const table = {
         columnId: 'deposit',
         columnName: 'Deposit',
         columnWidth: '130px',
-        
+
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'geo',
@@ -88,7 +88,7 @@ export const table = {
 
         renderRowItem: (item) => {
             return (
-                 <div
+                <div
                     style={{
                         padding: '5px 10px',
                         backgroundColor: 'rgba(22, 255, 172, 0.26)',
@@ -100,14 +100,15 @@ export const table = {
                 </div>
             )
         }
-    }, ],
+    },],
 
     emptyTable: {
         icon: images.emptyTableIcon,
         text: 'Action logs will appear here once you’ll lorem ipsum dolomir loret galor. ',
         button: {
             text: 'Explore offers',
-            onClick: ()=>{}
+            onClick: () => {
+            }
         }
     }
 };
