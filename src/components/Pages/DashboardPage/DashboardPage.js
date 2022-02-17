@@ -54,7 +54,7 @@ export const DashboardPage = () => {
                                     </div>
                                 }
                                 {
-                                    dashboardQuery.data && <div className='dashboardPage__chart'>
+                                    dashboardQuery.data && dashboardQuery.data.graphics && <div className='dashboardPage__chart'>
                                         <BarChart data={getGraphicsConfig(dashboardQuery.data.graphics)}/>
                                     </div>
                                 }
