@@ -32,20 +32,20 @@ export const statistics = [{
 
 export const getGraphicsConfig = (data) => {
     return {
-        dates: data.map(item => item.date),
+        dates: data && data.map(item => item.date),
         bars: [
             {
                 style: {
                     stroke: '#16FFAC',
                     fill: '#16FFAC',
                 },
-                data: data.map(item => item.income),
+                data: data && data.map(item => item.income),
             }, {
                 style: {
                     stroke: '#0063FF',
                     fill: '#0063FF',
                 },
-                data: data.map(item => item.turnover),
+                data: data && data.map(item => item.turnover),
             }
         ]
     }
