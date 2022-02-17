@@ -58,7 +58,7 @@ export const BarChart = ({ data }) => {
                         }} />
         
                         {
-                            data && data.bars.map( (bar, barIndex) => {
+                            data.bars && data.bars.map( (bar, barIndex) => {
                                 const relevantData = [...bar.data].slice(-10);
                                 const barData = relevantData.map( (item, index) => {
                                     return {
