@@ -19,29 +19,6 @@ import {offerTypeNameList} from "../OffersPage/data";
 
 import {dateStringFormator, localeString} from "../../../helpers/lib";
 
-// export const descriptionData = {
-//     benefits: ["Преимущества кратко:",
-//         "Кешбэк до 30% у партнеров: LevelOne, AliExpress, re:Store, Reebok, Adidas, Ostin, Pandora, Подружка, GeekBrains, Улыбка Радуги, О'КЕЙ доставка, МТС и другие.",
-//         "Умный кешбэк до 10% рублями в категории максимальных трат, и 1% - на все остальные покупки До 5% милями на все покупки и до 11% милями за покупки на «Газпромбанк - Travel»",
-//         "Один раз в месяц вы можете сменить программу лояльности и копить мили вместо кешбэка и наоборот. Накопленные баллы при этом не сгорают.",
-//     ],
-//     service: ["Обслуживание – от 0 ₽",
-//         "Бесплатное снятие наличных в любых банкоматах мира",
-//         "Моментальные переводы без комиссии в другие банки",
-//         "До 6% на остаток по накопительному счету",
-//         "Выпуск до 4 дополнительных карт бесплатно",
-//         "Технология PayPass, бесконтактная технология Apple Pay, Google Pay, Samsung Pay",
-//     ],
-//     superiority: [
-//         "2 160 платежных систем",
-//         "47 языков на веб-сайте",
-//         "12 000+ партнеров по всему миру",
-//         "Высокие коэффициенты",
-//         "Регулярные акции и бонусы",
-//         "1 000 000+ ставок ежедневно"
-//     ],
-// };
-
 
 export const rowsConfig = [
     [{
@@ -129,12 +106,8 @@ export const rowsConfig = [
                 data: demoAccounts,
                 emptyTable: {
                     icon: images.emptyTableIcon,
-                    text: 'Action logs will appear here once you’ll lorem ipsum dolomir loret galor. ',
-                    button: {
-                        text: 'Explore offers',
-                        onClick: () => {
-                        }
-                    }
+                    text: "Oops, error...",
+
                 }
             };
 

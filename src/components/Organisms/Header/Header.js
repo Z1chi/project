@@ -22,7 +22,6 @@ export const Header = () => {
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
     const supportData = profileSettingsData.fields;
-
     return (
         <div className='header'>
 

@@ -10,13 +10,14 @@ export const Select = ({ options, onChange, renderItem=option=>option, mobileCon
     const [optionsSelectable, setOptionsSelectable] = useState(options)
 
     useEffect( () => {
-        options && options.length > 0 && setOptionsSelectable(options.map( option => {
+        options && options.length > 0 && setOptionsSelectable(options.map( (option, key) => {
             return {
                 isSelected: false,
                 ...option,
+                key
             }
         }))
-    }, [options,])
+    }, [options,]);
 
     return (
         <div className='select'>
@@ -32,7 +33,8 @@ export const Select = ({ options, onChange, renderItem=option=>option, mobileCon
             {
                 optionsSelectable.map( (option, index) => {
                     return (
-                        <div className={`select__optionsItem${option.isSelected?' select__optionsItem--selected':''}`} 
+                        <div className={`select__optionsItem${option.isSelected?' select__optionsItem--selected':''}`}
+                        key={`seletItem${index}`}
                             onClick={()=>{
                                 const selectResult = optionsSelectable.map((optionsSelectableItem, innerIndex) => {
                                     return index===innerIndex ? {

@@ -21,19 +21,17 @@ export const FAQPage = () => {
     return (
         <div className='FAQPage'>
             <PageTemplate 
-                renderPage={({ width })=>{
+                renderPage={({ width, contentData, profileQuery })=>{
                     return (
                         <div className={getAdaptiveClassName({ className: 'FAQPage__content', width, maxWidth: 900 })}>
                             <div className='FAQPage__questions'>
                                 <div className='FAQPage__title'>
                                     <h2>FAQ</h2>
                                 </div>
-                                <div className='FAQPage__subtitle'>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
+
                                 <div className='FAQPage__questionList'>
                                 {
-                                    FAQ.questions.map( (question, index) => {
+                                    contentData.data.faq.questions.map( (question, index) => {
                                         return (
                                             <div key={`FAQPage__questionListItem(${index})`} className='FAQPage__questionListItem'>
                                                 <FAQItem {...question} />
@@ -44,7 +42,7 @@ export const FAQPage = () => {
                                 </div>
                             </div>
                             <div className='FAQPage__contacts'>
-                                <ContactUs contacts={FAQ.contacts} />
+                                <ContactUs contentData={contentData.data.faq} support={profileQuery.data?.support} />
                             </div>
                         </div>
                     )

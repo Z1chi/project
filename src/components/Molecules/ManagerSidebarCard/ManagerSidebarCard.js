@@ -38,7 +38,7 @@ const ManagerSidebarCardInfo = styled.div`
    height: ${({sidebarIsOpened}) => sidebarIsOpened ? '51px' : '89px'};
 `;
 
-export const ManagerSidebarCard = ({sidebarIsOpened}) => {
+export const ManagerSidebarCard = ({sidebarIsOpened, contentData}) => {
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
@@ -49,7 +49,7 @@ export const ManagerSidebarCard = ({sidebarIsOpened}) => {
             sidebarIsOpened={sidebarIsOpened}
             className='managerSidebarCard'>
             {sidebarIsOpened && <h3 className='managerSidebarCard__title'>
-                YOUR PERSONAL MANAGER
+                {contentData.title}
             </h3>}
             <ManagerSidebarCardInfo
                 sidebarIsOpened={sidebarIsOpened}

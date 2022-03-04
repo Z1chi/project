@@ -29,31 +29,31 @@ const queryClient = new QueryClient();
 
 export default function App() {
     setToken();
+
     return (
         <QueryClientProvider client={queryClient}>
             <div className="app">
                 <reatomContext.Provider value={store}>
                     <Router basename='affiliate'>
 
-                            <Switch>
-                                <Route exact path='/' component={MainPage}/>
-                                <Route exact path='/dashboard' component={DashboardPage}/>
-                                <Route exact path='/offers' component={OffersPage}/>
-                                <Route exact path='/offers/:id' component={OffersSinglePage}/>
-                                <Route exact path='/creatives' component={CreativesPage}/>
-                                <Route exact path='/creatives/:id' component={CreativesSinglePage}/>
-                                <Route exact path='/statistics' component={StatisticsPage}/>
-                                <Route exact path='/actionLogs' component={ActionLogsPage}/>
-                                {/*<Route exact path='/leads' component={LeadsPage}/>*/}
-                                {/*<Route exact path='/affiliate-program' component={AffiliatePage}/>*/}
-                                <Route exact path='/smartlinks' component={SmartLinksPage}/>
-                                {/* <Route exact path='/postback' component={PostbackPage}/> */}
-                                <Route exact path='/withdraws' component={WithdrawPage}/>
-                                <Route exact path='/faq' component={FAQPage}/>
-                                <Route exact path='/settings' component={SettingsPage}/>
-                                <Route exact path='*' component={LeadsPage}/>
-                            </Switch>
-
+                        <Switch>
+                            <Route exact path='/' component={MainPage}/>
+                            <Route exact path='/dashboard' component={DashboardPage}/>
+                            <Route exact path='/offers' component={OffersPage}/>
+                            <Route exact path='/offers/:id' component={OffersSinglePage}/>
+                            <Route exact path='/creatives' component={CreativesPage}/>
+                            <Route exact path='/creatives/:id' component={CreativesSinglePage}/>
+                            <Route exact path='/statistics' component={StatisticsPage}/>
+                            <Route exact path='/actionLogs' component={ActionLogsPage}/>
+                            {/*<Route exact path='/leads' component={LeadsPage}/>*/}
+                            {/*<Route exact path='/affiliate-program' component={AffiliatePage}/>*/}
+                            <Route exact path='/smartlinks' component={SmartLinksPage}/>
+                            {/* <Route exact path='/postback' component={PostbackPage}/> */}
+                            <Route exact path='/withdraws' component={WithdrawPage}/>
+                            <Route exact path='/faq' component={FAQPage}/>
+                            <Route exact path='/settings' component={SettingsPage}/>
+                            <Route exact path='*' component={LeadsPage}/>
+                        </Switch>
 
 
                     </Router>

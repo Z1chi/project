@@ -121,42 +121,35 @@ export const table = {
         }
     },]),
 
-    data: [{
-        id: 0,
-        name: 'LoremIpsum',
-        created: 'Mar 13, 2021',
-        offer: '1xBest',
-        format: 'CPA',
-        url: '....com/?aff=8wv6v9',
-        leadIFrame: '....com/?aff=8wv6v9',
-        conversionIFrame: '....com/?aff=8wv6v9',
-    }, {
-        id: 1,
-        name: 'LoremIpsum',
-        created: 'Mar 13, 2021',
-        offer: '1xBest',
-        format: 'CPA',
-        url: '....com/?aff=8wv6v9',
-        leadIFrame: '....com/?aff=8wv6v9',
-        conversionIFrame: '....com/?aff=8wv6v9',
-    }, {
-        id: 2,
-        name: 'LoremIpsum',
-        created: 'Mar 13, 2021',
-        offer: '1xBest',
-        format: 'CPA',
-        url: '....com/?aff=8wv6v9',
-        leadIFrame: '....com/?aff=8wv6v9',
-        conversionIFrame: '....com/?aff=8wv6v9',
-    },],
+    // data: [{
+    //     id: 0,
+    //     name: 'LoremIpsum',
+    //     created: 'Mar 13, 2021',
+    //     offer: '1xBest',
+    //     format: 'CPA',
+    //     url: '....com/?aff=8wv6v9',
+    //     leadIFrame: '....com/?aff=8wv6v9',
+    //     conversionIFrame: '....com/?aff=8wv6v9',
+    // }, {
+    //     id: 1,
+    //     name: 'LoremIpsum',
+    //     created: 'Mar 13, 2021',
+    //     offer: '1xBest',
+    //     format: 'CPA',
+    //     url: '....com/?aff=8wv6v9',
+    //     leadIFrame: '....com/?aff=8wv6v9',
+    //     conversionIFrame: '....com/?aff=8wv6v9',
+    // }, {
+    //     id: 2,
+    //     name: 'LoremIpsum',
+    //     created: 'Mar 13, 2021',
+    //     offer: '1xBest',
+    //     format: 'CPA',
+    //     url: '....com/?aff=8wv6v9',
+    //     leadIFrame: '....com/?aff=8wv6v9',
+    //     conversionIFrame: '....com/?aff=8wv6v9',
+    // },],
 
-    emptyTable: {
-        icon: images.emptyTableIcon,
-        text: 'Smartlinks will appear here once you’ll lorem ipsum dolomir loret galor. ',
-        button: {
-            text: 'Create Smartlink',
-        }
-    }
 };
 
 const isNewSmartlinkValid = ({project, title, format,}) => {
@@ -166,8 +159,8 @@ const isNewSmartlinkValid = ({project, title, format,}) => {
 export const drawers = {
     create: (props) => ({
         logo: images.createLinkIcon,
-        title: 'Create smartlink',
-        subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.',
+        title: props.title,
+        subtitle: props.subTitle,
         fieldRows: [
             [{
                 id: 'project',
@@ -238,8 +231,8 @@ export const drawers = {
                     }
                     return (
                         <Button
-                                disabled={!isNewSmartlinkValid(stateData)}
-                                onClick={button.onClick}
+                            disabled={!isNewSmartlinkValid(stateData)}
+                            onClick={button.onClick}
                         >
                             Create
                         </Button>
@@ -264,8 +257,8 @@ export const drawers = {
     }),
     edit: (props) => ({
         logo: images.editLinkIconExample,
-        title: 'Edit smartlink',
-        subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.',
+        title: props.editTitle,
+        subtitle: props.editSubtitle,
         fieldRows: [
             [{
                 id: 'created_at',
@@ -346,7 +339,7 @@ export const drawers = {
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-                            background: '#219FE5',
+
                         }}
                                 onClick={() => props.onEdit(data)}
                         >
@@ -362,7 +355,6 @@ export const drawers = {
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-                            background: '#219FE5',
                         }}
                                 onClick={() => props.onDelete({itemId})}
                         >
@@ -375,23 +367,25 @@ export const drawers = {
     }),
 };
 
-export const modalDelete = ({onSubmit, onClose,}) => ({
+export const modalDelete = ({onSubmit, onClose, title, subtitle, confirm, back}) => ({
     icon: images.deleteIcon,
-    title: 'Delete Smartlink',
-    subtitle: 'By deleting your SmartLink you also delete entire statistics logs. NOTE: the system no longer counts any clicks on this link. Take our advice: do not delete your SmartLink if you used it at least once.',
+    title: title,
+    subtitle: subtitle,
     children: (
         <div>
             <Button containerStyles={{width: '100%'}} styles={{marginTop: '30px', width: '100%', height: '50px'}}
                     onClick={() => {
                         onSubmit();
                         onClose();
-                    }}>
-                I am sure I want to delete this SmartLink and the entire history. I understand this operation cannot be
-                undone.
+                    }}
+            >
+                {confirm}
             </Button>
-            <Button onClick={onClose} styles={{marginTop: '20px', background: 'transparent', width: '100%'}}
-                    containerStyles={{width: '100%'}}>
-                Go back and do not delete this SmartLink.
+            <Button styles={{marginTop: '20px', background: 'transparent', width: '100%'}}
+                    containerStyles={{width: '100%'}}
+                    onClick={onClose}
+            >
+                {back}
             </Button>
         </div>
     ),

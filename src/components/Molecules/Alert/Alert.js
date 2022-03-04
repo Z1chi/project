@@ -16,7 +16,7 @@ const getAlertIcon = ({ type }) => {
                 ? images.errorIcon
                 : ''
     )
-}
+};
 
 export const Alert = ({ type, message }) => {
 
@@ -26,7 +26,7 @@ export const Alert = ({ type, message }) => {
         setTimeout( () => {
             alertActions.close();
         }, 3000)
-    }, [])
+    }, []);
 
     return (
         <div className='alert'>
@@ -38,4 +38,4 @@ export const Alert = ({ type, message }) => {
             </div>
         </div>
     )
-}
+};

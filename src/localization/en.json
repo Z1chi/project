@@ -1,0 +1,144 @@
+{
+  "common": {
+    "buttonSubmit": "Submit",
+    "connect": "Connect",
+    "logOut": "Log out"
+  },
+  "smartLinks": {
+    "emptyTable": "Smartlinks will appear here immediately after you create the first SmartLink",
+    "text": "Create Smartlink",
+    "copy": "Copied to clipboard",
+    "edit": "Edit smartlink",
+    "editSubtitle": "It's always better to create a brand new SmartLink if any editing is needed. Except for its name – you can edit it anytime.",
+    "editSuccess": "Successfully updated",
+    "create": "Create smartlink",
+    "createSubtitle": "Creating your SmartLink choose an easy-to-remember, associative name. It will help you to manage a large number of links over time.",
+    "delete": {
+      "title": "Delete SmartLink",
+      "subtitle": "By deleting your SmartLink you also delete entire statistics logs. NOTE: the system no longer counts any clicks on this link. Take our advice: do not delete your SmartLink if you used it at least once.",
+      "confirm": "I am sure I want to delete this SmartLink and the entire history. I understand this operation cannot be undone.",
+      "back": "Go back and do not delete this SmartLink."
+    }
+  },
+  "withdraw": {
+    "emptyTable": "Your Withdrawals will appear here after your first withdrawal is successfully done",
+    "text": "Explore offers",
+    "totalBalance": "Total Balance",
+    "drawer": {
+      "min": "Min withdraw is at least",
+      "title": "Withdraw fund",
+      "subtitle": "Please make sure all information is correct (including your wallet address and requested amount). The transaction cannot be canceled or altered. Unfortunately, we cannot fix it if you entered the wrong wallet address.",
+      "button": "Withdraw",
+      "insufficientFunds" : "Insufficient funds"
+
+    }
+  },
+  "actionLog": {
+    "emptyTable": "Your Action Logs will appear here after you get first clicks on your SmartLink"
+  },
+  "statistics": {
+    "emptyTable": "Your Statistics will appear here after you get first clicks on your SmartLink"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "offers": "Offers",
+    "creatives": "Creatives",
+    "statistics": "Statistics",
+    "actionLogs": "Action logs",
+    "smartLinks": "Smart links",
+    "withdraws": "Withdraws",
+    "faq": "FAQ",
+    "settings": "Settings"
+  },
+  "settingsPage": {
+    "title": "Personal Settings",
+    "fullName": {
+      "title": "Full Name",
+      "description": "Your name or nickname"
+    },
+    "walletAddress": {
+      "title": "Wallet Address",
+      "description": "Please enter your wallet address correctly. We cannot help if you entered the wrong wallet address."
+    },
+    "password": {
+      "title": "Password",
+      "description": "Your password. Keep in mind we will never ask you for your password."
+    },
+    "telegram": {
+      "title": "Telegram",
+      "description": "The fastest way to reach our team whenever you have any questions. Use it to contact your personal manager."
+    },
+    "email": {
+      "title": "Email",
+      "description": "Use it for authorization, sign-up confirmation, and receiving newsletters (including news, statistics, weekly top, etc.)"
+    },
+    "currency": {
+      "title": "Currency",
+      "description": "Choose a currency that is convenient for you"
+    },
+    "alertSettings": {
+      "success": "Your settings are successfully updated.",
+      "error": "An error occurred. Please try again later or contact support."
+    }
+  },
+  "faq": {
+    "questions": [
+      {
+        "short_question": "Offers",
+        "full_question": "Offers",
+        "answer": "Find the best affiliate offers to participate in the program. Pick a suitable offer and click the Select button. The system will redirect you to the SmartLinks section. Create your own link that will redirect traffic to the website. Feel free to use ready-made creative promo tools such as videos, images, or landing pages. You can find them any time on the Creative promo page."
+      },
+      {
+        "short_question": "Smartlinks",
+        "full_question": "Smartlinks",
+        "answer": "SmartLink is an affiliate marketing link that drives customers to the website with a higher percentage of CR. Using your SmartLink, you don't have to create and run any complex marketing campaigns. Any user who clicks on your SmartLink will be automatically attached to your account. Also, it can be used as a detailed statistics tool as SmartLinks are related to the algorithms that provide rankings of affiliate offers due to their performance."
+      },
+      {
+        "short_question": "Statistics",
+        "full_question": "Statistics",
+        "answer": "<div>      <p>Get access to your detailed statistics. Track current income stats and measure your daily affiliate performance on the following page.</p>      <p>To make you feel comfortable with statistics, it contains five sections:</p>      <ul>      <li>Clicks</li>      <li>Leads</li>      <li>Deposits</li>      <li>Profit</li>      <li>Withdraw</li>      </ul>      <p>The section contains the following items.</p>      <ul>      <li>Clicks - Total clicks</li>      <li>UC - Total unique users clicked on your link</li>      <li>EPC - Earn per one click </li>      <li>REG - Total registrations</li>      <li>CR - Clicks to registrations percentage. With 100 clicks and 10 registrations, your CR is 10%.</li>      <li>EPR - Earn per one registration</li>      <li>DEP - Total deposits made</li>      <li>CR - Conversion rate (Registration to Deposit) </li>      <li>SUM - Sum of deposits </li>      <li>CPA - Profit by CPA </li>      <li>REVSHARE - Profit by Revshare </li>      <li>SUM - Your overall profit </li>      <li>Pending - The 'Pending' status of your income under CPA (the status may remain within seven business days)</li>      <li>Declined - The 'Declined' status of your income under CPA. Make sure attracted consumers fully meet the requirements to get an 'Accepted' status</li>      <li>Accepted - The 'Accepted' status of your income under CPA</li>      </ul></div>"
+      },
+      {
+        "short_question": "BTC and fiat currencies",
+        "full_question": "BTC and fiat currencies",
+        "answer": "<div>All transactions on affiliate websites are in Bitcoin (BTC). The system automatically converts BTC to USD using the current cryptocurrency exchange rate. Any amounts in fiat currencies (including USD) are indicated for information purposes only to make your experience more comfortable.<br><br>Bitcoin has always been highly volatile, and its value can rise and fall just within one month. A system calculates all prices at current BTC rates at the time of payment. Therefore your total amount may differ from the prices indicated on the website. Put it another way: the amount in BTC is still the same, but its value constantly fluctuates.</div>"
+      },
+      {
+        "short_question": "Withdrawal",
+        "full_question": "Withdrawal",
+        "answer": "<div>Withdraw your funds at any time in a few clicks. You can easily check your balance and create a withdrawal request in the Payments section. Your current balance state is available in the upper left corner. You also can check your entire payout history on this page.<br><br><p>We use the following withdrawal statuses in our system:</p><ul><li><b>Pending.</b> The withdrawal has been requested, and a system is processing it. The funds will be sent to your wallet within 24 hours.</li><li><b>Sent.</b> Money successfully sent to your wallet. How long does a withdrawal take? It depends mainly on the current network load state.</li></ul></div>"
+      }
+    ],
+    "contacts": {
+      "links": [
+        {
+          "socialName": "SOCIALS/EMAIL",
+          "link": {
+            "to": "exampletest@gmail.com",
+            "text": "exampletest@gmail.com"
+          }
+        },
+        {
+          "socialName": "SOCIALS/TELEGRAM",
+          "link": {
+            "to": "@ourtelegramsupport",
+            "text": "@ourtelegramsupport"
+          }
+        }
+      ],
+      "title": "Contact us",
+      "subTitle": "We are always happy to help and advise you on any questions",
+      "secondSubTitle": "Your personal manager will provide the fastest and most detailed advice on most issues"
+    },
+    "managerTitle": {
+      "title": "Your personal manager",
+      "managerCard": {
+        "name": "Full name",
+        "occupation": "Occupation",
+        "exp": "Experience",
+        "link": "Contact now"
+      }
+
+    }
+  }
+}

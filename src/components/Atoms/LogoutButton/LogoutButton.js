@@ -15,7 +15,7 @@ const StyledLogoutButton = styled.div`
        }
 `;
 
-export const LogoutButton = ({sidebar}) => {
+export const LogoutButton = ({sidebar,logoutButton}) => {
 
     const logoutFn = () => {
         request('/logout', {method: 'post'});
@@ -29,7 +29,7 @@ export const LogoutButton = ({sidebar}) => {
             onClick={() => logoutFn()}>
             <div>
                 <SVG src={logOut}/>
-                <p>Log out</p>
+                <p>{logoutButton}</p>
             </div>
         </StyledLogoutButton>
     )

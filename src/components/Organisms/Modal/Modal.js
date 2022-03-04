@@ -12,7 +12,7 @@ import './modal.scss'
 
 export const Modal = ({icon, title, subtitle, children, onClose}) => {
 
-    const [modalData, modalActions] = useAtom(modalAtom);
+    const [, modalActions] = useAtom(modalAtom);
 
     const onCloseHandler = onClose || modalActions.close;
 

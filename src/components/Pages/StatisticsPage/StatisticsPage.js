@@ -13,6 +13,7 @@ import {convertToQueryString} from '../../../helpers/lib';
 
 import './statisticsPage.scss';
 import {useResizeDetector} from "react-resize-detector";
+import {images} from "./images";
 
 export const StatisticsPage = () => {
 
@@ -84,7 +85,7 @@ export const StatisticsPage = () => {
     return (
         <div className='statisticsPage'>
             <PageTemplate
-                renderPage={() => {
+                renderPage={({contentData}) => {
                     return (
                         <div className='statisticsPage__content'>
                             <div ref={ref} className='statisticsPage__filters'>
@@ -108,7 +109,14 @@ export const StatisticsPage = () => {
                                     }}
                                     {...table}
                                     data={tableData.table}
-                                    emptyTable={table.emptyTable}
+                                    emptyTable={{
+                                        icon: images.emptyTableIcon,
+                                        text:contentData.data.statistics.emptyTable ,
+                                        button: {
+                                            text: 'Explore offers',
+                                            link: '/offers',
+                                        }
+                                    }}
                                 />
                             </div>
 

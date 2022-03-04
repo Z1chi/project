@@ -13,6 +13,9 @@ import trafburgIcon from './images/menu-icon-trafburgMob.svg'
 import {menuLinks} from "./data";
 
 import './sidebar.scss'
+import {useAtom} from "@reatom/react";
+import {languageAtom} from "../../../store/language";
+
 
 
 const SidebarContent = styled.div`
@@ -35,6 +38,8 @@ const SidebarContentMenu = styled.div`
 
 
 export const Sidebar = ({sidebarIsOpened, setSidebarIsOpened}) => {
+    const [languageData, languageActions] = useAtom(languageAtom);
+
 
     return (
         <SidebarContent sidebarIsOpened={sidebarIsOpened} className={`sidebar${sidebarIsOpened ? " open" : ""}`}>
@@ -61,8 +66,8 @@ export const Sidebar = ({sidebarIsOpened, setSidebarIsOpened}) => {
                     sidebarIsOpened={sidebarIsOpened}
                 />
             </SidebarContentMenu>
-            {sidebarIsOpened && <LogoutButton sidebar className='menu__button'/>}
-            <ManagerSidebarCard sidebarIsOpened={sidebarIsOpened}/>
+            {sidebarIsOpened && <LogoutButton logoutButton={languageData.data.common.logOut} sidebar className='menu__button'/>}
+            <ManagerSidebarCard contentData={languageData.data.faq.managerTitle} sidebarIsOpened={sidebarIsOpened}/>
 
         </SidebarContent>
     )

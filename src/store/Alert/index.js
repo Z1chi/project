@@ -12,13 +12,13 @@ export const alertAtom = createAtom(
                 isOpened: true,
                 ...payload
             }
-        })
+        });
         onAction('close', () => {
             return state = {
                 isOpened: false,
             }
-        })
+        });
 
         return state
     },
-)
+);

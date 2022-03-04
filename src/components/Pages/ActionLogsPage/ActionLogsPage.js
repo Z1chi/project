@@ -15,6 +15,7 @@ import request from '../../../api/request';
 
 import './actionLogsPage.scss';
 import {useResizeDetector} from "react-resize-detector";
+import {images} from "./images";
 
 
 export const ActionLogsPage = () => {
@@ -85,7 +86,7 @@ export const ActionLogsPage = () => {
     return (
         <div className='actionLogsPage'>
             <PageTemplate
-                renderPage={() => {
+                renderPage={({contentData}) => {
                     return (
                         <div className='actionLogsPage__content'>
                             <div className='actionLogsPage__statistics'>
@@ -123,8 +124,16 @@ export const ActionLogsPage = () => {
                                                 setPushTableData(true)
                                             }}
                                             {...table}
+                                            emptyTable={{
+                                                icon: images.emptyTableIcon,
+                                                text: contentData.data.actionLog.emptyTable,
+                                                button: {
+                                                    text: 'Explore offers',
+                                                    link: '/offers',
+                                                }
+                                            }}
                                             data={tableData.table}
-                                            emptyTable={table.emptyTable}
+
                                         />
                                     }
                                 </div>
