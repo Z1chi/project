@@ -113,12 +113,5 @@ export const table = {
         }
     }, ],
 
-    emptyTable: {
-        icon: images.emptyTableIcon,
-        text: 'Action logs will appear here once you’ll lorem ipsum dolomir loret galor. ',
-        button: {
-            text: 'Explore offers',
-            link: '/offers',
-        }
-    }
+
 };

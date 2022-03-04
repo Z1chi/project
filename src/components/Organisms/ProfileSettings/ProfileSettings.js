@@ -1,28 +1,30 @@
 import React from 'react';
+import {useAtom} from "@reatom/react";
 
 import {ProfileSettingsItem} from "../../Atoms/ProfileSettingsItem/ProfileSettingsItem";
 import {LogoutButton} from "../../Atoms/LogoutButton/LogoutButton";
+import {languageAtom} from "../../../store/language";
 
 import './ProfileSettings.scss'
+
+
 
 const setting = [
     {
         title: 'Profile',
         description: 'Important account details',
-        link : '/settings'
+        onClick: ({history}) => history.push('/settings')
     },
-    // {
-    //     title: 'Affiliate program',
-    //     description: 'Invite your friends and earn rewards'
-    // },
-    // {
-    //     title: 'Dark Mode',
-    //     description: 'Switch dark/light mode'
-    // },
+    {
+        title: 'Language',
+        onClick: ({handler}) => {
+            handler()
+        }
+    }
 ];
 
 export const ProfileSettings = ({email}) => {
-
+    const [languageData, languageActions] = useAtom(languageAtom);
     return (
         <div className='profileSettings'>
             <p className='profileSettings__email'>{email}</p>
@@ -30,7 +32,7 @@ export const ProfileSettings = ({email}) => {
                 setting.map((info, key) =>
                     <ProfileSettingsItem key={`profileSettingsItem${key}`} info={info}/>)
             }
-            <LogoutButton/>
+            <LogoutButton logoutButton={languageData.data.common.logOut}/>
         </div>
     )
 };

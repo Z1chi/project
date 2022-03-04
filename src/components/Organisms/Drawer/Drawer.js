@@ -66,4 +66,4 @@ export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => 
         </div>
         </>
     )
-}
+};

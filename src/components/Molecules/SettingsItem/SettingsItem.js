@@ -12,15 +12,18 @@ import {alertAtom} from "../../../store/Alert";
 
 import './settingsItem.scss';
 
-export const SettingsItem = ({title, description, placeholder, isNotChangeable, type, value, onSubmitHandler,
-    hasConfirmField, confirmOldValue, validator, id, formValidator, renderNewValueField, mapRequestData, apiId, isMobile}) => {
+export const SettingsItem = (
+    {
+        title, description, placeholder, isNotChangeable, type, value, onSubmitHandler, contentData, hasConfirmField,
+        confirmOldValue, validator, id, formValidator, renderNewValueField, mapRequestData, apiId, isMobile
+    }) => {
 
-    const [alertData, alertActions] = useAtom(alertAtom);
+    const [, alertActions] = useAtom(alertAtom);
 
     const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
 
     const [modalOpen, setModalOpen] = useState(false);
-    
+
     return (
         <div className={`settingsItem${isMobile ? ' settingsItem--isMobile' : ''}`}>
             <h5>{title}</h5>
@@ -29,7 +32,7 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                 <Input value={value} type={type} placeholder={placeholder} isNotChangeable={isNotChangeable}/>
                 <span onClick={() => setModalOpen(true)}>Change</span>
                 {modalOpen &&
-                <Modal title={title} onClose={()=>setModalOpen(false)}>
+                <Modal title={title} onClose={() => setModalOpen(false)}>
                     <EditFieldForm
                         placeholder={placeholder}
                         type={type}
@@ -45,19 +48,20 @@ export const SettingsItem = ({title, description, placeholder, isNotChangeable, 
                         hasConfirmField={hasConfirmField}
                         confirmOldValue={confirmOldValue}
                         renderNewValueField={renderNewValueField}
-                        onSubmit={ () => {
+                        buttonText={contentData.data.common.buttonSubmit}
+                        onSubmit={() => {
                             const requestData = (mapRequestData(profileSettingsData.fields[id]));
                             return request(`/profile/${apiId}`, {method: 'patch', data: requestData}).then((res) => {
                                 onSubmitHandler();
-                                if(res.exception) {
+                                if (res.exception) {
                                     alertActions.open({
-                                        message: 'An error occurred. Please try again later or contact support.',
+                                        message: contentData.data.settingsPage.alertSettings.error,
                                         type: 'ALERT/ERROR',
                                     })
                                 } else {
-                                    setModalOpen(false)
+                                    setModalOpen(false);
                                     alertActions.open({
-                                        message: 'Your settings are successfully updated.',
+                                        message: contentData.data.settingsPage.alertSettings.success,
                                         type: 'ALERT/SUCCESS',
                                     });
                                 }

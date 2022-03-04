@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useQuery} from 'react-query';
 import {useAtom} from '@reatom/react';
+import {useResizeDetector} from "react-resize-detector";
+import request from '../../../api/request';
 
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import {InfoCard} from '../../Molecules/InfoCard/InfoCard';
@@ -9,19 +11,19 @@ import {Filter} from '../../Organisms/Filter/Filter';
 import {Table} from '../../Organisms/Table/Table';
 import {Drawer} from '../../Organisms/Drawer/Drawer';
 import {Button} from '../../Atoms/Button/Button';
+
 import {drawerAtom} from '../../../store/Drawer';
 import {modalAtom} from '../../../store/Modal';
 import {alertAtom} from "../../../store/Alert";
 import {filterAtom} from '../../../store/Filter';
 
-import request from '../../../api/request';
-
 import {statistics, filters, filterFormators, table, drawers, modalWithdraw} from './data';
+import emptyTableIcon from "./images/emptyTable.svg";
 
 import {convertToQueryString} from '../../../helpers/lib';
 
 import './withdrawPage.scss';
-import {useResizeDetector} from "react-resize-detector";
+
 
 export const WithdrawPage = () => {
 
@@ -30,11 +32,11 @@ export const WithdrawPage = () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [tableData, setTableData] = useState({table: [], last_page: null});
 
-    const [alertData, alertActions] = useAtom(alertAtom);
+    const [, alertActions] = useAtom(alertAtom);
     const [filterData, filterActions] = useAtom(filterAtom);
 
-    const [drawerData, drawerActions] = useAtom(drawerAtom)
-    const [modalData, modalActions] = useAtom(modalAtom);
+    const [drawerData, drawerActions] = useAtom(drawerAtom);
+    const [, modalActions] = useAtom(modalAtom);
 
     const {width, ref} = useResizeDetector();
 
@@ -79,7 +81,7 @@ export const WithdrawPage = () => {
     return (
         <div className='withdrawPage'>
             <PageTemplate
-                renderPage={({width}) => {
+                renderPage={({width, contentData}) => {
                     return (
                         <div className='withdrawPage__content'>
                             <div className='withdrawPage__statistics'>
@@ -88,7 +90,7 @@ export const WithdrawPage = () => {
                                         statistics.map(item => {
                                             return (
                                                 <div className='withdrawPage__cardsItem'>
-                                                    <InfoCard {...item} />
+                                                    <InfoCard {...item}  title={contentData.data.withdraw.totalBalance} />
                                                 </div>
                                             )
                                         })
@@ -98,6 +100,9 @@ export const WithdrawPage = () => {
                                     <Button onClick={() => {
                                         request('/withdraw/get-address-info').then(res => {
                                             drawerActions.open(drawers.withdraw({
+                                                title :contentData.data.withdraw.drawer.title,
+                                                subtitle: contentData.data.withdraw.drawer.subtitle,
+                                                withdrawButton: contentData.data.withdraw.drawer.button,
                                                 available: res.data.balance,
                                                 minWithdraw: res.data.minWithdraw,
                                                 walletAddress: res.data.walletAddress,
@@ -105,13 +110,13 @@ export const WithdrawPage = () => {
                                                     const amount = Number(data.amount);
                                                     if (amount > res.data.balance) {
                                                         alertActions.open({
-                                                            message: 'Insufficient funds',
+                                                            message: contentData.data.withdraw.drawer.insufficientFunds,
                                                             type: 'ALERT/ERROR',
                                                         });
                                                         return;
                                                     } else if (amount < res.data.minWithdraw) {
                                                         alertActions.open({
-                                                            message: `Min withdraw is at least ${res.data.minWithdraw}`,
+                                                            message: `${contentData.data.withdraw.drawer.min} ${res.data.minWithdraw}`,
                                                             type: 'ALERT/ERROR',
                                                         });
                                                         return;
@@ -137,7 +142,7 @@ export const WithdrawPage = () => {
                                             }))
                                         })
                                     }}>
-                                        Withdraw
+                                        {contentData.data.withdraw.drawer.button}
                                     </Button>
                                 </div>
                             </div>
@@ -157,6 +162,14 @@ export const WithdrawPage = () => {
                                 (width > 480
                                     ? <div className='withdrawPage__table'>
                                         <Table {...table}
+                                               emptyTable={{
+                                                   icon: emptyTableIcon,
+                                                   text: contentData.data.withdraw.emptyTable,
+                                                   button: {
+                                                       text: 'Explore offers',
+                                                       link: '/offers',
+                                                   }
+                                               }}
                                                hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
                                                fetchMore={() => {
                                                    setPageIndex(pageIndex + 1)

@@ -12,7 +12,7 @@ import emptyTableIcon from './images/emptyTable.svg'
 export const statistics = [{
     icon: images.balanceIcon,
     backgroundColor: '#000',
-    title: 'Total Balance',
+
     value: {
         amount: 0,
         precision: 8,
@@ -111,22 +111,15 @@ export const table = {
         },
     },
 
-    emptyTable: {
-        icon: emptyTableIcon,
-        text: 'Withdraws will appear here once you’ll lorem ipsum dolomir loret galor. ',
-        button: {
-            text: 'Explore offers',
-            link: '/offers',
-        }
-    }
+
 };
 
 
 export const drawers = {
     withdraw: (props) => ({
         logo: images.withdrawIcon, 
-        title: 'Withdraw money', 
-        subtitle: 'Lorem ipsum dolomir loret alor lorem ipsum.', 
+        title: props.title,
+        subtitle: props.subtitle,
         fieldRows: [
             [{
                 id: 'walletAddress',
@@ -157,25 +150,20 @@ export const drawers = {
                 generateField: ({ stateData }) => {
                     const button = {};
                     if(!stateData.walletAddress || !stateData.amount) {
-                        button.styles = {
-                            background: '#3F3F3F',
-                        };
                         button.onClick = () => {}
                     } else {
-                        button.styles = {
-                            background: '#219FE5',
-                        };
                         button.onClick = () => props.onClick(stateData)
                     }
                     return (
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-                            ...button.styles,
-                        }} 
+
+                        }}
+                                disabled={!stateData.walletAddress || !stateData.amount}
                             onClick={button.onClick}
                         >
-                            Withdraw
+                            {props.withdrawButton}
                         </Button>
                     )
                 }

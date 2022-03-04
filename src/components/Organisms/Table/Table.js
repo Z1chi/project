@@ -33,7 +33,6 @@ export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, hasMore
                                 })
                             }
 
-
                         </div>
                     </div>)
                     : <TableEmpty {...emptyTable}/>

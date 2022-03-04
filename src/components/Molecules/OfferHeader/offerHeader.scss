@@ -37,10 +37,13 @@
 
   &__tags {
     margin-top: 10px;
-  }      color: #219FE6;
+  }
+
+  color: #219FE6;
 
   &__link {
     margin-top: 10px;
+
     & > a {
       margin-top: 10px;
 
@@ -65,24 +68,29 @@
 
   &__connect {
     text-decoration: none;
-    display: block;
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
     width: 160px;
     height: 36px;
     background: #219FE5;
     border: 1px solid #219FE6;
     border-radius: 4px;
-    padding: 6px 41px;
+    padding: 6px 0;
     position: relative;
     color: #fff;
     box-sizing: border-box;
+    max-width: fit-content;
+    min-width: 160px;
 
     & > p {
+      margin-right: 5px
+    }
+
+    & {
       &:after {
         content: url('./images/icon.svg');
         position: relative;
-        right: -10px;
-
       }
     }
 

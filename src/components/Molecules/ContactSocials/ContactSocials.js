@@ -3,18 +3,18 @@ import { ContactSocialLink } from '../../Atoms/ContactSocialLink/ContactSocialLi
 
 import './contactSocials.scss';
 
-export const ContactSocials = ({ links }) => {
+export const ContactSocials = ({ contacts }) => {
     return (
         <div className='contactSocials'>
             <div className='contactSocials__title'>
-                Contact us
+                {contacts.title}
             </div>
             <div className='contactSocials__subtitle'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+                {contacts.subTitle}
             </div>
             <div className='contactSocials__links'>
             {
-                links.map( (link, key) => {
+                contacts.links.map( (link, key) => {
                     return (
                         <div key={key} className='contactSocials__linksItem'>
                             <ContactSocialLink {...link} />

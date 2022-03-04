@@ -4,24 +4,25 @@ import { ManagerContactCard } from '../../Molecules/ManagerContactCard/ManagerCo
 
 import './contactUs.scss';
 
-export const ContactUs = ({ contacts }) => {
+export const ContactUs = ({ contentData , support}) => {
+console.log(support)
     return (
         <div className='contactUs'>
             <div className='contactUs__socials'>
-                <ContactSocials links={contacts.links} />
+                <ContactSocials contacts={contentData.contacts} />
             </div>
-            <div className='contactUs__separator'></div>
+            <div className='contactUs__separator'/>
             <div className='contactUs__manager'>
                 <div className='contactUs__managerTitle'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt?
+                    {contentData.contacts.secondSubTitle}
                 </div>
                 <div className='contactUs__managerSubtitle'>
-                    Your personal manager
+                    {contentData.managerTitle.title}
                 </div>
                 <div className='contactUs__managerInfo'>
-                    <ManagerContactCard manager={contacts.manager} />
+                    <ManagerContactCard managerData={support} manager={contentData.managerTitle} />
                 </div>
             </div>
         </div>
     )
-}
+};

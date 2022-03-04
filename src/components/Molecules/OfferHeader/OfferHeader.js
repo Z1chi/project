@@ -8,7 +8,7 @@ import {OfferTags} from "../../Atoms/OfferTags/OfferTags";
 import './offerHeader.scss';
 
 
-export const OfferHeader = ({title, link, small_description, image, id}) => {
+export const OfferHeader = ({title, link, small_description, image, id, contentData}) => {
 
     const {width, height, ref} = useResizeDetector();
     const widthHeaderText = width < 768;
@@ -33,7 +33,7 @@ export const OfferHeader = ({title, link, small_description, image, id}) => {
                     {small_description}
                 </div>
                 <Link to={`/creatives/${id}`} className='offerHeader__connect'>
-                    <p>Connect</p>
+                    <p>{contentData.common.connect}</p>
 
                 </Link>
             </div>
