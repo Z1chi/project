@@ -41,19 +41,17 @@ export const OfferCard = ({image, isMobile, id, title, url, project_affiliate, s
 
                 <div className='offerCard__paymentParams'>
                     {
+                        paymentParamsArray && paymentParamsArray.map((item, key) =>
 
-                        paymentParamsArray && paymentParamsArray.map((item, key) => {
-                            return (
-                                <div className='offerCard__paymentParamsItem'
-                                     key={`offerCard__paymentParamsItem${key}`}>
-                                    {
-                                        (offerConfig[item[0]] && offerConfig[item[0]].renderValue)
-                                            ? offerConfig[item[0]].renderValue({value: item, isMobile})
-                                            : <OfferPaymentParam key={key} isMobile={isMobile} param={item}/>
-                                    }
-                                </div>
-                            )
-                        })
+                            <div className='offerCard__paymentParamsItem'
+                                 key={`offerCard__paymentParamsItem${key}`}>
+                                {
+                                    (offerConfig[item[0]] && offerConfig[item[0]].renderValue)
+                                        ? offerConfig[item[0]].renderValue({value: item, isMobile})
+                                        : <OfferPaymentParam key={key} isMobile={isMobile} param={item}/>
+                                }
+                            </div>
+                        )
                     }
                 </div>
                 <div className='offerCard__description'>
