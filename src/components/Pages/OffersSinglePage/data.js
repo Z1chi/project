@@ -40,7 +40,7 @@ export const rowsConfig = [
                             cursor: 'default',
                             borderRadius: "4px"
                         }}>
-                            {`${offerTypeNameList[0]} $${Number(cpa).toFixed(2)}`}
+                            {`${offerTypeNameList[0]} ${cpa.symbol} ${Number(cpa.amount).toFixed(2)}`}
                         </span>
                     ]}
 
