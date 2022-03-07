@@ -8,7 +8,6 @@ import {languageAtom} from "../../../store/language";
 import './ProfileSettings.scss'
 
 
-
 const setting = [
     {
         title: 'Profile',
@@ -24,7 +23,7 @@ const setting = [
 ];
 
 export const ProfileSettings = ({email}) => {
-    const [languageData, languageActions] = useAtom(languageAtom);
+    const [languageData,] = useAtom(languageAtom);
     return (
         <div className='profileSettings'>
             <p className='profileSettings__email'>{email}</p>

@@ -2,7 +2,8 @@
   "common": {
     "buttonSubmit": "Отправить",
     "connect": "Подключить",
-    "logOut": "Выйты"
+    "logOut": "Выйты",
+    "changeLanguageError": "Язык не изменен"
   },
   "smartLinks": {
     "emptyTable": "Смартлинки появятся тут сразу же после того, как вы создадите первую «умную» ссылку",

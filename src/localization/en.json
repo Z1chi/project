@@ -2,7 +2,9 @@
   "common": {
     "buttonSubmit": "Submit",
     "connect": "Connect",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "changeLanguage": "Language changed",
+    "changeLanguageError": "Language not changed"
   },
   "smartLinks": {
     "emptyTable": "Smartlinks will appear here immediately after you create the first SmartLink",
