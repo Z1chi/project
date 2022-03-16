@@ -8,11 +8,17 @@ import SVG from 'react-inlinesvg';
 import './creativesModalTemplate.scss';
 
 import {icons} from "./images";
-export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, onDownload, preview_src, file}) => {
+
+export const CreativesModalTemplate = ({onClose, images, description, file_size, file_format, preview_src, file, contentData}) => {
 
     const sliderImages = images && images.map(imageItem => {
         return {
             ...imageItem,
+            handler: () => {
+                const win = window.open(process.env.MEDIA_URL + imageItem.source, "_blank");
+                win.focus();
+            },
+            link: process.env.MEDIA_URL + imageItem.source,
             source: `${imageItem.source}`,
         };
     });
@@ -25,9 +31,9 @@ export const CreativesModalTemplate = ({onClose, images, description, file_size,
             <div className='creativesModalTemplate__image'>
                 <img src={process.env.MEDIA_URL + preview_src} alt='modalImage'/>
             </div>
-            { sliderImages && <div className='creativesModalTemplate__slider'>
-                <Slider items={sliderImages.map(image => image.source)}/>
-            </div> }
+            {sliderImages && <div className='creativesModalTemplate__slider'>
+                <Slider items={sliderImages}/>
+            </div>}
             <div className='creativesModalTemplate__about'>
                 <h3>About</h3>
                 <div className='creativesModalTemplate__description'>
@@ -42,8 +48,8 @@ export const CreativesModalTemplate = ({onClose, images, description, file_size,
                     </div>
                 </div>
                 <div className='creativesModalTemplate__download'>
-                    <a href={process.env.MEDIA_URL + file} target='_blank' download={file} >
-                        Download now
+                    <a href={process.env.MEDIA_URL + file} target='_blank' download={file}>
+                        {contentData.common.download}
                     </a>
                 </div>
             </div>

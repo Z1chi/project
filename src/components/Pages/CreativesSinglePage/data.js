@@ -1,6 +1,6 @@
 import { images } from './images';
 
-const { modalMainImage, cardImages, sliderItemFirstImage, sliderItemSecondImage, } = images;
+const { modalMainImage, sliderItemFirstImage, sliderItemSecondImage, } = images;
 
 export const creativesCategories = {
     countLimit: 999,
@@ -35,45 +35,7 @@ export const creativesCategories = {
             count: 20,
         }, 
     ]
-}
-
-export const creativesItems = [{
-    logo: cardImages[0],
-    categoryId: 5,
-}, {
-    logo: cardImages[1],
-    categoryId: 3,
-}, {
-    logo: cardImages[2],
-    categoryId: 1,
-}, {
-    logo: cardImages[3],
-    categoryId: 2,
-}, {
-    logo: cardImages[0],
-    categoryId: 5,
-}, {
-    logo: cardImages[1],
-    categoryId: 3,
-}, {
-    logo: cardImages[2],
-    categoryId: 1,
-}, {
-    logo: cardImages[3],
-    categoryId: 2,
-}, {
-    logo: cardImages[0],
-    categoryId: 5,
-}, {
-    logo: cardImages[1],
-    categoryId: 3,
-}, {
-    logo: cardImages[2],
-    categoryId: 1,
-}, {
-    logo: cardImages[3],
-    categoryId: 2,
-}]
+};
 
 export const creativesModalData = {
     mainImage: modalMainImage,
@@ -90,4 +52,4 @@ export const creativesModalData = {
         value: '21'
     }, ], 
     onDownload: () => {},
-}
+};

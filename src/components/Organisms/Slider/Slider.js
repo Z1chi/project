@@ -1,12 +1,10 @@
 import React from 'react';
-
 import {Swiper, SwiperSlide} from 'swiper/react';
 
-import 'swiper/css';
-
-import './slider.scss';
-
 import {AItem} from "../../Atoms/AdItem/AItem";
+
+import 'swiper/css';
+import './slider.scss';
 
 
 export const Slider = ({items}) => {
@@ -29,7 +27,7 @@ export const Slider = ({items}) => {
                     items && items.map((adItem, key) => {
                         return (
                             <SwiperSlide style={{width: "100%", height: "200px"}} key={key}>
-                                <AItem preview_src={adItem}/>
+                                <AItem preview_src={adItem.source} {...adItem}/>
                             </SwiperSlide>
                         )
                     })

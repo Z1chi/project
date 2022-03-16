@@ -6,8 +6,8 @@ export const TableCell = ({ rowId, item, columnWidth, renderRowItem = (item => i
     return (
         <div className={`tableCell${isGroupEnd ? " tableCell--last" : ""}`} style={{ minWidth: columnWidth, width: '100%' }}>
         {
-            <p>{renderRowItem(item, rowId)}</p>
+            <div>{renderRowItem(item, rowId)}</div>
         }
         </div>
     )
-}
+};

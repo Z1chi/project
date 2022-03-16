@@ -18,17 +18,17 @@ export const CreativesPage = () => {
     return (
         <div className='creativesPage'>
             <PageTemplate
-                renderPage={() =>
+                renderPage={({contentData}) =>
                     <div className='creativesPage'>
                         <div className='creativesPage__title'>
-                            <h2>Choose offer</h2>
+                            <h2>{contentData.data.creativesPage.title}</h2>
                         </div>
                         <div className='creativesPage__offers'>
                             {faqQuery.data && faqQuery.data.map((item, key) => {
                                 return (
                                     <div key={`creativesPage__offersItem${key}`}
                                          className='creativesPage__offersItem'>
-                                        <CreativesOffer {...item} />
+                                        <CreativesOffer contentData={contentData.data.creativesPage} {...item} />
                                     </div>
                                 )
                             })

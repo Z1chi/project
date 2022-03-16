@@ -10,7 +10,6 @@ export const TableRow = ({ tableConfig, row }) => {
         {
             tableConfig.map( ({ columnId, columnWidth, renderRowItem, isGroupEnd }, key) => {
                 return (
-                    // <div key={key} className='tableRow__cell'>
                         <TableCell
                             key={`cell${row.id}${key}`}
                             rowId={row.id}
@@ -19,7 +18,6 @@ export const TableRow = ({ tableConfig, row }) => {
                             renderRowItem={renderRowItem}
                             isGroupEnd={isGroupEnd}
                         />
-                    // </div>
                 )
             })
         }
