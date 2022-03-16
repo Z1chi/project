@@ -71,15 +71,15 @@
     },
     "walletAddress": {
       "title": "Wallet Address",
-      "description": "Please enter your wallet address correctly. We cannot help if you entered the wrong wallet address."
+      "description": "Please enter your wallet address correctly. We cannot help if you entered the wrong wallet address"
     },
     "password": {
       "title": "Password",
-      "description": "Your password. Keep in mind we will never ask you for your password."
+      "description": "Your password. Keep in mind we will never ask you for your password"
     },
     "telegram": {
       "title": "Telegram",
-      "description": "The fastest way to reach our team whenever you have any questions. Use it to contact your personal manager."
+      "description": "The fastest way to reach our team whenever you have any questions. Use it to contact your personal manager"
     },
     "email": {
       "title": "Email",
@@ -140,7 +140,7 @@
         }
       ],
       "title": "Contact us",
-      "subTitle": "We are always happy to help and advise you on any questions",
+      "subTitle": "Feel free to contact our team if you have any questions. We're always here for you.",
       "secondSubTitle": "Your personal manager will provide the fastest and most detailed advice on most issues"
     },
     "managerTitle": {
