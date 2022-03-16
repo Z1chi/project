@@ -108,7 +108,7 @@ export const table = {
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'registrations',
-        columnName: 'Reg',
+        columnName: 'REG',
         columnWidth: '100px',
         groupId: 'Leads',
     }, {
@@ -184,7 +184,7 @@ export const table = {
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'cpa_declined',
-        columnName: 'Declined',
+        columnName: 'Decline',
         columnWidth: '100px',
         groupId: 'Withdraw',
         
