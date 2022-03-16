@@ -1,7 +1,7 @@
 import {useAtom} from '@reatom/react';
-import React from 'react';
-
+import React, {useEffect} from 'react';
 import SVG from "react-inlinesvg";
+
 import {modalAtom} from '../../../store/Modal';
 
 import {Backdrop} from '../../Atoms/Backdrop/Backdrop';
@@ -15,6 +15,11 @@ export const Modal = ({icon, title, subtitle, children, onClose}) => {
     const [, modalActions] = useAtom(modalAtom);
 
     const onCloseHandler = onClose || modalActions.close;
+
+    useEffect(() =>
+            document.addEventListener('keydown', (e) =>
+                e.keyCode === 27 ? onCloseHandler() : ""),
+        []);
 
     return (
         <div className='modal'>
