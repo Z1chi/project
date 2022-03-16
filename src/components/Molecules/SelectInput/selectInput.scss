@@ -19,7 +19,8 @@
     cursor: pointer;
 
     &__input:disabled {
-      background: #2D313D;;
+      background: #2D313D;
+      cursor: pointer;
     }
   }
 }
