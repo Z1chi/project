@@ -14,4 +14,4 @@ export const MultiSelectOption = ({ option, onChange, renderOption=option=>optio
             </div>
         </div>
     )
-}
+};

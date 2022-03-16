@@ -17,10 +17,10 @@ export const TableHead = ({ groups, tableConfig, info }) => {
                         </div>
                         <div className='tableHead__groupItems'>
                         {
-                            tableConfig.filter(headItem => headItem.groupId === groupItem.id).map(headItem => {
+                            tableConfig.filter(headItem => headItem.groupId === groupItem.id).map((headItem, key) => {
                                 return (
                                     // <div className='tableHead__item'>
-                                        <TableHeadItem item={headItem} info={info && info[headItem.columnId]} />
+                                        <TableHeadItem item={headItem} key={key} info={info && info[headItem.columnId]} />
                                     // </div>
                                 )
                             })

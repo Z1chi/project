@@ -8,7 +8,7 @@ import './multiSelect.scss';
 
 export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, onChange, }) => {
     const [searchValue, setSearchValue] = useState('');
-    const [optionsSelectable, setOptionsSelectable] = useState(options)
+    const [optionsSelectable, setOptionsSelectable] = useState(options);
 
     useEffect( () => {
         options && options.length > 0 && setOptionsSelectable(options.map( option => {
@@ -17,7 +17,7 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
                 ...option,
             }
         }))
-    }, [options,])
+    }, [options,]);
 
     const searchRegexp = new RegExp(searchValue, 'g');
 
@@ -47,7 +47,7 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
                     : option.match(searchRegexp)
                 ).map((option, index) => {
                     return (
-                        <div className='multiSelect__optionsItem'>
+                        <div key={index} className='multiSelect__optionsItem'>
                             <MultiSelectOption 
                                 option={option}
                                 renderOption={renderItem}
@@ -74,7 +74,7 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
                             ...item,
                             isSelected: false
                         }
-                    })
+                    });
                     setOptionsSelectable(unselectedOptions);
                     onChange(unselectedOptions)
                 }}>
@@ -87,8 +87,8 @@ export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, 
                                 ...item,
                                 isSelected: true
                             }
-                        })
-                        setOptionsSelectable(selectedOptions)
+                        });
+                        setOptionsSelectable(selectedOptions);
                         onChange(selectedOptions)
                     }}>Select all</button>
                 </div>

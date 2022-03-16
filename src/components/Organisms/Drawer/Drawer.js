@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 import { useAtom } from '@reatom/react';
 
 import {Backdrop} from '../../Atoms/Backdrop/Backdrop';
@@ -13,10 +13,6 @@ import './drawer.scss';
 
 export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => {
     const [drawerData, drawerActions] = useAtom(drawerAtom);
-    
-    useEffect( () => {
-        
-    },[drawerData])
 
     return (
         <>
@@ -38,13 +34,13 @@ export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => 
             </div>
             <div className='drawer__form'>
                 {
-                    fieldRows.map( row => {
+                    fieldRows.map( (row,key) => {
                         return (
-                            <div className='drawer__formRow'>
+                            <div key={`drawerRow${key}`} className='drawer__formRow'>
                             {
-                                row.map(field => {
+                                row.map((field, key) => {
                                     return (
-                                        <div className='drawer__formField'>
+                                        <div key={`drawerField${key}`} className='drawer__formField'>
                                             <FormField {...field}
                                                 stateData={drawerData.fieldValues}
                                                 options={field.id ? data[field.id] : []}

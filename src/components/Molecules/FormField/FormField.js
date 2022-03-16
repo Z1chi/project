@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 
 import { fieldComponentsList } from '../../../constants/field';
 
@@ -7,7 +7,7 @@ import './formField.scss';
 const renderField = ({type, generateField}) => (props) => {
     const Component = fieldComponentsList[type];
     return Component ? <Component {...props} /> : generateField(props);
-}
+};
 
 export const FormField = ({ mobileTitle, type, generateField, ...props }) => {
 
@@ -38,4 +38,4 @@ export const FormField = ({ mobileTitle, type, generateField, ...props }) => {
             </div>
         </div>
     )
-}
+};
