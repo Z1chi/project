@@ -6,11 +6,11 @@ import {dateStringFormator, idArrayFormator, dateFormator} from '../../../helper
 import {Button} from '../../Atoms/Button/Button';
 import {images} from './images';
 
-const renderLink = (link) => {
+const renderLink = ({link, onCopy}) => {
     return (
-        <a href={link} target='_blank' style={{color: '#219FE5', textDecoration: 'underline',}}>
+        <span style={{color: '#219FE5', textDecoration: 'underline',}} onClick={()=>{navigator.clipboard.writeText(link); onCopy();}}>
             {link}
-        </a>
+        </span>
     )
 };
 
@@ -49,7 +49,7 @@ export const filterFormators = {
     format: itemArray => idArrayFormator(itemArray),
 };
 
-export const table = {
+export const getTable = (tableProps) => ({
 
     getTableConfig: (props) => ([{
         columnId: 'title',
@@ -75,24 +75,24 @@ export const table = {
         columnName: 'URL',
         columnWidth: '170px',
 
-        renderRowItem: (item) => {
-            return renderLink(item);
+        renderRowItem: (link) => {
+            return renderLink({ link, onCopy: tableProps.onCopy });
         },
     }, {
         columnId: 'iframe_lead',
         columnName: 'Lead iFrame',
         columnWidth: '170px',
 
-        renderRowItem: (item) => {
-            return renderLink(item);
+        renderRowItem: (link) => {
+            return renderLink({ link, onCopy: tableProps.onCopy });
         },
     }, {
         columnId: 'conversionIFrame',
         columnName: 'Conversion iFrame',
         columnWidth: '170px',
 
-        renderRowItem: (item) => {
-            return renderLink(item);
+        renderRowItem: (link) => {
+            return renderLink({ link, onCopy: tableProps.onCopy });
         },
 
     }, {
@@ -150,7 +150,7 @@ export const table = {
     //     conversionIFrame: '....com/?aff=8wv6v9',
     // },],
 
-};
+});
 
 const isNewSmartlinkValid = ({project, title, format,}) => {
     return project && project.some(item => !!item.isSelected) && title && format && format.some(item => !!item.isSelected);

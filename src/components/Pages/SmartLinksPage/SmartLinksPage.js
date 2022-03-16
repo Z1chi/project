@@ -14,7 +14,7 @@ import {Button} from "../../Atoms/Button/Button";
 
 import request from '../../../api/request';
 import {convertToQueryString} from '../../../helpers/lib';
-import {filters, filterFormators, table, drawers, modalDelete} from './data';
+import {filters, filterFormators, drawers, modalDelete, getTable} from './data';
 
 import {filterAtom} from '../../../store/Filter';
 import {drawerAtom} from '../../../store/Drawer';
@@ -84,10 +84,17 @@ export const SmartLinksPage = () => {
         smartlinkFiltersQueryList[1].data || []
     ];
     const filterMobile = width <= 820;
+    
     return (
         <div className='smartLinksPage'>
             <PageTemplate
                 renderPage={({width, contentData}) => {
+                    const table = getTable({ onCopy : () => {
+                        alertActions.open({
+                            type: 'ALERT/SUCCESS',
+                            message: contentData.data.smartLinks.copy,
+                        });
+                    }})
                     return (
                         <div className='smartLinksPage__content'>
                             <div ref={ref}
