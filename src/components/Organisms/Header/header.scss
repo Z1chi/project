@@ -30,6 +30,8 @@
       font-size: 14px;
       line-height: 20px;
       color: #fff;
+      max-width: 100px;
+      overflow: hidden;
     }
 
     &Id {
@@ -52,7 +54,7 @@
 
     .dropdown__content {
       top: 60px;
-      right: 0px;
+      right: 0;
     }
 
     &Switcher {

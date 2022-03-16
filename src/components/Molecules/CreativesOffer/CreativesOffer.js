@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 import './creativesOffer.scss';
 
-export const CreativesOffer = ({id, image, title, url, small_description,}) =>
+export const CreativesOffer = ({id, image, title, url, small_description,contentData}) =>
 
     <div className='creativesOffer'>
         <div className='creativesOffer__logo'>
@@ -23,7 +23,7 @@ export const CreativesOffer = ({id, image, title, url, small_description,}) =>
 
         </div>
         <div className='creativesOffer__more'>
-            <Link to={`/creatives/${id}`}>See creatives</Link>
+            <Link to={`/creatives/${id}`}>{contentData.button}</Link>
         </div>
     </div>;
 

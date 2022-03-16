@@ -32,11 +32,11 @@ export const TableHead = ({ groups, tableConfig, info }) => {
             : tableConfig.map( (headItem, key) => {
                 return (
                     // <div key={key} className='tableHead__item'>
-                        <TableHeadItem item={headItem} />
+                        <TableHeadItem key={`tableHeadItem${key}`} item={headItem} />
                     // </div>
                 )
             })
         }
         </div>
     )
-}
+};

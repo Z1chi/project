@@ -14,9 +14,9 @@ import {
   
 import './barChart.scss';
 
-  const greenData = [{x: 'A', y: 10}, {x: 'B', y: 5}, {x: 'C', y: 15}];
+  // const greenData = [{x: 'A', y: 10}, {x: 'B', y: 5}, {x: 'C', y: 15}];
   
-  const blueData = [{x: 'A', y: 12}, {x: 'B', y: 2}, {x: 'C', y: 11}];
+  // const blueData = [{x: 'A', y: 12}, {x: 'B', y: 2}, {x: 'C', y: 11}];
 
     //закоментил пока не исопльзуется, что бы видеть лог без ошибок
 
@@ -67,7 +67,7 @@ export const BarChart = ({ data }) => {
                                     }
                                 } );
                                 return (
-                                    <VerticalBarSeries color={colors[barIndex]} barWidth={.25} data={barData} marginLeft={margin.default+margin.steps[barIndex]} style={data.style} />
+                                    <VerticalBarSeries key={barIndex} color={colors[barIndex]} barWidth={.25} data={barData} marginLeft={margin.default+margin.steps[barIndex]} style={data.style} />
                                 )
                             })
                         }
@@ -77,4 +77,4 @@ export const BarChart = ({ data }) => {
             </AutoSizer>
         </div>
     )
-}
+};

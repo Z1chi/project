@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router';
 import {useQuery} from 'react-query';
+import {useAtom} from '@reatom/react';
+import request from '../../../api/request';
 
 import {Backdrop} from '../../Atoms/Backdrop/Backdrop';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
@@ -8,27 +10,23 @@ import {CreativesCategory} from '../../Atoms/CreativesCategory/CreativesCategory
 import {CreativesCard} from '../../Molecules/CreativesCard/CreativesCard'
 import {CreativesModalTemplate} from '../../Templates/CreativesModalTemplate/CreativesModalTemplate';
 
-import linkIcon from './images/link.svg';
-import downloadIcon from './images/download.svg';
-
-import {creativesCategories, creativesModalData} from './data';
-
-import request from '../../../api/request';
-
-import {useAtom} from '@reatom/react';
+import {creativesCategories} from './data';
 import {creativesAtom} from '../../../store/Creatives';
+
+import downloadIcon from './images/download.svg';
+import linkIcon from './images/link.svg';
 
 import './creativesSinglePage.scss';
 
 export const CreativesSinglePage = () => {
 
-    const [filtersIdSelected, setFiltersIdSelected] = useState([])
+    const [filtersIdSelected, ] = useState([]);
     const [creativesModal, setCreativesModal] = useState(null);
-    const [creativesData, creativesActions] = useAtom(creativesAtom)
+    const [creativesData, creativesActions] = useAtom(creativesAtom);
     const {id} = useParams();
 
     const creativesCategoriesQuery = useQuery(['creatives-categories',], () => {
-        return request(`creative/get-categories-filters?project_id=${id}${filtersIdSelected.length>0?`&category=${filtersIdSelected.join(',')}`:''}`).then(res => res.data);
+        return request(`creative/get-categories-filters?project_id=${id}${filtersIdSelected.length > 0 ? `&category=${filtersIdSelected.join(',')}` : ''}`).then(res => res.data);
     });
 
     const creativesItemQuery = useQuery(['creatives-item', creativesData.filterIds,], () => {
@@ -38,7 +36,7 @@ export const CreativesSinglePage = () => {
     return (
         <div className='creativesSinglePage'>
             <PageTemplate
-                renderPage={({width}) =>
+                renderPage={({width, contentData}) =>
                     <>
                         <div className='creativesSinglePage__categoryList'>
 
@@ -73,10 +71,9 @@ export const CreativesSinglePage = () => {
                                                 key={`creativesSinglePage__cardListItem${key}`}>
 
                                                 <CreativesCard
-
                                                     {...item}
                                                     width={width}
-                                                    modalData={creativesModalData}
+                                                    // modalData={creativesModalData}
                                                     moreButton={{
                                                         icon: linkIcon,
                                                         onClick: () =>
@@ -116,6 +113,7 @@ export const CreativesSinglePage = () => {
                                     }/>
                                     <CreativesModalTemplate
                                         {...creativesModal}
+                                        contentData={contentData.data}
                                         onClose={() => setCreativesModal(null)}
                                     />
                                 </div>

@@ -19,7 +19,7 @@ import {profileSettingsFieldTypeList} from "../../Pages/SettingsPage/data";
 
 export const Header = () => {
 
-    const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
+    const [profileSettingsData, ] = useAtom(profileSettingsAtom);
 
     const supportData = profileSettingsData.fields;
     return (
@@ -28,7 +28,7 @@ export const Header = () => {
             <div className='header__profileSettings'>
                 <Dropdown
                     renderSwitcher={
-                        ({setIsOpened, isOpened}) => {
+                        () => {
                             return (
                                 <div className='header__profileSettingsSwitcher'>
                                     <Avatar
@@ -39,11 +39,11 @@ export const Header = () => {
                                     <div className='header__info'>
                                         <p className='header__infoName'>{supportData.name &&
                                         supportData.name[profileSettingsFieldTypeList.current]}</p>
-                                        <p className='header__infoId'>id: 123456</p>
+                                        {/*<p className='header__infoId'>id: 123456</p>*/}
                                     </div>
-                                    <div className='header__dropdownArrow'>
-                                        <SVG src={icon}/>
-                                    </div>
+
+                                        <SVG className='header__dropdownArrow' src={icon}/>
+
                                 </div>
                             )
                         }
