@@ -5,7 +5,7 @@ import { images } from './images';
 
 import './input.scss';
 
-export const Input = ({ type = 'text', value, hasError, error, placeholder, isNotChangeable = false, onChange = () => {}, canCopy, onCopy, fieldData={},}) => {
+export const Input = ({ type = 'text', value, hasError, error, placeholder, isNotChangeable=false, onChange=()=>{}, onChangeValue=(value)=>value, canCopy, onCopy, fieldData={},}) => {
 
     const [inputValue, setInputValue] = useState('');
 
@@ -24,8 +24,9 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
                     disabled={isNotChangeable}
                     {...fieldData}
                     onChange={e => {
-                        setInputValue(e.target.value);
-                        fieldData.onChange && fieldData.onChange(e)
+                        const res = onChangeValue(e.target.value);
+                        setInputValue(res);
+                        fieldData.onChange && fieldData.onChange({...e, target: {...target, value: res}})
                     }}
                     onBlur={(e)=>{
                         onChange(inputValue)

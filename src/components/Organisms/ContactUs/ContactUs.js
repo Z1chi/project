@@ -5,7 +5,6 @@ import { ManagerContactCard } from '../../Molecules/ManagerContactCard/ManagerCo
 import './contactUs.scss';
 
 export const ContactUs = ({ contentData , support}) => {
-console.log(support)
     return (
         <div className='contactUs'>
             <div className='contactUs__socials'>

@@ -134,7 +134,7 @@ export const drawers = {
                 generateField: ({ onChange }) => {
                     return (
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            <Input placeholder='0.000000000' onChange={onChange} />
+                            <Input placeholder='0.000000000' onChange={onChange} onChangeValue={(value)=>value.replace(/\D/,'')} />
                             <span style={{ 
                                 backgroundColor: '#2D313D', color: 'rgba(255, 255, 255, 0.4)', height: '40px', minWidth: '100px',
                                 display:'flex', justifyContent: 'center', alignItems: 'center', padding: '10px', fontSize:'13px', 
