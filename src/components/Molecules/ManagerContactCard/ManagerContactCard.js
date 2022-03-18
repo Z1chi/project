@@ -13,7 +13,6 @@ import './managerContactCard.scss';
 
 export const ManagerContactCard = ({manager, managerData}) => {
     const {width, height, ref} = useResizeDetector();
-    console.log(manager)
     const mangerInfo = [
         {
             parameter: manager.managerCard.name,
