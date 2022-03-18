@@ -11,11 +11,13 @@ import { profileSettingsFieldTypeList } from '../../Pages/SettingsPage/data';
 
 import 'react-image-crop/src/ReactCrop.scss';
 import './avatarEditor.scss'
+import {languageAtom} from "../../../store/language";
 
 export const AvatarEditor = ({onClose}) => {
 
-    const [alertData, alertActions] = useAtom(alertAtom);
-    const [profileSettingsData, profileSettingsActions] = useAtom(profileSettingsAtom);
+    const [, alertActions] = useAtom(alertAtom);
+    const [, profileSettingsActions] = useAtom(profileSettingsAtom);
+    const [langData,] = useAtom(languageAtom);
 
     const [upImg, setUpImg] = useState();
     const [crop, setCrop] = useState({
@@ -56,11 +58,11 @@ export const AvatarEditor = ({onClose}) => {
                             type: 'ALERT/ERROR',
                         })
                     } else {
-                        onClose(false)
+                        onClose(false);
                         alertActions.open({
                             message: 'Avatar updated',
                             type: 'ALERT/SUCCESS',
-                        })
+                        });
                         profileSettingsActions.setField({
                             fieldId: 'img',
                             fieldType: profileSettingsFieldTypeList.current,
@@ -153,7 +155,7 @@ export const AvatarEditor = ({onClose}) => {
                     generateDownload(previewCanvasRef.current, completedCrop)}
                 }
             >
-                Update avatar
+                {langData.data.common.updateButton}
             </button>
         </div>
 

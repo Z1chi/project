@@ -8,7 +8,7 @@ import arrow from './images/arrowIcon.svg'
 import './trafficSourceList.scss';
 
 
-export const TrafficSourceList = ({sources, width}) => {
+export const TrafficSourceList = ({sources, width, contentData:{show, hide}}) => {
 
     const [openList, setOpenList] = useState(false);
 
@@ -32,7 +32,7 @@ export const TrafficSourceList = ({sources, width}) => {
                 className='trafficSourceList__showButton'
                 onClick={() => setOpenList(!openList)}
             >
-                <p>{ openList ? 'Show less' : 'Show restricted traffic source' }</p>
+                <p>{ openList ? hide : show }</p>
                 <SVG src={arrow}
                      className={`trafficSourceList__arrowIcon${openList ? ' trafficSourceList__arrowIcon--open' : ''}`}/>
             </div>

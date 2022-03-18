@@ -2,7 +2,21 @@
   "common": {
     "buttonSubmit": "Submit",
     "connect": "Connect",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "changeLanguage": "Language changed",
+    "changeLanguageError": "Language not changed",
+    "profileMenu": {
+      "profile": {
+        "title": "Profile",
+        "description": "Important account details"
+      },
+      "language": {
+        "title": "Language"
+      }
+    },
+    "change": "Change",
+    "updateButton": "Update avatar",
+    "download": "Download now"
   },
   "smartLinks": {
     "emptyTable": "Smartlinks will appear here immediately after you create the first SmartLink",
@@ -29,8 +43,7 @@
       "title": "Withdraw fund",
       "subtitle": "Please make sure all information is correct (including your wallet address and requested amount). The transaction cannot be canceled or altered. Unfortunately, we cannot fix it if you entered the wrong wallet address.",
       "button": "Withdraw",
-      "insufficientFunds" : "Insufficient funds"
-
+      "insufficientFunds": "Insufficient funds"
     }
   },
   "actionLog": {
@@ -58,15 +71,15 @@
     },
     "walletAddress": {
       "title": "Wallet Address",
-      "description": "Please enter your wallet address correctly. We cannot help if you entered the wrong wallet address."
+      "description": "Please enter your wallet address correctly. We cannot help if you entered the wrong wallet address"
     },
     "password": {
       "title": "Password",
-      "description": "Your password. Keep in mind we will never ask you for your password."
+      "description": "Your password. Keep in mind we will never ask you for your password"
     },
     "telegram": {
       "title": "Telegram",
-      "description": "The fastest way to reach our team whenever you have any questions. Use it to contact your personal manager."
+      "description": "The fastest way to reach our team whenever you have any questions. Use it to contact your personal manager"
     },
     "email": {
       "title": "Email",
@@ -127,8 +140,8 @@
         }
       ],
       "title": "Contact us",
-      "subTitle": "We are always happy to help and advise you on any questions",
-      "secondSubTitle": "Your personal manager will provide the fastest and most detailed advice on most issues"
+      "subTitle": "Feel free to contact our team if you have any questions. We're always here for you.",
+      "secondSubTitle": "Your personal manager is always here to support you. Ask any questions and get instant feedback."
     },
     "managerTitle": {
       "title": "Your personal manager",
@@ -138,7 +151,40 @@
         "exp": "Experience",
         "link": "Contact now"
       }
-
     }
+  },
+  "offerSignlePage": {
+    "row": {
+      "description": "Description",
+      "model": "Model",
+      "conversion": "Conversion",
+      "demoAccount": "Demo Account",
+      "trafficSource": {
+        "title": "Traffic Source",
+        "show": "Show restricted traffic source",
+        "hide": "Show less"
+      },
+      "statistic": {
+        "title": "Statistic",
+        "createDate": "Creation date:",
+        "avgDep" : "Avg. deposit:",
+        "recordDep": "Deposit record:",
+        "avgTurnover": "Avg. turnover (30d)",
+        "regAmount": "Registration amount:",
+        "depAmount": "Deposit amount:"
+
+      },
+      "geo": {
+        "title": "GEO",
+        "available": "Available",
+        "unavailable": "Unavailable",
+        "list": "Available Country list:"
+      },
+      "advertisment": "Advertisment examples"
+    }
+  },
+  "creativesPage": {
+    "title": "Choose offer",
+    "button": "See creatives"
   }
 }

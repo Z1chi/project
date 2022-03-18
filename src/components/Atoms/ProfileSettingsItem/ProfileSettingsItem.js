@@ -2,20 +2,21 @@ import React from 'react';
 import {useAtom} from "@reatom/react";
 import {useHistory} from "react-router-dom";
 
+import {LanguageChanger} from "../../Molecules/LanguageChanger/LanguageChanger";
+
 import {modalAtom} from "../../../store/Modal";
 
 import './profileSettingsItem.scss'
-import {LanguageChanger} from "../../Molecules/LanguageChanger/LanguageChanger";
 
 
-export const ProfileSettingsItem = ({info: {title, description, onClick, renderContent}}) => {
-    const [modalData, modalActions] = useAtom(modalAtom);
+export const ProfileSettingsItem = ({info: {title, description, onClick, renderContent},contentData}) => {
+    const [, modalActions] = useAtom(modalAtom);
 
     const history = useHistory();
     return (
         <div className='profileSettingsItem' onClick={() => onClick({
             history, handler: () =>
-                modalActions.open({children: <LanguageChanger/>, title: 'Language'})
+                modalActions.open({children: <LanguageChanger/>, title: contentData.common.profileMenu.language.title})
         })}>
             {
                 title &&

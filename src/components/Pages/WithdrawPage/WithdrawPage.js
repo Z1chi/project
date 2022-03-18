@@ -28,7 +28,7 @@ import './withdrawPage.scss';
 export const WithdrawPage = () => {
 
     const [operationIndex, setOperationIndex] = useState(0);
-    const [pushTableData, setPushTableData] = useState(false);
+    const [pushTableData, ] = useState(false);
     const [pageIndex, setPageIndex] = useState(0);
     const [tableData, setTableData] = useState({table: [], last_page: null});
 
@@ -87,9 +87,9 @@ export const WithdrawPage = () => {
                             <div className='withdrawPage__statistics'>
                                 <div className='withdrawPage__cards'>
                                     {
-                                        statistics.map(item => {
+                                        statistics.map((item ,key) => {
                                             return (
-                                                <div className='withdrawPage__cardsItem'>
+                                                <div key={key} className='withdrawPage__cardsItem'>
                                                     <InfoCard {...item}  title={contentData.data.withdraw.totalBalance} />
                                                 </div>
                                             )
@@ -179,9 +179,9 @@ export const WithdrawPage = () => {
                                     </div>
                                     : <div>
                                         {
-                                            withdrawQuery.data.table.map(item => {
+                                            withdrawQuery.data.table.map((item, key) => {
                                                 return (
-                                                    <div className='withdrawPage__tableCard' style={{width}}>
+                                                    <div className='withdrawPage__tableCard' key={key} style={{width}}>
                                                         <WithdrawCard fields={item} config={table.tableConfig}/>
                                                     </div>
                                                 )

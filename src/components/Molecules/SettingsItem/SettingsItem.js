@@ -30,45 +30,49 @@ export const SettingsItem = (
             <p>{description}</p>
             <div className='settingsItem__input'>
                 <Input value={value} type={type} placeholder={placeholder} isNotChangeable={isNotChangeable}/>
-                <span onClick={() => setModalOpen(true)}>Change</span>
-                {modalOpen &&
-                <Modal title={title} onClose={() => setModalOpen(false)}>
-                    <EditFieldForm
-                        placeholder={placeholder}
-                        type={type}
-                        id={id}
-                        validator={validator}
-                        formValidator={formValidator}
-                        onChangeFieldValue={(fieldType) => (item) => profileSettingsActions.setField({
-                            fieldId: id,
-                            fieldType,
-                            fieldValue: item
-                        })}
-                        value={value}
-                        hasConfirmField={hasConfirmField}
-                        confirmOldValue={confirmOldValue}
-                        renderNewValueField={renderNewValueField}
-                        buttonText={contentData.data.common.buttonSubmit}
-                        onSubmit={() => {
-                            const requestData = (mapRequestData(profileSettingsData.fields[id]));
-                            return request(`/profile/${apiId}`, {method: 'patch', data: requestData}).then((res) => {
-                                onSubmitHandler();
-                                if (res.exception) {
-                                    alertActions.open({
-                                        message: contentData.data.settingsPage.alertSettings.error,
-                                        type: 'ALERT/ERROR',
-                                    })
-                                } else {
-                                    setModalOpen(false);
-                                    alertActions.open({
-                                        message: contentData.data.settingsPage.alertSettings.success,
-                                        type: 'ALERT/SUCCESS',
-                                    });
-                                }
-                            })
-                        }}
-                    />
-                </Modal>
+                <span onClick={() => setModalOpen(true)}>{contentData.data.common.change}</span>
+                {
+                    modalOpen &&
+                    <Modal title={title} onClose={() => setModalOpen(false)}>
+                        <EditFieldForm
+                            placeholder={placeholder}
+                            type={type}
+                            id={id}
+                            validator={validator}
+                            formValidator={formValidator}
+                            onChangeFieldValue={(fieldType) => (item) => profileSettingsActions.setField({
+                                fieldId: id,
+                                fieldType,
+                                fieldValue: item
+                            })}
+                            value={value}
+                            hasConfirmField={hasConfirmField}
+                            confirmOldValue={confirmOldValue}
+                            renderNewValueField={renderNewValueField}
+                            buttonText={contentData.data.common.buttonSubmit}
+                            onSubmit={() => {
+                                const requestData = (mapRequestData(profileSettingsData.fields[id]));
+                                return request(`/profile/${apiId}`, {
+                                    method: 'patch',
+                                    data: requestData
+                                }).then((res) => {
+                                    onSubmitHandler();
+                                    if (res.exception) {
+                                        alertActions.open({
+                                            message: contentData.data.settingsPage.alertSettings.error,
+                                            type: 'ALERT/ERROR',
+                                        })
+                                    } else {
+                                        setModalOpen(false);
+                                        alertActions.open({
+                                            message: contentData.data.settingsPage.alertSettings.success,
+                                            type: 'ALERT/SUCCESS',
+                                        });
+                                    }
+                                })
+                            }}
+                        />
+                    </Modal>
                 }
             </div>
         </div>

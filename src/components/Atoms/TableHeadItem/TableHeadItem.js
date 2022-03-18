@@ -18,4 +18,4 @@ export const TableHeadItem = ({ item, isGroup, info }) => {
             }
         </div>
     )
-}
+};

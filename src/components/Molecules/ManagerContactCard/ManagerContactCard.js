@@ -12,7 +12,7 @@ import {images} from '../../Pages/FAQPage/images';
 import './managerContactCard.scss';
 
 export const ManagerContactCard = ({manager, managerData}) => {
-    const {width, height, ref} = useResizeDetector();
+    const {width, ref} = useResizeDetector();
     const mangerInfo = [
         {
             parameter: manager.managerCard.name,
