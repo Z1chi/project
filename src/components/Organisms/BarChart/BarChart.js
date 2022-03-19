@@ -35,17 +35,29 @@ import './barChart.scss';
         '#0063FF',
     ];
 
-
+    const getFormattedTick = num => {
+        if (num >= 1000000000) {
+          return Math.round(num / 100000000) / 10 + "Bn";
+        } else if (num >= 1000000) {
+          return Math.round(num / 100000) / 10 + "M";
+        } else if (num >= 1000) {
+          return Math.round(num / 100) / 10 + "K";
+        } else {
+            return Math.round(num);
+        }
+    };
 export const BarChart = ({ data }) => {
-    
+    console.log(data.bars[0])
     const maxValue = Math.max.apply(null, data.bars.map( item => item.data).flat());
+
+    const leftMargin = ( Math.max(...data.bars[0].data.map(item => getFormattedTick(item.y))) ).toString().length * 16 + 20;
 
     return (
         <div className='barChart'>
             <AutoSizer>
             {({ width, height }) => {
                 return (
-                    <XYPlot xType="ordinal" width={width} height={height} yDomain={[0, maxValue+1]}>
+                    <XYPlot xType="ordinal" width={width} height={height} yDomain={[0, maxValue+1]} margin={{ left: leftMargin }}>
                         <VerticalGridLines />
                         <HorizontalGridLines  />
         
@@ -55,7 +67,7 @@ export const BarChart = ({ data }) => {
                         }}/>
                         <YAxis style={{
                             text: {stroke: 'none', fill: '#898A98',}
-                        }} />
+                        }} tickFormat={getFormattedTick} />
         
                         {
                             data.bars && data.bars.map( (bar, barIndex) => {
