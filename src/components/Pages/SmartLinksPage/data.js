@@ -23,7 +23,7 @@ export const filters = [{
     maxWidth: '204px',
     renderItem: (item) => (
         <div style={{display: 'flex', alignItems: 'center',}}>
-            <img src={item.image} alt="image"/>
+            { item.image && <img src={item.image} alt=""/> }
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
@@ -170,7 +170,7 @@ export const drawers = {
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => (
                     <div style={{display: 'flex', alignItems: 'center'}}>
-                        <img src={item.image} alt='image'/>
+                        <img src={item.image} alt=''/>
                         <span style={{marginLeft: '10px'}}>{item.title}</span>
                     </div>
                 ),
@@ -275,7 +275,7 @@ export const drawers = {
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => (
                     <div style={{display: 'flex', alignItems: 'center'}}>
-                        <img src={item.image} alt='image'/>
+                        <img src={item.image} alt=''/>
                         <span style={{marginLeft: '10px'}}>{item.title}</span>
                     </div>
                 ),

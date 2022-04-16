@@ -28,7 +28,7 @@ import './withdrawPage.scss';
 export const WithdrawPage = () => {
 
     const [operationIndex, setOperationIndex] = useState(0);
-    const [pushTableData, ] = useState(false);
+    const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(0);
     const [tableData, setTableData] = useState({table: [], last_page: null});
 
@@ -108,13 +108,14 @@ export const WithdrawPage = () => {
                                                 walletAddress: res.data.walletAddress,
                                                 onClick: (data) => {
                                                     const amount = Number(data.amount);
-                                                    if (amount > res.data.balance) {
-                                                        alertActions.open({
-                                                            message: contentData.data.withdraw.drawer.insufficientFunds,
-                                                            type: 'ALERT/ERROR',
-                                                        });
-                                                        return;
-                                                    } else if (amount < res.data.minWithdraw) {
+                                                    // if (amount > res.data.balance) {
+                                                    //     alertActions.open({
+                                                    //         message: contentData.data.withdraw.drawer.insufficientFunds,
+                                                    //         type: 'ALERT/ERROR',
+                                                    //     });
+                                                    //     return;
+                                                    // } else
+                                                     if (amount < res.data.minWithdraw) {
                                                         alertActions.open({
                                                             message: `${contentData.data.withdraw.drawer.min} ${res.data.minWithdraw}`,
                                                             type: 'ALERT/ERROR',
@@ -126,14 +127,25 @@ export const WithdrawPage = () => {
                                                             data,
                                                             onClose: modalActions.close,
                                                             onSubmit: (queryData) => {
-
                                                                 request('/withdraw/create', {
                                                                     method: 'post',
-                                                                    queryData
+                                                                    data: queryData,
                                                                 }).then((res) => {
-                                                                    drawerActions.close();
-                                                                    setOperationIndex(operationIndex + 1);
-                                                                    return res.data;
+                                                                    if(res.exception) {
+                                                                        alertActions.open({
+                                                                            message: res.message,
+                                                                            type: 'ALERT/ERROR',
+                                                                        });
+                                                                    } else if(!res.success) {
+                                                                        alertActions.open({
+                                                                            message: res.data.amount,
+                                                                            type: 'ALERT/ERROR',
+                                                                        });
+                                                                    } else {
+                                                                        drawerActions.close();
+                                                                        setOperationIndex(operationIndex + 1);
+                                                                        return res.data;
+                                                                    }
                                                                 })
                                                             },
                                                         })
@@ -152,34 +164,37 @@ export const WithdrawPage = () => {
                                         data={filtersData}
                                         onSave={
                                             () => {
-                                                setOperationIndex(operationIndex + 1)
+                                                setPageIndex(1);
+                                                setOperationIndex(operationIndex + 1);
+                                                setPushTableData(false);
                                             }
                                         }
                                 />
                             </div>
                             {
-                                (withdrawQuery.data && withdrawQuery.data.table) &&
+                                (tableData.table) &&
                                 (width > 480
                                     ? <div className='withdrawPage__table'>
                                         <Table {...table}
-                                               emptyTable={{
-                                                   icon: emptyTableIcon,
-                                                   text: contentData.data.withdraw.emptyTable,
-                                                   button: {
-                                                       text: 'Explore offers',
-                                                       link: '/offers',
-                                                   }
-                                               }}
-                                               hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                               fetchMore={() => {
-                                                   setPageIndex(pageIndex + 1)
-                                               }}
-                                               data={withdrawQuery.data.table}
+                                            emptyTable={{
+                                                icon: emptyTableIcon,
+                                                text: contentData.data.withdraw.emptyTable,
+                                                button: {
+                                                    text: 'Explore offers',
+                                                    link: '/offers',
+                                                }
+                                            }}
+                                            hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                            fetchMore={() => {
+                                                setPageIndex(pageIndex + 1);
+                                                setPushTableData(true)
+                                            }}
+                                            data={tableData.table}
                                         />
                                     </div>
                                     : <div>
                                         {
-                                            withdrawQuery.data.table.map((item, key) => {
+                                            tableData.table.map((item, key) => {
                                                 return (
                                                     <div className='withdrawPage__tableCard' key={key} style={{width}}>
                                                         <WithdrawCard fields={item} config={table.tableConfig}/>

@@ -5,13 +5,13 @@ import { SmartLinksField } from '../../Atoms/SmartLinksField/SmartLinksField';
 import './smartLinksCard.scss';
 
 const renderFormatList = {
-    'CPA': () => {
-        return (
-            <div style={{ background: 'rgba(22, 255, 172, 0.1)', color: '#16FFAC', border: '1px solid #16FFAC' }}>
-                CPA
-            </div>
-        )
-    },
+    // 'CPA': () => {
+    //     return (
+    //         <div style={{ background: 'rgba(22, 255, 172, 0.1)', color: '#16FFAC', border: '1px solid #16FFAC' }}>
+    //             CPA
+    //         </div>
+    //     )
+    // },
     'Revshare': () => {
         return (
             <div style={{ background: 'rgba(255, 22, 190, 0.26)', color: '#FF16BE', border: '1px solid #FF16BE' }}>

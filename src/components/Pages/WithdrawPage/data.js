@@ -132,14 +132,15 @@ export const drawers = {
                 id: 'amount',
                 title: 'Amount:',
                 generateField: ({ onChange }) => {
+                    const [availableMain, availableFractional] = props.available.toString().split('.')
                     return (
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            <Input placeholder='0.000000000' onChange={onChange} onChangeValue={(value)=>value.replace(/\D/,'')} />
+                            <Input placeholder='0.000000000' onChange={onChange} onChangeValue={(value)=>value.replace(/[^0-9|\.]/,'')} />
                             <span style={{ 
                                 backgroundColor: '#2D313D', color: 'rgba(255, 255, 255, 0.4)', height: '40px', minWidth: '100px',
                                 display:'flex', justifyContent: 'center', alignItems: 'center', padding: '10px', fontSize:'13px', 
                             }}>
-                                Available: {props.available}
+                                Available: {availableMain}.{availableFractional.slice(0,8)}
                             </span>
                         </div>
                     )    

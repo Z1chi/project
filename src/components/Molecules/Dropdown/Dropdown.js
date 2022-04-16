@@ -13,7 +13,7 @@ export const Dropdown = ({renderSwitcher, renderContent}) => {
         } : () => {}}>
         <div className='dropdown'>
             <div className='dropdown__switcher' onClick={() => {
-                setIsOpened(isOpenedStatus => !isOpenedStatus)
+                setIsOpened(!isOpened)
             }}>
                 {
                     renderSwitcher({isOpened, setIsOpened})
