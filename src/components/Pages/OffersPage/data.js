@@ -3,9 +3,9 @@ import React from "react";
 import {OfferPaymentParam} from "../../Atoms/OfferPaymentParam/OfferPaymentParam";
 
 export const offerTypeNameList = {
-    0: 'CPA:',
+    // 0: 'CPA:',
     1: 'Revshare:',
-    2: 'CPA, Revshare:',
+    // 2: 'CPA, Revshare:',
 };
 
 export const paymentParamsConfig = {
@@ -24,7 +24,7 @@ export const paymentParamsConfig = {
                             typeName?.slice(0, -1)
                         ]}
                     />
-                    {(type === 0 || type === 2) &&
+                    {/* {(type === 0 || type === 2) &&
                     <OfferPaymentParam
                         isMobile={isMobile}
                         param=
@@ -42,7 +42,7 @@ export const paymentParamsConfig = {
                             </span>
                             ]}
 
-                    />}
+                    />} */}
                     {(type === 1 || type === 2) &&
                     <OfferPaymentParam
                         isMobile={isMobile}

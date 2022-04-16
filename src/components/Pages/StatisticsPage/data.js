@@ -45,7 +45,7 @@ export const filters = [{
     width: '154px',
     renderItem: (item) => (
         <div style={{display: 'flex', alignItems: 'center', }}>
-            <img src={item.image}  alt='image'/>
+            <img src={item.image}  alt=''/>
             <span style={{marginLeft: '10px'}}>{item.title}</span>
         </div>
     ),
@@ -153,14 +153,16 @@ export const table = {
         groupId: 'Deposits',
         
         renderRowItem: (item) => currencyFormator(item),
-    }, {
-        columnId: 'profit_cpa',
-        columnName: 'CPA',
-        columnWidth: '100px',
-        groupId: 'Profit',
+    }, 
+    // {
+    //     columnId: 'profit_cpa',
+    //     columnName: 'CPA',
+    //     columnWidth: '100px',
+    //     groupId: 'Profit',
         
-        renderRowItem: (item) => currencyFormator(item),
-    }, {
+    //     renderRowItem: (item) => currencyFormator(item),
+    // }, 
+    {
         columnId: 'profit_revshare',
         columnName: 'REVSHARE',
         columnWidth: '100px',
