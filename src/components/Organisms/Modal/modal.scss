@@ -11,6 +11,11 @@
   align-items: center;
   z-index: 2001;
 
+  .dropdown__content {
+    top: 40px;
+    left: 0;
+  }
+
   &__window {
     border-radius: 5px;
     width: 100%;

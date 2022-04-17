@@ -163,6 +163,7 @@ export const drawers = {
         subtitle: props.subTitle,
         fieldRows: [
             [{
+                isRequired: true,
                 id: 'project',
                 title: 'Select Offer',
                 placeholder: 'Select Offer...',
@@ -177,6 +178,7 @@ export const drawers = {
             }],
 
             [{
+                isRequired: true,
                 id: 'title',
                 title: 'Name',
                 placeholder: 'Type name...',
@@ -184,6 +186,7 @@ export const drawers = {
             }],
 
             [{
+                isRequired: true,
                 id: 'format',
                 title: 'Format',
                 placeholder: 'Select format...',

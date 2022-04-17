@@ -3,8 +3,8 @@ import React from "react";
 import {OfferPaymentParam} from "../../Atoms/OfferPaymentParam/OfferPaymentParam";
 
 export const offerTypeNameList = {
-    // 0: 'CPA:',
-    1: 'Revshare:',
+    0: 'Revshare:',
+    // 1: 'CPA:',
     // 2: 'CPA, Revshare:',
 };
 

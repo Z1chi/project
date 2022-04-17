@@ -10,5 +10,9 @@
 
     &__input {
         margin-top: 15px;
+
+        &--required {
+            border: 1px solid #b21;
+        }
     }
 }
