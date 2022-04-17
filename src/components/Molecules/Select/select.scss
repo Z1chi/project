@@ -39,6 +39,8 @@
     }
 
     &__options {
+        max-height: 30vh;
+        overflow-y: scroll;
 
         &Item {
             padding: 8px 24px 8px 15px;

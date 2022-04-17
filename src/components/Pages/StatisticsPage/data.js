@@ -165,14 +165,14 @@ export const table = {
     {
         columnId: 'profit_revshare',
         columnName: 'REVSHARE',
-        columnWidth: '100px',
+        columnWidth: '150px',
         groupId: 'Profit',
         
         renderRowItem: (item) => currencyFormator(item),
     }, {
         columnId: 'profit_sum',
         columnName: 'SUM',
-        columnWidth: '100px',
+        columnWidth: '150px',
         isGroupEnd: true,
         groupId: 'Profit',
         

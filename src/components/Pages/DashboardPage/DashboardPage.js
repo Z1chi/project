@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {useQuery} from 'react-query';
+import { useAtom } from '@reatom/react';
 
 import {InfoCard} from '../../Molecules/InfoCard/InfoCard';
 import {BarChart} from '../../Organisms/BarChart/BarChart';
@@ -11,15 +12,40 @@ import request from '../../../api/request';
 import './dashboardPage.scss';
 
 import {getGraphicsConfig, statistics, table,} from './data';
+import { filterAtom } from '../../../store/Filter';
+import {convertToQueryString} from '../../../helpers/lib';
 
 export const DashboardPage = () => {
+    const [filterData, filterActions] = useAtom(filterAtom)
+    const [pushTableData, setPushTableData] = useState(false);
+    const [pageIndex, setPageIndex] = useState(1);
+    const [tableData, setTableData] = useState({table: [], last_page: null});
+
+    useEffect(() => {
+        filterActions.reset();
+    }, []);
 
     const dashboardQuery = useQuery(['dashboard'], async () => {
         return request(`dashboard/get-graphics`).then((res) => res.data);
     });
 
     const dashboardTableQuery = useQuery(['dashboard-table'], async () => {
-        return request(`/action-log/get-list`).then((res) => res.data);
+
+        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex})}`).then(res => {
+            console.log('r',res)
+            if (res) {
+                setTableData({
+                    ...res.data,
+                    table: pushTableData ? [
+                        ...tableData.table,
+                        ...res.data.table,
+                    ] : res.data.table
+                })
+            }
+
+            return res.data
+        })
+        
     });
 
     return (
@@ -57,12 +83,17 @@ export const DashboardPage = () => {
                                 }
                             </div>
                             {
-                                dashboardTableQuery.data &&
-
                                 <div className='dashboardPage__table'>
                                     {
-                                        dashboardTableQuery.data &&
-                                        <Table {...table} data={dashboardTableQuery.data.table}/>
+                                        <Table 
+                                        hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                        fetchMore={() => {
+                                            setPageIndex(pageIndex + 1);
+                                            setPushTableData(true)
+                                        }}
+                                        {...table}
+                                        data={tableData.table}
+                                        />
                                         // : <History historyList={dashboardTableQuery.data.table} />
                                     }
                                 </div>

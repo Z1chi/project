@@ -9,8 +9,8 @@ const renderField = ({type, generateField}) => (props) => {
     return Component ? <Component {...props} /> : generateField(props);
 };
 
-export const FormField = ({ mobileTitle, type, generateField, ...props }) => {
-
+export const FormField = ({ mobileTitle, isRequired, type, generateField, ...props }) => {
+    console.log('p', props)
     return (
         <div className='formField'>
             <div className='formField__header'>
@@ -27,7 +27,7 @@ export const FormField = ({ mobileTitle, type, generateField, ...props }) => {
                     )
                 }
             </div>
-            <div className='formField__input'>
+            <div className={`formField__input ${(isRequired&&!props.stateData[props.id])?' formField__input--required':''}`}>
             {
                 renderField(
                     { type, generateField }
