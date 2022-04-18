@@ -6,7 +6,7 @@ import {Button} from '../../Atoms/Button/Button';
 
 import './tableEmpty.scss';
 
-export const TableEmpty = ({icon, text, button, link}) => {
+export const TableEmpty = ({icon, text, button, link, loader: Loader}) => {
     return (
         <div className='tableEmpty'>
             <div className='tableEmpty__icon'>
@@ -14,6 +14,7 @@ export const TableEmpty = ({icon, text, button, link}) => {
             </div>
             <div className='tableEmpty__text'>
                 <p>{text}</p>
+                { Loader && <Loader /> }
             </div>
 
             {button && <div className='tableEmpty__button'>

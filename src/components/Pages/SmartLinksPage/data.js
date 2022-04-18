@@ -361,7 +361,7 @@ export const drawers = {
                         }}
                                 onClick={() => props.onDelete({itemId})}
                         >
-                            Delete offer
+                            Delete smartlink
                         </Button>
                     )
                 }

@@ -16,7 +16,10 @@
     },
     "change": "Change",
     "updateButton": "Update avatar",
-    "download": "Download now"
+    "download": "Download now",
+    "table": {
+      "loading": "Loading data..."
+    }
   },
   "smartLinks": {
     "emptyTable": "Smartlinks will appear here immediately after you create the first SmartLink",
@@ -40,6 +43,7 @@
     "totalBalance": "Total Balance",
     "drawer": {
       "min": "Min withdraw is at least",
+      "walletAddress": "Bitcoin address does not exist:",
       "title": "Withdraw fund",
       "subtitle": "Please make sure all information is correct (including your wallet address and requested amount). The transaction cannot be canceled or altered. Unfortunately, we cannot fix it if you entered the wrong wallet address.",
       "button": "Withdraw",

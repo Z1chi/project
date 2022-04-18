@@ -6,9 +6,17 @@ import {TableEmpty} from '../../Molecules/TableEmpty/TableEmpty';
 
 import './table.scss';
 
-export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, hasMore}) => {
+export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, hasMore, isLoading}) => {
 
     const [verticalScroll, setVerticalScroll] = useState(0);
+
+    if(isLoading) {
+        return (
+            <div className='table'>
+                <TableEmpty {...emptyTable} text='Loading data' />
+            </div>
+        )
+    }
 
     return (
         <div className='table'>
