@@ -10,7 +10,6 @@ const renderField = ({type, generateField}) => (props) => {
 };
 
 export const FormField = ({ mobileTitle, isRequired, type, generateField, ...props }) => {
-    console.log('p', props)
     return (
         <div className='formField'>
             <div className='formField__header'>

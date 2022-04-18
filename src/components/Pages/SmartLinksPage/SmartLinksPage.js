@@ -24,10 +24,13 @@ import createSmartLink from '../../Organisms/Drawer/images/close.svg';
 
 import './smartLinksPage.scss';
 import {images} from "./images";
+import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
+import { LoadingTemplate } from '../../Templates/LoadingTemplate/LoadingTemplate';
+import { Loader } from '../../Atoms/Loader/Loader';
 
 
 export const SmartLinksPage = () => {
-    const [tableData, setTableData] = useState({table: [], last_page: null});
+    const [tableData, setTableData] = useState(null);
     const [pageIndex, setPageIndex] = useState(1);
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
@@ -84,8 +87,6 @@ export const SmartLinksPage = () => {
         smartlinkFiltersQueryList[1].data || []
     ];
     const filterMobile = width <= 820;
-    
-    
 
     return (
         <div className='smartLinksPage'>
@@ -108,7 +109,7 @@ export const SmartLinksPage = () => {
                                         data: {
                                             title: data.stateData.title,
                                             project_id: data.stateData.project.id,
-                                            format: data.stateData.format.find(item => item.isSelected).id
+                                            format: data.stateData.format.find ? data.stateData.format.find(item => item.isSelected).id : data.stateData.format.id
                                         },
                                     }).then((res) => {
                                         alertActions.open({
@@ -123,6 +124,10 @@ export const SmartLinksPage = () => {
                                 onDelete: () => {
                                     modalActions.open(
                                         modalDelete({
+                                            title: contentData.data.smartLinks.delete.title,
+                                            subtitle: contentData.data.smartLinks.delete.subtitle,
+                                            confirm: contentData.data.smartLinks.delete.confirm,
+                                            back: contentData.data.smartLinks.delete.back,
                                             onSubmit: () => {
                                                 request(`smartlink/delete/${itemId}`, {method: 'delete',}).then((res) => {
                                                     drawerActions.close();
@@ -207,7 +212,9 @@ export const SmartLinksPage = () => {
                                         }
                                     </div>
                                     : <div className='smartLinksPage__table'>
-                                        <Table {...table}
+                                        {
+                                            tableData
+                                            ? <Table {...table}
                                                emptyTable={{
                                                    icon: images.emptyTableIcon,
                                                    text: contentData.data.smartLinks.emptyTable,
@@ -241,7 +248,10 @@ export const SmartLinksPage = () => {
                                                             },
                                                         })
                                                     ),
-                                               })} data={tableData.table}/>
+                                               })} data={tableData.table}
+                                            />
+                                            : <TableEmpty loader={Loader} />
+                                        }
                                     </div>
                             }
                         </div>

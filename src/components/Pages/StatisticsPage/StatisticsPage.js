@@ -6,6 +6,7 @@ import request from "../../../api/request";
 import {Table} from '../../Organisms/Table/Table';
 import {Filter} from '../../Organisms/Filter/Filter';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
+import { Loader } from '../../Atoms/Loader/Loader'
 
 import {filters, filterFormators, table} from './data';
 import {filterAtom} from '../../../store/Filter';
@@ -101,23 +102,27 @@ export const StatisticsPage = () => {
                                         }/>
                             </div>
                             <div className='statisticsPage__table'>
-                                <Table
-                                    hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                    fetchMore={() => {
-                                        setPageIndex(pageIndex + 1);
-                                        setPushTableData(true)
-                                    }}
-                                    {...table}
-                                    data={tableData.table}
-                                    emptyTable={{
-                                        icon: images.emptyTableIcon,
-                                        text:contentData.data.statistics.emptyTable ,
-                                        button: {
-                                            text: 'Explore offers',
-                                            link: '/offers',
-                                        }
-                                    }}
-                                />
+                                {
+                                    tableData
+                                    ? <Table
+                                        hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                        fetchMore={() => {
+                                            setPageIndex(pageIndex + 1);
+                                            setPushTableData(true)
+                                        }}
+                                        {...table}
+                                        data={tableData.table}
+                                        emptyTable={{
+                                            icon: images.emptyTableIcon,
+                                            text:contentData.data.statistics.emptyTable ,
+                                            button: {
+                                                text: 'Explore offers',
+                                                link: '/offers',
+                                            }
+                                        }}
+                                    />
+                                    : <TableEmpty loader={Loader} />
+                                }
                             </div>
 
                         </div>

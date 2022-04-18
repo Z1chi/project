@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useQuery} from 'react-query';
 import {useAtom} from '@reatom/react';
 import {useResizeDetector} from "react-resize-detector";
+import {validate} from 'bitcoin-address-validation';
 import request from '../../../api/request';
 
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
@@ -11,6 +12,7 @@ import {Filter} from '../../Organisms/Filter/Filter';
 import {Table} from '../../Organisms/Table/Table';
 import {Drawer} from '../../Organisms/Drawer/Drawer';
 import {Button} from '../../Atoms/Button/Button';
+import {Loader} from '../../Atoms/Loader/Loader';
 
 import {drawerAtom} from '../../../store/Drawer';
 import {modalAtom} from '../../../store/Modal';
@@ -30,7 +32,7 @@ export const WithdrawPage = () => {
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(0);
-    const [tableData, setTableData] = useState({table: [], last_page: null});
+    const [tableData, setTableData] = useState(null);
 
     const [, alertActions] = useAtom(alertAtom);
     const [filterData, filterActions] = useAtom(filterAtom);
@@ -115,9 +117,16 @@ export const WithdrawPage = () => {
                                                     //     });
                                                     //     return;
                                                     // } else
-                                                     if (amount < res.data.minWithdraw) {
+                                                    if (amount < res.data.minWithdraw) {
                                                         alertActions.open({
                                                             message: `${contentData.data.withdraw.drawer.min} ${res.data.minWithdraw}`,
+                                                            type: 'ALERT/ERROR',
+                                                        });
+                                                        return;
+                                                    }
+                                                    if(!validate(res.data.walletAddress)) {
+                                                        alertActions.open({
+                                                            message: `${contentData.data.withdraw.drawer.walletAddress} ${data.walletAddress}`,
                                                             type: 'ALERT/ERROR',
                                                         });
                                                         return;
@@ -175,22 +184,26 @@ export const WithdrawPage = () => {
                                 (tableData.table) &&
                                 (width > 480
                                     ? <div className='withdrawPage__table'>
-                                        <Table {...table}
-                                            emptyTable={{
-                                                icon: emptyTableIcon,
-                                                text: contentData.data.withdraw.emptyTable,
-                                                button: {
-                                                    text: 'Explore offers',
-                                                    link: '/offers',
-                                                }
-                                            }}
-                                            hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                            fetchMore={() => {
-                                                setPageIndex(pageIndex + 1);
-                                                setPushTableData(true)
-                                            }}
-                                            data={tableData.table}
-                                        />
+                                        {
+                                            tableData
+                                            ? <Table {...table}
+                                                emptyTable={{
+                                                    icon: emptyTableIcon,
+                                                    text: contentData.data.withdraw.emptyTable,
+                                                    button: {
+                                                        text: 'Explore offers',
+                                                        link: '/offers',
+                                                    }
+                                                }}
+                                                hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                                fetchMore={() => {
+                                                    setPageIndex(pageIndex + 1);
+                                                    setPushTableData(true)
+                                                }}
+                                                data={tableData.table}
+                                            />
+                                            : <TableEmpty loader={Loader} />
+                                        }
                                     </div>
                                     : <div>
                                         {

@@ -16,6 +16,8 @@ import request from '../../../api/request';
 import './actionLogsPage.scss';
 import {useResizeDetector} from "react-resize-detector";
 import {images} from "./images";
+import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
+import { Loader } from '../../Atoms/Loader/Loader';
 
 
 export const ActionLogsPage = () => {
@@ -24,7 +26,7 @@ export const ActionLogsPage = () => {
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
-    const [tableData, setTableData] = useState({table: [], last_page: null});
+    const [tableData, setTableData] = useState(null);
     const {width, ref} = useResizeDetector();
     useEffect(() => {
         filterActions.reset();
@@ -117,7 +119,8 @@ export const ActionLogsPage = () => {
                                 </div>
                                 <div className='actionLogsPage__tableData'>
                                     {
-                                        <Table
+                                        tableData
+                                        ? <Table
                                             hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
                                             fetchMore={() => {
                                                 setPageIndex(pageIndex + 1);
@@ -135,6 +138,7 @@ export const ActionLogsPage = () => {
                                             data={tableData.table}
 
                                         />
+                                        : <TableEmpty loader={Loader} />
                                     }
                                 </div>
                             </div>

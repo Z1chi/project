@@ -14,12 +14,14 @@ import './dashboardPage.scss';
 import {getGraphicsConfig, statistics, table,} from './data';
 import { filterAtom } from '../../../store/Filter';
 import {convertToQueryString} from '../../../helpers/lib';
+import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
+import { Loader } from '../../Atoms/Loader/Loader';
 
 export const DashboardPage = () => {
     const [filterData, filterActions] = useAtom(filterAtom)
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
-    const [tableData, setTableData] = useState({table: [], last_page: null});
+    const [tableData, setTableData] = useState(null);
 
     useEffect(() => {
         filterActions.reset();
@@ -32,7 +34,6 @@ export const DashboardPage = () => {
     const dashboardTableQuery = useQuery(['dashboard-table'], async () => {
 
         return request(`/action-log/get-list?${convertToQueryString({page: pageIndex})}`).then(res => {
-            console.log('r',res)
             if (res) {
                 setTableData({
                     ...res.data,
@@ -85,15 +86,17 @@ export const DashboardPage = () => {
                             {
                                 <div className='dashboardPage__table'>
                                     {
-                                        <Table 
-                                        hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                        fetchMore={() => {
-                                            setPageIndex(pageIndex + 1);
-                                            setPushTableData(true)
-                                        }}
-                                        {...table}
-                                        data={tableData.table}
+                                        tableData
+                                        ? <Table 
+                                            hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                            fetchMore={() => {
+                                                setPageIndex(pageIndex + 1);
+                                                setPushTableData(true)
+                                            }}
+                                            {...table}
+                                            data={tableData.table}
                                         />
+                                        : <TableEmpty loader={Loader} />
                                         // : <History historyList={dashboardTableQuery.data.table} />
                                     }
                                 </div>

@@ -11,6 +11,10 @@
       }
   }
 
+  .table__data {
+    max-height: 70vh;
+  }
+
   &__statistics {
     background-color: #131826;
     display: flex;
