@@ -136,7 +136,7 @@ export const drawers = {
                                 backgroundColor: '#2D313D', color: 'rgba(255, 255, 255, 0.4)', height: '40px', minWidth: '100px',
                                 display:'flex', justifyContent: 'center', alignItems: 'center', padding: '10px', fontSize:'13px', 
                             }}>
-                                Available: {availableMain}.{availableFractional.slice(0,8)}
+                                Available: {availableMain}{availableFractional ? `.${availableFractional.slice(0,8)}` : ''}
                             </span>
                         </div>
                     )    
