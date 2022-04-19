@@ -132,7 +132,7 @@ export const WithdrawPage = () => {
                                                         });
                                                         return;
                                                     }
-                                                    if(!validate(res.data.walletAddress)) {
+                                                    if(!validate(data.walletAddress)) {
                                                         alertActions.open({
                                                             message: `${contentData.data.withdraw.drawer.walletAddress} ${data.walletAddress}`,
                                                             type: 'ALERT/ERROR',
