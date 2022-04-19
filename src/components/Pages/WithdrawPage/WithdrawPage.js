@@ -13,6 +13,7 @@ import {Table} from '../../Organisms/Table/Table';
 import {Drawer} from '../../Organisms/Drawer/Drawer';
 import {Button} from '../../Atoms/Button/Button';
 import {Loader} from '../../Atoms/Loader/Loader';
+import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
 
 import {drawerAtom} from '../../../store/Drawer';
 import {modalAtom} from '../../../store/Modal';
@@ -181,8 +182,7 @@ export const WithdrawPage = () => {
                                 />
                             </div>
                             {
-                                (tableData.table) &&
-                                (width > 480
+                                width > 480
                                     ? <div className='withdrawPage__table'>
                                         {
                                             tableData
@@ -207,7 +207,7 @@ export const WithdrawPage = () => {
                                     </div>
                                     : <div>
                                         {
-                                            tableData.table.map((item, key) => {
+                                            tableData && tableData.table.map((item, key) => {
                                                 return (
                                                     <div className='withdrawPage__tableCard' key={key} style={{width}}>
                                                         <WithdrawCard fields={item} config={table.tableConfig}/>
@@ -215,7 +215,7 @@ export const WithdrawPage = () => {
                                                 )
                                             })
                                         }
-                                    </div>)
+                                    </div>
                             }
                         </div>
                     )
