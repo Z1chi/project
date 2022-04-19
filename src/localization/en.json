@@ -96,6 +96,23 @@
     "alertSettings": {
       "success": "Your settings are successfully updated.",
       "error": "An error occurred. Please try again later or contact support."
+    },
+    "profileErrors": {
+      "name": {
+        "empty": "Enter fullname or nickname",
+        "length": "Name must be at least 2 symbols long",
+        "regex": "Only letters and numbers allowed"
+      },
+      "walletAddress": {
+        "empty": "Enter bitcoin address",
+        "regex": "Invalid bitcoin address"
+      },
+      "password": {
+        "empty": "Enter new password",
+        "length": "Password must be at least 12 symbols long",
+        "repeatNew": "Confirm new password",
+        "match": "Passwords do not match"
+      }
     }
   },
   "faq": {

@@ -27,14 +27,14 @@ export const getProfileSettingsConfig = ({currencyList, initialCurrency, changeC
             formValidator: (values) => {
                 const errors = {};
                 if (!values[profileSettingsFieldTypeList.new]) {
-                    errors[profileSettingsFieldTypeList.new] = 'Enter fullname or nickname';
+                    errors[profileSettingsFieldTypeList.new] = settingsPage.profileErrors.name.empty
                     return errors;
                 }
                 if (values[profileSettingsFieldTypeList.new].length < 2) {
-                    errors[profileSettingsFieldTypeList.new] = 'Name must be at least 2 symbols long'
+                    errors[profileSettingsFieldTypeList.new] = settingsPage.profileErrors.name.length
                 }
                 if (!values[profileSettingsFieldTypeList.new].match(new RegExp(/^[a-z0-9\s]+$/i))) {
-                    errors[profileSettingsFieldTypeList.new] = 'Only letters and numbers allowed'
+                    errors[profileSettingsFieldTypeList.new] = settingsPage.profileErrors.name.regex
                 }
                 return errors;
             },
@@ -53,10 +53,11 @@ export const getProfileSettingsConfig = ({currencyList, initialCurrency, changeC
             formValidator: (values) => {
                 const errors = {};
                 if (!values[profileSettingsFieldTypeList.new]) {
-                    return;
+                    errors[profileSettingsFieldTypeList.new] = settingsPage.profileErrors.walletAddress.empty
+                    return errors;
                 }
                 if (!validate(values[profileSettingsFieldTypeList.new])) {
-                    errors[profileSettingsFieldTypeList.new] = 'Invalid bitcoin address'
+                    errors[profileSettingsFieldTypeList.new] = settingsPage.profileErrors.walletAddress.regex
                 }
                 return errors;
             },
@@ -80,15 +81,20 @@ export const getProfileSettingsConfig = ({currencyList, initialCurrency, changeC
                 const errors = {};
 
                 if (!values[profileSettingsFieldTypeList.new]) {
-                    errors[profileSettingsFieldTypeList.new] = 'Enter new password'
+                    errors[profileSettingsFieldTypeList.new] = settingsPage.profileErrors.password.empty
+                    return errors;
+                }
+
+                if(values[profileSettingsFieldTypeList.new].length < 12) {
+                    errors[profileSettingsFieldTypeList.new] = settingsPage.profileErrors.password.length
                 }
 
                 if (!values[profileSettingsFieldTypeList.repeatNew]) {
-                    errors[profileSettingsFieldTypeList.repeatNew] = 'Confirm new password'
+                    errors[profileSettingsFieldTypeList.repeatNew] = settingsPage.profileErrors.password.repeatNew
                 }
 
                 if (values[profileSettingsFieldTypeList.new] !== values[profileSettingsFieldTypeList.repeatNew]) {
-                    errors[profileSettingsFieldTypeList.repeatNew] = 'Passwords do not match'
+                    errors[profileSettingsFieldTypeList.repeatNew] = settingsPage.profileErrors.password.match
                 }
                 return errors;
             },

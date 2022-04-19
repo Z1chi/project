@@ -26,7 +26,7 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
                     onChange={e => {
                         const res = onChangeValue(e.target.value);
                         setInputValue(res);
-                        fieldData.onChange && fieldData.onChange({...e, target: {...target, value: res}})
+                        fieldData.onChange && fieldData.onChange({...e, target: {...e.target, value: res}})
                     }}
                     onBlur={(e)=>{
                         onChange(inputValue)
