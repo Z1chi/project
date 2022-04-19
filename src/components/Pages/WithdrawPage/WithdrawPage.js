@@ -84,7 +84,7 @@ export const WithdrawPage = () => {
     return (
         <div className='withdrawPage'>
             <PageTemplate
-                renderPage={({width, contentData}) => {
+                renderPage={({width, contentData,}) => {
                     return (
                         <div className='withdrawPage__content'>
                             <div className='withdrawPage__statistics'>
@@ -103,7 +103,7 @@ export const WithdrawPage = () => {
                                     <Button onClick={() => {
                                         request('/withdraw/get-address-info').then(res => {
                                             drawerActions.open(drawers.withdraw({
-                                                title :contentData.data.withdraw.drawer.title,
+                                                title: contentData.data.withdraw.drawer.title,
                                                 subtitle: contentData.data.withdraw.drawer.subtitle,
                                                 withdrawButton: contentData.data.withdraw.drawer.button,
                                                 available: res.data.balance,
