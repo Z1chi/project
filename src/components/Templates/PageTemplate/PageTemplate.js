@@ -32,9 +32,11 @@ export const PageTemplate = ({renderPage}) => {
 
     const profileQuery = useQuery(['profile', languageData.language], () => {
         return request('/profile/get-data').then(res => {
+            if(res.exception) {
+                window.location.href = `${process.env.MEDIA_URL}/mngr/`;
+            }
             const data = res.data;
             const language = data.language;
-
             language && language !== languageData.language &&
             languageActions.setLanguage({
                 language: language,

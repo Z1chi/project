@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import { useAtom } from '@reatom/react';
 
 import {Backdrop} from '../../Atoms/Backdrop/Backdrop';
@@ -11,8 +11,21 @@ import { drawerAtom } from '../../../store/Drawer';
 
 import './drawer.scss';
 
+const getOnEscClose = onClose => e => {
+    if (e.key === "Escape") {
+        onClose();
+    }
+}
+
 export const Drawer = ({ data, onClose, logo, title, subtitle, fieldRows, }) => {
     const [drawerData, drawerActions] = useAtom(drawerAtom);
+
+    useEffect( () => {
+        const onEscClose = getOnEscClose(onClose);
+        document.addEventListener("keydown", onEscClose, false);
+          
+        return () => document.removeEventListener("keydown", onEscClose, false);
+    }, [])
 
     return (
         <>
