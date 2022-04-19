@@ -5,7 +5,7 @@ import { images } from './images';
 
 import './input.scss';
 
-export const Input = ({ type = 'text', value, hasError, error, placeholder, isNotChangeable=false, onChange=()=>{}, onChangeValue=(value)=>value, canCopy, onCopy, fieldData={},}) => {
+export const Input = ({ required, type = 'text', value, hasError, error, placeholder, isNotChangeable=false, onChange=()=>{}, onChangeValue=(value)=>value, canCopy, onCopy, fieldData={},}) => {
 
     const [inputValue, setInputValue] = useState('');
 
@@ -14,7 +14,7 @@ export const Input = ({ type = 'text', value, hasError, error, placeholder, isNo
     }, [value])
 
     return (
-        <div className='customInput'>
+        <div className={`customInput ${required && !inputValue ? ' customInput--required':''}`}>
             <div className='customInput__field'>
                 <input
                     className='customInput__input'
