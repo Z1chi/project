@@ -74,6 +74,10 @@ export const WithdrawPage = () => {
         return request('withdraw/get-statuses').then(res => res.data);
     });
 
+    const balanceQuery = useQuery(['withdraw-balance'], () => {
+        return request('withdraw/get-address-info').then(res => res.data);
+    });
+
     const filtersData = [
         [],
         [],
@@ -90,10 +94,13 @@ export const WithdrawPage = () => {
                             <div className='withdrawPage__statistics'>
                                 <div className='withdrawPage__cards'>
                                     {
-                                        statistics.map((item ,key) => {
+                                        balanceQuery.data && statistics.map((item ,key) => {
                                             return (
                                                 <div key={key} className='withdrawPage__cardsItem'>
-                                                    <InfoCard {...item}  title={contentData.data.withdraw.totalBalance} />
+                                                    <InfoCard {...item} 
+                                                        title={contentData.data.withdraw.totalBalance} 
+                                                        value={{amount: `${balanceQuery.data.balance} ₿`}} 
+                                                    />
                                                 </div>
                                             )
                                         })

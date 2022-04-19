@@ -12,11 +12,6 @@ import emptyTableIcon from './images/emptyTable.svg'
 export const statistics = [{
     icon: images.balanceIcon,
     backgroundColor: '#000',
-
-    value: {
-        amount: 0,
-        precision: 8,
-    }
 }];
 
 export const filters = [{
