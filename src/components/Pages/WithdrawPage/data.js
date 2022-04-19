@@ -126,6 +126,7 @@ export const drawers = {
                 title: 'Bitcoin address:', 
                 placeholder: props.walletAddress,
                 type: dropdownTypes.INPUT,
+                value: props.walletAddress,
             }],
 
             [{
@@ -150,10 +151,10 @@ export const drawers = {
             [{
                 generateField: ({ stateData }) => {
                     const button = {};
-                    if(!stateData.walletAddress || !stateData.amount) {
+                    if(!(stateData.walletAddress || props.walletAddress) || !stateData.amount) {
                         button.onClick = () => {}
                     } else {
-                        button.onClick = () => props.onClick(stateData)
+                        button.onClick = () => props.onClick(stateData.walletAddress ? stateData : {...stateData, walletAddress: props.walletAddress})
                     }
                     return (
                         <Button styles={{
@@ -161,7 +162,7 @@ export const drawers = {
                             height: '42px',
 
                         }}
-                                disabled={!stateData.walletAddress || !stateData.amount}
+                            disabled={!(stateData.walletAddress || props.walletAddress) || !stateData.amount}
                             onClick={button.onClick}
                         >
                             {props.withdrawButton}

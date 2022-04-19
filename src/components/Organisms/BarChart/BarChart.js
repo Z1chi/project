@@ -47,7 +47,6 @@ import './barChart.scss';
         }
     };
 export const BarChart = ({ data }) => {
-    console.log(data.bars[0])
     const maxValue = Math.max.apply(null, data.bars.map( item => item.data).flat());
 
     const leftMargin = ( Math.max(...data.bars[0].data.map(item => getFormattedTick(item.y))) ).toString().length * 16 + 20;
