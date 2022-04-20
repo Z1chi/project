@@ -63,24 +63,30 @@ export const table = {
     groups: [{
         id: 'Time',
         width: '150px',
+        columnCount: 1,
     }, {
         id: 'Clicks',
         width: '300px',
+        columnCount: 3,
     }, {
         id: 'Leads',
         width: '300px',
+        columnCount: 3,
     }, {
         id: 'Deposits',
         info: true,
         width: '400px',
+        columnCount: 4,
     }, {
         id: 'Profit',
         info: true,
         width: '300px',
+        columnCount: 2,
     }, {
         id: 'Withdraw',
         info: true,
         width: '300px',
+        columnCount: 3,
     }],
     tableConfig: [{
         columnId: 'date',

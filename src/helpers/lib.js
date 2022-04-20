@@ -88,10 +88,13 @@ export const dateStringFormator = (dateTimeString) => {
 };
 
 export const dateObjToString = ({ from, to }) => {
-    const fromString = from ? `${monthArr[from.month]} ${from.day.toString().padStart(2, '0')}, ${from.year}` : '';
-    const toString = to ? ` - ${monthArr[to.month]} ${to.day.toString().padStart(2, '0')}, ${to.year}` : '';
+    const fromDateString = from ? `${from.month.toString().padStart(2, '0')}/${from.day.toString().padStart(2, '0')}/${from.year.toString().slice(2,4)}` : '';
+    const toDateString = to ? ` - ${to.month.toString().padStart(2, '0')}/${to.day.toString().padStart(2, '0')}/${to.year.toString().slice(2,4)}` : '';
 
-    return `${fromString} ${toString}`
+    // const fromString = from ? `${monthArr[from.month]} ${from.day.toString().padStart(2, '0')}, ${from.year}` : '';
+    // const toString = to ? ` - ${monthArr[to.month]} ${to.day.toString().padStart(2, '0')}, ${to.year}` : '';
+
+    return `${fromDateString}${(toDateString&&toDateString!==fromDateString)?toDateString:''}`
 }
 
 export const dateFormator = (dateObject) => {

@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 
 import { fieldComponentsList } from '../../../constants/field';
 
@@ -10,6 +10,9 @@ const renderField = ({type, generateField}) => (props) => {
 };
 
 export const FormField = ({ mobileTitle, isRequired, type, generateField, ...props }) => {
+    useEffect(()=>{
+        
+    },[props.value, props.inputValue])
     return (
         <div className='formField'>
             <div className='formField__header'>

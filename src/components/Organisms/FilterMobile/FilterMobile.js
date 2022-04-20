@@ -47,7 +47,7 @@ const getOnSelectFormators = ({type, matchPropName, options}) => {
     }
 }
 
-export const FilterMobile = ({filters, data, onSave,}) => {
+export const FilterMobile = ({filters, data, onSave, onReset}) => {
 
     const [isOpened, setIsOpened] = useState(false);
     const [filterData, filterActions] = useAtom(filterAtom);
@@ -59,7 +59,7 @@ export const FilterMobile = ({filters, data, onSave,}) => {
                     ? (
                         <>
                             <div className='filterMobile__header'>
-                                <div className='filterMobile__reset'>
+                                <div className='filterMobile__reset' onClick={onReset}>
                                     <div className='filterMobile__resetIcon'>
                                         <SVG src={images.resetIcon}/>
                                     </div>
@@ -85,13 +85,17 @@ export const FilterMobile = ({filters, data, onSave,}) => {
                                                 <FormField {...field}
                                                 value={filterData.fields[field.id] ? onSelectFormators.value(filterData.fields[field.id]) : ''}
                                                 inputValue={filterData.fields[field.id] ? onSelectFormators.inputValue(filterData.fields[field.id]) : ''}
-                                                options={data[index]} 
-                                                    onChange={(value)=>{ 
-                                                        filterActions.setFieldValue({
-                                                            fieldId: field.id,
-                                                            fieldValue: value
-                                                        });
-                                                    }}
+                                                options={filterData.fields[field.id] || data[index]} 
+                                                onChange={(value)=>{ 
+                                                    filterActions.setFieldValue({
+                                                        fieldId: field.id,
+                                                        fieldValue: value
+                                                    });
+                                                }}
+                                                dateSource={filterData.fields[field.id] || {
+                                                    from: null,
+                                                    to: null,
+                                                }}
                                                 />
                                             </div>
                                         )

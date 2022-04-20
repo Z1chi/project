@@ -12,7 +12,7 @@ const getInputValue = ({ fieldValue, value, formatValue }) => {
 
 export const fieldComponentsList = {
     [dropdownTypes.INPUT]: (props) => <Input {...props}  value={getInputValue(props)} />,
-    [dropdownTypes.SELECT]: (props) => <SelectInput {...props} value={(props.fieldValue && props.fieldValue.find) ? props.fieldValue.find(item => {
+    [dropdownTypes.SELECT]: (props) => <SelectInput {...props} value={props.inputValue!==undefined ? props.inputValue : (props.fieldValue && props.fieldValue.find) ? props.fieldValue.find(item => {
         return !!item.isSelected
     }) : props.fieldValue} onCloseCheck={()=>true} />,
     [dropdownTypes.MULTISELECT]: (props) => <SelectInput {...props} SelectComponent={MultiSelect} />,
