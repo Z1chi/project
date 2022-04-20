@@ -146,17 +146,17 @@ export function rowsConfig({contentData}) {
                         {
                             icon: images.avg_deposit,
                             title: contentData.statistic.avgDep,
-                            value: localeString({value: statistic.avg_deposit.amount}).slice(0, -3),
+                            value: `${statistic.avg_deposit.symbol} ${localeString({value: statistic.avg_deposit.amount})}`,
                         },
                         {
                             icon: images.deposits,
                             title: contentData.statistic.recordDep,
-                            value: localeString({value: statistic.deposits}).slice(0, -3),
+                            value: `${statistic.deposits.symbol} ${localeString({value: statistic.deposits.amount})}`,
                         },
                         {
                             icon: images.avg_turnover,
                             title: contentData.statistic.avgTurnover,
-                            value: localeString({value: statistic.avg_turnover.amount}).slice(0, -3),
+                            value: `${statistic.avg_turnover.symbol} ${localeString({value: statistic.avg_turnover.amount})}`,
                         },
                         {
                             icon: images.registrations_amount,

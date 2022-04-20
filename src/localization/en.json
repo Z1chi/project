@@ -190,7 +190,7 @@
         "createDate": "Creation date:",
         "avgDep" : "Avg. deposit:",
         "recordDep": "Deposit record:",
-        "avgTurnover": "Avg. turnover (30d)",
+        "avgTurnover": "Avg. turnover",
         "regAmount": "Registration amount:",
         "depAmount": "Deposit amount:"
 
