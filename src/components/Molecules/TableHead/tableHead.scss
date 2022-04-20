@@ -29,9 +29,12 @@
 
   &__groupItems {
     display: flex;
+    flex-direction: row;
   }
 
   &__group {
+    display: flex;
+    flex-direction: column;
     border-right: 1px solid #282D3A;
     &:last-child {
       border-right: none;

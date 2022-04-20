@@ -9,7 +9,6 @@ import './multiSelect.scss';
 export const MultiSelect = ({ options, matchPropName, renderItem, mobileConfig, onChange, }) => {
     const [searchValue, setSearchValue] = useState('');
     const [optionsSelectable, setOptionsSelectable] = useState(options);
-
     useEffect( () => {
         options && options.length > 0 && setOptionsSelectable(options.map( option => {
             return {

@@ -11,17 +11,30 @@ import {images} from './images';
 import {filterAtom} from '../../../store/Filter';
 
 import './filter.scss';
+import { alertAtom } from '../../../store/Alert';
+import { languageAtom } from '../../../store/language';
 
 export const Filter = ({filters, data, onSave, isMobile}) => {
 
     const [filterData, filterActions] = useAtom(filterAtom);
+    const [alertData, alertActions] = useAtom(alertAtom);
+    const [languageData, languageActions] = useAtom(languageAtom);
 
     return (
         <div className={`filter ${isMobile ? 'filter--Mobile' : ''}`}>
             {
                 isMobile
                     ? (
-                        <FilterMobile filters={filters} data={data} onSave={onSave} />
+                        <FilterMobile filters={filters} data={data} onSave={()=>{
+                            onSave();
+                            alertActions.open({
+                                message: languageData.data.common.filters.success,
+                                type: 'ALERT/SUCCESS',
+                            });
+                        }} onReset={() => {
+                            filterActions.reset();
+                            onSave();
+                        }} />
                     )
                     :
 
@@ -38,7 +51,13 @@ export const Filter = ({filters, data, onSave, isMobile}) => {
                         {
                             Object.values(filterData.fields).some(field => !!field) && <>
                                 <div className='filter__confirm'>
-                                    <Button onClick={() => onSave(filterData.fields)}>
+                                    <Button onClick={() => {
+                                        onSave(filterData.fields)
+                                        alertActions.open({
+                                            message: languageData.data.common.filters.success,
+                                            type: 'ALERT/SUCCESS',
+                                        });
+                                    }}>
                                         Save changes
                                     </Button>
                                 </div>

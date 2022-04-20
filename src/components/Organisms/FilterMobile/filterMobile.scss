@@ -2,6 +2,11 @@
   width: 100%;
   background-color: #262A37;
 
+  .dropdown__content {
+    top: 40px;
+    left: 0;
+  }
+
   &--opened {
     @media (max-width: 480px) {
       padding: 20px;

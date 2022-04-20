@@ -10,6 +10,7 @@ import { filterComponentsList } from '../../../constants/filter';
 import { filterAtom } from '../../../store/Filter';
 
 import { dropdownTypes } from '../../../constants/dropdown';
+import { dateObjToString } from '../../../helpers/lib';
 
 import './filterItem.scss';
 
@@ -30,6 +31,9 @@ const getSelectedValue = ({ type, options, matchPropName }) => {
         case dropdownTypes.MULTISELECT:
             const items = options.filter(item => item.isSelected).length;
             return (items > 0 && items !== options.length) ? `Multiple (${items})` : 'All';
+
+        case dropdownTypes.DATE:
+            return dateObjToString(options)
     }
 }
 

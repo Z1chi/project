@@ -7,7 +7,7 @@ import './select.scss';
 
 export const Select = ({ options, onChange, renderItem=option=>option, mobileConfig }) => {
     
-    const [optionsSelectable, setOptionsSelectable] = useState(options)
+    const [optionsSelectable, setOptionsSelectable] = useState(options);
 
     useEffect( () => {
         options && options.length > 0 && setOptionsSelectable(options.map( (option, key) => {

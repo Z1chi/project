@@ -12,16 +12,16 @@ export const Input = ({ required, type = 'text', value, hasError, error, placeho
     useEffect( ()=>{
         setInputValue(value)
     }, [value])
-
+    
     return (
         <div className={`customInput ${required && !inputValue ? ' customInput--required':''}`}>
             <div className='customInput__field'>
                 <input
                     className='customInput__input'
                     type={type}
-                    value={inputValue}
                     placeholder={placeholder}
                     disabled={isNotChangeable}
+                    value={inputValue}
                     {...fieldData}
                     onChange={e => {
                         const res = onChangeValue(e.target.value);
