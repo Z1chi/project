@@ -52,9 +52,13 @@ export const AvatarEditor = ({onClose}) => {
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then((res) => {
-                    if (res.exception) {
+                    if (typeof res === "string" || res instanceof String) {
+
+                        //TODO fix
+
+                        //Нужно уменьшать размер файла
                         alertActions.open({
-                            message: 'Error text',
+                            message: langData.data.common.avatarToBig,
                             type: 'ALERT/ERROR',
                         })
                     } else {
