@@ -17,6 +17,7 @@
     "change": "Change",
     "updateButton": "Update avatar",
     "download": "Download now",
+    "avatarToBig": "The file weighs too much",
     "table": {
       "loading": "Loading data..."
     }
