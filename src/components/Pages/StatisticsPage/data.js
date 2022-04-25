@@ -82,12 +82,14 @@ export const table = {
         info: true,
         width: '300px',
         columnCount: 2,
-    }, {
-        id: 'Withdraw',
-        info: true,
-        width: '300px',
-        columnCount: 3,
-    }],
+    }, 
+    // {
+    //     id: 'Withdraw',
+    //     info: true,
+    //     width: '300px',
+    //     columnCount: 3,
+    // }
+],
     tableConfig: [{
         columnId: 'date',
         columnName: 'Date',
@@ -183,28 +185,29 @@ export const table = {
         groupId: 'Profit',
         
         renderRowItem: (item) => currencyFormator(item),
-    }, {
-        columnId: 'cpa_pending',
-        columnName: 'Pending',
-        columnWidth: '100px',
-        groupId: 'Withdraw',
+    }, 
+    // {
+    //     columnId: 'cpa_pending',
+    //     columnName: 'Pending',
+    //     columnWidth: '100px',
+    //     groupId: 'Withdraw',
         
-        renderRowItem: (item) => currencyFormator(item),
-    }, {
-        columnId: 'cpa_declined',
-        columnName: 'Decline',
-        columnWidth: '100px',
-        groupId: 'Withdraw',
+    //     renderRowItem: (item) => currencyFormator(item),
+    // }, {
+    //     columnId: 'cpa_declined',
+    //     columnName: 'Decline',
+    //     columnWidth: '100px',
+    //     groupId: 'Withdraw',
         
-        renderRowItem: (item) => currencyFormator(item),
-    }, {
-        columnId: 'cpa_accepted',
-        columnName: 'Accepted',
-        columnWidth: '100px',
-        groupId: 'Withdraw',
+    //     renderRowItem: (item) => currencyFormator(item),
+    // }, {
+    //     columnId: 'cpa_accepted',
+    //     columnName: 'Accepted',
+    //     columnWidth: '100px',
+    //     groupId: 'Withdraw',
 
-        renderRowItem: (item) => currencyFormator(item),
-    },
+    //     renderRowItem: (item) => currencyFormator(item),
+    // },
 
 
     ],
