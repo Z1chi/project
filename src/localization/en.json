@@ -5,6 +5,9 @@
     "logOut": "Log out",
     "changeLanguage": "Language changed",
     "changeLanguageError": "Language not changed",
+    "filters": {
+      "success": "Filters applied"
+    },
     "profileMenu": {
       "profile": {
         "title": "Profile",

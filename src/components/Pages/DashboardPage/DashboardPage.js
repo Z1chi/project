@@ -27,11 +27,11 @@ export const DashboardPage = () => {
         filterActions.reset();
     }, []);
 
-    const dashboardQuery = useQuery(['dashboard'], async () => {
+    const dashboardQuery = useQuery(['dashboard',], async () => {
         return request(`dashboard/get-graphics`).then((res) => res.data);
     });
 
-    const dashboardTableQuery = useQuery(['dashboard-table'], async () => {
+    const dashboardTableQuery = useQuery(['dashboard-table', pageIndex,], async () => {
 
         return request(`/action-log/get-list?${convertToQueryString({page: pageIndex})}`).then(res => {
             if (res) {

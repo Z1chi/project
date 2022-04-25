@@ -4,6 +4,9 @@
     "connect": "Подключить",
     "logOut": "Выйти",
     "changeLanguageError": "Язык не изменен",
+    "filters": {
+      "success": "Фильтры применены"
+    },
     "profileMenu": {
       "profile": {
         "title": "Профиль",

@@ -2,6 +2,10 @@
 
     .table__data {
         max-height: 47vh;
+
+        .tableCell {
+            text-align: center;
+        }
     }
 
     &__balance {
