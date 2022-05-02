@@ -7,6 +7,7 @@ import {Table} from '../../Organisms/Table/Table';
 import {Filter} from '../../Organisms/Filter/Filter';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import { Loader } from '../../Atoms/Loader/Loader'
+import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
 
 import {filters, filterFormators, table} from './data';
 import {filterAtom} from '../../../store/Filter';
