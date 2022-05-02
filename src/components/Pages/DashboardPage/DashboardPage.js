@@ -77,9 +77,9 @@ export const DashboardPage = () => {
                                     </div>
                                 }
                                 {
-                                    dashboardQuery.data && dashboardQuery.data.graphics &&
+                                    dashboardQuery.data && dashboardQuery.data.graphics && 
                                     <div className='dashboardPage__chart'>
-                                        <BarChart data={getGraphicsConfig(dashboardQuery.data.graphics)}/>
+                                        <BarChart isEmpty={dashboardQuery.data.graphics.find(item => !(item.income && item.turnover))} data={getGraphicsConfig(dashboardQuery.data.graphics)}/>
                                     </div>
                                 }
                             </div>

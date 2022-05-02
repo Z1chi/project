@@ -9,9 +9,9 @@ import './tableEmpty.scss';
 export const TableEmpty = ({icon, text, button, link, loader: Loader}) => {
     return (
         <div className='tableEmpty'>
-            <div className='tableEmpty__icon'>
+            { icon && <div className='tableEmpty__icon'>
                 <SVG src={icon}/>
-            </div>
+            </div> }
             <div className='tableEmpty__text'>
                 <p>{text}</p>
                 { Loader && <Loader /> }

@@ -22,7 +22,7 @@ export const StatisticsPage = () => {
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
     const [pageIndex, setPageIndex] = useState(1);
-    const [tableData, setTableData] = useState({table: [], last_page: null});
+    const [tableData, setTableData] = useState(null);
     const {width, ref} = useResizeDetector();
 
     useEffect(() => {

@@ -8,6 +8,7 @@
     "filters": {
       "success": "Filters applied"
     },
+    "emptyChart": "No data to display",
     "profileMenu": {
       "profile": {
         "title": "Profile",
