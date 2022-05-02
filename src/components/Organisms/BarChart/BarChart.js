@@ -1,3 +1,4 @@
+import { useAtom } from '@reatom/react';
 import React from 'react';
 
 import AutoSizer from 'react-virtualized-auto-sizer';
@@ -11,6 +12,9 @@ import {
     VerticalBarSeries,
     // LabelSeries
   } from 'react-vis';
+import { languageAtom } from '../../../store/language';
+
+import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
   
 import './barChart.scss';
 
@@ -46,7 +50,19 @@ import './barChart.scss';
             return Math.round(num);
         }
     };
-export const BarChart = ({ data }) => {
+export const BarChart = ({ data, isEmpty }) => {
+
+    const [languageData, languageActions] = useAtom(languageAtom);
+
+    if(isEmpty) {
+        return (
+            <div className='barChart'>
+                <TableEmpty text={languageData.data.common.emptyChart} />    
+            </div>
+        )
+        
+    }
+
     const maxValue = Math.max.apply(null, data.bars.map( item => item.data).flat());
 
     const leftMargin = ( Math.max(...data.bars[0].data.map(item => getFormattedTick(item.y))) ).toString().length * 16 + 20;
