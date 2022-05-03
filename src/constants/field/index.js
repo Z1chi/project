@@ -1,4 +1,5 @@
 import { Input } from '../../components/Atoms/Input/Input';
+import { Select } from '../../components/Molecules/Select/Select';
 import { MultiSelect } from '../../components/Molecules/MultiSelect/MultiSelect';
 import { Calendar } from '../../components/Organisms/Calendar/Calendar';
 import { SelectInput } from '../../components/Molecules/SelectInput/SelectInput';
@@ -11,7 +12,7 @@ const getInputValue = ({ fieldValue, value, formatValue }) => {
 }
 
 export const fieldComponentsList = {
-    [dropdownTypes.INPUT]: (props) => <Input {...props}  value={getInputValue(props)} />,
+    [dropdownTypes.INPUT]: (props) => <Input {...props} value={getInputValue(props)} />,
     [dropdownTypes.SELECT]: (props) => <SelectInput {...props} value={props.inputValue!==undefined ? props.inputValue : (props.fieldValue && props.fieldValue.find) ? props.fieldValue.find(item => {
         return !!item.isSelected
     }) : props.fieldValue} onCloseCheck={()=>true} />,

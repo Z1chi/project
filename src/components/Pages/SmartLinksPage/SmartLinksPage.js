@@ -13,7 +13,7 @@ import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import {Button} from "../../Atoms/Button/Button";
 
 import request from '../../../api/request';
-import {convertToQueryString} from '../../../helpers/lib';
+import {convertToQueryString, idSelectFormator} from '../../../helpers/lib';
 import {filters, filterFormators, drawers, modalDelete, getTable} from './data';
 
 import {filterAtom} from '../../../store/Filter';
@@ -27,7 +27,6 @@ import {images} from "./images";
 import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
 import { LoadingTemplate } from '../../Templates/LoadingTemplate/LoadingTemplate';
 import { Loader } from '../../Atoms/Loader/Loader';
-
 
 export const SmartLinksPage = () => {
     const [tableData, setTableData] = useState(null);
@@ -108,8 +107,8 @@ export const SmartLinksPage = () => {
                                         method: 'patch',
                                         data: {
                                             title: data.stateData.title,
-                                            project_id: data.stateData.project.id,
-                                            format: data.stateData.format.find ? data.stateData.format.find(item => item.isSelected).id : data.stateData.format.id
+                                            project_id: idSelectFormator({ source: data.stateData.project, propName: 'id' }),
+                                            format: idSelectFormator({ source: data.stateData.format, propName: 'id' }),
                                         },
                                     }).then((res) => {
                                         alertActions.open({
@@ -137,7 +136,14 @@ export const SmartLinksPage = () => {
                                             },
                                         })
                                     )
-                                }
+                                },
+                                onCopy: () => {
+                                    alertActions.open({
+                                        type: 'ALERT/SUCCESS',
+                                        message: contentData.data.smartLinks.copy,
+                                    });
+                                    drawerActions.close();
+                                },
                             }));
                         const smartlinkItem = smartLinksQuery.data.table.find(item => item.id === itemId);
                         drawerActions.setFieldValues(smartlinkItem)
