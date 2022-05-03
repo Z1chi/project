@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = merge(common, {
-    mode: 'development',
+    mode: 'production',
 
     entry: {
         index: {

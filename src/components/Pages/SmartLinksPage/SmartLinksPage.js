@@ -136,7 +136,14 @@ export const SmartLinksPage = () => {
                                             },
                                         })
                                     )
-                                }
+                                },
+                                onCopy: () => {
+                                    alertActions.open({
+                                        type: 'ALERT/SUCCESS',
+                                        message: contentData.data.smartLinks.copy,
+                                    });
+                                    drawerActions.close();
+                                },
                             }));
                         const smartlinkItem = smartLinksQuery.data.table.find(item => item.id === itemId);
                         drawerActions.setFieldValues(smartlinkItem)
