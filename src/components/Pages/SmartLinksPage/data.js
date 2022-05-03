@@ -2,7 +2,7 @@ import React from "react";
 
 import SVG from 'react-inlinesvg';
 import {dropdownTypes} from '../../../constants/dropdown';
-import {dateStringFormator, idArrayFormator, dateFormator} from '../../../helpers/lib';
+import {dateStringFormator, idArrayFormator, dateFormator, copyToClipboard} from '../../../helpers/lib';
 import {Button} from '../../Atoms/Button/Button';
 import {images} from './images';
 
