@@ -139,3 +139,23 @@ export const convertToQueryString = (object, currentBreadcrum = '', isProp = fal
 };
 
 export const idArrayFormator = (itemArray)=>itemArray.filter(item => item.isSelected).map(item => item.id).join(',');
+export const idSelectFormator = ({ source, propName })=> source.find ? source.find(item => item.isSelected)[propName] : source[propName];
+
+export const copyToClipboard = (textToCopy) => {
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(textToCopy);
+    } else {
+        let textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        return new Promise((res, rej) => {
+            document.execCommand('copy') ? res() : rej();
+            textArea.remove();
+        });
+    }
+}

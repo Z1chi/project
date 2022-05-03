@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import SVG from 'react-inlinesvg';
+import { copyToClipboard } from '../../../helpers/lib';
 import { images } from './images';
 
 import './input.scss';
@@ -35,7 +36,8 @@ export const Input = ({ required, type = 'text', value, hasError, error, placeho
                 />
                 {
                     canCopy && <div className='customInput__copy' onClick={()=>{
-                        navigator.clipboard.writeText(inputValue)
+                        copyToClipboard(inputValue)
+                        // navigator.clipboard && navigator.clipboard.writeText(inputValue)
                         onCopy();
                     }}>
                         <SVG src={images.copyIcon}/>

@@ -8,7 +8,8 @@ import {images} from './images';
 
 const renderLink = ({link, onCopy}) => {
     return (
-        <span style={{color: '#219FE5', textDecoration: 'underline',}} onClick={()=>{navigator.clipboard.writeText(link); onCopy();}}>
+        <span style={{color: '#219FE5', textDecoration: 'underline',}} onClick={()=>{
+            copyToClipboard(link); onCopy();}}>
             {link}
         </span>
     )
@@ -342,7 +343,6 @@ export const drawers = {
                         <Button styles={{
                             padding: '10px 15px',
                             height: '42px',
-
                         }}
                                 onClick={() => props.onEdit(data)}
                         >
