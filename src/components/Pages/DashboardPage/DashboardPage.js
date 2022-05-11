@@ -93,6 +93,7 @@ export const DashboardPage = () => {
                                                 setPageIndex(pageIndex + 1);
                                                 setPushTableData(true)
                                             }}
+                                            isFetching={dashboardTableQuery.isFetching}
                                             {...table}
                                             data={tableData.table}
                                         />

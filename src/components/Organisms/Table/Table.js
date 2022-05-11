@@ -5,9 +5,10 @@ import {TableRow} from '../../Molecules/TableRow/TableRow';
 import {TableEmpty} from '../../Molecules/TableEmpty/TableEmpty';
 
 import './table.scss';
+import { Button } from '../../Atoms/Button/Button';
+import { Loader } from '../../Atoms/Loader/Loader';
 
-export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, hasMore, isLoading}) => {
-    console.log('hasMore', hasMore)
+export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, isFetching, hasMore, isLoading}) => {
     const [verticalScroll, setVerticalScroll] = useState(0);
 
     if(isLoading) {
@@ -19,18 +20,12 @@ export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, hasMore
     }
 
     return (
+        <>
         <div className='table'>
             {
                 data && data.length > 0 ?
 
-                    (<div className='table__data' onScroll={e => {
-                        console.log('scroll', {top: e.target.scrollTop, topMax: e.target.scrollTopMax, vertical: verticalScroll});
-                        const isScrolled = e.target.scrollTopMax && e.target.scrollTop !== verticalScroll && e.target.scrollTop == e.target.scrollTopMax;
-                        isScrolled && setVerticalScroll(e.target.scrollTop);
-
-                        console.log('isScrolled', isScrolled)
-                        return (isScrolled && hasMore) ? fetchMore() : undefined
-                    }}>
+                    <div className='table__data'>
 
                         <TableHead tableConfig={tableConfig} groups={groups}/>
 
@@ -45,9 +40,17 @@ export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, hasMore
                             }
 
                         </div>
-                    </div>)
+                    </div>
                     : <TableEmpty {...emptyTable}/>
             }
         </div>
+        { hasMore && <div className='table__load'>
+            {
+                isFetching 
+                ? <Button><Loader whiteTheme={true} /></Button>  
+                : <Button onClick={()=>fetchMore()}>Load more</Button>  
+            }   
+        </div> }
+        </>
     )
 };

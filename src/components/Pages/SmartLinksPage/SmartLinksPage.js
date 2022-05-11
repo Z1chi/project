@@ -234,6 +234,7 @@ export const SmartLinksPage = () => {
                                                    setPageIndex(pageIndex + 1);
                                                    setPushTableData(true)
                                                }}
+                                               isFetching={smartLinksQuery.isFetching}
                                                tableConfig={table.getTableConfig({
                                                     onEditOpen: ({itemId}) => {
                                                         openEditDrawer(itemId)

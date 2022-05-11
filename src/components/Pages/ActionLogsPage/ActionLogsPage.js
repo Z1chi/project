@@ -126,6 +126,7 @@ export const ActionLogsPage = () => {
                                                 setPageIndex(pageIndex + 1);
                                                 setPushTableData(true)
                                             }}
+                                            isFetching={actionLogsTableQuery.isFetching}
                                             {...table}
                                             emptyTable={{
                                                 icon: images.emptyTableIcon,

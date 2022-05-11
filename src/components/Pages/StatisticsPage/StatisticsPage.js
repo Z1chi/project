@@ -111,6 +111,7 @@ export const StatisticsPage = () => {
                                             setPageIndex(pageIndex + 1);
                                             setPushTableData(true)
                                         }}
+                                        isFetching={statisticsQuery.isFetching}
                                         {...table}
                                         data={tableData.table}
                                         emptyTable={{

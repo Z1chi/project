@@ -32,7 +32,7 @@ export const WithdrawPage = () => {
 
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
-    const [pageIndex, setPageIndex] = useState(0);
+    const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState(null);
 
     const [, alertActions] = useAtom(alertAtom);
@@ -199,6 +199,7 @@ export const WithdrawPage = () => {
                                                     }
                                                 }}
                                                 hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                                isFetching={withdrawQuery.isFetching}
                                                 fetchMore={() => {
                                                     setPageIndex(pageIndex + 1);
                                                     setPushTableData(true)
