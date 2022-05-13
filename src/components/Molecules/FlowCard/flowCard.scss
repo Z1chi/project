@@ -8,13 +8,21 @@
     align-items: center;
     padding: 22px 16px;
 
-    @media (max-width: 991px) {
+    &--isMobile {
         flex-direction: column;
-        justify-content: space-between;
         align-items: center;
         padding: 15px 7px 10px 7px;
         width: 100%;
         height: 100%;
+
+        .flowCard {
+            &__text {
+                margin-top: 10px;
+                margin-left: 0;
+                align-items: center;
+                align-items: center;
+            }
+        }
     }
 
     &__icon {
@@ -42,13 +50,6 @@
         justify-content: flex-start;
         align-items: flex-start;
         margin-left: 15px;
-
-        @media (max-width: 991px) {
-            margin-top: 10px;
-            margin-left: 0;
-            align-items: center;
-            align-items: center;
-        }
     }
 
     &__title {

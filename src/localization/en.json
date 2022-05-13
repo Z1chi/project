@@ -27,6 +27,7 @@
   },
   "chart": {
     "options": [
+      "All time",
       "Today",
       "Last 7 days",
       "Last 30 days",

@@ -10,7 +10,7 @@ const getYearByDiff = (diff) =>{
   return new Date(new Date().getFullYear()-diff, 0, 1);
 }
 
-export const getCalendarAside = ({ changeHandler, setValue }) => {
+export const getCalendarAside = ({ changeHandler, setValue, setLabel, }) => {
   const today = getToday();
   const onChange = ({from, to})=>{
     changeHandler(dateObjFormator({from, to}));
@@ -19,34 +19,48 @@ export const getCalendarAside = ({ changeHandler, setValue }) => {
   return (
     [
       {
+          onClick: () => {
+            setValue(new Date());
+            changeHandler(null);
+            setLabel(null);
+          },
+      },
+      {
           onClick: () => { 
             const todayMidnight = getToday()
             todayMidnight.setHours(0,0,0,0);
             onChange({ from: todayMidnight, to: today });
+            setLabel('today');
           },
       }, {
           onClick: () => {
             onChange({ from: getDateByDiff(7), to: today });
+            setLabel('last week');
           },
       }, {
           onClick: () => {
             onChange({ from: getDateByDiff(30), to: today });
+            setLabel('last month');
           },
       }, {
           onClick: () => {
             onChange({ from: getDateByDiff(90), to: today });
+            setLabel('last 3 months');
           },
       }, {
           onClick: () => {
             onChange({ from: getYearByDiff(0), to: today });
+            setLabel('last year');
           },
       }, {
           onClick: () => {
             onChange({ from: getYearByDiff(1), to: today });
+            setLabel('last 2 years');
           },
       }, {
           onClick: () => {
             onChange({ from: getYearByDiff(2), to: today });
+            setLabel('last 3 years');
           },
       }, 
   ]);

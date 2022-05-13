@@ -3,6 +3,7 @@ import {useQuery} from 'react-query';
 import { useAtom } from '@reatom/react';
 
 import {InfoCard} from '../../Molecules/InfoCard/InfoCard';
+import {FlowCard} from '../../Molecules/FlowCard/FlowCard';
 import {BarChart} from '../../Organisms/BarChart/BarChart';
 import {Table} from '../../Organisms/Table/Table';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
@@ -19,6 +20,7 @@ import { Loader } from '../../Atoms/Loader/Loader';
 import { useHistory } from 'react-router-dom';
 import { images } from './images';
 import { ChartCalendar } from '../../Organisms/Calendar/ChartCalendar';
+import { languageAtom } from '../../../store/language';
 
 export const DashboardPage = () => {
     const history = useHistory();
@@ -27,6 +29,8 @@ export const DashboardPage = () => {
     const [pageIndex, setPageIndex] = useState(1);
     const [tableData, setTableData] = useState(null);
     const [period, setPeriod] = useState(null);
+    const [periodLabel, setPeriodLabel] = useState(null)
+    const [languageData, languageActions] = useAtom(languageAtom);
 
     useEffect(() => {
         filterActions.reset();
@@ -60,7 +64,7 @@ export const DashboardPage = () => {
                         <div className='dashboardPage__content'>
                             <div className={`dashboardPage__balance${width<440?' dashboardPage__balance--isMobile':''}`}>
                                 <div className='dashboardPage__period'>
-                                    <ChartCalendar changeHandler={setPeriod} isMobile={width<640} />
+                                    <ChartCalendar setPeriodLabel={setPeriodLabel} changeHandler={setPeriod} isMobile={width<640} />
                                 </div>
                                 <div className='dashboardPage__header'>
                                     <div className='dashboardPage__title'>
@@ -73,9 +77,14 @@ export const DashboardPage = () => {
                                             statistics.map((item, key) => {
                                                 return (
                                                     <div key={key} className='dashboardPage__statisticsItem'>
-                                                        {/* <FlowCard {...item} /> */}
-                                                        <InfoCard {...item} value={dashboardQuery.data[item.id]} prevValue={dashboardQuery.data[item.prevId]}
-                                                                  isMobile={width < 768}/>
+                                                        <FlowCard {...item}
+                                                            isMobile={width<820}
+                                                            currentMonth={dashboardQuery.data[item.id]} 
+                                                            lastMonth={dashboardQuery.data[item.prevId]}
+                                                            period={periodLabel}
+                                                        />
+                                                        {/* <InfoCard {...item} value={dashboardQuery.data[item.id]} prevValue={dashboardQuery.data[item.prevId]}
+                                                                  isMobile={width < 768}/> */}
                                                     </div>
                                                 )
                                             })
@@ -85,39 +94,50 @@ export const DashboardPage = () => {
                                 {
                                     dashboardQuery.data && dashboardQuery.data.graphics && 
                                     <div className='dashboardPage__chart'>
-                                        <BarChart isEmpty={dashboardQuery.data.graphics.find(item => !(item.income && item.turnover))} data={getGraphicsConfig(dashboardQuery.data.graphics)}/>
+                                        <BarChart isEmpty={dashboardQuery.data.graphics.length === 0 || dashboardQuery.data.graphics.find(item => !(item.income && item.turnover))} data={getGraphicsConfig(dashboardQuery.data.graphics)}/>
                                     </div>
                                 }
                             </div>
+                            <div className='dashboardPage__table'>
+                                {
+                                    tableData
+                                    ? <Table 
+                                        hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                        fetchMore={() => {
+                                            history.push('/actionLogs')
+                                        }}
+                                        loadMoreText='See more'
+                                        isFetching={dashboardTableQuery.isFetching}
+                                        {...table}
+                                        emptyTable={{
+                                            icon: images.emptyTableIcon,
+                                            text: contentData.data.actionLog.emptyTable,
+                                            button: {
+                                                text: 'Explore offers',
+                                                link: '/offers',
+                                            }
+                                        }}
+                                        data={tableData.table}
+                                    />
+                                    : <TableEmpty loader={Loader} />
+                                    // : <History historyList={dashboardTableQuery.data.table} />
+                                }
+                            </div>
                             {
-                                <div className='dashboardPage__table'>
-                                    {
-                                        tableData
-                                        ? <Table 
-                                            hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                            fetchMore={() => {
-                                                history.push('/actionLogs')
-                                            }}
-                                            loadMoreText='See more'
-                                            isFetching={dashboardTableQuery.isFetching}
-                                            {...table}
-                                            emptyTable={{
-                                                icon: images.emptyTableIcon,
-                                                text: contentData.data.actionLog.emptyTable,
-                                                button: {
-                                                    text: 'Explore offers',
-                                                    link: '/offers',
-                                                }
-                                            }}
-                                            data={tableData.table}
-                                        />
-                                        : <TableEmpty loader={Loader} />
-                                        // : <History historyList={dashboardTableQuery.data.table} />
-                                    }
+                                languageData.language==='en'
+                                ?<div className='dashboardPage__banner'>
+                                    <a href='https://t.me/trafburg' target='_blank'>
+                                        <img src={images.bannerEnImage} alt='banner' />
+                                    </a>
                                 </div>
-
+                                :languageData.language==='ru'
+                                    ?<div className='dashboardPage__banner'>
+                                        <a href='https://t.me/trafburg' target='_blank'>
+                                            <img src={images.bannerEnImage} alt='banner' />
+                                        </a>
+                                    </div>
+                                    :null
                             }
-
                         </div>
                     )
                 }}

@@ -98,7 +98,11 @@ export const ActionLogsPage = () => {
                                         return (
                                             <div key={key} className='actionLogsPage__statisticsItem'>
                                                 <FlowCard {...actionLogsStatisticsQuery.data[configItem.id]}
-                                                          icon={configItem.icon}/>
+                                                    icon={configItem.icon}
+                                                    title={configItem.title}
+                                                    isMobile={width<820}
+                                                    period={'last month'}
+                                                />
                                             </div>
                                         )
                                     })

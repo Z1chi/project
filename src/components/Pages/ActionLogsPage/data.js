@@ -6,14 +6,17 @@ import { dateStringFormator, idArrayFormator, dateFormator, currencyFormator} fr
 export const actionLogsStatisticsConfig = [
     {
         id: 'totalClicks',
+        title: 'Total clicks',
         icon: images.clicksIcon,
     },
     {
         id: 'totalRegistrations',
+        title: 'Total Registrations',
         icon: images.registrationsIcon,
     },
     {
         id: 'totalDeposits',
+        title: 'Total Deposits',
         icon: images.depositIcon,
     }
 ];

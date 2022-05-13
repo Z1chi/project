@@ -69,6 +69,10 @@ export const localeString = ({value = 0, currencySymbol = 'USD', locales = 'ja-J
     (value).toLocaleString(locales, {style: 'currency', currency: currencySymbol});
 
 export const getChartDate = (date) => {
+    const isTime = date.match(/^\d{2}\:\d{2}$/);
+    if(isTime) {
+        return date;
+    }
     const [year, month, day] = date.split('-');
     return `${day} ${monthArr.find((item, key) =>
         key + 1 === Number(month) ? item : '')}`

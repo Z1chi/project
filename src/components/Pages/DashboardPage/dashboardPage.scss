@@ -65,4 +65,14 @@
     &__table {
         margin-top: 12px;
     }
+
+    &__banner {
+        margin-top: 16px;
+        width: 100%;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+        }
+    }
 }

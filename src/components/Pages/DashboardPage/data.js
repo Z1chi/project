@@ -7,11 +7,8 @@ export const statistics = [{
     id: 'total_balance',
     icon: images.balanceIcon,
     title: 'Total Balance',
-    renderSubtitle: (value) => {
+    renderValue: (value) => {
         return currencyFormator(value)
-    },
-    renderConverted: (value) => {
-        return `Compared to ${currencyFormator(value)} last month`
     },
     backgroundColor: '#FF7800',
 }, {
@@ -19,11 +16,8 @@ export const statistics = [{
     prevId: 'total_income_last_period',
     icon: images.incomeIcon,
     title: 'Income',
-    renderSubtitle: (value) => {
+    renderValue: (value) => {
         return currencyFormator(value)
-    },
-    renderConverted: (value) => {
-        return `Compared to ${currencyFormator(value)} last month`
     },
     backgroundColor: '#16FFAC',
 }, {
@@ -31,11 +25,8 @@ export const statistics = [{
     prevId: 'total_turnover_last_period',
     icon: images.turnoverIcon,
     title: 'Turnover',
-    renderSubtitle: (value) => {
+    renderValue: (value) => {
         return currencyFormator(value)
-    },
-    renderConverted: (value) => {
-        return `Compared to ${currencyFormator(value)} last month`
     },
     backgroundColor: '#0063FF',
 },];

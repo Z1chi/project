@@ -12,13 +12,13 @@ import { languageAtom } from '../../../store/language';
 import { getCalendarAside, months, weekdays } from './data';
 import { dateObjFormator } from '../../../helpers/lib';
 
-export const ChartCalendar = ({ changeHandler=()=>{}, isMobile }) => {
-    const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+export const ChartCalendar = ({ setPeriodLabel=()=>{}, changeHandler=()=>{}, isMobile }) => {
+    const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [value, setValue] = useState( new Date() );
     const [languageData, languageActions] = useAtom(languageAtom);
     const currentYear = (new Date()).getFullYear()
-    const calendarAside = getCalendarAside({changeHandler, setValue});
+    const calendarAside = getCalendarAside({changeHandler, setValue, setLabel: setPeriodLabel });
     return (
         <div className={`chartCalendar${isMobile?' chartCalendar--isMobile':''}`}>
             <Dropdown 
