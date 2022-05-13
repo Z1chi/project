@@ -25,6 +25,14 @@
       "loading": "Loading data..."
     }
   },
+  "chart": {
+    "options": [
+      "Today",
+      "Last 7 days",
+      "Last 30 days",
+      "Last 90 days"
+    ]
+  },
   "smartLinks": {
     "emptyTable": "Smartlinks will appear here immediately after you create the first SmartLink",
     "text": "Create Smartlink",
@@ -58,7 +66,29 @@
     "emptyTable": "Your Action Logs will appear here after you get first clicks on your SmartLink"
   },
   "statistics": {
-    "emptyTable": "Your Statistics will appear here after you get first clicks on your SmartLink"
+    "emptyTable": "Your Statistics will appear here after you get first clicks on your SmartLink",
+    "table": {
+      "clicks": {
+        "total": "Total clicks",
+        "UC": "Total unique users clicked on your link",
+        "EPC": "Earn per one click"
+      },
+      "leads": {
+        "REG": "Total registrations",
+        "CR": "Clicks to registrations percentage. With 100 clicks and 10 registrations, your CR is 10%",
+        "EPR": "Earn per one registration"
+      },
+      "deposits": {
+        "DEP": "Total deposits made",
+        "CD": "Clicks to deposits percentage. With 100 clicks and 5 deposits, your CR is 5%",
+        "CR": "Conversion rate (Registration to Deposit)",
+        "SUM": "Сумма депозитов"
+      },
+      "profit": {
+        "REVSHARE": "Сумма вашего заработка (прибыли) по модели ревшер",
+        "SUM": "Сумма всех моделей вашего заработка"
+      }
+    }
   },
   "sidebar": {
     "dashboard": "Dashboard",

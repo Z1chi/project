@@ -95,7 +95,17 @@ export const WithdrawPage = () => {
                                                 <div key={key} className='withdrawPage__cardsItem'>
                                                     <InfoCard {...item} 
                                                         title={contentData.data.withdraw.totalBalance} 
-                                                        value={{amount: `${(profileQuery.data && profileQuery.data.balance) ? profileQuery.data.balance : 0} ₿`}} 
+                                                        renderSubtitle={(value)=>{
+                                                            return <>
+                                                                <span>{value.amount}</span>
+                                                                <span className='withdrawPage__userCurrency'>{value.balance_in_user_currency}</span>
+                                                            </>
+                                                        }}
+                                                        value={{
+                                                            amount: `${(profileQuery.data && profileQuery.data.balance) ? profileQuery.data.balance : 0} ₿`,
+                                                            balance_in_user_currency: 
+                                                                `${(profileQuery.data && profileQuery.data.balance_in_user_currency) ? ` ~ ${profileQuery.data.balance_in_user_currency.amount} ${profileQuery.data.balance_in_user_currency.symbol}` : 0}`
+                                                        }} 
                                                     />
                                                 </div>
                                             )

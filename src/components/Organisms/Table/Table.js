@@ -8,7 +8,7 @@ import './table.scss';
 import { Button } from '../../Atoms/Button/Button';
 import { Loader } from '../../Atoms/Loader/Loader';
 
-export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, isFetching, hasMore, isLoading}) => {
+export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, isFetching, loadMoreText='Load more', hasMore, isLoading}) => {
     const [verticalScroll, setVerticalScroll] = useState(0);
 
     if(isLoading) {
@@ -48,7 +48,7 @@ export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, isFetch
             {
                 isFetching 
                 ? <Button><Loader whiteTheme={true} /></Button>  
-                : <Button onClick={()=>fetchMore()}>Load more</Button>  
+                : <Button onClick={()=>fetchMore()}>{loadMoreText}</Button>  
             }   
         </div> }
         </>

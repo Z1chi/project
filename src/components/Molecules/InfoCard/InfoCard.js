@@ -13,6 +13,7 @@ export const InfoCard = (
         backgroundColor,
         title,
         value,
+        prevValue,
         renderSubtitle = (value) => value?.amount,
         renderConverted,
         iconSize = '50px'
@@ -30,11 +31,12 @@ export const InfoCard = (
                     {
                         renderSubtitle(value)
                     }
-                    <span className='infoCard__converted'>
+                </div>
+
+                <div className='infoCard__converted'>
                     {
-                        renderConverted && renderConverted(value)
+                        renderConverted && prevValue && renderConverted(prevValue)
                     }
-                    </span>
                 </div>
             </div>
         </div>

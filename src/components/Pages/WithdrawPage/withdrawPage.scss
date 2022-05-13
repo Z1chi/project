@@ -26,6 +26,15 @@
     height: 94px;
   }
 
+  &__userCurrency {
+    margin-left: 4px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF88;
+  }
+
   &__withdraw {
     button {
       padding: 10px 15px;

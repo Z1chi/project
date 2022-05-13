@@ -15,14 +15,22 @@
       }
     }
   }
+
+  .table {
+    .tableRow {
+      &:first-child {
+        &:after {
+          border-color:#E61B4A;
+          border-width: 2px;
+        }
+        .tableCell {
+          &:after {
+            border-color: #E61B4A;
+            border-width: 2px;
+          }
+        }
+      }
+    }
+  }
 }
 
-.table {
-  &Cell {
-    justify-content: center;
-  }
-
-  &HeadItem {
-    justify-content: center;
-  }
-}
