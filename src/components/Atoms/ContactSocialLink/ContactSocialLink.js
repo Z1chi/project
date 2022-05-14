@@ -8,8 +8,8 @@ import { SOCIALS_EMAIL, SOCIALS_TELEGRAM } from '../../Pages/FAQPage/constants'
 import './contactSocialLink.scss';
 
 const socailIcons = {
-    [SOCIALS_EMAIL]: images.socials.telegramIcon,
-    [SOCIALS_TELEGRAM]: images.socials.emailIcon,
+    [SOCIALS_EMAIL]: images.socials.emailIcon,
+    [SOCIALS_TELEGRAM]: images.socials.telegramIcon,
 };
 
 export const ContactSocialLink = ({ socialName, link }) => {

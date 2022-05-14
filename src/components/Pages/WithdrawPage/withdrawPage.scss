@@ -12,7 +12,7 @@
   }
 
   .table__data {
-    max-height: 70vh;
+    max-height: 66vh;
   }
 
   &__statistics {
@@ -24,6 +24,15 @@
     margin-bottom: 15px;
     border-radius: 4px;
     height: 94px;
+  }
+
+  &__userCurrency {
+    margin-left: 4px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF88;
   }
 
   &__withdraw {

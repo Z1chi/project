@@ -68,6 +68,16 @@ export const objToArray = obj => {
 export const localeString = ({value = 0, currencySymbol = 'USD', locales = 'ja-JP'}) =>
     (value).toLocaleString(locales, {style: 'currency', currency: currencySymbol});
 
+export const getChartDate = (date) => {
+    const isTime = date.match(/^\d{2}\:\d{2}$/);
+    if(isTime) {
+        return date;
+    }
+    const [year, month, day] = date.split('-');
+    return `${day} ${monthArr.find((item, key) =>
+        key + 1 === Number(month) ? item : '')}`
+}
+
 export const dateStringFormator = (dateTimeString) => {
     if(!dateTimeString) {
         return ''
@@ -94,6 +104,9 @@ export const dateObjToString = ({ from, to }) => {
     // const fromString = from ? `${monthArr[from.month]} ${from.day.toString().padStart(2, '0')}, ${from.year}` : '';
     // const toString = to ? ` - ${monthArr[to.month]} ${to.day.toString().padStart(2, '0')}, ${to.year}` : '';
 
+    // const fromDateString = from.replace(/\-/g, '/')
+    // const toDateString = ` - ${to.replace(/\-/g, '/')}`
+
     return `${fromDateString}${(toDateString&&toDateString!==fromDateString)?toDateString:''}`
 }
 
@@ -103,6 +116,36 @@ export const dateFormator = (dateObject) => {
         to: `${dateObject.to.year}-${dateObject.to.month.toString().padStart(2, '0')}-${dateObject.to.day.toString().padStart(2, '0')} 23:59:59`
     }
 };
+
+const getDateObj = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth()+1;
+    const year = date.getFullYear();
+    return {
+        day,
+        month,
+        year
+    }
+}
+
+const getDateString = (date) => {
+    const {day, month, year} = getDateObj(date);
+    return `${year}-${(month).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
+}
+
+export const dateObjFormator = ({ from, to }) => {
+    return {
+        from: getDateString(from),
+        to: getDateString(to),
+    }
+}
+
+export const dateToObjFormator = ({ from, to }) => {
+    return {
+        from: getDateObj(from),
+        to: getDateObj(to),
+    }
+}
 
 export const currencyFormator = (item) => `${item.symbol} ${item.amount}`;
 

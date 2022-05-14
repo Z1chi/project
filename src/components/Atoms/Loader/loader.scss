@@ -1,5 +1,6 @@
 .loader {
     --clock-color: #007affbb;
+    --white-color: #fff;
     --clock-width: 2.5rem;
     --clock-radius: calc(var(--clock-width) / 2);
     --clock-minute-length: calc(var(--clock-width) * 0.4);
@@ -15,6 +16,15 @@
     height: var(--clock-width);
     border: 2px solid var(--clock-color);
     border-radius: 50%;
+
+    &--whiteTheme {
+      border: 2px solid var(--white-color);
+
+      &::before,
+      &::after {
+        background: var(--white-color) !important;
+      }
+    }
   
     &::before,
     &::after {

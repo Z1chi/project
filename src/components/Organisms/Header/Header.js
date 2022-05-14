@@ -39,7 +39,7 @@ export const Header = () => {
                                     <div className='header__info'>
                                         <p className='header__infoName'>{supportData.name &&
                                         supportData.name[profileSettingsFieldTypeList.current]}</p>
-                                        {/*<p className='header__infoId'>id: 123456</p>*/}
+                                        <p className='header__infoId'>{supportData.id && `id: ${supportData.id[profileSettingsFieldTypeList.current]}`}</p>
                                     </div>
 
                                         <SVG className='header__dropdownArrow' src={icon}/>

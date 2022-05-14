@@ -19,9 +19,9 @@ const getFlow = ({currentMonthValue, lastMonthValue}) => {
             : flowList.unchanged
 };
 
-export const FlowCard = ({icon, title, currentMonth, lastMonth, renderValue = (value) => value.amount, backgroundColor,}) => {
+export const FlowCard = ({icon, title, currentMonth, lastMonth, renderValue = (value) => value.amount, backgroundColor, isMobile, period}) => {
     return (
-        <div className='flowCard'>
+        <div className={`flowCard${isMobile?' flowCard--isMobile':''}`}>
             <div className='flowCard__icon' style={{backgroundColor}}>
                 <SVG src={icon}/>
             </div>
@@ -31,8 +31,8 @@ export const FlowCard = ({icon, title, currentMonth, lastMonth, renderValue = (v
                 </div>
                 <div className='flowCard__subtitle'>
                     <div className='flowCard__vale'>{renderValue(currentMonth)}</div>
-                    <div className='flowCard__flow'>
-                        {
+                    { lastMonth && lastMonth.amount > 0 && period &&
+                        <div className='flowCard__flow'>
                             <FlowItem
                                 difference={getDifference({
                                     currentMonthValue: currentMonth.amount,
@@ -43,12 +43,12 @@ export const FlowCard = ({icon, title, currentMonth, lastMonth, renderValue = (v
                                     lastMonthValue: lastMonth.amount
                                 })}
                             />
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
-                <div className='flowCard__description'>
-                    Compared to {renderValue(lastMonth)} last month
-                </div>
+                { lastMonth && period && <div className='flowCard__description'>
+                    Compared to {renderValue(lastMonth)} {period}
+                </div> }
             </div>
         </div>
     )

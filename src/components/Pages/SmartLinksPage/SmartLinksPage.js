@@ -222,18 +222,43 @@ export const SmartLinksPage = () => {
                                             tableData
                                             ? <Table {...table}
                                                emptyTable={{
-                                                   icon: images.emptyTableIcon,
-                                                   text: contentData.data.smartLinks.emptyTable,
-                                                   button: {
-                                                       text: contentData.data.smartLinks.text,
-                                                   }
-                                               }
-                                               }
+                                                    icon: images.emptyTableIcon,
+                                                    text: contentData.data.smartLinks.emptyTable,
+                                                    button: {
+                                                        text: contentData.data.smartLinks.text,
+                                                        onClick: () => drawerActions.open(drawers.create(
+                                                            {
+                                                                title: contentData.data.smartLinks.create,
+                                                                subTitle: contentData.data.smartLinks.createSubtitle,
+                                                            onCreate: (data) => {
+                                                                request('smartlink/create', {
+                                                                    method: 'post',
+                                                                    data,
+                                                                }).then((res) => {
+                                                                    drawerActions.setFieldValue({
+                                                                        fieldId: 'url',
+                                                                        fieldValue: res.data.url
+                                                                    });
+                                                                    setOperationIndex(operationIndex + 1);
+                                                                    return res.data;
+                                                                });
+                                                            },
+                                                            onCopy: () => {
+                                                                alertActions.open({
+                                                                    type: 'ALERT/SUCCESS',
+                                                                    message: contentData.data.smartLinks.copy,
+                                                                });
+                                                                drawerActions.close();
+                                                            },
+                                                        }))
+                                                    }
+                                               }}
                                                hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
                                                fetchMore={() => {
                                                    setPageIndex(pageIndex + 1);
                                                    setPushTableData(true)
                                                }}
+                                               isFetching={smartLinksQuery.isFetching}
                                                tableConfig={table.getTableConfig({
                                                     onEditOpen: ({itemId}) => {
                                                         openEditDrawer(itemId)

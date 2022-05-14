@@ -15,4 +15,13 @@
     &__row {
         border-bottom: 1px solid #282D3A;
     }
+
+    &__load {
+        margin-top: 15px;
+        
+        button {
+            height: 60px !important;
+            font-size: 16px !important;
+        }
+    }
 }

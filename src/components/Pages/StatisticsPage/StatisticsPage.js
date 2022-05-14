@@ -9,7 +9,7 @@ import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import { Loader } from '../../Atoms/Loader/Loader'
 import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
 
-import {filters, filterFormators, table} from './data';
+import {filters, filterFormators, getTable} from './data';
 import {filterAtom} from '../../../store/Filter';
 import {convertToQueryString} from '../../../helpers/lib';
 
@@ -88,6 +88,7 @@ export const StatisticsPage = () => {
         <div className='statisticsPage'>
             <PageTemplate
                 renderPage={({contentData}) => {
+                    const table = getTable({ infoMessages: contentData.data.statistics.table })
                     return (
                         <div className='statisticsPage__content'>
                             <div ref={ref} className='statisticsPage__filters'>
@@ -111,6 +112,7 @@ export const StatisticsPage = () => {
                                             setPageIndex(pageIndex + 1);
                                             setPushTableData(true)
                                         }}
+                                        isFetching={statisticsQuery.isFetching}
                                         {...table}
                                         data={tableData.table}
                                         emptyTable={{

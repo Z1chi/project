@@ -1,30 +1,31 @@
 import React from "react";
 
 import {dateStringFormator, currencyFormator} from "../../../helpers/lib";
-import {images} from "./images"
-
+import {images} from "./images";
 
 export const statistics = [{
     id: 'total_balance',
     icon: images.balanceIcon,
     title: 'Total Balance',
-    renderSubtitle: (value) => {
+    renderValue: (value) => {
         return currencyFormator(value)
     },
     backgroundColor: '#FF7800',
 }, {
     id: 'total_income',
+    prevId: 'total_income_last_period',
     icon: images.incomeIcon,
     title: 'Income',
-    renderSubtitle: (value) => {
+    renderValue: (value) => {
         return currencyFormator(value)
     },
     backgroundColor: '#16FFAC',
 }, {
     id: 'total_turnover',
+    prevId: 'total_turnover_last_period',
     icon: images.turnoverIcon,
-    title: 'Total Turnover',
-    renderSubtitle: (value) => {
+    title: 'Turnover',
+    renderValue: (value) => {
         return currencyFormator(value)
     },
     backgroundColor: '#0063FF',
@@ -104,7 +105,6 @@ export const table = {
 
     emptyTable: {
         icon: images.emptyTableIcon,
-        text: 'Action logs will appear here once you’ll lorem ipsum dolomir loret galor. ',
         button: {
             text: 'Explore offers',
             onClick: () => {

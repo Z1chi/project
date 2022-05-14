@@ -10,24 +10,13 @@ import {
     VerticalGridLines,
     HorizontalGridLines,
     VerticalBarSeries,
-    // LabelSeries
   } from 'react-vis';
+import { getChartDate } from '../../../helpers/lib';
 import { languageAtom } from '../../../store/language';
 
 import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
   
 import './barChart.scss';
-
-  // const greenData = [{x: 'A', y: 10}, {x: 'B', y: 5}, {x: 'C', y: 15}];
-  
-  // const blueData = [{x: 'A', y: 12}, {x: 'B', y: 2}, {x: 'C', y: 11}];
-
-    //закоментил пока не исопльзуется, что бы видеть лог без ошибок
-
-  // const labelData = greenData.map((d, idx) => ({
-  //   x: d.x,
-  //   y: Math.max(greenData[idx].y, blueData[idx].y)
-  // }));
 
     const margin = {
         default: 40,
@@ -51,7 +40,7 @@ import './barChart.scss';
         }
     };
 export const BarChart = ({ data, isEmpty }) => {
-
+    
     const [languageData, languageActions] = useAtom(languageAtom);
 
     if(isEmpty) {
@@ -65,7 +54,7 @@ export const BarChart = ({ data, isEmpty }) => {
 
     const maxValue = Math.max.apply(null, data.bars.map( item => item.data).flat());
 
-    const leftMargin = ( Math.max(...data.bars[0].data.map(item => getFormattedTick(item.y))) ).toString().length * 16 + 20;
+    const leftMargin = ( Math.max(...data.bars[0].data.map(item => getFormattedTick(item.y))) ).toString().length * 16 + 10;
 
     return (
         <div className='barChart'>
@@ -76,17 +65,17 @@ export const BarChart = ({ data, isEmpty }) => {
                         <VerticalGridLines />
                         <HorizontalGridLines  />
         
-                        <XAxis tickLabelAngle={-30} style={{
+                        <XAxis tickLabelAngle={width<1180 ? -30 : 0} style={{
                             text: {stroke: 'none', fill: '#898A98',},
                             ticks: {fontSize: 10},
-                        }}/>
+                        }} tickFormat={(v)=>getChartDate(v)} left={width<1180 ? leftMargin-10 : leftMargin-20} />
                         <YAxis style={{
                             text: {stroke: 'none', fill: '#898A98',}
                         }} tickFormat={getFormattedTick} />
         
                         {
                             data.bars && data.bars.map( (bar, barIndex) => {
-                                const relevantData = [...bar.data].slice(-10);
+                                const relevantData = bar.data;
                                 const barData = relevantData.map( (item, index) => {
                                     return {
                                         x: data.dates[index].split(' ')[0],

@@ -6,14 +6,17 @@ import { dateStringFormator, idArrayFormator, dateFormator, currencyFormator} fr
 export const actionLogsStatisticsConfig = [
     {
         id: 'totalClicks',
+        title: 'Total clicks',
         icon: images.clicksIcon,
     },
     {
         id: 'totalRegistrations',
+        title: 'Total Registrations',
         icon: images.registrationsIcon,
     },
     {
         id: 'totalDeposits',
+        title: 'Total Deposits',
         icon: images.depositIcon,
     }
 ];
@@ -78,6 +81,24 @@ export const table = {
         columnId: 'action',
         columnName: 'Action',
         columnWidth: '90px',
+
+        
+
+        renderRowItem: (item) => {
+            const isNotClick = item==='Registration' || item==='Deposit';
+            return (
+                 <div
+                    style={{
+                        padding: '5px 10px',
+                        backgroundColor: isNotClick ? 'rgba(22, 255, 172, 0.26)' : 'initial',
+                        color: isNotClick ? '#16FFAC' : '#fff',
+                        borderRadius: '4px',
+                    }}
+                >
+                    {item}
+                </div>
+            )
+        }
     }, {
         columnId: 'deposit',
         columnName: 'Deposit',
@@ -98,12 +119,13 @@ export const table = {
         columnWidth: '110px',
 
         renderRowItem: (item) => {
+            const isPositiveAmount = item.amount > 0
             return (
                  <div
                     style={{
                         padding: '5px 10px',
-                        backgroundColor: 'rgba(22, 255, 172, 0.26)',
-                        color: '#16FFAC',
+                        backgroundColor: isPositiveAmount ? 'rgba(22, 255, 172, 0.26)' : 'initial',
+                        color: isPositiveAmount ? '#16FFAC' : '#fff',
                         borderRadius: '4px',
                     }}
                 >
