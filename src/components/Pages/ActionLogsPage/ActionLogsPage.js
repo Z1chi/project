@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAtom} from '@reatom/react';
 import {useQueries, useQuery} from 'react-query';
 
@@ -7,7 +7,7 @@ import {FlowCard} from '../../Molecules/FlowCard/FlowCard';
 import {Filter} from '../../Organisms/Filter/Filter';
 import {Table} from '../../Organisms/Table/Table';
 
-import {actionLogsStatisticsConfig, filters, filterFormators, table} from './data';
+import {actionLogsStatisticsConfig, filterFormators, filters, table} from './data';
 import {filterAtom} from '../../../store/Filter';
 
 import {convertToQueryString} from '../../../helpers/lib';
@@ -16,8 +16,8 @@ import request from '../../../api/request';
 import './actionLogsPage.scss';
 import {useResizeDetector} from "react-resize-detector";
 import {images} from "./images";
-import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
-import { Loader } from '../../Atoms/Loader/Loader';
+import {TableEmpty} from '../../Molecules/TableEmpty/TableEmpty';
+import {Loader} from '../../Atoms/Loader/Loader';
 
 
 export const ActionLogsPage = () => {
@@ -25,7 +25,7 @@ export const ActionLogsPage = () => {
     const [filterData, filterActions] = useAtom(filterAtom);
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
-    const [pageIndex, setPageIndex] = useState(1);
+    const [cursor, setCursor] = useState(null);
     const [tableData, setTableData] = useState(null);
     const {width, ref} = useResizeDetector();
     useEffect(() => {
@@ -36,7 +36,7 @@ export const ActionLogsPage = () => {
         return request('/action-log/total').then(res => res.data);
     });
 
-    const actionLogsTableQuery = useQuery(['action-logs/table', pageIndex, operationIndex], () => {
+    const actionLogsTableQuery = useQuery(['action-logs/table',cursor, operationIndex], () => {
         const filterQueryData = {};
         for (const filterFieldId in filterData.fields) {
             const filterFieldValue = filterFormators[filterFieldId](filterData.fields[filterFieldId]);
@@ -44,15 +44,19 @@ export const ActionLogsPage = () => {
                 filterQueryData[filterFieldId] = filterFieldValue
             }
         }
-        return request(`/action-log/get-list?${convertToQueryString({page: pageIndex, ...filterQueryData})}`).then(res => {
+        return request(`/action-log/get-list?${convertToQueryString({cursor, ...filterQueryData})}`).then(res => {
 
             if (res) {
                 setTableData({
                     ...res.data,
-                    table: pushTableData ? [
-                        ...tableData.table,
-                        ...res.data.table,
-                    ] : res.data.table
+                    table: pushTableData ?
+                        [
+                            ...tableData.table,
+                            ...res.data.table,
+                        ]
+                        :
+                        res.data.table
+
                 })
             }
 
@@ -98,10 +102,10 @@ export const ActionLogsPage = () => {
                                         return (
                                             <div key={key} className='actionLogsPage__statisticsItem'>
                                                 <FlowCard {...actionLogsStatisticsQuery.data[configItem.id]}
-                                                    icon={configItem.icon}
-                                                    title={configItem.title}
-                                                    isMobile={width<820}
-                                                    period={'last month'}
+                                                          icon={configItem.icon}
+                                                          title={configItem.title}
+                                                          isMobile={width < 820}
+                                                          period={'last month'}
                                                 />
                                             </div>
                                         )
@@ -115,7 +119,6 @@ export const ActionLogsPage = () => {
                                             isMobile={isMobile}
                                             onSave={
                                                 () => {
-                                                    setPageIndex(1);
                                                     setOperationIndex(operationIndex + 1);
                                                     setPushTableData(false)
                                                 }
@@ -124,26 +127,27 @@ export const ActionLogsPage = () => {
                                 <div className='actionLogsPage__tableData'>
                                     {
                                         tableData
-                                        ? <Table
-                                            hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                            fetchMore={() => {
-                                                setPageIndex(pageIndex + 1);
-                                                setPushTableData(true)
-                                            }}
-                                            isFetching={actionLogsTableQuery.isFetching}
-                                            {...table}
-                                            emptyTable={{
-                                                icon: images.emptyTableIcon,
-                                                text: contentData.data.actionLog.emptyTable,
-                                                button: {
-                                                    text: 'Explore offers',
-                                                    link: '/offers',
-                                                }
-                                            }}
-                                            data={tableData.table}
+                                            ? <Table
+                                                hasMore={tableData.has_more_pages}
+                                                fetchMore={() => {
+                                                    console.log(tableData.next_page_cursor_param, "ASDASDASDASD")
+                                                    setCursor(tableData.next_page_cursor_param);
+                                                    setPushTableData(true)
+                                                }}
+                                                isFetching={actionLogsTableQuery.isFetching}
+                                                {...table}
+                                                emptyTable={{
+                                                    icon: images.emptyTableIcon,
+                                                    text: contentData.data.actionLog.emptyTable,
+                                                    button: {
+                                                        text: 'Explore offers',
+                                                        link: '/offers',
+                                                    }
+                                                }}
+                                                data={tableData.table}
 
-                                        />
-                                        : <TableEmpty loader={Loader} />
+                                            />
+                                            : <TableEmpty loader={Loader}/>
                                     }
                                 </div>
                             </div>
