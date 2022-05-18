@@ -36,8 +36,10 @@ export const ActionLogsPage = () => {
         return request('/action-log/total').then(res => res.data);
     });
 
-    const actionLogsTableQuery = useQuery(['action-logs/table',cursor, operationIndex], () => {
+    const actionLogsTableQuery = useQuery(['action-logs/table', cursor, operationIndex], () => {
         const filterQueryData = {};
+
+
         for (const filterFieldId in filterData.fields) {
             const filterFieldValue = filterFormators[filterFieldId](filterData.fields[filterFieldId]);
             if (filterFieldValue) {
@@ -120,7 +122,8 @@ export const ActionLogsPage = () => {
                                             onSave={
                                                 () => {
                                                     setOperationIndex(operationIndex + 1);
-                                                    setPushTableData(false)
+                                                    setPushTableData(false);
+                                                    setCursor(null)
                                                 }
                                             }/>
                                 </div>
@@ -130,7 +133,7 @@ export const ActionLogsPage = () => {
                                             ? <Table
                                                 hasMore={tableData.has_more_pages}
                                                 fetchMore={() => {
-                                                    console.log(tableData.next_page_cursor_param, "ASDASDASDASD")
+
                                                     setCursor(tableData.next_page_cursor_param);
                                                     setPushTableData(true)
                                                 }}

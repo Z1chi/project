@@ -30,7 +30,7 @@ import { Loader } from '../../Atoms/Loader/Loader';
 
 export const SmartLinksPage = () => {
     const [tableData, setTableData] = useState(null);
-    const [pageIndex, setPageIndex] = useState(1);
+    const [cursor, setCursor] = useState(null);
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
     const [drawerData, drawerActions] = useAtom(drawerAtom);
@@ -43,7 +43,7 @@ export const SmartLinksPage = () => {
         filterActions.reset();
     }, []);
 
-    const smartLinksQuery = useQuery(['smartlinks', pageIndex, operationIndex], async () => {
+    const smartLinksQuery = useQuery(['smartlinks', cursor, operationIndex], async () => {
         const filterQueryData = {};
         for (const filterFieldId in filterData.fields) {
             const filterFieldValue = filterFormators[filterFieldId](filterData.fields[filterFieldId]);
@@ -51,7 +51,7 @@ export const SmartLinksPage = () => {
                 filterQueryData[filterFieldId] = filterFieldValue
             }
         }
-        return request(`smartlink?${convertToQueryString({page: pageIndex, ...filterQueryData})}`).then(res => {
+        return request(`smartlink?${convertToQueryString({cursor, ...filterQueryData})}`).then(res => {
             if (res) {
                 setTableData({
                     ...res.data,
@@ -159,7 +159,7 @@ export const SmartLinksPage = () => {
                                             isMobile={filterMobile}
                                             onSave={
                                                 () => {
-                                                    setPageIndex(1);
+                                                    setCursor(null)
                                                     setOperationIndex(operationIndex + 1);
                                                     setPushTableData(false)
                                                 }
@@ -253,9 +253,9 @@ export const SmartLinksPage = () => {
                                                         }))
                                                     }
                                                }}
-                                               hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
+                                               hasMore={tableData.has_more_pages}
                                                fetchMore={() => {
-                                                   setPageIndex(pageIndex + 1);
+                                                   setCursor(tableData.next_page_cursor_param);
                                                    setPushTableData(true)
                                                }}
                                                isFetching={smartLinksQuery.isFetching}

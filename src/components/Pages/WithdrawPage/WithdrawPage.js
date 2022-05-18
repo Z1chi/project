@@ -13,7 +13,7 @@ import {Table} from '../../Organisms/Table/Table';
 import {Drawer} from '../../Organisms/Drawer/Drawer';
 import {Button} from '../../Atoms/Button/Button';
 import {Loader} from '../../Atoms/Loader/Loader';
-import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
+import {TableEmpty} from '../../Molecules/TableEmpty/TableEmpty';
 
 import {drawerAtom} from '../../../store/Drawer';
 import {modalAtom} from '../../../store/Modal';
@@ -32,7 +32,7 @@ export const WithdrawPage = () => {
 
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
-    const [pageIndex, setPageIndex] = useState(1);
+    const [cursor, setCursor] = useState(null);
     const [tableData, setTableData] = useState(null);
 
     const [, alertActions] = useAtom(alertAtom);
@@ -47,7 +47,7 @@ export const WithdrawPage = () => {
         filterActions.reset();
     }, []);
 
-    const withdrawQuery = useQuery(['withdraw-table', pageIndex, operationIndex], () => {
+    const withdrawQuery = useQuery(['withdraw-table', cursor, operationIndex], () => {
         const filterQueryData = {};
         for (const filterFieldId in filterData.fields) {
             const filterFieldValue = filterFormators[filterFieldId](filterData.fields[filterFieldId]);
@@ -55,14 +55,16 @@ export const WithdrawPage = () => {
                 filterQueryData[filterFieldId] = filterFieldValue
             }
         }
-        return request(`withdraw/get-withdraws?${convertToQueryString({page: pageIndex, ...filterQueryData})}`,).then(res => {
+        return request(`withdraw/get-withdraws?${convertToQueryString({cursor, ...filterQueryData})}`,).then(res => {
             if (res) {
                 setTableData({
                     ...res.data,
-                    table: pushTableData ? [
-                        ...tableData.table,
-                        ...res.data.table,
-                    ] : res.data.table
+                    table: pushTableData ?
+                        [
+                            ...tableData.table,
+                            ...res.data.table,
+                        ]
+                        : res.data.table
                 })
             }
 
@@ -90,22 +92,24 @@ export const WithdrawPage = () => {
                             <div className='withdrawPage__statistics'>
                                 <div className='withdrawPage__cards'>
                                     {
-                                        statistics.map((item ,key) => {
+                                        statistics.map((item, key) => {
                                             return (
                                                 <div key={key} className='withdrawPage__cardsItem'>
-                                                    <InfoCard {...item} 
-                                                        title={contentData.data.withdraw.totalBalance} 
-                                                        renderSubtitle={(value)=>{
-                                                            return <>
-                                                                <span>{value.amount}</span>
-                                                                <span className='withdrawPage__userCurrency'>{value.balance_in_user_currency}</span>
-                                                            </>
-                                                        }}
-                                                        value={{
-                                                            amount: `${(profileQuery.data && profileQuery.data.balance) ? profileQuery.data.balance : 0} ₿`,
-                                                            balance_in_user_currency: 
-                                                                `${(profileQuery.data && profileQuery.data.balance_in_user_currency) ? ` ~ ${profileQuery.data.balance_in_user_currency.amount} ${profileQuery.data.balance_in_user_currency.symbol}` : 0}`
-                                                        }} 
+                                                    <InfoCard {...item}
+                                                              title={contentData.data.withdraw.totalBalance}
+                                                              renderSubtitle={(value) => {
+                                                                  return <>
+                                                                      <span>{value.amount}</span>
+                                                                      <span className='withdrawPage__userCurrency'>
+                                                                          {value.balance_in_user_currency}
+                                                                      </span>
+                                                                  </>
+                                                              }}
+                                                              value={{
+                                                                  amount: `${(profileQuery.data && profileQuery.data.balance) ? profileQuery.data.balance : 0} ₿`,
+                                                                  balance_in_user_currency:
+                                                                      `${(profileQuery.data && profileQuery.data.balance_in_user_currency) ? ` ~ ${profileQuery.data.balance_in_user_currency.amount} ${profileQuery.data.balance_in_user_currency.symbol}` : 0}`
+                                                              }}
                                                     />
                                                 </div>
                                             )
@@ -138,7 +142,7 @@ export const WithdrawPage = () => {
                                                         });
                                                         return;
                                                     }
-                                                    if(!validate(data.walletAddress)) {
+                                                    if (!validate(data.walletAddress)) {
                                                         alertActions.open({
                                                             message: `${contentData.data.withdraw.drawer.walletAddress} ${data.walletAddress}`,
                                                             type: 'ALERT/ERROR',
@@ -154,12 +158,12 @@ export const WithdrawPage = () => {
                                                                     method: 'post',
                                                                     data: queryData,
                                                                 }).then((res) => {
-                                                                    if(res.exception) {
+                                                                    if (res.exception) {
                                                                         alertActions.open({
                                                                             message: res.message,
                                                                             type: 'ALERT/ERROR',
                                                                         });
-                                                                    } else if(!res.success) {
+                                                                    } else if (!res.success) {
                                                                         alertActions.open({
                                                                             message: res.data.amount,
                                                                             type: 'ALERT/ERROR',
@@ -187,7 +191,7 @@ export const WithdrawPage = () => {
                                         data={filtersData}
                                         onSave={
                                             () => {
-                                                setPageIndex(1);
+                                                setCursor(null);
                                                 setOperationIndex(operationIndex + 1);
                                                 setPushTableData(false);
                                             }
@@ -199,24 +203,24 @@ export const WithdrawPage = () => {
                                     ? <div className='withdrawPage__table'>
                                         {
                                             tableData
-                                            ? <Table {...table}
-                                                emptyTable={{
-                                                    icon: emptyTableIcon,
-                                                    text: contentData.data.withdraw.emptyTable,
-                                                    button: {
-                                                        text: 'Explore offers',
-                                                        link: '/offers',
-                                                    }
-                                                }}
-                                                hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                                isFetching={withdrawQuery.isFetching}
-                                                fetchMore={() => {
-                                                    setPageIndex(pageIndex + 1);
-                                                    setPushTableData(true)
-                                                }}
-                                                data={tableData.table}
-                                            />
-                                            : <TableEmpty loader={Loader} />
+                                                ? <Table {...table}
+                                                         emptyTable={{
+                                                             icon: emptyTableIcon,
+                                                             text: contentData.data.withdraw.emptyTable,
+                                                             button: {
+                                                                 text: 'Explore offers',
+                                                                 link: '/offers',
+                                                             }
+                                                         }}
+                                                         hasMore={tableData.has_more_pages}
+                                                         isFetching={withdrawQuery.isFetching}
+                                                         fetchMore={() => {
+                                                             setCursor(tableData.next_page_cursor_param);
+                                                             setPushTableData(true)
+                                                         }}
+                                                         data={tableData.table}
+                                                />
+                                                : <TableEmpty loader={Loader}/>
                                         }
                                     </div>
                                     : <div>

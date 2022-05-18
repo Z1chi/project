@@ -6,8 +6,8 @@ import request from "../../../api/request";
 import {Table} from '../../Organisms/Table/Table';
 import {Filter} from '../../Organisms/Filter/Filter';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
-import { Loader } from '../../Atoms/Loader/Loader'
-import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
+import {Loader} from '../../Atoms/Loader/Loader'
+import {TableEmpty} from '../../Molecules/TableEmpty/TableEmpty';
 
 import {filters, filterFormators, getTable} from './data';
 import {filterAtom} from '../../../store/Filter';
@@ -22,7 +22,7 @@ export const StatisticsPage = () => {
     const [filterData, filterActions] = useAtom(filterAtom);
     const [operationIndex, setOperationIndex] = useState(0);
     const [pushTableData, setPushTableData] = useState(false);
-    const [pageIndex, setPageIndex] = useState(1);
+    const [cursor, setCursor] = useState(null);
     const [tableData, setTableData] = useState(null);
     const {width, ref} = useResizeDetector();
 
@@ -30,7 +30,7 @@ export const StatisticsPage = () => {
         filterActions.reset();
     }, []);
 
-    const statisticsQuery = useQuery(['statistics', pageIndex, operationIndex,], () => {
+    const statisticsQuery = useQuery(['statistics', cursor, operationIndex,], () => {
         const filterQueryData = {};
         for (const filterFieldId in filterData.fields) {
             const filterFieldValue = filterFormators[filterFieldId](filterData.fields[filterFieldId]);
@@ -38,15 +38,17 @@ export const StatisticsPage = () => {
                 filterQueryData[filterFieldId] = filterFieldValue
             }
         }
-        return request(`/statistic/get-statistic?${convertToQueryString({page: pageIndex, ...filterQueryData})}`).then(res => {
+        return request(`/statistic/get-statistic?${convertToQueryString({cursor, ...filterQueryData})}`).then(res => {
 
             if (res) {
                 setTableData({
                     ...res.data,
-                    table: pushTableData ? [
-                        ...tableData.table,
-                        ...res.data.table,
-                    ] : res.data.table
+                    table: pushTableData ?
+                        [
+                            ...tableData.table,
+                            ...res.data.table,
+                        ]
+                        : res.data.table
                 })
             }
 
@@ -88,7 +90,7 @@ export const StatisticsPage = () => {
         <div className='statisticsPage'>
             <PageTemplate
                 renderPage={({contentData}) => {
-                    const table = getTable({ infoMessages: contentData.data.statistics.table })
+                    const table = getTable({infoMessages: contentData.data.statistics.table})
                     return (
                         <div className='statisticsPage__content'>
                             <div ref={ref} className='statisticsPage__filters'>
@@ -97,7 +99,7 @@ export const StatisticsPage = () => {
                                         isMobile={isMobile}
                                         onSave={
                                             () => {
-                                                setPageIndex(1);
+                                                setCursor(null)
                                                 setOperationIndex(operationIndex + 1);
                                                 setPushTableData(false)
                                             }
@@ -106,25 +108,25 @@ export const StatisticsPage = () => {
                             <div className='statisticsPage__table'>
                                 {
                                     tableData
-                                    ? <Table
-                                        hasMore={tableData.last_page === null || tableData.last_page > pageIndex}
-                                        fetchMore={() => {
-                                            setPageIndex(pageIndex + 1);
-                                            setPushTableData(true)
-                                        }}
-                                        isFetching={statisticsQuery.isFetching}
-                                        {...table}
-                                        data={tableData.table}
-                                        emptyTable={{
-                                            icon: images.emptyTableIcon,
-                                            text:contentData.data.statistics.emptyTable ,
-                                            button: {
-                                                text: 'Explore offers',
-                                                link: '/offers',
-                                            }
-                                        }}
-                                    />
-                                    : <TableEmpty loader={Loader} />
+                                        ? <Table
+                                            hasMore={tableData.has_more_pages}
+                                            fetchMore={() => {
+                                                setCursor(tableData.next_page_cursor_param);
+                                                setPushTableData(true)
+                                            }}
+                                            isFetching={statisticsQuery.isFetching}
+                                            {...table}
+                                            data={tableData.table}
+                                            emptyTable={{
+                                                icon: images.emptyTableIcon,
+                                                text: contentData.data.statistics.emptyTable,
+                                                button: {
+                                                    text: 'Explore offers',
+                                                    link: '/offers',
+                                                }
+                                            }}
+                                        />
+                                        : <TableEmpty loader={Loader}/>
                                 }
                             </div>
 

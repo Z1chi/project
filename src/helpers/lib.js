@@ -153,7 +153,7 @@ const getPropQueryParam = (property, isProp) => {
     return isProp ? '[' + property + ']' : property
 };
 
-export const convertToQueryString = (object, currentBreadcrum = '', isProp = false,) => {
+export const convertToQueryString = (object, currentBreadcrum = '', isProp = false) => {
     let queryString = '';
 
     if (!object || Object.keys(object).length === 0) {
