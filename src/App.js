@@ -25,7 +25,15 @@ import {store} from './store';
 import './app.scss';
 import './fonts/fonts.scss';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient(
+    {
+        defaultOptions: {
+            queries: {
+                refetchOnWindowFocus: false,
+            },
+        }
+    },
+);
 
 export default function App() {
     setToken();
