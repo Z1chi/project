@@ -68,6 +68,7 @@
     }
 
     &__info {
+        margin-left: 5px;
         position: relative;
         width: 14px;
         height: 14px;
@@ -87,33 +88,29 @@
         -ms-user-select: none;
         user-select: none;  
 
-        &--highlighted {
+        &:hover {
             background-color: #FFFFFF;
             box-shadow: 0 0 20px #FFFFFF;
+            .tableHeadItem__message {
+                display: initial;
+            }
         }
     }
 
     &__message {
+        position: absolute;
+        display: none;
         width: max-content;
         max-width: 420px;
         padding: 10px;
         background-color: #131826;
         color: #FFFFFF;
         font-size: 12px;
-    }
-
-    .dropdown {
-        margin-left: 5px;
-        width: 14px;
-        height: 14px;
-
-        &__content {
-            z-index: 2;
-            top: initial;
-            bottom: 16px;
-            left: initial;
-            right: -50%;
-            transform: translate(20%, 0);
-        }
+        z-index: 2;
+        top: initial;
+        bottom: 16px;
+        left: initial;
+        right: -50%;
+        transform: translate(20%, 0);
     }
 }

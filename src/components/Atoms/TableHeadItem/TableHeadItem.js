@@ -13,22 +13,12 @@ export const TableHeadItem = ({ item, isGroup }) => {
             {
                 item.info
                 && (
-                    <Dropdown 
-                        renderSwitcher={({ isOpened })=>{
-                            return (
-                                <div className={`tableHeadItem__info${isOpened?' tableHeadItem__info--highlighted':''}`}>
-                                    {item.info.message?'i':''}
-                                </div>
-                            )
-                        }}
-                        renderContent={()=>{
-                            return (
-                                <div className='tableHeadItem__message'>
-                                    {item.info.message}
-                                </div>
-                            )
-                        }}
-                    />
+                    <div className='tableHeadItem__info'>
+                        <div className='tableHeadItem__message'>
+                            {item.info.message}
+                        </div>
+                        {item.info.message?'i':''}
+                    </div>
                 )
             }
         </div>

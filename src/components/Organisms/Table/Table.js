@@ -40,17 +40,18 @@ export const Table = ({groups, tableConfig, data, emptyTable, fetchMore, isFetch
                             }
 
                         </div>
+
+                        { hasMore && <div className='table__load'>
+                            {
+                                isFetching 
+                                ? <Button><Loader whiteTheme={true} /></Button>  
+                                : <Button onClick={()=>fetchMore()}>{loadMoreText}</Button>  
+                            }    
+                        </div> }
                     </div>
                     : <TableEmpty {...emptyTable}/>
             }
         </div>
-        { hasMore && <div className='table__load'>
-            {
-                isFetching 
-                ? <Button><Loader whiteTheme={true} /></Button>  
-                : <Button onClick={()=>fetchMore()}>{loadMoreText}</Button>  
-            }   
-        </div> }
         </>
     )
 };

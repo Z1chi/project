@@ -82,7 +82,7 @@ export const FilterMobile = ({filters, data, onSave, onReset}) => {
                                         const onSelectFormators = getOnSelectFormators({ type: field.type, matchPropName: field.matchPropName, options: filterData.fields[field.id] })
                                         return (
                                             <div className='filterMobile__fieldsItem'>
-                                                <FormField {...field}
+                                                <FormField isMobile={true} {...field}
                                                 value={filterData.fields[field.id] ? onSelectFormators.value(filterData.fields[field.id]) : ''}
                                                 inputValue={filterData.fields[field.id] ? onSelectFormators.inputValue(filterData.fields[field.id]) : ''}
                                                 options={filterData.fields[field.id] || data[index]} 
@@ -92,10 +92,7 @@ export const FilterMobile = ({filters, data, onSave, onReset}) => {
                                                         fieldValue: value
                                                     });
                                                 }}
-                                                dateSource={filterData.fields[field.id] || {
-                                                    from: null,
-                                                    to: null,
-                                                }}
+                                                dateSource={filterData.fields[field.id] || null}
                                                 />
                                             </div>
                                         )

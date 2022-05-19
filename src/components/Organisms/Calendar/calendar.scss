@@ -148,8 +148,6 @@
             }
         }
     }
-
-    
 }
 
 .react-calendar {
@@ -276,8 +274,51 @@
     &__navigation__prev2-button {
         display: none;
     }
+
+    .react-calendar__month-view__days__day--neighboringMonth {
+        opacity: .6;
+    }
 }
 
-.calendar {
+.periodCalendar {
+    width: 540px;
+    position: absolute;
+    display: flex;
+    z-index: 9;
+    background-color: #131826;
 
+    &__options {
+        min-width: 150px;
+        width: max-content;
+        padding: 24px;
+        font-family: 'Lexend';
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+        border-right: 1px solid #FFFFFF;
+
+        &Item {
+            padding: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+
+            &--selected {
+                background: rgba(33, 159, 230, 0.14);
+                color: #219FE6;
+            }
+        }
+    }
+
+
+    &--isMobile {
+        flex-direction: column;
+
+        .periodCalendar__options {
+            border-right: none;
+            border-bottom: 1px solid #FFFFFF;
+            width: 100%;
+        }
+    }
 }

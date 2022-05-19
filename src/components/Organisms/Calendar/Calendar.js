@@ -18,7 +18,7 @@ export const Calendar = ({ onChange, dateSource }) => {
     //     from: null,
     //     to: null
     // });
-    const [value, setValue] = useState( new Date() );
+    const [value, setValue] = useState( null );
     
     return (
         <div className='calendar'>

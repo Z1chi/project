@@ -33,7 +33,7 @@ const getSelectedValue = ({ type, options, matchPropName }) => {
             return (items > 0 && items !== options.length) ? `Multiple (${items})` : 'All';
 
         case dropdownTypes.DATE:
-            return dateObjToString(options)
+            return dateObjToString(options);
     }
 }
 
@@ -68,10 +68,7 @@ export const FilterItem = ({ id, title, matchPropName, mobileTitle, items=[], re
                         {
                             renderFilterContent(type)({
                                 options: filterData.fields[id] || items, 
-                                dateSource: filterData.fields[id] || {
-                                    from: null,
-                                    to: null,
-                                },
+                                dateSource: filterData.fields[id] || null,
                                 renderItem,
                                 matchPropName,
                                 onChange: (value)=>{ 

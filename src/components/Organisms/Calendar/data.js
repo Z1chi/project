@@ -1,5 +1,25 @@
 import { dateObjFormator } from "../../../helpers/lib";
 
+const getDaysDiff = ({ from, to }) => {
+  const diffTime = Math.abs(to - from);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+  return diffDays;
+}
+
+export const getCustomPeriodLabel = ({ from, to }) => {
+  const dateLength = getDaysDiff({from, to});
+  if(dateLength < 31) {
+    const labelCount = dateLength > 1 ? 'days' : 'day';
+    return (`last ${dateLength} ${labelCount}`);
+  } else if(dateLength < 365) {
+    const labelCount = Math.round(dateLength/30) > 1 ? 'months' : 'month';
+    return (`last ${Math.round(dateLength/30)} ${labelCount}`);
+  } else {
+    const labelCount = Math.round(dateLength/365) > 1 ? 'years' : 'year';
+    return (`last ${Math.round(dateLength/365)} ${labelCount}`);
+  }
+}
+
 const getToday = () => new Date();
 
 const getDateByDiff = (diff) => {
@@ -7,10 +27,18 @@ const getDateByDiff = (diff) => {
 } 
 
 const getYearByDiff = (diff) =>{
-  return new Date(new Date().getFullYear()-diff, 0, 1);
+  return new Date().getFullYear() - diff;
 }
 
-export const getCalendarAside = ({ changeHandler, setValue, setLabel, }) => {
+const getFirstDayOfYear = (year) => {
+  return new Date(year, 0, 1);
+}
+
+const getLastDayOfYear = (year) => {
+  return new Date(year, 11, 31);
+}
+
+export const getCalendarAside = ({ changeHandler, setValue, setLabel=()=>{}, }) => {
   const today = getToday();
   const onChange = ({from, to})=>{
     changeHandler(dateObjFormator({from, to}));
@@ -20,7 +48,7 @@ export const getCalendarAside = ({ changeHandler, setValue, setLabel, }) => {
     [
       {
           onClick: () => {
-            setValue(new Date());
+            setValue(null);
             changeHandler(null);
             setLabel(null);
           },
@@ -49,18 +77,21 @@ export const getCalendarAside = ({ changeHandler, setValue, setLabel, }) => {
           },
       }, {
           onClick: () => {
-            onChange({ from: getYearByDiff(0), to: today });
-            setLabel('last year');
+            const year = getYearByDiff(0);
+            onChange({ from: getFirstDayOfYear(year), to: getLastDayOfYear(year) });
+            setLabel(`year ${year}`);
           },
       }, {
           onClick: () => {
-            onChange({ from: getYearByDiff(1), to: today });
-            setLabel('last 2 years');
+            const year = getYearByDiff(1);
+            onChange({ from: getFirstDayOfYear(year), to: getLastDayOfYear(year) });
+            setLabel(`year ${year}`);
           },
       }, {
           onClick: () => {
-            onChange({ from: getYearByDiff(2), to: today });
-            setLabel('last 3 years');
+            const year = getYearByDiff(2);
+            onChange({ from: getFirstDayOfYear(year), to: getLastDayOfYear(year) });
+            setLabel(`year ${year}`);
           },
       }, 
   ]);

@@ -84,11 +84,11 @@
         "DEP": "Total deposits made",
         "CD": "Clicks to deposits percentage. With 100 clicks and 5 deposits, your CR is 5%",
         "CR": "Conversion rate (Registration to Deposit)",
-        "SUM": "Сумма депозитов"
+        "SUM": "Amount of deposits"
       },
       "profit": {
-        "REVSHARE": "Сумма вашего заработка (прибыли) по модели ревшер",
-        "SUM": "Сумма всех моделей вашего заработка"
+        "REVSHARE": "Profit by REVSHARE",
+        "SUM": "Your overall profit"
       }
     }
   },

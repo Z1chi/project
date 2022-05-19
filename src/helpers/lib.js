@@ -69,9 +69,19 @@ export const localeString = ({value = 0, currencySymbol = 'USD', locales = 'ja-J
     (value).toLocaleString(locales, {style: 'currency', currency: currencySymbol});
 
 export const getChartDate = (date) => {
+    const isYearAmdMonth = date.match(/^\d{4}\-\d{2}$/);
+    const isYear = date.match(/^\d{4}$/);
+    const isMonth = date.match(/^\d{2}$/);
     const isTime = date.match(/^\d{2}\:\d{2}$/);
-    if(isTime) {
+    if(isYear || isTime) {
         return date;
+    }
+    if(isMonth) {
+        return monthArr[date.replace('0','') - 1]
+    }
+    if(isYearAmdMonth) {
+        const [year, month] = date.split('-');
+        return `${monthArr[month.replace('0','') - 1]} ${year}`
     }
     const [year, month, day] = date.split('-');
     return `${day} ${monthArr.find((item, key) =>
@@ -98,23 +108,28 @@ export const dateStringFormator = (dateTimeString) => {
 };
 
 export const dateObjToString = ({ from, to }) => {
-    const fromDateString = from ? `${from.month.toString().padStart(2, '0')}/${from.day.toString().padStart(2, '0')}/${from.year.toString().slice(2,4)}` : '';
-    const toDateString = to ? ` - ${to.month.toString().padStart(2, '0')}/${to.day.toString().padStart(2, '0')}/${to.year.toString().slice(2,4)}` : '';
+    // const fromDateString = from ? `${from.month.toString().padStart(2, '0')}/${from.day.toString().padStart(2, '0')}/${from.year.toString().slice(2,4)}` : '';
+    // const toDateString = to ? ` - ${to.month.toString().padStart(2, '0')}/${to.day.toString().padStart(2, '0')}/${to.year.toString().slice(2,4)}` : '';
 
     // const fromString = from ? `${monthArr[from.month]} ${from.day.toString().padStart(2, '0')}, ${from.year}` : '';
     // const toString = to ? ` - ${monthArr[to.month]} ${to.day.toString().padStart(2, '0')}, ${to.year}` : '';
 
-    // const fromDateString = from.replace(/\-/g, '/')
-    // const toDateString = ` - ${to.replace(/\-/g, '/')}`
+    const fromDateString = from.replace(/\-/g, '/')
+    const toDateString = ` - ${to.replace(/\-/g, '/')}`
 
     return `${fromDateString}${(toDateString&&toDateString!==fromDateString)?toDateString:''}`
 }
 
 export const dateFormator = (dateObject) => {
+    
     return {
-        from: `${dateObject.from.year}-${dateObject.from.month.toString().padStart(2, '0')}-${dateObject.from.day.toString().padStart(2, '0')} 00:00:00`,
-        to: `${dateObject.to.year}-${dateObject.to.month.toString().padStart(2, '0')}-${dateObject.to.day.toString().padStart(2, '0')} 23:59:59`
+        from: `${dateObject.from} 00:00:00`,
+        to: `${dateObject.to} 23:59:59`
     }
+    // return {
+    //     from: `${dateObject.from.year}-${dateObject.from.month.toString().padStart(2, '0')}-${dateObject.from.day.toString().padStart(2, '0')} 00:00:00`,
+    //     to: `${dateObject.to.year}-${dateObject.to.month.toString().padStart(2, '0')}-${dateObject.to.day.toString().padStart(2, '0')} 23:59:59`
+    // }
 };
 
 const getDateObj = (date) => {
