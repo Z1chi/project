@@ -180,22 +180,6 @@
       }
     ],
     "contacts": {
-      "links": [
-        {
-          "socialName": "SOCIALS/EMAIL",
-          "link": {
-            "to": "exampletest@gmail.com",
-            "text": "exampletest@gmail.com"
-          }
-        },
-        {
-          "socialName": "SOCIALS/TELEGRAM",
-          "link": {
-            "to": "@ourtelegramsupport",
-            "text": "@ourtelegramsupport"
-          }
-        }
-      ],
       "title": "Contact us",
       "subTitle": "Feel free to contact our team if you have any questions. We're always here for you.",
       "secondSubTitle": "Your personal manager is always here to support you. Ask any questions and get instant feedback."

@@ -5,10 +5,11 @@ import { ManagerContactCard } from '../../Molecules/ManagerContactCard/ManagerCo
 import './contactUs.scss';
 
 export const ContactUs = ({ contentData , support}) => {
+
     return (
         <div className='contactUs'>
             <div className='contactUs__socials'>
-                <ContactSocials contacts={contentData.contacts} />
+                <ContactSocials supportData={support} contacts={contentData.contacts} />
             </div>
             <div className='contactUs__separator'/>
             <div className='contactUs__manager'>

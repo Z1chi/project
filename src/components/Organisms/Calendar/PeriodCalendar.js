@@ -16,14 +16,14 @@ export const PeriodCalendar = ({ dateSource, isMobile, onChange=()=>{}, }) => {
     const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
     const [value, setValue] = useState( null );
     const [languageData, languageActions] = useAtom(languageAtom);
-    const currentYear = (new Date()).getFullYear()
+    const currentYear = (new Date()).getFullYear();
     const calendarAside = getCalendarAside({changeHandler: onChange, setValue, });
 
     useEffect(()=>{
         if(!dateSource) {
             setSelectedOptionIndex(0)
         }
-    }, [dateSource])
+    }, [dateSource]);
 
     return (
         <div className={`periodCalendar${isMobile?' periodCalendar--isMobile':''}`}>
@@ -31,7 +31,8 @@ export const PeriodCalendar = ({ dateSource, isMobile, onChange=()=>{}, }) => {
             {
                 [...languageData.data.chart.options, currentYear, currentYear-1, currentYear-2].map((item, index) => {
                     return (
-                        <div 
+                        <div
+                            key={`PeriodCalendar__optionsItem ${index}`}
                             className={`periodCalendar__optionsItem ${selectedOptionIndex===index?' periodCalendar__optionsItem--selected':''}`}
                             onClick={()=>{
                                 setSelectedOptionIndex(index);
@@ -64,4 +65,4 @@ export const PeriodCalendar = ({ dateSource, isMobile, onChange=()=>{}, }) => {
             />
         </div>
     )
-}
+};

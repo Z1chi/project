@@ -180,22 +180,7 @@
       }
     ],
     "contacts": {
-      "links": [
-        {
-          "socialName": "SOCIALS/EMAIL",
-          "link": {
-            "to": "exampletest@gmail.com",
-            "text": "exampletest@gmail.com"
-          }
-        },
-        {
-          "socialName": "SOCIALS/TELEGRAM",
-          "link": {
-            "to": "@ourtelegramsupport",
-            "text": "@ourtelegramsupport"
-          }
-        }
-      ],
+
       "title": "Свяжитесь с нами",
       "subTitle": "Мы всегда рады помочь и проконсультировать вас по любым вопросам.",
       "secondSubTitle": "Самую быструю и детальную консультацию по большинству вопросов предоставит ваш личный менеджер."

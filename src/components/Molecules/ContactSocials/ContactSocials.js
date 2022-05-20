@@ -1,9 +1,9 @@
 import React from 'react';
-import { ContactSocialLink } from '../../Atoms/ContactSocialLink/ContactSocialLink';
+import {ContactSocialLink} from '../../Atoms/ContactSocialLink/ContactSocialLink';
 
 import './contactSocials.scss';
 
-export const ContactSocials = ({ contacts }) => {
+export const ContactSocials = ({contacts, supportData}) => {
     return (
         <div className='contactSocials'>
             <div className='contactSocials__title'>
@@ -13,15 +13,8 @@ export const ContactSocials = ({ contacts }) => {
                 {contacts.subTitle}
             </div>
             <div className='contactSocials__links'>
-            {
-                contacts.links.map( (link, key) => {
-                    return (
-                        <div key={key} className='contactSocials__linksItem'>
-                            <ContactSocialLink {...link} />
-                        </div>
-                    )
-                })
-            }
+                    <ContactSocialLink link={supportData?.email} socialName={"SOCIALS/EMAIL"}/>
+                    <ContactSocialLink link={supportData?.link} socialName={"SOCIALS/TELEGRAM"}/>
             </div>
         </div>
     )

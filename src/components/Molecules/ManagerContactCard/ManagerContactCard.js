@@ -10,6 +10,7 @@ import SVG from 'react-inlinesvg';
 import {images} from '../../Pages/FAQPage/images';
 
 import './managerContactCard.scss';
+import {Button} from "../../Atoms/Button/Button";
 
 export const ManagerContactCard = ({manager, managerData}) => {
     const {width, ref} = useResizeDetector();
@@ -20,11 +21,11 @@ export const ManagerContactCard = ({manager, managerData}) => {
         },
         {
             parameter: manager.managerCard.occupation,
-            value: "Marketing Expert"
+            value: managerData?.occupation
         },
         {
             parameter: manager.managerCard.exp,
-            value: "10 year"
+            value: managerData?.experience
         }
     ];
     return (
@@ -46,10 +47,13 @@ export const ManagerContactCard = ({manager, managerData}) => {
                 </div>
             </div>
             <div className='managerContactCard__contact'>
-                <a href={manager?.link}>
+                <Button onClick={() => {
+                    window.open(manager?.link, '_blank');
+                }}>
                     <SVG src={images.socials.telegramIcon}/>
-                    <span>Contact now</span>
-                </a>
+                    <span>{manager.managerCard.link}</span>
+                </Button>
+
             </div>
         </div>
     )
