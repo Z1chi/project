@@ -49,7 +49,6 @@ export const BarChart = ({ data, isEmpty }) => {
                 <TableEmpty text={languageData.data.common.emptyChart} />    
             </div>
         )
-        
     }
 
     const maxValue = Math.max.apply(null, data.bars.map( item => item.data).flat());

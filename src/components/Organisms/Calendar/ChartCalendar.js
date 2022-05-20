@@ -9,13 +9,13 @@ import { images } from './images';
 import './calendar.scss';
 import { useAtom } from '@reatom/react';
 import { languageAtom } from '../../../store/language';
-import { getCalendarAside, months, weekdays } from './data';
+import { getCalendarAside, getCustomPeriodLabel, months, weekdays } from './data';
 import { dateObjFormator } from '../../../helpers/lib';
 
 export const ChartCalendar = ({ setPeriodLabel=()=>{}, changeHandler=()=>{}, isMobile }) => {
     const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
-    const [value, setValue] = useState( new Date() );
+    const [value, setValue] = useState( null );
     const [languageData, languageActions] = useAtom(languageAtom);
     const currentYear = (new Date()).getFullYear()
     const calendarAside = getCalendarAside({changeHandler, setValue, setLabel: setPeriodLabel });
@@ -27,10 +27,10 @@ export const ChartCalendar = ({ setPeriodLabel=()=>{}, changeHandler=()=>{}, isM
                         <div className='chartCalendar__preview' onClick={()=>{setIsVisible(!isVisible)}}>
                             <SVG className='chartCalendar__icon' src={images.calendarIcon} />
                             <span className='chartCalendar__period'>
-                                {value.toLocaleDateString
+                                {value ? (value.toLocaleDateString
                                     ?value.toLocaleDateString()
                                     :`${value[0].toLocaleDateString()} - ${value[1].toLocaleDateString()}`
-                                }
+                                ) : 'All time'}
                             </span>
                         </div>
                     )
@@ -62,7 +62,9 @@ export const ChartCalendar = ({ setPeriodLabel=()=>{}, changeHandler=()=>{}, isM
                                     if(from && to) {
                                         const date = dateObjFormator({ from, to });
                                         changeHandler(date);
-                                        setValue(e)
+                                        setValue(e);
+                                        setSelectedOptionIndex(null);
+                                        setPeriodLabel(getCustomPeriodLabel({ from, to }))
                                     }
                                 }}
                                 value={value}

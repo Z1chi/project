@@ -1,5 +1,4 @@
 import React from 'react';
-import { useQuery, } from 'react-query';
 
 import { getAdaptiveClassName } from '../../../helpers/mobile';
 
@@ -7,16 +6,11 @@ import { FAQItem } from '../../Atoms/FAQItem/FAQItem';
 import { ContactUs } from '../../Organisms/ContactUs/ContactUs';
 import { PageTemplate } from '../../Templates/PageTemplate/PageTemplate';
 
-import request from '../../../api/request';
-import { FAQ } from './data';
 
 import './FAQPage.scss';
 
 export const FAQPage = () => {
 
-    // const faqQuery = useQuery('faq', async () => {
-    //     return request('faq').then(res => res.data)
-    // })
 
     return (
         <div className='FAQPage'>

@@ -28,7 +28,7 @@ export function rowsConfig({contentData}) {
                 title: contentData.model,
                 renderContent: ({type, cpa, revshare}) => {
                     return (
-                        <> {(type === 0 || type === 2) && <OfferPaymentParam
+                        <> {(type === 1 || type === 2) && <OfferPaymentParam
                             styles={{margin: '5px 10px 5px 0'}}
                             param={[
 
@@ -40,12 +40,13 @@ export function rowsConfig({contentData}) {
                                     cursor: 'default',
                                     borderRadius: "4px"
                                 }}>
-                            {`${offerTypeNameList[0]} ${cpa.symbol} ${Number(cpa.amount).toFixed(2)}`}
+
+                            {`${offerTypeNameList[1]}`}
                         </span>
                             ]}
 
                         />}
-                            {(type === 1 || type === 2) && <OfferPaymentParam
+                            {(type === 0 || type === 2) && <OfferPaymentParam
                                 styles={{margin: '5px 0'}}
                                 param={[
 
@@ -57,7 +58,7 @@ export function rowsConfig({contentData}) {
                                         cursor: 'default',
                                         borderRadius: "4px"
                                     }}>
-                                {`${offerTypeNameList[1]} ${Number(revshare).toFixed(1)}% `}<b>FTD</b>
+                                {`${offerTypeNameList[0]} ${Number(revshare).toFixed(1)}% `}<b>FTD</b>
                             </span>
                                 ]}/>}</>
                     )

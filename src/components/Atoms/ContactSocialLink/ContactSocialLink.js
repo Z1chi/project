@@ -19,7 +19,7 @@ export const ContactSocialLink = ({ socialName, link }) => {
                 <SVG src={socailIcons[socialName]} />
             </div>
             <div className='contactSocialLink__text'>
-                <Link to={link.to}>{link.text}</Link>
+                <Link to={link}>{link}</Link>
             </div>
         </div>
     )

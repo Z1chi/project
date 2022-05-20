@@ -9,7 +9,7 @@ import { images } from './images';
 
 import './selectInput.scss'
 
-export const SelectInput = ({ value, inputValue, placeholder, options, matchPropName, renderItem, onChange, onCloseCheck, SelectComponent = Select, mobileConfig, dateSource }) => {
+export const SelectInput = ({ value, inputValue, placeholder, options, matchPropName, renderItem, onChange, onCloseCheck, SelectComponent = Select, mobileConfig, dateSource, isMobile, }) => {
     useEffect(() => {
         
     }, [value, inputValue])
@@ -30,7 +30,8 @@ export const SelectInput = ({ value, inputValue, placeholder, options, matchProp
                     ({ setIsOpened }) => {
                         return (
                             <div className='selectInput__select'>
-                                <SelectComponent options={options || []} renderItem={renderItem} 
+                                <SelectComponent options={options || []} renderItem={renderItem}
+                                isMobile={isMobile}
                                 dateSource={dateSource}
                                 matchPropName={matchPropName}
                                 value={value}

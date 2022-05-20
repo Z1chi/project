@@ -4,8 +4,8 @@ import {OfferPaymentParam} from "../../Atoms/OfferPaymentParam/OfferPaymentParam
 
 export const offerTypeNameList = {
     0: 'Revshare:',
-    // 1: 'CPA:',
-    // 2: 'CPA, Revshare:',
+    1: 'CPA',
+    2: 'CPA, Revshare:',
 };
 
 export const paymentParamsConfig = {
@@ -24,7 +24,7 @@ export const paymentParamsConfig = {
                             typeName?.slice(0, -1)
                         ]}
                     />
-                    {/* {(type === 0 || type === 2) &&
+                     {(type === 1 || type === 2) &&
                     <OfferPaymentParam
                         isMobile={isMobile}
                         param=
@@ -38,12 +38,12 @@ export const paymentParamsConfig = {
                                     cursor: 'default',
                                     borderRadius: "4px"
                                 }}>
-                                {value[1].cpa.amount ? `${offerTypeNameList[0]} ${value[1].cpa.symbol}${Number(value[1].cpa.amount).toFixed(2)}` : ''}
+                                {value[1].cpa.amount ? `${offerTypeNameList[1]} ${value[1].cpa.symbol}${Number(value[1].cpa.amount).toFixed(2)}` : ''}
                             </span>
                             ]}
 
-                    />} */}
-                    {(type === 1 || type === 2) &&
+                    />}
+                    {(type === 0 || type === 2) &&
                     <OfferPaymentParam
                         isMobile={isMobile}
                         param=
@@ -57,7 +57,7 @@ export const paymentParamsConfig = {
                                     cursor: 'default',
                                     borderRadius: "4px"
                                 }}>
-                                {value[1].revshare ? `${offerTypeNameList[1]} ${Number(value[1].revshare).toFixed(1)}%` : ''}
+                                {value[1].revshare ? `${offerTypeNameList[0]} ${Number(value[1].revshare).toFixed(1)}%` : ''}
                             </span>
                             ]}
                     />}
