@@ -3,8 +3,6 @@
     "buttonSubmit": "Submit",
     "connect": "Connect",
     "logOut": "Log out",
-    "changeLanguage": "Language changed",
-    "changeLanguageError": "Language not changed",
     "filters": {
       "success": "Filters applied"
     },
@@ -44,6 +42,22 @@
     "editSuccess": "Successfully updated",
     "create": "Create smartlink",
     "createSubtitle": "Creating your SmartLink choose an easy-to-remember, associative name. It will help you to manage a large number of links over time.",
+    "drawer": {
+      "offer": "Offer",
+      "selectOffer": "Select Offer",
+      "selectOfferPlaceholder": "Select Offer...",
+      "name": "Name",
+      "namePlaceholder": "Type name...",
+      "format": "Format",
+      "selectFormat": "Select Format...",
+      "lead": "Lead IFrame",
+      "conversion": "Conversion IFrame",
+      "generated": "Generated URL",
+      "createdAt": "Created",
+      "createdAtPlaceholder": "Select date...",
+      "apply": "Apply changes",
+      "delete": "Delete SmartLink"
+    },
     "delete": {
       "title": "Delete SmartLink",
       "subtitle": "By deleting your SmartLink you also delete entire statistics logs. NOTE: the system no longer counts any clicks on this link. Take our advice: do not delete your SmartLink if you used it at least once.",
@@ -208,12 +222,11 @@
       "statistic": {
         "title": "Statistic",
         "createDate": "Creation date:",
-        "avgDep" : "Avg. deposit:",
+        "avgDep": "Avg. deposit:",
         "recordDep": "Deposit record:",
         "avgTurnover": "Avg. turnover",
         "regAmount": "Registration amount:",
         "depAmount": "Deposit amount:"
-
       },
       "geo": {
         "title": "GEO",

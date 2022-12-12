@@ -4,13 +4,14 @@ import {useQuery, useQueries,} from 'react-query';
 import {useResizeDetector} from "react-resize-detector";
 import SVG from "react-inlinesvg"
 
-
 import {SmartLinksCard} from '../../Molecules/SmartLinksCard/SmartLinksCard';
 import {Drawer} from '../../Organisms/Drawer/Drawer';
 import {Filter} from '../../Organisms/Filter/Filter'
 import {Table} from '../../Organisms/Table/Table';
 import {PageTemplate} from '../../Templates/PageTemplate/PageTemplate';
 import {Button} from "../../Atoms/Button/Button";
+import {TableEmpty} from '../../Molecules/TableEmpty/TableEmpty';
+import {Loader} from '../../Atoms/Loader/Loader';
 
 import request from '../../../api/request';
 import {convertToQueryString, idSelectFormator} from '../../../helpers/lib';
@@ -22,11 +23,9 @@ import {modalAtom} from '../../../store/Modal';
 import {alertAtom} from '../../../store/Alert';
 import createSmartLink from '../../Organisms/Drawer/images/close.svg';
 
-import './smartLinksPage.scss';
 import {images} from "./images";
-import { TableEmpty } from '../../Molecules/TableEmpty/TableEmpty';
-import { LoadingTemplate } from '../../Templates/LoadingTemplate/LoadingTemplate';
-import { Loader } from '../../Atoms/Loader/Loader';
+
+import './smartLinksPage.scss';
 
 export const SmartLinksPage = () => {
     const [tableData, setTableData] = useState(null);
@@ -35,8 +34,8 @@ export const SmartLinksPage = () => {
     const [pushTableData, setPushTableData] = useState(false);
     const [drawerData, drawerActions] = useAtom(drawerAtom);
     const [filterData, filterActions] = useAtom(filterAtom);
-    const [modalData, modalActions] = useAtom(modalAtom);
-    const [alertData, alertActions] = useAtom(alertAtom);
+    const [, modalActions] = useAtom(modalAtom);
+    const [, alertActions] = useAtom(alertAtom);
     const {width, ref} = useResizeDetector();
 
     useEffect(() => {
@@ -96,10 +95,11 @@ export const SmartLinksPage = () => {
                             type: 'ALERT/SUCCESS',
                             message: contentData.data.smartLinks.copy,
                         });
-                    }})
+                    }});
                     const openEditDrawer = (itemId) => {
                         drawerActions.open(drawers.edit(
                             {
+                                localisation: contentData.data?.smartlinks?.drawer,
                                 editTitle: contentData.data.smartLinks.edit,
                                 editSubtitle:contentData.data.smartLinks.editSubtitle,
                                 onEdit: (data) => {
@@ -147,7 +147,7 @@ export const SmartLinksPage = () => {
                             }));
                         const smartlinkItem = smartLinksQuery.data.table.find(item => item.id === itemId);
                         drawerActions.setFieldValues(smartlinkItem)
-                    }
+                    };
                     return (
                         <div className='smartLinksPage__content'>
                             <div ref={ref}
@@ -171,6 +171,7 @@ export const SmartLinksPage = () => {
                                     <Button onClick={
                                         () => drawerActions.open(drawers.create(
                                             {
+                                                localisation: contentData.data?.smartlinks?.drawer,
                                                 title: contentData.data.smartLinks.create,
                                                 subTitle: contentData.data.smartLinks.createSubtitle,
                                             onCreate: (data) => {
@@ -228,6 +229,7 @@ export const SmartLinksPage = () => {
                                                         text: contentData.data.smartLinks.text,
                                                         onClick: () => drawerActions.open(drawers.create(
                                                             {
+                                                                localisation: contentData.data?.smartlinks?.drawer,
                                                                 title: contentData.data.smartLinks.create,
                                                                 subTitle: contentData.data.smartLinks.createSubtitle,
                                                             onCreate: (data) => {

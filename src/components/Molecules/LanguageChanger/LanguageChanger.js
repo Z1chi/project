@@ -18,7 +18,19 @@ const changeLanguage = ({language, handler}) => {
     })
 };
 
+const changeMessage = {
+    ru: {
+        "success": "Язык изменен",
+        "error": "Язык не изменен",
+    },
+    en: {
+        "success": "Language changed",
+        "error": "Language not changed",
+    }
+};
+
 export const LanguageChanger = () => {
+
     const [, alertActions] = useAtom(alertAtom);
     const [, modalActions] = useAtom(modalAtom);
     const [languageData, languageActions] = useAtom(languageAtom);
@@ -27,17 +39,18 @@ export const LanguageChanger = () => {
 
         if (success) {
             modalActions.close();
-            alertActions.open({
-                message: languageData.data.common.changeLanguage,
-                type: 'ALERT/SUCCESS',
-            });
             languageActions.setLanguage({
                 language: language,
                 data: languageConfig[language]
+            });
+            alertActions.open({
+                message: changeMessage[language].success,
+                type: 'ALERT/SUCCESS',
             })
+
         } else {
             alertActions.open({
-                message: languageData.data.common.changeLanguageError,
+                message: changeMessage[language].error,
                 type: 'ALERT/ERROR',
             });
         }

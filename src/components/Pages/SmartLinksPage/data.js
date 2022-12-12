@@ -166,8 +166,8 @@ export const drawers = {
             [{
                 isRequired: true,
                 id: 'project',
-                title: 'Select Offer',
-                placeholder: 'Select Offer...',
+                title: props.localisation.selectOffer,
+                placeholder:props.localisation.selectOfferPlaceholder ,
                 matchPropName: 'title',
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => (
@@ -181,23 +181,23 @@ export const drawers = {
             [{
                 isRequired: true,
                 id: 'title',
-                title: 'Name',
-                placeholder: 'Type name...',
+                title: props.localisation.name,
+                placeholder: props.localisation.namePlaceholder,
                 type: dropdownTypes.INPUT,
             }],
 
             [{
                 isRequired: true,
                 id: 'format',
-                title: 'Format',
-                placeholder: 'Select format...',
+                title:  props.localisation.format,
+                placeholder:  props.localisation.formatPlaceholder,
                 matchPropName: 'label',
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => item.label,
             }],
 
             [{
-                title: 'Lead IFrame',
+                title:  props.localisation.lead,
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -208,7 +208,7 @@ export const drawers = {
             }],
 
             [{
-                title: 'Conversion IFrame',
+                title:  props.localisation.conversion,
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -222,9 +222,7 @@ export const drawers = {
                 generateField: ({stateData}) => {
                     const button = {};
                     if (!isNewSmartlinkValid(stateData)) {
-
-                        button.onClick = () => {
-                        };
+                        button.onClick = () => {};
                     } else {
 
                         button.onClick = () => props.onCreate({
@@ -246,7 +244,7 @@ export const drawers = {
 
             [{
                 id: 'url',
-                title: 'Generated URL',
+                title: props.localisation.generated,
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -266,15 +264,15 @@ export const drawers = {
         fieldRows: [
             [{
                 id: 'created_at',
-                title: 'Created',
-                placeholder: 'Select date...',
+                title:  props.localisation.createdAt,
+                placeholder:  props.localisation.createdAtPlaceholder,
                 type: dropdownTypes.INPUT,
                 isNotChangeable: true,
                 formatValue: dateStringFormator,
             }, {
                 id: 'project',
-                title: 'Offer',
-                placeholder: 'Select offer...',
+                title: props.localisation.offer,
+                placeholder: props.localisation.selectOfferPlaceholder,
                 matchPropName: 'title',
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => (
@@ -287,13 +285,13 @@ export const drawers = {
 
             [{
                 id: 'title',
-                title: 'Name',
+                title: props.localisation.name,
                 type: dropdownTypes.INPUT,
             }],
 
             [{
                 id: 'format',
-                title: 'Format',
+                title:props.localisation.format,
                 matchPropName: 'label',
                 type: dropdownTypes.SELECT,
                 renderItem: (item) => item.label,
@@ -301,7 +299,7 @@ export const drawers = {
 
             [{
                 id: 'iframe_lead',
-                title: 'Lead IFrame',
+                title: props.localisation.lead,
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -313,7 +311,7 @@ export const drawers = {
 
             [{
                 id: 'iframe_conversion',
-                title: 'Conversion IFrame',
+                title: props.localisation.conversion,
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -325,7 +323,7 @@ export const drawers = {
 
             [{
                 id: 'url',
-                title: 'Generated URL',
+                title: props.localisation.generated,
                 placeholder: '',
                 type: dropdownTypes.INPUT,
                 styles: {
@@ -346,7 +344,7 @@ export const drawers = {
                         }}
                                 onClick={() => props.onEdit(data)}
                         >
-                            Apply changes
+                            { props.localisation.apply}
                         </Button>
                     )
                 }
@@ -361,7 +359,7 @@ export const drawers = {
                         }}
                                 onClick={() => props.onDelete({itemId})}
                         >
-                            Delete smartlink
+                            { props.localisation.delete}
                         </Button>
                     )
                 }

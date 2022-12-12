@@ -1,8 +1,9 @@
-import React from 'react'; 
+import React from 'react';
 
-import { SmartLinksField } from '../../Atoms/SmartLinksField/SmartLinksField';
+import {SmartLinksField} from '../../Atoms/SmartLinksField/SmartLinksField';
 
 import './smartLinksCard.scss';
+import {Button} from "../../Atoms/Button/Button";
 
 const renderFormatList = {
     // 'CPA': () => {
@@ -14,15 +15,15 @@ const renderFormatList = {
     // },
     'Revshare': () => {
         return (
-            <div style={{ background: 'rgba(255, 22, 190, 0.26)', color: '#FF16BE', border: '1px solid #FF16BE' }}>
+            <div style={{background: 'rgba(255, 22, 190, 0.26)', color: '#FF16BE', border: '1px solid #FF16BE'}}>
                 Revshare
             </div>
         )
     },
-}
+};
 
-export const SmartLinksCard = ({ config, data, }) => {
-    const { id, created, offer, format, name, ...fields } = data;
+export const SmartLinksCard = ({config, data, onEdit}) => {
+    const {id, created, offer, format, name, ...fields} = data;
 
     return (
         <div className='smartLinksCard'>
@@ -33,7 +34,7 @@ export const SmartLinksCard = ({ config, data, }) => {
                 <div className='smartLinksCard__titleWrapper'>
                     <div className='smartLinksCard__title'>
                         <div className='smartLinksCard__titleLogo'>
-                            
+
                         </div>
                         <div className='smartLinksCard__titleText'>
                             {offer}
@@ -44,27 +45,24 @@ export const SmartLinksCard = ({ config, data, }) => {
                     </div>
                 </div>
             </div>
-            <div className='smartLinksCard__name'>
-                <SmartLinksField item={name} configItem={{ columnName: 'Name', }} />
-            </div>
             <div className='smartLinksCard__info'>
-            {
-                config && config.length > 0 && config.map( configItem => {
-                    const item = fields[configItem.columnId];
-                    return (
-                        item
-                        && (
-                            <div className='smartLinksCard__infoItem'>
-                                <SmartLinksField item={item} configItem={configItem} />
-                            </div>
+                {
+                    config && config.length > 0 && config.map(configItem => {
+                        const item = fields[configItem.columnId];
+                        return (
+                            item
+                            && (
+                                <div className='smartLinksCard__infoItem'>
+                                    <SmartLinksField item={item} configItem={configItem}/>
+                                </div>
+                            )
                         )
-                    )
-                })
-            }
+                    })
+                }
             </div>
-            <div className='smartLinksCard__edit'>
+            <Button onClick={() => onEdit(id)}>
                 Edit
-            </div>
+            </Button>
         </div>
     )
-}
+};
